@@ -1,0 +1,23 @@
+/*
+ * There are some custom styles we do not
+ * want loaded inside the block editor.
+ */
+
+/* Template Parts
+---------------------------------------- */
+
+/* -- Group (Menu Bar) -- */
+.site-header {
+  position: sticky;
+  top: 0;
+}
+@media only screen and (min-width: 782px) {
+  .admin-bar .site-header {
+    top: 32px;
+  }
+}
+@media only screen and (min-width: 600px) and (max-width: 781px) {
+  .admin-bar .site-header {
+    top: 46px;
+  }
+}

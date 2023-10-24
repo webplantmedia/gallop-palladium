@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file adds functions to the GallopWP WordPress theme.
  *
@@ -8,7 +9,7 @@
  * @link    https://gallopwpwp.com/
  */
 
-if ( ! function_exists( 'gallopwp_setup' ) ) {
+if (!function_exists('gallopwp_setup')) {
 
 	/**
 	 * Sets up theme defaults and registers support for various WordPress features.
@@ -21,10 +22,11 @@ if ( ! function_exists( 'gallopwp_setup' ) ) {
 	 *
 	 * @return void
 	 */
-	function gallopwp_setup() {
+	function gallopwp_setup()
+	{
 
 		// Make theme available for translation.
-		load_theme_textdomain( 'gallopwp', get_template_directory() . '/languages' );
+		load_theme_textdomain('gallopwp', get_template_directory() . '/languages');
 
 		// Enqueue editor styles and fonts.
 		add_editor_style(
@@ -34,18 +36,18 @@ if ( ! function_exists( 'gallopwp_setup' ) ) {
 		);
 
 		// Remove core block patterns.
-		remove_theme_support( 'core-block-patterns' );
-
+		remove_theme_support('core-block-patterns');
 	}
 }
-add_action( 'after_setup_theme', 'gallopwp_setup' );
+add_action('after_setup_theme', 'gallopwp_setup');
 
 // Enqueue style sheet.
-add_action( 'wp_enqueue_scripts', 'gallopwp_enqueue_style_sheet' );
-function gallopwp_enqueue_style_sheet() {
+add_action('wp_enqueue_scripts', 'gallopwp_enqueue_style_sheet');
+function gallopwp_enqueue_style_sheet()
+{
 
-	wp_enqueue_style( 'gallopwp', get_template_directory_uri() . '/style.css', array(), wp_get_theme()->get( 'Version' ) );
-
+	wp_enqueue_style('gallopwp', get_template_directory_uri() . '/style.css', array(), wp_get_theme()->get('Version'));
+	wp_enqueue_style('gallopwp-front', get_template_directory_uri() . '/assets/css/front.css', array(), wp_get_theme()->get('Version'));
 }
 
 /**
@@ -53,37 +55,41 @@ function gallopwp_enqueue_style_sheet() {
  *
  * @since 0.9.2
  */
-function gallopwp_register_block_styles() {
+function gallopwp_register_block_styles()
+{
 
 	$block_styles = array(
 		'core/columns' => array(
-			'columns-reverse' => __( 'Reverse', 'gallopwp' ),
+			'columns-reverse' => __('Reverse', 'gallopwp'),
 		),
 		'core/group' => array(
-			'shadow-light' => __( 'Shadow', 'gallopwp' ),
-			'shadow-solid' => __( 'Solid', 'gallopwp' ),
+			'shadow-light' => __('Shadow', 'gallopwp'),
+			'shadow-solid' => __('Solid', 'gallopwp'),
 		),
 		'core/image' => array(
-			'shadow-light' => __( 'Shadow', 'gallopwp' ),
-			'shadow-solid' => __( 'Solid', 'gallopwp' ),
+			'shadow-light' => __('Shadow', 'gallopwp'),
+			'shadow-solid' => __('Solid', 'gallopwp'),
 		),
 		'core/list' => array(
-			'no-disc' => __( 'No Disc', 'gallopwp' ),
+			'no-disc' => __('No Disc', 'gallopwp'),
 		),
 		'core/navigation-link' => array(
-			'outline' => __( 'Outline', 'gallopwp' ),
+			'outline' => __('Outline', 'gallopwp'),
+		),
+		'core/search' => array(
+			'condensed' => __('Condensed', 'gallopwp'),
 		),
 		'core/quote' => array(
-			'shadow-light' => __( 'Shadow', 'gallopwp' ),
-			'shadow-solid' => __( 'Solid', 'gallopwp' ),
+			'shadow-light' => __('Shadow', 'gallopwp'),
+			'shadow-solid' => __('Solid', 'gallopwp'),
 		),
 		'core/social-links' => array(
-			'outline' => __( 'Outline', 'gallopwp' ),
+			'outline' => __('Outline', 'gallopwp'),
 		),
 	);
 
-	foreach ( $block_styles as $block => $styles ) {
-		foreach ( $styles as $style_name => $style_label ) {
+	foreach ($block_styles as $block => $styles) {
+		foreach ($styles as $style_name => $style_label) {
 			register_block_style(
 				$block,
 				array(
@@ -94,30 +100,30 @@ function gallopwp_register_block_styles() {
 		}
 	}
 }
-add_action( 'init', 'gallopwp_register_block_styles' );
+add_action('init', 'gallopwp_register_block_styles');
 
 /**
  * Register block pattern categories.
  *
  * @since 1.0.4
  */
-function gallopwp_register_block_pattern_categories() {
+function gallopwp_register_block_pattern_categories()
+{
 
 	register_block_pattern_category(
 		'page',
 		array(
-			'label'       => __( 'Page', 'gallopwp' ),
-			'description' => __( 'Create a full page with multiple patterns that are grouped together.', 'gallopwp' ),
+			'label'       => __('Page', 'gallopwp'),
+			'description' => __('Create a full page with multiple patterns that are grouped together.', 'gallopwp'),
 		)
 	);
 	register_block_pattern_category(
 		'pricing',
 		array(
-			'label'       => __( 'Pricing', 'gallopwp' ),
-			'description' => __( 'Compare features for your digital products or service plans.', 'gallopwp' ),
+			'label'       => __('Pricing', 'gallopwp'),
+			'description' => __('Compare features for your digital products or service plans.', 'gallopwp'),
 		)
 	);
-
 }
 
-add_action( 'init', 'gallopwp_register_block_pattern_categories' );
+add_action('init', 'gallopwp_register_block_pattern_categories');
