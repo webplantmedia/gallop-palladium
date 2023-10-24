@@ -1,7 +1,7 @@
 <?php
 /**
  * Title: List of posts in three columns.
- * Slug: frost/posts-list
+ * Slug: gallopwp/posts-list
  * Categories: posts
  * Block Types: core/query
  */

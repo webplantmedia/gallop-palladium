@@ -1,7 +1,7 @@
 <?php
 /**
  * Title: Box with image, text, social icons.
- * Slug: frost/author-box-dark
+ * Slug: gallopwp/author-box-dark
  * Categories: call-to-action
  */
 ?>

@@ -5,10 +5,10 @@
  * @package Frost
  * @author  WP Engine
  * @license GNU General Public License v2 or later
- * @link    https://frostwp.com/
+ * @link    https://gallopwpwp.com/
  */
 
-if ( ! function_exists( 'frost_setup' ) ) {
+if ( ! function_exists( 'gallopwp_setup' ) ) {
 
 	/**
 	 * Sets up theme defaults and registers support for various WordPress features.
@@ -21,10 +21,10 @@ if ( ! function_exists( 'frost_setup' ) ) {
 	 *
 	 * @return void
 	 */
-	function frost_setup() {
+	function gallopwp_setup() {
 
 		// Make theme available for translation.
-		load_theme_textdomain( 'frost', get_template_directory() . '/languages' );
+		load_theme_textdomain( 'gallopwp', get_template_directory() . '/languages' );
 
 		// Enqueue editor styles and fonts.
 		add_editor_style(
@@ -38,13 +38,13 @@ if ( ! function_exists( 'frost_setup' ) ) {
 
 	}
 }
-add_action( 'after_setup_theme', 'frost_setup' );
+add_action( 'after_setup_theme', 'gallopwp_setup' );
 
 // Enqueue style sheet.
-add_action( 'wp_enqueue_scripts', 'frost_enqueue_style_sheet' );
-function frost_enqueue_style_sheet() {
+add_action( 'wp_enqueue_scripts', 'gallopwp_enqueue_style_sheet' );
+function gallopwp_enqueue_style_sheet() {
 
-	wp_enqueue_style( 'frost', get_template_directory_uri() . '/style.css', array(), wp_get_theme()->get( 'Version' ) );
+	wp_enqueue_style( 'gallopwp', get_template_directory_uri() . '/style.css', array(), wp_get_theme()->get( 'Version' ) );
 
 }
 
@@ -53,32 +53,32 @@ function frost_enqueue_style_sheet() {
  *
  * @since 0.9.2
  */
-function frost_register_block_styles() {
+function gallopwp_register_block_styles() {
 
 	$block_styles = array(
 		'core/columns' => array(
-			'columns-reverse' => __( 'Reverse', 'frost' ),
+			'columns-reverse' => __( 'Reverse', 'gallopwp' ),
 		),
 		'core/group' => array(
-			'shadow-light' => __( 'Shadow', 'frost' ),
-			'shadow-solid' => __( 'Solid', 'frost' ),
+			'shadow-light' => __( 'Shadow', 'gallopwp' ),
+			'shadow-solid' => __( 'Solid', 'gallopwp' ),
 		),
 		'core/image' => array(
-			'shadow-light' => __( 'Shadow', 'frost' ),
-			'shadow-solid' => __( 'Solid', 'frost' ),
+			'shadow-light' => __( 'Shadow', 'gallopwp' ),
+			'shadow-solid' => __( 'Solid', 'gallopwp' ),
 		),
 		'core/list' => array(
-			'no-disc' => __( 'No Disc', 'frost' ),
+			'no-disc' => __( 'No Disc', 'gallopwp' ),
 		),
 		'core/navigation-link' => array(
-			'outline' => __( 'Outline', 'frost' ),
+			'outline' => __( 'Outline', 'gallopwp' ),
 		),
 		'core/quote' => array(
-			'shadow-light' => __( 'Shadow', 'frost' ),
-			'shadow-solid' => __( 'Solid', 'frost' ),
+			'shadow-light' => __( 'Shadow', 'gallopwp' ),
+			'shadow-solid' => __( 'Solid', 'gallopwp' ),
 		),
 		'core/social-links' => array(
-			'outline' => __( 'Outline', 'frost' ),
+			'outline' => __( 'Outline', 'gallopwp' ),
 		),
 	);
 
@@ -94,30 +94,30 @@ function frost_register_block_styles() {
 		}
 	}
 }
-add_action( 'init', 'frost_register_block_styles' );
+add_action( 'init', 'gallopwp_register_block_styles' );
 
 /**
  * Register block pattern categories.
  *
  * @since 1.0.4
  */
-function frost_register_block_pattern_categories() {
+function gallopwp_register_block_pattern_categories() {
 
 	register_block_pattern_category(
 		'page',
 		array(
-			'label'       => __( 'Page', 'frost' ),
-			'description' => __( 'Create a full page with multiple patterns that are grouped together.', 'frost' ),
+			'label'       => __( 'Page', 'gallopwp' ),
+			'description' => __( 'Create a full page with multiple patterns that are grouped together.', 'gallopwp' ),
 		)
 	);
 	register_block_pattern_category(
 		'pricing',
 		array(
-			'label'       => __( 'Pricing', 'frost' ),
-			'description' => __( 'Compare features for your digital products or service plans.', 'frost' ),
+			'label'       => __( 'Pricing', 'gallopwp' ),
+			'description' => __( 'Compare features for your digital products or service plans.', 'gallopwp' ),
 		)
 	);
 
 }
 
-add_action( 'init', 'frost_register_block_pattern_categories' );
+add_action( 'init', 'gallopwp_register_block_pattern_categories' );
