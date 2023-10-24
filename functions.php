@@ -1,8 +1,8 @@
 <?php
 /**
- * This file adds functions to the Frost WordPress theme.
+ * This file adds functions to the GallopWP WordPress theme.
  *
- * @package Frost
+ * @package GallopWP
  * @author  WP Engine
  * @license GNU General Public License v2 or later
  * @link    https://gallopwpwp.com/

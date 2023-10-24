@@ -11,7 +11,7 @@
 <h2 class="wp-block-heading has-text-align-center has-x-large-font-size"><?php echo esc_html__( 'Call-to-Action', 'gallopwp' ); ?></h2>
 <!-- /wp:heading -->
 <!-- wp:paragraph {"align":"center","style":{"typography":{"lineHeight":"1.5"}}} -->
-<p class="has-text-align-center" style="line-height:1.5"><?php echo esc_html__( 'With its minimal design and powerful feature set, Frost enables agencies to build sophisticated websites.', 'gallopwp' ); ?></p>
+<p class="has-text-align-center" style="line-height:1.5"><?php echo esc_html__( 'With its minimal design and powerful feature set, GallopWP enables agencies to build sophisticated websites.', 'gallopwp' ); ?></p>
 <!-- /wp:paragraph -->
 <!-- wp:buttons {"layout":{"type":"flex","justifyContent":"center"}} -->
 <div class="wp-block-buttons"><!-- wp:button {"style":{"spacing":{"padding":{"top":"var:preset|spacing|x-small","bottom":"var:preset|spacing|x-small","left":"var:preset|spacing|medium","right":"var:preset|spacing|medium"}}},"fontSize":"small"} -->

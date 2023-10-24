@@ -13,7 +13,7 @@
 <h4 class="wp-block-heading" id="our-company"><?php echo esc_html__( 'Our Company', 'gallopwp' ); ?></h4>
 <!-- /wp:heading -->
 <!-- wp:paragraph -->
-<p><?php echo esc_html__( 'With its clean, minimal design and powerful feature set, Frost enables agencies to build stylish and sophisticated WordPress websites.', 'gallopwp' ); ?></p>
+<p><?php echo esc_html__( 'With its clean, minimal design and powerful feature set, GallopWP enables agencies to build stylish and sophisticated WordPress websites.', 'gallopwp' ); ?></p>
 <!-- /wp:paragraph -->
 <!-- wp:buttons -->
 <div class="wp-block-buttons"><!-- wp:button {"style":{"spacing":{"padding":{"top":"var:preset|spacing|x-small","bottom":"var:preset|spacing|x-small","left":"var:preset|spacing|medium","right":"var:preset|spacing|medium"}}},"className":"is-style-fill"} -->

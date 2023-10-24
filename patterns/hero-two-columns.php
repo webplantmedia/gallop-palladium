@@ -10,10 +10,10 @@
 <div class="wp-block-columns are-vertically-aligned-center is-style-columns-reverse"><!-- wp:column {"verticalAlignment":"center","width":""} -->
 <div class="wp-block-column is-vertically-aligned-center"><!-- wp:group {"layout":{"type":"constrained","wideSize":"480px","justifyContent":"left"}} -->
 <div class="wp-block-group"><!-- wp:heading {"anchor":"text-on-left-image-on-right","className":"wp-block-heading","fontSize":"x-large"} -->
-<h2 class="wp-block-heading has-x-large-font-size" id="text-on-left-image-on-right"><?php echo esc_html__( 'Welcome to Frost', 'gallopwp' ); ?></h2>
+<h2 class="wp-block-heading has-x-large-font-size" id="text-on-left-image-on-right"><?php echo esc_html__( 'Welcome to GallopWP', 'gallopwp' ); ?></h2>
 <!-- /wp:heading -->
 <!-- wp:paragraph -->
-<p><?php echo esc_html__( 'With its clean, minimal design and powerful feature set, Frost enables agencies to build stylish and sophisticated WordPress websites.', 'gallopwp' ); ?></p>
+<p><?php echo esc_html__( 'With its clean, minimal design and powerful feature set, GallopWP enables agencies to build stylish and sophisticated WordPress websites.', 'gallopwp' ); ?></p>
 <!-- /wp:paragraph -->
 <!-- wp:buttons -->
 <div class="wp-block-buttons"><!-- wp:button {"className":"is-style-fill"} -->

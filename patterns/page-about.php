@@ -12,7 +12,7 @@
 <h2 class="wp-block-heading has-max-60-font-size" id="we-reimagine-how-to-build-wordpress-websites" style="margin-bottom:0px;letter-spacing:-1px"><?php echo esc_html__( 'Experience the next generation of WordPress.', 'gallopwp' ); ?></h2>
 <!-- /wp:heading -->
 <!-- wp:paragraph {"style":{"spacing":{"margin":{"top":"var:preset|spacing|x-small"}}},"fontSize":"large"} -->
-<p class="has-large-font-size" style="margin-top:var(--wp--preset--spacing--x-small)"><?php echo esc_html__( 'Whether you’re building a website for your business, personal brand, or creative project, Frost is the perfect solution for anyone looking to launch a website quickly and efficiently.', 'gallopwp' ); ?></p>
+<p class="has-large-font-size" style="margin-top:var(--wp--preset--spacing--x-small)"><?php echo esc_html__( 'Whether you’re building a website for your business, personal brand, or creative project, GallopWP is the perfect solution for anyone looking to launch a website quickly and efficiently.', 'gallopwp' ); ?></p>
 <!-- /wp:paragraph -->
 <!-- wp:buttons {"layout":{"type":"flex"},"style":{"spacing":{"blockGap":"10px","margin":{"top":"30px"}}}} -->
 <div class="wp-block-buttons" style="margin-top:30px"><!-- wp:button {"fontSize":"small"} -->
@@ -52,10 +52,10 @@
 <!-- wp:group {"align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|x-large","bottom":"var:preset|spacing|x-large","right":"30px","left":"30px"},"margin":{"top":"0"}}},"layout":{"type":"constrained","wideSize":"1200px"}} -->
 <div class="wp-block-group alignfull" style="margin-top:0;padding-top:var(--wp--preset--spacing--x-large);padding-right:30px;padding-bottom:var(--wp--preset--spacing--x-large);padding-left:30px"><!-- wp:group {"layout":{"type":"constrained"}} -->
 <div class="wp-block-group"><!-- wp:heading {"textAlign":"center","style":{"typography":{"letterSpacing":"-1px"}},"className":"wp-block-heading","fontSize":"max-60"} -->
-<h2 class="wp-block-heading has-text-align-center has-max-60-font-size" id="text-on-left-image-on-right" style="letter-spacing:-1px"><?php echo esc_html__( 'Build with Frost.', 'gallopwp' ); ?></h2>
+<h2 class="wp-block-heading has-text-align-center has-max-60-font-size" id="text-on-left-image-on-right" style="letter-spacing:-1px"><?php echo esc_html__( 'Build with GallopWP.', 'gallopwp' ); ?></h2>
 <!-- /wp:heading -->
 <!-- wp:paragraph {"align":"center","style":{"typography":{"lineHeight":"1.5"}}} -->
-<p class="has-text-align-center" style="line-height:1.5"><?php echo esc_html__( 'With its clean, minimal design and powerful feature set, Frost enables agencies to build stylish and sophisticated WordPress websites.', 'gallopwp' ); ?></p>
+<p class="has-text-align-center" style="line-height:1.5"><?php echo esc_html__( 'With its clean, minimal design and powerful feature set, GallopWP enables agencies to build stylish and sophisticated WordPress websites.', 'gallopwp' ); ?></p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 <!-- wp:columns {"style":{"spacing":{"blockGap":{"top":"0","left":"0"},"margin":{"top":"var:preset|spacing|medium"}}}} -->
@@ -121,7 +121,7 @@
 <div class="wp-block-group alignfull has-background-color has-base-color has-contrast-background-color has-text-color has-background" style="margin-top:0px;padding-top:var(--wp--preset--spacing--x-large);padding-right:30px;padding-bottom:var(--wp--preset--spacing--x-large);padding-left:30px"><!-- wp:columns {"verticalAlignment":"center","align":"wide"} -->
 <div class="wp-block-columns alignwide are-vertically-aligned-center"><!-- wp:column {"verticalAlignment":"center","width":"65%"} -->
 <div class="wp-block-column is-vertically-aligned-center" style="flex-basis:65%"><!-- wp:paragraph {"style":{"typography":{"lineHeight":"1.5"}},"fontSize":"large"} -->
-<p class="has-large-font-size" style="line-height:1.5"><?php echo esc_html__( 'With its clean, minimal design and powerful feature set, Frost enables agencies to build stylish and sophisticated WordPress websites. Ka-chow!', 'gallopwp' ); ?></p>
+<p class="has-large-font-size" style="line-height:1.5"><?php echo esc_html__( 'With its clean, minimal design and powerful feature set, GallopWP enables agencies to build stylish and sophisticated WordPress websites. Ka-chow!', 'gallopwp' ); ?></p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:column -->
 <!-- wp:column {"verticalAlignment":"center","width":"35%"} -->
@@ -142,7 +142,7 @@
 <h2 class="wp-block-heading has-text-align-center has-max-48-font-size" id="block-patterns" style="margin-bottom:0px"><?php echo esc_html__( 'Meet the team.', 'gallopwp' ); ?></h2>
 <!-- /wp:heading -->
 <!-- wp:paragraph {"align":"center","style":{"spacing":{"margin":{"bottom":"var:preset|spacing|medium"}}}} -->
-<p class="has-text-align-center" style="margin-bottom:var(--wp--preset--spacing--medium)"><?php echo esc_html__( 'The talented folks who work on the Frost theme.', 'gallopwp' ); ?></p>
+<p class="has-text-align-center" style="margin-bottom:var(--wp--preset--spacing--medium)"><?php echo esc_html__( 'The talented folks who work on the GallopWP theme.', 'gallopwp' ); ?></p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 <!-- wp:group {"align":"wide","layout":{"type":"default"}} -->

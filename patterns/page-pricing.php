@@ -11,7 +11,7 @@
 <h2 class="wp-block-heading has-text-align-center has-max-60-font-size" id="block-patterns" style="margin-bottom:0px"><?php echo esc_html__( 'Our Pricing', 'gallopwp' ); ?></h2>
 <!-- /wp:heading -->
 <!-- wp:paragraph {"align":"center","style":{"spacing":{"margin":{"bottom":"var:preset|spacing|medium"}}}} -->
-<p class="has-text-align-center" style="margin-bottom:var(--wp--preset--spacing--medium)"><?php echo esc_html__( 'Frost is the ultimate WordPress theme for website builders.', 'gallopwp' ); ?></p>
+<p class="has-text-align-center" style="margin-bottom:var(--wp--preset--spacing--medium)"><?php echo esc_html__( 'GallopWP is the ultimate WordPress theme for website builders.', 'gallopwp' ); ?></p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 <!-- wp:group {"align":"wide","layout":{"type":"default"}} -->
@@ -171,10 +171,10 @@
 <!-- /wp:group -->
 <!-- wp:group {"style":{"spacing":{"blockGap":"10px"}},"layout":{"type":"constrained"}} -->
 <div class="wp-block-group"><!-- wp:paragraph {"align":"center"} -->
-<p class="has-text-align-center"><strong><?php echo esc_html__( 'Why should I download the Frost WordPress theme?', 'gallopwp' ); ?></strong></p>
+<p class="has-text-align-center"><strong><?php echo esc_html__( 'Why should I download the GallopWP WordPress theme?', 'gallopwp' ); ?></strong></p>
 <!-- /wp:paragraph -->
 <!-- wp:paragraph {"align":"center"} -->
-<p class="has-text-align-center"><?php echo esc_html__( 'With its clean, minimal design and powerful feature set, Frost enables agencies to build stylish and sophisticated WordPress websites.', 'gallopwp' ); ?></p>
+<p class="has-text-align-center"><?php echo esc_html__( 'With its clean, minimal design and powerful feature set, GallopWP enables agencies to build stylish and sophisticated WordPress websites.', 'gallopwp' ); ?></p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 <!-- wp:separator {"backgroundColor":"neutral","className":"is-style-wide"} -->
@@ -182,10 +182,10 @@
 <!-- /wp:separator -->
 <!-- wp:group {"style":{"spacing":{"blockGap":"10px"}},"layout":{"type":"constrained"}} -->
 <div class="wp-block-group"><!-- wp:paragraph {"align":"center"} -->
-<p class="has-text-align-center"><strong><?php echo esc_html__( 'Why should I download the Frost WordPress theme?', 'gallopwp' ); ?></strong></p>
+<p class="has-text-align-center"><strong><?php echo esc_html__( 'Why should I download the GallopWP WordPress theme?', 'gallopwp' ); ?></strong></p>
 <!-- /wp:paragraph -->
 <!-- wp:paragraph {"align":"center"} -->
-<p class="has-text-align-center"><?php echo esc_html__( 'With its clean, minimal design and powerful feature set, Frost enables agencies to build stylish and sophisticated WordPress websites.', 'gallopwp' ); ?></p>
+<p class="has-text-align-center"><?php echo esc_html__( 'With its clean, minimal design and powerful feature set, GallopWP enables agencies to build stylish and sophisticated WordPress websites.', 'gallopwp' ); ?></p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 <!-- wp:separator {"backgroundColor":"neutral","className":"is-style-wide"} -->
@@ -193,10 +193,10 @@
 <!-- /wp:separator -->
 <!-- wp:group {"style":{"spacing":{"blockGap":"10px"}},"layout":{"type":"constrained"}} -->
 <div class="wp-block-group"><!-- wp:paragraph {"align":"center"} -->
-<p class="has-text-align-center"><strong><?php echo esc_html__( 'Why should I download the Frost WordPress theme?', 'gallopwp' ); ?></strong></p>
+<p class="has-text-align-center"><strong><?php echo esc_html__( 'Why should I download the GallopWP WordPress theme?', 'gallopwp' ); ?></strong></p>
 <!-- /wp:paragraph -->
 <!-- wp:paragraph {"align":"center"} -->
-<p class="has-text-align-center"><?php echo esc_html__( 'With its clean, minimal design and powerful feature set, Frost enables agencies to build stylish and sophisticated WordPress websites.', 'gallopwp' ); ?></p>
+<p class="has-text-align-center"><?php echo esc_html__( 'With its clean, minimal design and powerful feature set, GallopWP enables agencies to build stylish and sophisticated WordPress websites.', 'gallopwp' ); ?></p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group --></div>
 <!-- /wp:group -->

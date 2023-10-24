@@ -1,4 +1,4 @@
-=== Frost ===
+=== GallopWP ===
 Contributors: wpengine, bgardner
 Requires at least: 6.3
 Tested up to: 6.3
@@ -9,7 +9,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 == Description ==
 
-With its clean, minimal design and powerful feature set, Frost enables agencies to build stylish and sophisticated WordPress websites. Frost is a masterpiece of design and functionality. It features a range of valuable patterns, including hero and portfolio sections, prominent call-to-action buttons, and customer testimonials. Whether you’re building a website for your business, personal brand, or creative project, Frost is perfect for anyone looking to launch quickly and efficiently.
+With its clean, minimal design and powerful feature set, GallopWP enables agencies to build stylish and sophisticated WordPress websites. GallopWP is a masterpiece of design and functionality. It features a range of valuable patterns, including hero and portfolio sections, prominent call-to-action buttons, and customer testimonials. Whether you’re building a website for your business, personal brand, or creative project, GallopWP is perfect for anyone looking to launch quickly and efficiently.
 
 
 == Changelog ==
@@ -128,8 +128,8 @@ Initial public release.
 
 == Copyright ==
 
-Frost WordPress Theme, (C) 2022-2023 WP Engine.
-Frost is distributed under the terms of the GNU GPL.
+GallopWP WordPress Theme, (C) 2022-2023 WP Engine.
+GallopWP is distributed under the terms of the GNU GPL.
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by

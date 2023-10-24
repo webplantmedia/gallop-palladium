@@ -11,7 +11,7 @@
 
 <!-- /wp:heading -->
 <!-- wp:paragraph {"align":"center","fontSize":"large"} -->
-<p class="has-text-align-center has-large-font-size"><?php echo esc_html__( 'Frost is the ultimate WordPress theme for website builders.', 'gallopwp' ); ?></p>
+<p class="has-text-align-center has-large-font-size"><?php echo esc_html__( 'GallopWP is the ultimate WordPress theme for website builders.', 'gallopwp' ); ?></p>
 <!-- /wp:paragraph -->
 <!-- wp:buttons {"layout":{"type":"flex","justifyContent":"center"},"style":{"spacing":{"blockGap":"10px","margin":{"top":"30px"}}}} -->
 <div class="wp-block-buttons" style="margin-top:30px"><!-- wp:button {"fontSize":"small"} -->
@@ -27,10 +27,10 @@
 <div class="wp-block-columns alignwide are-vertically-aligned-center is-style-columns-reverse"><!-- wp:column {"verticalAlignment":"center","width":""} -->
 <div class="wp-block-column is-vertically-aligned-center"><!-- wp:group {"layout":{"type":"constrained","wideSize":"480px","justifyContent":"left"}} -->
 <div class="wp-block-group"><!-- wp:heading {"anchor":"text-on-left-image-on-right","className":"wp-block-heading","fontSize":"max-36"} -->
-<h2 class="wp-block-heading has-max-36-font-size" id="text-on-left-image-on-right"><?php echo esc_html__( 'Build with Frost', 'gallopwp' ); ?></h2>
+<h2 class="wp-block-heading has-max-36-font-size" id="text-on-left-image-on-right"><?php echo esc_html__( 'Build with GallopWP', 'gallopwp' ); ?></h2>
 <!-- /wp:heading -->
 <!-- wp:paragraph -->
-<p><?php echo esc_html__( 'Frost is a powerful WordPress theme created for agencies and professional website builders. With its clean, minimal design, Frost provides the perfect canvas for stylish and sophisticated websites.', 'gallopwp' ); ?></p>
+<p><?php echo esc_html__( 'GallopWP is a powerful WordPress theme created for agencies and professional website builders. With its clean, minimal design, GallopWP provides the perfect canvas for stylish and sophisticated websites.', 'gallopwp' ); ?></p>
 <!-- /wp:paragraph -->
 <!-- wp:buttons -->
 <div class="wp-block-buttons"><!-- wp:button {"textColor":"base"} -->
@@ -52,7 +52,7 @@
 <h2 class="wp-block-heading has-text-align-center has-max-60-font-size" id="text-on-left-image-on-right" style="letter-spacing:-1px"><?php echo esc_html__( 'Experience the next generation of WordPress.', 'gallopwp' ); ?></h2>
 <!-- /wp:heading -->
 <!-- wp:paragraph {"align":"center","style":{"typography":{"lineHeight":"1.5"}}} -->
-<p class="has-text-align-center" style="line-height:1.5"><?php echo esc_html__( 'Frost is the ultimate WordPress theme for website builders.', 'gallopwp' ); ?></p>
+<p class="has-text-align-center" style="line-height:1.5"><?php echo esc_html__( 'GallopWP is the ultimate WordPress theme for website builders.', 'gallopwp' ); ?></p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 <!-- wp:columns {"verticalAlignment":"center","style":{"spacing":{"blockGap":{"top":"var:preset|spacing|medium","left":"var:preset|spacing|large"},"margin":{"bottom":"var:preset|spacing|large"}}}} -->
@@ -66,7 +66,7 @@
 <h2 class="wp-block-heading has-x-large-font-size"><?php echo esc_html__( 'Fresh patterns. Endless Layouts.', 'gallopwp' ); ?></h2>
 <!-- /wp:heading -->
 <!-- wp:paragraph -->
-<p><?php echo esc_html__( 'Frost is a masterpiece of design and functionality. It features a range of valuable elements, including hero and portfolio sections, prominent call-to-action buttons, and customer testimonials.', 'gallopwp' ); ?></p>
+<p><?php echo esc_html__( 'GallopWP is a masterpiece of design and functionality. It features a range of valuable elements, including hero and portfolio sections, prominent call-to-action buttons, and customer testimonials.', 'gallopwp' ); ?></p>
 <!-- /wp:paragraph -->
 <!-- wp:buttons -->
 <div class="wp-block-buttons"><!-- wp:button {"backgroundColor":"primary","style":{"spacing":{"padding":{"top":"var:preset|spacing|x-small","bottom":"var:preset|spacing|x-small","left":"var:preset|spacing|medium","right":"var:preset|spacing|medium"}}}} -->
@@ -81,7 +81,7 @@
 <h2 class="wp-block-heading has-x-large-font-size"><?php echo esc_html__( 'One theme. Infinite designs.', 'gallopwp' ); ?></h2>
 <!-- /wp:heading -->
 <!-- wp:paragraph -->
-<p><?php echo esc_html__( 'Frost utilizes the potential of the editor to create link pages, serve as a powerful tool for building relationships with clients, sharing valuable content, and boosting social media engagement.', 'gallopwp' ); ?></p>
+<p><?php echo esc_html__( 'GallopWP utilizes the potential of the editor to create link pages, serve as a powerful tool for building relationships with clients, sharing valuable content, and boosting social media engagement.', 'gallopwp' ); ?></p>
 <!-- /wp:paragraph -->
 <!-- wp:buttons -->
 <div class="wp-block-buttons"><!-- wp:button {"backgroundColor":"primary","style":{"spacing":{"padding":{"top":"var:preset|spacing|x-small","bottom":"var:preset|spacing|x-small","left":"var:preset|spacing|medium","right":"var:preset|spacing|medium"}}}} -->
@@ -106,7 +106,7 @@
 <h2 class="wp-block-heading has-x-large-font-size"><?php echo esc_html__( 'Stylish websites. Simply made.', 'gallopwp' ); ?></h2>
 <!-- /wp:heading -->
 <!-- wp:paragraph -->
-<p><?php echo esc_html__( 'Whether you’re building a website for your business, personal brand, or creative project, Frost is the perfect solution for anyone looking to launch a website quickly and efficiently.', 'gallopwp' ); ?></p>
+<p><?php echo esc_html__( 'Whether you’re building a website for your business, personal brand, or creative project, GallopWP is the perfect solution for anyone looking to launch a website quickly and efficiently.', 'gallopwp' ); ?></p>
 <!-- /wp:paragraph -->
 <!-- wp:buttons -->
 <div class="wp-block-buttons"><!-- wp:button {"backgroundColor":"primary","style":{"spacing":{"padding":{"top":"var:preset|spacing|x-small","bottom":"var:preset|spacing|x-small","left":"var:preset|spacing|medium","right":"var:preset|spacing|medium"}}}} -->

@@ -9,10 +9,10 @@
 <div class="wp-block-group alignwide"><!-- wp:columns {"verticalAlignment":"center","align":"wide","style":{"spacing":{"blockGap":{"top":"var:preset|spacing|medium","left":"var:preset|spacing|large"}}},"className":"is-style-columns-reverse"} -->
 <div class="wp-block-columns alignwide are-vertically-aligned-center is-style-columns-reverse"><!-- wp:column {"verticalAlignment":"center","width":""} -->
 <div class="wp-block-column is-vertically-aligned-center"><!-- wp:heading {"fontSize":"x-large","anchor":"sample-heading"} -->
-<h2 class="wp-block-heading has-x-large-font-size" id="sample-heading"><?php echo esc_html__( 'Build with Frost', 'gallopwp' ); ?></h2>
+<h2 class="wp-block-heading has-x-large-font-size" id="sample-heading"><?php echo esc_html__( 'Build with GallopWP', 'gallopwp' ); ?></h2>
 <!-- /wp:heading -->
 <!-- wp:paragraph -->
-<p><?php echo esc_html__( 'Frost is a powerful WordPress theme created for agencies and professional website builders. With its clean, minimal design, Frost provides the perfect canvas for sophisticated websites.', 'gallopwp' ); ?></p>
+<p><?php echo esc_html__( 'GallopWP is a powerful WordPress theme created for agencies and professional website builders. With its clean, minimal design, GallopWP provides the perfect canvas for sophisticated websites.', 'gallopwp' ); ?></p>
 <!-- /wp:paragraph -->
 <!-- wp:buttons -->
 <div class="wp-block-buttons"><!-- wp:button -->
