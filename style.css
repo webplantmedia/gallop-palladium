@@ -127,6 +127,7 @@ textarea {
 @media only screen and (max-width: 1000px) {
   .wp-block-group.is-style-responsive-menu {
     flex-wrap: wrap !important;
+    padding-top: var(--wp--preset--spacing--x-small) !important;
   }
   .wp-block-group.is-style-responsive-menu .wp-block-search {
     flex-basis: 100% !important;

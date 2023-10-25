@@ -25,6 +25,11 @@
   position: sticky;
   top: 0;
 }
+@media only screen and (max-width: 1000px) {
+  .site-header {
+    position: relative;
+  }
+}
 .site-header > .wp-block-group {
   transition: background 0.2s ease-out;
 }
@@ -41,6 +46,6 @@ body:not(.scrolled-1px) .site-header > .wp-block-group {
 }
 @media only screen and (min-width: 600px) and (max-width: 781px) {
   .admin-bar .site-header {
-    top: 46px;
+    /* top: 46px; */
   }
 }
