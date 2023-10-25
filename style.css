@@ -148,6 +148,8 @@ textarea {
     justify-content: flex-start !important;
   }
 }
+
+/* -- Site Header -- */
 /* -- Navigation -- */
 
 .wp-block-navigation__responsive-container.is-menu-open {
@@ -168,6 +170,13 @@ textarea {
 .has-background .wp-block-navigation__responsive-container-open:focus,
 .has-background .wp-block-navigation__responsive-container-open:hover {
   color: var(--wp--preset--color--base);
+}
+.wp-block-navigation
+  .wp-block-navigation__container
+  > .wp-block-navigation-item
+  > .wp-block-navigation-item__content {
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 /* -- Navigation Submenu -- */

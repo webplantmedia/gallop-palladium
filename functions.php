@@ -48,6 +48,7 @@ function gallopwp_enqueue_style_sheet()
 
 	wp_enqueue_style('gallopwp', get_template_directory_uri() . '/style.css', array(), wp_get_theme()->get('Version'));
 	wp_enqueue_style('gallopwp-front', get_template_directory_uri() . '/assets/css/front.css', array(), wp_get_theme()->get('Version'));
+	wp_enqueue_script('gallopwp-scroll', get_template_directory_uri() . '/assets/js/scroll.jquery.js', array('jquery'), wp_get_theme()->get('Version'), true);
 }
 
 /**
