@@ -72,14 +72,14 @@ function gallopwp_register_block_styles()
 			'shadow-light' => __('Shadow', 'gallopwp'),
 			'shadow-solid' => __('Solid', 'gallopwp'),
 		),
+		'core/group' => array(
+			'hero-1' => __('Hero 1', 'gallopwp'),
+		),
 		'core/list' => array(
 			'no-disc' => __('No Disc', 'gallopwp'),
 		),
 		'core/navigation-link' => array(
 			'outline' => __('Outline', 'gallopwp'),
-		),
-		'core/search' => array(
-			'condensed' => __('Condensed', 'gallopwp'),
 		),
 		'core/quote' => array(
 			'shadow-light' => __('Shadow', 'gallopwp'),
