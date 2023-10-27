@@ -66,6 +66,7 @@ function gallopwp_register_block_styles()
 		'core/group' => array(
 			'shadow-light' => __('Shadow', 'gallopwp'),
 			'shadow-solid' => __('Solid', 'gallopwp'),
+			'navbar' => __('Navbar', 'gallopwp'),
 		),
 		'core/image' => array(
 			'shadow-light' => __('Shadow', 'gallopwp'),
