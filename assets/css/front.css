@@ -6,6 +6,14 @@
 /* Template Parts
 ---------------------------------------- */
 
+body {
+}
+@media only screen and (min-width: 1001px) {
+  body {
+    margin-top: 120px;
+  }
+}
+
 /* -- Group (Menu Bar) -- */
 .wp-site-blocks {
   /* position: relative; */
@@ -22,8 +30,13 @@
   /* z-index: -1; */
 }
 .site-header {
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
+}
+.site-header > .wp-block-group {
+  width: 100%;
 }
 @media only screen and (max-width: 1000px) {
   .site-header {
@@ -33,15 +46,7 @@
 .site-header > .wp-block-group {
   transition: background 0.2s ease-out;
 }
-@media only screen and (min-width: 999px) {
-  body:not(.scrolled-1px) .site-header > .wp-block-group {
-    background: transparent !important;
-    /* background: var(--wp--preset--color--base-alternate) !important; */
-    /* padding-top: var(--wp--preset--spacing--x-small) !important; */
-    /* padding-bottom: var(--wp--preset--spacing--x-small) !important; */
-  }
-}
-@media only screen and (min-width: 999px) {
+@media only screen and (min-width: 1001px) {
   .admin-bar .site-header {
     top: 32px;
   }

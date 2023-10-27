@@ -128,6 +128,7 @@ textarea {
   .wp-block-group.is-style-responsive-menu {
     flex-wrap: wrap !important;
     padding-top: var(--wp--preset--spacing--x-small) !important;
+    grid-row-gap: 0;
   }
   .wp-block-group.is-style-responsive-menu .wp-block-search {
     flex-basis: 100% !important;
@@ -151,6 +152,7 @@ textarea {
 }
 
 /* -- Site Header -- */
+
 /* -- Navigation -- */
 
 .wp-block-navigation__responsive-container.is-menu-open {
@@ -172,12 +174,39 @@ textarea {
 .has-background .wp-block-navigation__responsive-container-open:hover {
   color: var(--wp--preset--color--base);
 }
+.wp-block-navigation.is-responsive,
+.wp-block-social-links .wp-social-link .wp-block-social-link-anchor,
 .wp-block-navigation
   .wp-block-navigation__container
   > .wp-block-navigation-item
   > .wp-block-navigation-item__content {
-  padding-top: 20px;
-  padding-bottom: 20px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  transition: height 0.2s ease-out;
+}
+
+.site-header {
+  transition: height 0.2s ease-out;
+  height: auto;
+  display: flex;
+  align-items: center;
+  transition: height 0.2s ease-out;
+}
+@media only screen and (min-width: 1001px) {
+  .site-header {
+    height: 120px;
+  }
+
+  body.scrolled-1px .site-header {
+    height: 70px;
+  }
+  body:not(.scrolled-1px) .site-header > .wp-block-group {
+    background: transparent !important;
+    /* background: var(--wp--preset--color--base-alternate) !important; */
+    /* padding-top: var(--wp--preset--spacing--x-small) !important; */
+    /* padding-bottom: var(--wp--preset--spacing--x-small) !important; */
+  }
 }
 
 /* -- Navigation Submenu -- */
@@ -202,6 +231,11 @@ textarea {
 .wp-block-search.is-style-condensed
   .wp-block-search__inside-wrapper
   .wp-block-search__input {
+  padding: 0 4px;
+}
+.wp-block-search.is-style-condensed
+  .wp-block-search__inside-wrapper
+  .wp-block-search__input {
   border-width: 0;
 }
 .wp-block-search.is-style-condensed
@@ -209,6 +243,9 @@ textarea {
   .wp-block-search__button {
   background: transparent;
   padding: 0;
+  margin-left: 0;
+  border-radius: 0;
+  background: var(--wp--preset--color--base);
 }
 
 /* Media Queries
