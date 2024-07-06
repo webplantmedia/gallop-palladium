@@ -1,0 +1,192 @@
+@tailwind base;
+
+/* Write your own custom base styles here */
+
+/* Start purging... */
+@tailwind components;
+/* Stop purging. */
+
+/* Write you own custom component styles here */
+
+/* Start purging... */
+@tailwind utilities;
+/* Stop purging. */
+
+/* Your own custom utilities */
+
+/*.has-text-align-left {
+  @apply text-left;
+}
+.main-content .alignfull {
+  @apply mx-auto max-w-none;
+}
+.main-content .alignwide {
+  @apply mx-auto max-w-5xl;
+}*/
+
+/* .has-text-align-center {
+  @apply text-center;
+} */
+
+/* .has-text-align-right {
+  @apply text-right;
+} */
+
+/* .has-large-font-size {
+  @apply text-4xl;
+} */
+
+p {
+  @apply break-words;
+}
+
+/*
+.wp-block-image img {
+  @apply max-w-full;
+}
+.wp-block-image.aligncenter {
+  @apply text-center mx-auto table justify-center;
+}
+.wp-block-image.alignleft {
+  @apply text-center md:float-left md:mr-10 md:mb-10;
+}
+.wp-block-image.alignright {
+  @apply text-center md:float-right md:ml-10 md:mb-10;
+}
+.wp-block-image.alignfull img,
+.wp-block-image.alignwide img {
+  @apply w-full;
+}
+.wp-block-image .alignleft,
+.wp-block-image .alignright,
+.wp-block-image .aligncenter,
+.wp-block-image.is-resized {
+  @apply table ml-0 mr-0;
+}
+.wp-block-image .alignleft > figcaption,
+.wp-block-image .alignright > figcaption,
+.wp-block-image .aligncenter > figcaption,
+.wp-block-image.is-resized > figcaption {
+  @apply table-caption;
+
+  caption-side: bottom;
+}
+
+.wp-block-image .alignleft {
+  @apply float-left mr-4;
+}
+.wp-block-image .alignright {
+  @apply float-right ml-4;
+}
+.wp-block-image .aligncenter {
+  @apply m-auto;
+}
+*/
+
+/* clears the 'X' from Internet Explorer */
+.hide-clear::-ms-clear,
+.hide-clear::-ms-reveal {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+/* clears the 'X' from Chrome */
+.hide-clear::-webkit-search-decoration,
+.hide-clear::-webkit-search-cancel-button,
+.hide-clear::-webkit-search-results-button,
+.hide-clear::-webkit-search-results-decoration {
+  display: none;
+}
+
+/* For Webkit-based browsers (Chrome, Safari and Opera) */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.smooth-scrolling {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* For IE, Edge and Firefox */
+.scrollbar-hide {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+.wp-block-group.alignfull > *,
+.main-content > * {
+  max-width: 750px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.wp-block-gallop-single-post.alignfull > * {
+  max-width: 750px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.wp-block-group.alignfull {
+  @apply !max-w-none;
+}
+
+.main-content h3 + h3 + h3,
+.main-content h3 + h4 + h4 {
+  @apply !-mt-7 mb-7;
+}
+
+.main-content .is-style-h3 + .is-style-h3,
+.main-content h3 + h3 {
+  @apply -mt-1 mb-7;
+}
+.main-content h3 + h4 {
+  @apply -mt-2 mb-7;
+}
+
+.is-style-h1 {
+  margin-top: 5rem;
+}
+
+.main-content h3.is-style-h2 + h3,
+.main-content h2:not(.is-style-h1) + h3 {
+  @apply -mt-2 mb-7;
+}
+
+/* .main-content h1 + h2 { */
+/* margin-top: 0; */
+/* margin-bottom: 70px; */
+/* } */
+/* .main-content h1 + h2 + h3 { */
+/* @apply mb-7 font-body leading-tight text-lg text-primary-main -mt-[5px] variant-normal text-lg; */
+/* } */
+
+.yarl__slide_description a,
+figcaption > a,
+.main-content ol span > a,
+.main-content ul span > a,
+.main-content p > * > a,
+.main-content p > a {
+  @apply text-secondary-main underline underline-offset-2 hover:text-secondary-lighter dmh:text-modern-primary-main dmh:hover:text-modern-primary-lighter;
+}
+
+.children-y-0 > *:first-child > *:first-child,
+.children-y-0 > *:first-child {
+  @apply mt-0;
+}
+.children-y-0 > *:last-child > *:last-child,
+.children-y-0 > *:last-child {
+  @apply mb-0;
+}
+.has-text-color.has-primary-color,
+.has-inline-color.has-primary-color {
+  @apply text-primary-main;
+}
+.has-text-color.has-secondary-color,
+.has-inline-color.has-secondary-color {
+  @apply text-secondary-main;
+}
+.fluid-image {
+  @apply !relative !left-auto !right-auto !top-auto !bottom-auto !w-auto !h-auto;
+}
+.clearfix {
+  @apply after:content-[''] after:table after:clear-both;
+}

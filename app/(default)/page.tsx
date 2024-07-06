@@ -1,4 +1,6 @@
 import type { Metadata } from 'next';
+import Content from '@components/content';
+import Grid from '@components/grid';
 
 export const revalidate = 3600;
 
@@ -11,5 +13,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function Page({ searchParams }) {
-  return <p>Hello</p>;
+  return (
+    <Grid>
+      <p>Hello</p>
+    </Grid>
+  );
 }
