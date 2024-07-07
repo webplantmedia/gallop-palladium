@@ -62,7 +62,7 @@ module.exports = {
           paper: '#ffffff',
           darker: '#6b5c4c',
           dark: '#eed093',
-          body: '#efd9ac',
+          body: '#fff1dc',
           light: '#ffe7bd',
           card: '#e2cca2',
           contrast: '#482401',
