@@ -43,11 +43,11 @@ module.exports = {
       },
       colors: {
         primary: {
-          lighter: '#bb3420',
-          light: '#b2220d',
-          main: '#AC1600',
-          dark: '#a01602',
-          darker: '#9e1400',
+          lighter: '#77565d',
+          light: '#634249',
+          main: '#58353b',
+          dark: '#44272d',
+          darker: '#2d171c',
           contrast: '#ffffff',
         },
         secondary: {
@@ -84,36 +84,6 @@ module.exports = {
             main: '#482401',
             dark: '#3a1d01',
             darker: '#2c1600',
-            contrast: '#ffffff',
-          },
-          base: {
-            paper: '#ffffff',
-            darker: '#6b5c4c',
-            dark: '#eed093',
-            body: '#ffffff',
-            light: '#ffe7bd',
-            card: '#e8fcb5',
-            card2: '#e3faa8',
-            contrast: '#482401',
-            contrast2: '#603813',
-            disabled: '#936f4d',
-          },
-        },
-        eclectic: {
-          primary: {
-            lighter: '#bb3420',
-            light: '#b2220d',
-            main: '#a3cd3c',
-            dark: '#a5ce39',
-            darker: '#97c225',
-            contrast: '#ffffff',
-          },
-          secondary: {
-            lighter: '#db8c3e',
-            light: '#d2761a',
-            main: '#CC6600',
-            dark: '#c46302',
-            darker: '#c06000',
             contrast: '#ffffff',
           },
           base: {
