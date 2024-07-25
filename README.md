@@ -68,6 +68,42 @@ To install Node Version Manager (nvm) on a Mac, follow these steps:
 
 That's it! You now have nvm installed on your Mac and can easily manage multiple versions of Node.js.
 
+## How to Update Node Packages for Your Next.js App Using npm
+
+Follow these steps to update your Node packages for a Next.js app using npm:
+
+1. **Open Terminal**: Navigate to your Next.js project directory.
+
+   ```sh
+   cd path/to/your/nextjs/project
+   ```
+
+2. **Check outdated packages**: Use the `npm outdated` command to check which packages are outdated.
+
+   ```sh
+   npm outdated
+   ```
+
+3. **Update packages**: You can update all packages to their latest versions using the following command:
+
+   ```sh
+   npm update
+   ```
+
+4. **Check outdated packages again**: Use the `npm outdated` command to make sure all packages have been updated.
+
+   ```sh
+   npm outdated
+   ```
+
+5. **Run the development server**: After updating the packages, start your development server to ensure everything is working correctly:
+
+   ```sh
+   npm run dev
+   ```
+
+That's it! You've successfully updated your Node packages for your Next.js app using npm.
+
 ## How to use on Mac
 
 Install Homebrew [Homebrew](https://brew.sh/).
