@@ -1,6 +1,7 @@
 'use client';
 
 import { Fragment } from 'react';
+import { _siteLogo } from '@data/_general';
 import Iconify from '@components/iconify';
 import BookmarkIcon from '@iconify/icons-carbon/bookmark';
 // import Trolly from '../../lib/svg/dougnewby-trolly.svg';
@@ -83,12 +84,11 @@ export default function Navbar({ sidebarContent = 'default' }) {
           <div className="w-full sm:w-auto flex justify-center px-4 sm:px-0">
             <Link prefetch={true} href="/">
               <img
-                src="/dougnewby-logo-2.png"
+                src={_siteLogo.src}
                 className="block w-[344px]"
-                alt="Douglas Newby"
-                // quality={100}
-                width={688}
-                height={148}
+                alt={_siteLogo.alt}
+                width={_siteLogo.width}
+                height={_siteLogo.height}
               />
             </Link>
           </div>

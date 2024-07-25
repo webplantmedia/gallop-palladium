@@ -1,10 +1,6 @@
-# An Incremental Static Regeneration Blog Example Using Next.js and WordPress
+# GallopWP - Production Ready Bootstrap Website Template Using Next.js, Headless WordPress, and Tailwind
 
-This example showcases Next.js's [Incremental Static Regeneration](https://nextjs.org/docs/basic-features/data-fetching/incremental-static-regeneration) feature using [WordPress](https://wordpress.org) as the data source.
-
-## Demo.
-
-### [https://next-blog-wordpress.vercel.app](https://next-blog-wordpress.vercel.app)
+This is a production ready bootstrap website template with clear instructions, thoughtfully selected npm packages and libraries, and an easy content management. View example of a production site deployed using [GallopWP](https://nextjs.org/docs/basic-features/data-fetching/incremental-static-regeneration).
 
 ## Deploy your own
 
@@ -12,28 +8,69 @@ Once you have access to [the environment variables you'll need](#step-3-set-up-e
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/next.js/tree/canary/examples/cms-wordpress&project-name=cms-wordpress&repository-name=cms-wordpress&env=WORDPRESS_API_URL&envDescription=Required%20to%20connect%20the%20app%20with%20WordPress&envLink=https://vercel.link/cms-wordpress-env)
 
-### Related examples
+## How to Install NVM on a Mac
 
-- [DatoCMS](/examples/cms-datocms)
-- [Sanity](/examples/cms-sanity)
-- [TakeShape](/examples/cms-takeshape)
-- [Prismic](/examples/cms-prismic)
-- [Contentful](/examples/cms-contentful)
-- [Strapi](/examples/cms-strapi)
-- [Agility CMS](/examples/cms-agilitycms)
-- [Cosmic](/examples/cms-cosmic)
-- [ButterCMS](/examples/cms-buttercms)
-- [Storyblok](/examples/cms-storyblok)
-- [GraphCMS](/examples/cms-graphcms)
-- [Kontent](/examples/cms-kontent)
-- [Ghost](/examples/cms-ghost)
-- [Blog Starter](/examples/blog-starter)
-- [Builder.io](/examples/cms-builder-io)
-- [DotCMS](/examples/cms-dotcms)
+To install Node Version Manager (nvm) on a Mac, follow these steps:
 
-## How to use
+1. **Open Terminal**: You can find Terminal in Applications > Utilities, or you can press `Cmd + Space` and type "Terminal" to open it.
 
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init), [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/), or [pnpm](https://pnpm.io) to bootstrap the example:
+2. **Install Homebrew (if not already installed)**: Homebrew is a package manager for macOS that simplifies the installation of software. If you don't have Homebrew installed, you can install it by running the following command in Terminal:
+
+   ```sh
+   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+   ```
+
+3. **Install nvm using Homebrew**: Once Homebrew is installed, you can use it to install nvm by running the following command:
+
+   ```sh
+   brew install nvm
+   ```
+
+4. **Create nvm directory**: Create a directory for nvm in your home directory:
+
+   ```sh
+   mkdir ~/.nvm
+   ```
+
+5. **Configure your shell**: You need to configure your shell to load nvm. Add the following lines to your `~/.zshrc` file:
+
+   ```sh
+   export NVM_DIR="$HOME/.nvm"
+   [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+   [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+   ```
+
+6. **Reload your shell configuration**: After editing your `~/.zshrc` file, reload it to apply the changes by running:
+
+   ```sh
+   source ~/.zshrc
+   ```
+
+7. **Verify nvm installation**: To verify that nvm is installed correctly, run:
+
+   ```sh
+   nvm --version
+   ```
+
+   This should display the version of nvm that you installed.
+
+8. **Install Node.js**: With nvm installed, you can now install the latest LTS version of Node.js by running:
+
+   ```sh
+   nvm install --lts
+   ```
+
+9. **Set default Node.js version**: To set the LTS version as the default, run:
+
+   ```sh
+   nvm alias default lts/*
+   ```
+
+That's it! You now have nvm installed on your Mac and can easily manage multiple versions of Node.js.
+
+## How to use on Mac
+
+Install Homebrew [Homebrew](https://brew.sh/).
 
 ```bash
 npx create-next-app --example cms-wordpress cms-wordpress-app
