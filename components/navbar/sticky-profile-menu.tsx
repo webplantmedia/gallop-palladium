@@ -1,5 +1,6 @@
 'use client';
 
+import { _siteStickyLogo } from '@data/_general';
 import { Disclosure, Dialog, Transition } from '@headlessui/react';
 import SidebarContent from '../sidebar/content';
 import SidebarContentDMH from '../sidebar/content-dmh';
@@ -34,10 +35,10 @@ export default function MobileMenu({ sidebarContent = 'default' }) {
           <span className="relative inline-block">
             <img
               className="h-[48px] w-[48px] rounded-md object-cover object-center box-border border border-white dmh:w-[44px] dmh:h-[44px] dmh:rounded-full"
-              src="/dougpicture-198.jpg"
-              alt="Douglas Newby Profile"
-              width={198}
-              height={220}
+              src={_siteStickyLogo.src}
+              alt={_siteStickyLogo.alt}
+              width={_siteStickyLogo.width}
+              height={_siteStickyLogo.height}
             />
             <span className="absolute -top-[3px] block -right-[3px] h-3 w-3 rounded-full bg-green-400 ring-1 ring-white dmh:-top-px dmh:-right-px" />
           </span>

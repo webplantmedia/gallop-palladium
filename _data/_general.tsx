@@ -8,3 +8,15 @@ export const _siteLogo = {
   width: 800,
   height: 313,
 };
+export const _siteArt = {
+  src: 'https://wp.jnlsteel.com/wp-content/uploads/2024/07/jnl-art3@700px.png',
+  alt: 'Build it with steel, build it to last.',
+  width: 700,
+  height: 495,
+};
+export const _siteStickyLogo = {
+  src: 'https://wp.jnlsteel.com/wp-content/uploads/2024/07/jnl-building-thumb.jpg',
+  alt: 'JNL Steel Components, Inc.',
+  width: 100,
+  height: 100,
+};

@@ -1,7 +1,7 @@
 'use client';
 
 import { Fragment } from 'react';
-import { _siteLogo } from '@data/_general';
+import { _siteLogo, _siteArt } from '@data/_general';
 import Iconify from '@components/iconify';
 import BookmarkIcon from '@iconify/icons-carbon/bookmark';
 // import Trolly from '../../lib/svg/dougnewby-trolly.svg';
@@ -72,35 +72,22 @@ export default function Navbar({ sidebarContent = 'default' }) {
   return (
     <header
       className={classNames(
-        isScrolling ? '-translate-y-28' : 'translate-y-0',
+        isScrolling ? '-translate-y-32' : 'translate-y-0',
         'z-30 transition-transform ease-out duration-300 bg-base-body block fixed top-0 w-full drop-shadow-xl'
       )}
     >
-      <div className="mx-auto 2xl:container">
-        <div className="h-28 flex justify-between items-center">
-          <div className="w-48 md:w-80 hidden sm:flex justify-start md:justify-center">
-            <ProfileMenu />
-          </div>
+      <div className="relative mx-auto 2xl:container px-4 sm:px-8">
+        <div className="h-32 flex justify-center items-center">
           <div className="w-full sm:w-auto flex justify-center px-4 sm:px-0">
-            <Link prefetch={true} href="/">
+            <Link prefetch={false} href="/">
               <img
                 src={_siteLogo.src}
-                className="block w-[344px]"
+                className="block w-[256px]"
                 alt={_siteLogo.alt}
                 width={_siteLogo.width}
                 height={_siteLogo.height}
               />
             </Link>
-          </div>
-          <div className="w-48 md:w-80 hidden sm:flex justify-end md:justify-center">
-            <img
-              src="/dougnewby-carriage@390.png"
-              className="block w-[120px] md:w-[175px]"
-              alt="Douglas Newby Origins"
-              // quality={100}
-              width={390}
-              height={162}
-            />
           </div>
         </div>
       </div>
@@ -204,7 +191,7 @@ export default function Navbar({ sidebarContent = 'default' }) {
             <div
               className={classNames(
                 isScrolling ? 'block' : 'sm:hidden',
-                'w-[48px] relative flex-shrink-0'
+                'relative flex-shrink-0'
               )}
             >
               <StickyProfileMenu sidebarContent={sidebarContent} />
