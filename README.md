@@ -104,6 +104,24 @@ Follow these steps to update your Node packages for a Next.js app using npm:
 
 That's it! You've successfully updated your Node packages for your Next.js app using npm.
 
+## How to Use `compressFonts.js` on New Google Fonts.
+
+Put all your `.ttf` fonts for your font family in its own folder under `fonts`. You can easily download fonts from Google Fonts or from a font foundary. To compress all `.ttf` files to a woff2 for NextJs use in a specified folder using the `compressFonts.js` script, follow these steps:
+
+1. **Open Terminal**: Navigate to the `/styles/fonts/` directory in your project.
+
+   ```sh
+   cd path/to/your/project/styles/fonts/
+   ```
+
+2. **Run the Script**: Execute the script with the folder name as an argument. For example, to compress all `.ttf` files in the `Poppins` folder, use:
+
+   ```sh
+   node compressFonts.js Poppins
+   ```
+
+This will process all `.ttf` files in the specified folder and compress them using the `woff2_compress` command.
+
 ## How to use on Mac
 
 Install Homebrew [Homebrew](https://brew.sh/).
