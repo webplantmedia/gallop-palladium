@@ -13,7 +13,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function Page({ params }) {
-  const uri = '/home/';
+  const uri = `/${params.slug.join('/')}/`;
   const headers = {
     'Content-Type': 'application/json',
   };
@@ -26,17 +26,17 @@ export default async function Page({ params }) {
       body: JSON.stringify({
         uri: uri,
       }),
-      next: { tags: [uri] },
     }
   );
 
   if (response.ok) {
     const { post, seo } = await response.json();
-
-    return (
-      <Grid>
-        <Content post={post} meta={seo} />
-      </Grid>
-    );
+    console.log(post);
   }
+
+  return (
+    <Grid>
+      <p>Hello</p>
+    </Grid>
+  );
 }

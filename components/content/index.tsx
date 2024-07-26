@@ -7,11 +7,13 @@ import { parseContent } from './parse-content';
 import { GalleryPopup } from '@components/lightbox/gallery-popup';
 import { captureMediaElements } from '@components/content/capture-media-elements';
 
-export default function Content({ content, meta }) {
+export default function Content({ post, meta = {} }) {
   let toc: any = [];
   let hasH1: boolean;
+  let content: string;
 
-  ({ content, toc, hasH1 } = parseContent(content));
+  console.log(post.post_content);
+  ({ content, toc, hasH1 } = parseContent(post.post_content));
 
   let article = (
     <article className="main-content pt-12">
@@ -29,7 +31,6 @@ export default function Content({ content, meta }) {
   return (
     <>
       {article}
-      <DynamicSidebar />
       <GalleryPopup slides={slides} />
     </>
   );

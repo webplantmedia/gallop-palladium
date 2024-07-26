@@ -19,15 +19,22 @@ import {
   TagAnchor,
   CoreAudio,
   CoreEmbed,
-  // GallopAlbumCover,
-  // GallopSinglePost,
-  // GallopExcerptPost,
+  GallopAlbumCover,
+  GallopSinglePost,
+  GallopExcerptPost,
+  GallopEstatePost,
+  GallopHomePost,
   GallopGridder,
-  // GallopBlogPosts,
-  // GallopMap,
-  // GallopNeighborhood,
-  // GallopCard,
-  // GallopContactForm,
+  GallopBlogPosts,
+  GallopMLS,
+  GallopMLSSold,
+  GallopMLSModern,
+  GallopMLSModernRecent,
+  GallopMap,
+  GallopInstagramPosts,
+  GallopNeighborhood,
+  GallopCard,
+  GallopContactForm,
 } from '@components/blocks';
 import { HTMLAttributeProps } from '@lib/types';
 import { castToHTMLAttributeProps } from '@utils/tools';
@@ -85,6 +92,24 @@ export const ParseBlocks = ({ content, meta }) => {
             <CoreParagraph className={className}>
               {domToReact(domNode.children as DOMNode[], options)}
             </CoreParagraph>
+          );
+        } else if (className?.includes('wp-block-gallop-card')) {
+          return (
+            <GallopCard
+              className={className}
+              props={props}
+              options={options}
+              node={domNode.children}
+            />
+          );
+        } else if (className?.includes('wp-block-gallop-neighborhood')) {
+          return (
+            <GallopNeighborhood
+              className={className}
+              props={props}
+              options={options}
+              node={domNode.children}
+            />
           );
         } else if (domNode.name === 'ul') {
           return (
@@ -186,6 +211,94 @@ export const ParseBlocks = ({ content, meta }) => {
               options={options}
             />
           );
+        } else if (className?.includes('wp-block-gallop-album-cover')) {
+          return (
+            <GallopAlbumCover
+              className={className}
+              node={domNode.children}
+              options={options}
+              props={props}
+            />
+          );
+        } else if (className?.includes('wp-block-gallop-estate-post')) {
+          return (
+            <GallopEstatePost
+              node={domNode.children}
+              className={className}
+              id={props?.id}
+              props={props}
+              options={options}
+            />
+          );
+        } else if (className?.includes('wp-block-gallop-home-post')) {
+          return (
+            <GallopHomePost
+              node={domNode.children}
+              className={className}
+              id={props?.id}
+              props={props}
+              options={options}
+            />
+          );
+        } else if (className?.includes('wp-block-gallop-excerpt-post')) {
+          return (
+            <GallopExcerptPost
+              node={domNode.children}
+              className={className}
+              id={props?.id}
+              props={props}
+              options={options}
+            />
+          );
+        } else if (className?.includes('wp-block-gallop-single-post')) {
+          return (
+            <GallopSinglePost className={className} id={props?.id}>
+              {domToReact(domNode.children as DOMNode[], options)}
+            </GallopSinglePost>
+          );
+        } else if (className?.includes('wp-block-gallop-gridder')) {
+          return (
+            <GallopGridder className={className} id={props?.id}>
+              {domToReact(domNode.children as DOMNode[], options)}
+            </GallopGridder>
+          );
+        } else if (domNode.name === 'gallop-blog-posts') {
+          return <GallopBlogPosts className={className} meta={meta} />;
+        } else if (domNode.name === 'gallop-mls-modern-recent') {
+          return (
+            <GallopMLSModern
+              className={className}
+              meta={meta}
+              props={props}
+              sort="recent"
+            />
+          );
+        } else if (domNode.name === 'gallop-mls-modern') {
+          return (
+            <GallopMLSModern
+              className={className}
+              meta={meta}
+              props={props}
+              sort="date"
+            />
+          );
+        } else if (domNode.name === 'gallop-mls-sold') {
+          return (
+            <GallopMLSSold className={className} meta={meta} props={props} />
+          );
+        } else if (domNode.name === 'gallop-mls') {
+          return <GallopMLS className={className} meta={meta} props={props} />;
+        } else if (domNode.name === 'gallop-map') {
+          return <GallopMap className={className} meta={meta} props={props} />;
+        } else if (className?.includes('wp-block-gallop-instagram-posts')) {
+          return (
+            <GallopInstagramPosts
+              className={className}
+              node={domNode.children}
+            />
+          );
+        } else if (className.includes('wp-block-gallop-contact')) {
+          return <GallopContactForm source={'contact'} homeUrl={null} />;
         }
       }
     },
