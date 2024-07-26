@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Content from '@components/content';
-import Grid from '@components/grid';
+import GridFull from '@components/grid-full';
 
 export const revalidate = 3600;
 
@@ -33,10 +33,15 @@ export default async function Page({ params }) {
   if (response.ok) {
     const { post, seo } = await response.json();
 
+    const meta = {
+      title: post.post_title,
+      ...seo,
+    };
+
     return (
-      <Grid>
-        <Content post={post} meta={seo} />
-      </Grid>
+      <GridFull>
+        <Content post={post} meta={meta} />
+      </GridFull>
     );
   }
 }

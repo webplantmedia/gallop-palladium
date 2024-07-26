@@ -52,11 +52,11 @@ function TailwindCSSClasses(className: string) {
   );
   className = className.replace(
     'alignfull',
-    'alignfull mx-auto !max-w-none clear-both'
+    'alignfull mx-auto !max-w-none clear-both !px-0'
   );
   className = className.replace(
     'alignwide',
-    'alignwide mx-auto !max-w-5xl clear-both'
+    'alignwide mx-auto !max-w-screen-3xl clear-both'
   );
   className = className.replace(
     'wp-block-image',
@@ -178,6 +178,7 @@ export const ParseBlocks = ({ content, meta }) => {
             />
           );
         } else if (className?.includes('wp-block-embed')) {
+          console.log(domNode);
           return (
             <CoreEmbed
               tag={domNode.name}

@@ -31,7 +31,6 @@ export default async function Page({ params }) {
 
   if (response.ok) {
     const { post, seo } = await response.json();
-    console.log(post);
   }
 
   return (
