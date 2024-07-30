@@ -16,6 +16,7 @@ module.exports = {
       xl: '1180px',
       '2xl': '1280px',
       '3xl': '1536px',
+      '4xl': '1920px',
     },
     extend: {
       keyframes: {
@@ -146,6 +147,10 @@ module.exports = {
         },
         '.column-fill-balance': {
           columnFill: 'balance',
+        },
+        '.clip-trapazoid': {
+          'clip-path':
+            'polygon(0 0, 100% 0, calc(100% - 30px) 100%, 30px 100%)',
         },
       };
       addUtilities(newUtilities, ['responsive', 'hover']);

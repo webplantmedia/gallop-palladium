@@ -35,6 +35,8 @@ export default async function Page({ params }) {
 
     const meta = {
       title: post.post_title,
+      postType: post.post_type,
+      databaseId: post.ID,
       ...seo,
     };
 

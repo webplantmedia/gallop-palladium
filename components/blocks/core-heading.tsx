@@ -4,9 +4,9 @@ export const CoreHeading = ({ children, tag, className = '', props }) => {
   const { id } = props;
 
   let h1Class =
-    'mb-7 leading-tight text-4xl md:text-5xl lg:text-6xl text-white small-caps dmh:font-accent dmh:text-modern-primary-main dmh:uppercase dmh:variant-normal dmh:tracking-widest dmh:xl:text-5xl dmh:md:text-4xl dmh:text-3xl';
+    'mb-7 leading-tight text-4xl md:text-5xl lg:text-6xl text-base-contrast font-bold';
   let h2Class =
-    'mb-2 leading-tight text-3xl md:text-3xl text-primary-main small-caps mt-14 dmh:font-accent dmh:normal-case dmh:variant-normal dmh:text-modern-base-contrast dmh:mb-7';
+    'mb-2 leading-tight text-3xl md:text-4xl text-primary-main mt-14';
   let h3Class =
     'mb-1 leading-tight text-2xl text-base-contrast small-caps font-medium dmh:font-accent dmh:normal-case dmh:variant-normal dmh:mb-2';
   let h4Class =

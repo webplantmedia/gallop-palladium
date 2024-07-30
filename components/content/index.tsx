@@ -15,7 +15,7 @@ export default function Content({ post, meta = {} }) {
   ({ content, toc, hasH1 } = parseContent(post.post_content));
 
   let article = (
-    <article className="main-content pt-12">
+    <article className="main-content">
       <ParseBlocks content={content} meta={meta} />
       <div className="fixed bottom-5 right-5 z-40 flex gap-2 !px-0">
         <EditLink meta={meta} />

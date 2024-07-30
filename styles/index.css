@@ -192,3 +192,7 @@ figcaption > a,
 .clearfix {
   @apply after:content-[''] after:table after:clear-both;
 }
+.slanted-lines {
+  clip-path: polygon(0 0, 100% 0, 94% 100%, 6% 100%);
+  @apply relative w-full;
+}

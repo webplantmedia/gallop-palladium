@@ -10,3 +10,6 @@ export { default as useBoundingClientRect } from './useBoundingClientRect';
 export { default as useRequest } from './useRequest';
 export { default as useLightbox } from './useLightbox';
 export { default as useLoggedIn } from './useLoggedIn';
+export { default as useInView } from './useInView';
+export { default as useVimeoInView } from './useVimeoInView';
+export { default as useVimeoPlayerScript } from './useVimeoPlayerScript';

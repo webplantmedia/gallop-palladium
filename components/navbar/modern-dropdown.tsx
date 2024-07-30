@@ -44,7 +44,7 @@ export default function ModernDropdown({ isScrolling, item }) {
           >
             <Popover.Panel
               static={true}
-              className="absolute left-8 right-8 max-w-full top-full"
+              className="absolute left-0 right-0 max-w-full top-full"
             >
               {({ close }) => (
                 <div className="overflow-hidden rounded-b-md bg-base-body text-sm shadow-2xl">

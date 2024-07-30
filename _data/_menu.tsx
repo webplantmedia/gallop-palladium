@@ -8,6 +8,8 @@ import {
   ArrowRightIcon,
   NewspaperIcon,
 } from '@heroicons/react/24/outline';
+import DevicePhoneMobileIcon2 from '@iconify/icons-heroicons/device-phone-mobile-solid';
+import ClockIcon from '@iconify/icons-heroicons/clock';
 import CarbonBlog from '@iconify/icons-carbon/blog';
 import CarbonLogoYoutube from '@iconify/icons-carbon/logo-youtube';
 import CarbonLogoInstagram from '@iconify/icons-carbon/logo-instagram';
@@ -177,29 +179,39 @@ export const _navDMH = [
 ];
 export const _nav = [
   {
-    name: 'Featured Listings',
-    mobile: 'Featured Listings',
-    href: '/featured-listings/',
+    name: 'Products',
+    mobile: 'Products',
+    href: '/products/',
   },
   {
-    name: 'Neighborhoods',
-    mobile: 'Neighborhoods',
-    href: '/neighborhoods/',
+    name: 'Projects',
+    mobile: 'Projects',
+    href: '/projects/',
   },
   {
-    name: 'Architecture',
-    mobile: 'Architecture',
-    href: '/architecture/',
+    name: 'About',
+    mobile: 'About',
+    href: '/about/',
   },
   {
-    name: 'Modern',
-    mobile: 'Modern',
+    name: 'Downloads',
+    mobile: 'Downloads',
     href: '/modern/',
   },
+];
+
+export const _navTop = [
   {
-    name: 'MLS',
-    mobile: 'MLS',
-    href: '/mls/',
+    name: '430 US Hwy 180 West, Seminole, TX 79360',
+    mobile: 'Address',
+    href: 'https://maps.app.goo.gl/7vPNHsdActmJGAoV9',
+    icon: <Iconify icon={MapOutlineIcon} className="flex-shrink-0 h-6 w-6" />,
+  },
+  {
+    name: 'Mon-Fri: 6am-6pm • Sat: 6am-12pm',
+    mobile: 'See Hours',
+    href: '/contact/',
+    icon: <Iconify icon={ClockIcon} className="flex-shrink-0 h-6 w-6" />,
   },
 ];
 

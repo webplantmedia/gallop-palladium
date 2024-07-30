@@ -52,7 +52,7 @@ function TailwindCSSClasses(className: string) {
   );
   className = className.replace(
     'alignfull',
-    'alignfull mx-auto !max-w-none clear-both !px-0'
+    'alignfull mx-auto !max-w-screen-4xl clear-both !px-0'
   );
   className = className.replace(
     'alignwide',
@@ -178,7 +178,6 @@ export const ParseBlocks = ({ content, meta }) => {
             />
           );
         } else if (className?.includes('wp-block-embed')) {
-          console.log(domNode);
           return (
             <CoreEmbed
               tag={domNode.name}

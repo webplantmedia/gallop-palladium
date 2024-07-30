@@ -18,7 +18,7 @@ export default function NeighborhoodDropdown({ isScrolling, item }) {
             as="a"
             href="#"
             className={classNames(
-              'inline-flex items-center border-b-2 outline-none border-transparent text-base font-normal text-base-contrast ui-open:border-base-contrast hover:border-base-contrast transition-all h-full'
+              'inline-flex items-center outline-none border-transparent text-base font-normal text-base-contrast ui-open:border-base-contrast hover:border-base-contrast transition-all h-full'
             )}
           >
             {item.name}
@@ -43,7 +43,7 @@ export default function NeighborhoodDropdown({ isScrolling, item }) {
           >
             <Popover.Panel
               static={true}
-              className="absolute left-8 right-8 max-w-full top-full"
+              className="absolute left-0 right-0 max-w-screen-3xl top-full"
             >
               {({ close }) => (
                 <div className="overflow-hidden rounded-b-md bg-base-body shadow-2xl">
@@ -51,7 +51,7 @@ export default function NeighborhoodDropdown({ isScrolling, item }) {
                     className={classNames(
                       isScrolling
                         ? 'max-h-[calc(var(--app-height)-theme(space.28))]'
-                        : 'max-h-[calc(var(--app-height)-theme(space.56))]',
+                        : 'max-h-[calc(var(--app-height)-theme(space.40))]',
                       'px-4 pb-4 pt-4 overflow-hidden overflow-y-auto scrollbar-hide grid grid-cols-4 gap-0 shadow-inner'
                     )}
                   >

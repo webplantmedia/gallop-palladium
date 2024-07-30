@@ -51,7 +51,7 @@ export default function ArchitectureDropdown({ isScrolling, item }) {
           >
             <Popover.Panel
               static={true}
-              className="absolute left-8 right-8 max-w-full top-full"
+              className="absolute left-0 right-0 max-w-full top-full"
             >
               {({ close }) => (
                 <>

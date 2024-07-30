@@ -107,7 +107,7 @@ export default function Search({ isScrolling }) {
           >
             <Popover.Panel
               static={true}
-              className="absolute left-4 right-4 sm:left-8 sm:right-8 max-w-full top-full"
+              className="absolute left-0 right-0 max-w-full top-full"
             >
               <div className="isolate overflow-hidden rounded-b-md shadow-2xl">
                 <div

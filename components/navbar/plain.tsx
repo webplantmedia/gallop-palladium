@@ -16,7 +16,7 @@ import Search from './search';
 import OpenAISearch from './openai-search';
 import MobileMenu from './mobile-menu';
 import StickyProfileMenu from './sticky-profile-menu';
-import { _navTop, _contact, _aboutMinimum, _nav } from '@data/_menu';
+import { _contact, _aboutMinimum, _nav } from '@data/_menu';
 import classNames from 'classnames';
 import NeighborhoodDropdown from './neighborhood-dropdown';
 import ArchitectureDropdown from './architecture-dropdown';
@@ -76,50 +76,25 @@ export default function Navbar({ sidebarContent = 'default' }) {
     <header
       className={classNames(
         // isScrolling ? '-translate-y-32' : 'translate-y-0',
-        // isScrolling ? 'drop-shadow-xl' : 'drop-shadow-xl',
-        'z-30 bg-base-body fixed top-0 w-full overflow-visible drop-shadow-xl'
+        isScrolling ? 'drop-shadow-xl' : '',
+        'z-30 bg-base-body fixed top-0 w-full'
       )}
     >
       <div
         className={classNames(
-          isScrolling && 'hidden',
-          'xl:hidden h-10 flex xl:w-auto xl:clip-trapazoid items-center justify-center xl:justify-end bg-primary-main text-primary-contrast shadow-xl text-sm'
-        )}
-      >
-        <ul className="px-4 lg:px-14 relative flex flex-row-reverse gap-8">
-          {_navTop.map((item, itemIndex) => (
-            <li className="flex justify-center" key={`top-nav${itemIndex}`}>
-              <a className="flex gap-2 items-center" href={item.href}>
-                {item.icon && item.icon}
-                <span className="hidden md:block">{item.name}</span>
-                <span className="block md:hidden">{item.mobile}</span>
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div
-        className={classNames(
-          isScrolling ? 'xl:h-20' : 'h-60 xl:h-40',
-          'mx-auto w-full flex flex-col xl:flex-row items-center justify-center xl:justify-between gap-0 xl:gap-10 max-w-screen-3xl px-4 sm:px-8 transition-height ease-out duration-300'
+          isScrolling ? 'h-20' : 'h-32',
+          'mx-auto w-full flex flex-row items-center justify-between gap-10 max-w-screen-3xl px-8 transition-height ease-out duration-300'
         )}
       >
         <div
-          className={classNames(
-            isScrolling && 'hidden',
-            'relative shrink-0 pt-7 pb-1 xl:py-0 h-40'
-          )}
+          className={classNames(isScrolling && 'hidden', 'relative shrink-0')}
         >
-          <div
-            className={classNames(
-              'flex justify-center items-end xl:items-center h-full'
-            )}
-          >
+          <div className={classNames('flex justify-center items-center')}>
             <div className="w-full sm:w-auto flex justify-center">
               <Link prefetch={false} href="/">
                 <img
                   src={_siteLogo.src}
-                  className="block w-[300px]"
+                  className="block w-[256px]"
                   alt={_siteLogo.alt}
                   width={_siteLogo.width}
                   height={_siteLogo.height}
@@ -128,34 +103,17 @@ export default function Navbar({ sidebarContent = 'default' }) {
             </div>
           </div>
         </div>
-        <nav className="w-full relative xl:h-full flex flex-col h-20">
-          <div
-            className={classNames(
-              isScrolling ? 'xl:hidden' : 'hidden xl:flex ',
-              'h-10 hidden shrink-0 clip-trapazoid items-center justify-end bg-primary-main text-primary-contrast shadow-xl -mr-[30px] text-sm'
-            )}
-          >
-            <ul className="px-14 relative flex gap-8 flex-row-reverse">
-              {_navTop.map((item, itemIndex) => (
-                <li key={`top-nav${itemIndex}`}>
-                  <a className="flex gap-2 items-center" href={item.href}>
-                    {item.icon && item.icon}
-                    <span>{item.name}</span>
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className="flex gap-4 justify-between h-full items-center relative">
-            <div className="flex px-0 h-full items-center">
-              <div className={classNames('flex items-center h-full')}>
-                <div className="-ml-2 flex gap-0 2xl:gap-1 flex-row pr-0 xl:pr-2 2xl:pr-3 h-full">
+        <nav className="w-full h-full relative">
+          <div className="flex gap-0 space-x-0 h-full justify-between">
+            <div className="flex px-0">
+              <div className={classNames('flex')}>
+                <div className="-ml-2 flex gap-0 2xl:gap-1 flex-row pr-0 xl:pr-2 2xl:pr-3">
                   <MobileMenu />
                 </div>
                 {/* Current: "border-primary-darker text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" */}
                 <div
                   className={classNames(
-                    'gap-7 2xl:gap-7 xl:flex hidden pr-3 xl:pr-3 2xl:pr-3 h-full'
+                    'gap-7 2xl:gap-7 xl:flex hidden pr-3 xl:pr-3 2xl:pr-3'
                   )}
                 >
                   {_nav.map((item, itemIndex) => (
@@ -166,7 +124,7 @@ export default function Navbar({ sidebarContent = 'default' }) {
                     />
                   ))}
                 </div>
-                <div className="flex gap-0 2xl:gap-1 flex-row h-full">
+                <div className="flex gap-0 2xl:gap-1 flex-row">
                   <OpenAISearch isScrolling={isScrolling} />
                   <Search isScrolling={isScrolling} />
                 </div>

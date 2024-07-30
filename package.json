@@ -31,7 +31,6 @@
     "react-dom": "^18.2.0",
     "react-instantsearch": "^7.5.4",
     "react-instantsearch-core": "^7.0.1",
-    "react-intersection-observer": "^9.13.0",
     "react-popper": "^2.3.0",
     "sharp": "^0.33.4",
     "swr": "^2.2.5",
