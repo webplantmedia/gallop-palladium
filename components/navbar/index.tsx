@@ -76,8 +76,8 @@ export default function Navbar({ sidebarContent = 'default' }) {
     <header
       className={classNames(
         // isScrolling ? '-translate-y-32' : 'translate-y-0',
-        // isScrolling ? 'drop-shadow-xl' : 'drop-shadow-xl',
-        'z-30 bg-base-body fixed top-0 w-full overflow-visible drop-shadow-xl'
+        // isScrolling ? 'xl:h-20' : 'xl:h-40',
+        'z-30 bg-base-body fixed top-0 w-full transition-height overflow-visible drop-shadow-xl'
       )}
     >
       <div
@@ -100,7 +100,7 @@ export default function Navbar({ sidebarContent = 'default' }) {
       </div>
       <div
         className={classNames(
-          isScrolling ? 'xl:h-20' : 'h-60 xl:h-40',
+          isScrolling ? 'h-20' : 'h-60 xl:h-40',
           'mx-auto w-full flex flex-col xl:flex-row items-center justify-center xl:justify-between gap-0 xl:gap-10 max-w-screen-3xl px-4 sm:px-8 transition-height ease-out duration-300'
         )}
       >
