@@ -33,4 +33,5 @@ export { GallopGridder } from './gallop-gridder';
 // export { GallopNeighborhood } from './gallop-neighborhood';
 // export { GallopCard } from './gallop-card';
 // export { GallopContactForm } from './gallop-contact-form';
+export { CoreGroupHero1 } from './core-group-hero-1';
 export { ParseBlocks } from './parse-blocks';

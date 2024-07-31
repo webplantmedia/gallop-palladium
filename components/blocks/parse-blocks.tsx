@@ -8,6 +8,7 @@ import {
   CoreParagraph,
   CoreHeading,
   CoreGallery,
+  CoreGroupHero1,
   CoreSeparator,
   CoreButtons,
   CoreButton,
@@ -97,6 +98,15 @@ export const ParseBlocks = ({ content, meta }) => {
           );
         } else if (domNode.name === 'hr') {
           return <CoreSeparator props={props} />;
+        } else if (className?.includes('hero-1')) {
+          return (
+            <CoreGroupHero1
+              className={className}
+              props={props}
+              options={options}
+              node={domNode.children}
+            />
+          );
         } else if (className?.includes('wp-block-heading')) {
           return (
             <CoreHeading tag={domNode.name} className={className} props={props}>
