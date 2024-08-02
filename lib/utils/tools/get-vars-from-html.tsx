@@ -1,15 +1,7 @@
 import { hasExactClass, castToHTMLAttributeProps } from '@utils/tools';
 import { HTMLAttributeProps } from '@lib/types';
 
-interface Block {
-  attribs?: HTMLAttributeProps;
-  name?: string;
-  type?: string;
-  data?: string;
-  children?: Block[];
-}
-
-export function getVarsFromHTML(node: Block[]): Record<string, any> {
+export function getVarsFromHTML(node: any): Record<string, any> {
   let data: Record<string, any> = {};
 
   const saveNestedObject = (path: string, value: any) => {
@@ -30,7 +22,7 @@ export function getVarsFromHTML(node: Block[]): Record<string, any> {
     }
   };
 
-  const recurseNode = (block: Block, name: string[]) => {
+  const recurseNode = (block: any, name: string[]) => {
     let value: any = '';
 
     const props: HTMLAttributeProps = castToHTMLAttributeProps(block.attribs);
@@ -65,7 +57,7 @@ export function getVarsFromHTML(node: Block[]): Record<string, any> {
       name.push('htmlP');
     } else if (block.name == 'strong') {
       name.push('htmlStrong');
-    } else if (block.type == 'text' && block.data) {
+    } else if (block.type === 'text' && block.data) {
       name.push('text');
       value = block.data;
       saveNestedObject(name.join('.'), value);
@@ -80,9 +72,11 @@ export function getVarsFromHTML(node: Block[]): Record<string, any> {
     return;
   };
 
-  node.map((block: any) => {
-    recurseNode(block, []);
-  });
+  if (node.children) {
+    node.children.map((block: any) => {
+      recurseNode(block, []);
+    });
+  }
 
   return data;
 }

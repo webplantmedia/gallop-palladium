@@ -4,6 +4,7 @@ import parse, {
   DOMNode,
   Element,
 } from 'html-react-parser';
+import { getVarsFromHTML } from '@utils/tools';
 import {
   CoreParagraph,
   CoreHeading,
@@ -99,14 +100,8 @@ export const ParseBlocks = ({ content, meta }) => {
         } else if (domNode.name === 'hr') {
           return <CoreSeparator props={props} />;
         } else if (className?.includes('hero-1')) {
-          return (
-            <CoreGroupHero1
-              className={className}
-              props={props}
-              options={options}
-              node={domNode.children}
-            />
-          );
+          const data = getVarsFromHTML(domNode);
+          return <CoreGroupHero1 data={data} />;
         } else if (className?.includes('wp-block-heading')) {
           return (
             <CoreHeading tag={domNode.name} className={className} props={props}>

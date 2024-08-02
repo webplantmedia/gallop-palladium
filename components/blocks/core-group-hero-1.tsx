@@ -9,8 +9,7 @@ import { HTMLAttributeProps } from '@lib/types';
 import { castToHTMLAttributeProps } from '@utils/tools';
 import { getVarsFromHTML } from '@utils/tools';
 
-export const CoreGroupHero1 = ({ node, className, props, options }) => {
-  const data = getVarsFromHTML(node);
+export const CoreGroupHero1 = ({ data }) => {
   console.log(data);
   return <></>;
   /*
