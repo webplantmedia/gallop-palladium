@@ -28,39 +28,39 @@ export const CoreGroupHero1 = ({ node, className, props }) => {
           data-object-fit="cover"
         ></video>
       )}
-      <div className="absolute inset-0 h-full w-full !max-w-none bg-black/30"></div>
+      <div className="absolute inset-0 h-full w-full !max-w-none bg-black/50"></div>
       <div className="relative flex flex-row !max-w-screen-3xl py-40">
-        <div className="w-1/2">
+        <div className="w-7/12">
           {data.wpBlockCover?.wpBlockGroup &&
             data.wpBlockCover.wpBlockGroup.map((group: any, index: number) => {
               console.log(group);
               return (
                 <div key={`hero-1-group-${index}`} className="flex flex-col">
-                  {group?.p[0]?.strong?.text && (
-                    <strong className="mb-7 leading-tight text-4xl font-bold text-white">
-                      {group.p[0].strong.text}
+                  {group?.h4?.text && (
+                    <strong className="mb-7 leading-tight text-3xl font-bold text-white">
+                      {group.h4.text}
                     </strong>
                   )}
                   {group?.h1?.text && (
-                    <h1 className="mb-7 leading-tight text-4xl md:text-5xl lg:text-6xl text-base-contrast font-bold">
+                    <h1 className="mb-7 leading-tight text-4xl md:text-5xl lg:text-6xl text-white font-bold">
                       {group.h1.text}
                     </h1>
                   )}
                   {group?.h2?.text && (
-                    <h2 className="mb-7 leading-tight text-4xl md:text-5xl lg:text-6xl text-base-contrast font-bold">
+                    <h2 className="mb-7 leading-tight text-4xl md:text-5xl lg:text-6xl text-white font-bold">
                       {group.h2.text}
                     </h2>
                   )}
-                  {group?.p[1]?.strong?.text && (
-                    <p className="mb-7 leading-tight text-4xl font-bold text-white">
-                      {group?.p[1]?.strong?.text}
+                  {group?.p?.text && (
+                    <p className="mb-7 text-lg font-bold text-white">
+                      {group?.p?.text}
                     </p>
                   )}
                 </div>
               );
             })}
         </div>
-        <div className="w-1/2"></div>
+        <div className="w-5/12"></div>
       </div>
     </div>
   );
