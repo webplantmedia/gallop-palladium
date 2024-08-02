@@ -9,60 +9,59 @@ import { HTMLAttributeProps } from '@lib/types';
 import { castToHTMLAttributeProps } from '@utils/tools';
 import { getVarsFromHTML } from '@utils/tools';
 
-export const CoreGroupHero1 = ({ data }) => {
+export const CoreGroupHero1 = ({ node, className, props }) => {
+  const data = getVarsFromHTML(node);
   console.log(data);
-  return <></>;
-  /*
 
   return (
-    <Link
-      prefetch={false}
-      className={classNames(
-        'flex flex-row gap-4 items-center w-full justify-between bg-base-card rounded-md pr-4 py-4 group mb-7 shadow-lg',
-        src ? 'pl-4' : 'pl-6'
-      )}
-      href={href}
-    >
-      {src && (
-        <figure className="h-[100px] w-[100px] shrink-0">
-          <img
-            className={classNames(
-              'aspect-square object-cover object-center box-border rounded-full',
-              'min-w-full'
-            )}
-            loading="lazy"
-            src={src}
-          />
-        </figure>
-      )}
-      <div className="w-full flex flex-row gap-3 items-center">
-        <div
+    <div className={classNames(className, 'relative overflow-clip')}>
+      {data.wpBlockCover?.video && (
+        <video
           className={classNames(
-            'h-full flex flex-col justify-center text-base text-base-contrast w-full'
+            'w-full object-cover object-center h-full absolute inset-0 !max-w-none !p-0'
           )}
-        >
-          {heading && <span>{heading}</span>}
-          {paragraph &&
-            paragraph.map((item: string, index: number) => (
-              <span className="block text-sm" key={index}>
-                {item}
-              </span> // You can also use <p> instead of <div> here
-            ))}
+          autoPlay
+          muted
+          loop
+          playsInline
+          src={data.wpBlockCover.video.src}
+          data-object-fit="cover"
+        ></video>
+      )}
+      <div className="absolute inset-0 h-full w-full !max-w-none bg-black/30"></div>
+      <div className="relative flex flex-row !max-w-screen-3xl py-40">
+        <div className="w-1/2">
+          {data.wpBlockCover?.wpBlockGroup &&
+            data.wpBlockCover.wpBlockGroup.map((group: any, index: number) => {
+              console.log(group);
+              return (
+                <div key={`hero-1-group-${index}`} className="flex flex-col">
+                  {group?.p[0]?.strong?.text && (
+                    <strong className="mb-7 leading-tight text-4xl font-bold text-white">
+                      {group.p[0].strong.text}
+                    </strong>
+                  )}
+                  {group?.h1?.text && (
+                    <h1 className="mb-7 leading-tight text-4xl md:text-5xl lg:text-6xl text-base-contrast font-bold">
+                      {group.h1.text}
+                    </h1>
+                  )}
+                  {group?.h2?.text && (
+                    <h2 className="mb-7 leading-tight text-4xl md:text-5xl lg:text-6xl text-base-contrast font-bold">
+                      {group.h2.text}
+                    </h2>
+                  )}
+                  {group?.p[1]?.strong?.text && (
+                    <p className="mb-7 leading-tight text-4xl font-bold text-white">
+                      {group?.p[1]?.strong?.text}
+                    </p>
+                  )}
+                </div>
+              );
+            })}
         </div>
-        <span
-          className={classNames(
-            'chevron-right shrink-0 hidden md:flex h-auto items-center justify-end right-8 md:right-0 self-center'
-          )}
-        >
-          <span className="rounded-full bg-white/20 group-hover:bg-base-contrast/20 p-2">
-            <ChevronRightIcon
-              className={
-                'h-7 w-7 relative text-base-contrast group-hover:text-white'
-              }
-            />
-          </span>
-        </span>
+        <div className="w-1/2"></div>
       </div>
-    </Link>
-	);*/
+    </div>
+  );
 };

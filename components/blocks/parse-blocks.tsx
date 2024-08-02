@@ -4,7 +4,7 @@ import parse, {
   DOMNode,
   Element,
 } from 'html-react-parser';
-import { getVarsFromHTML } from '@utils/tools';
+import { getVarsFromHTML, hasExactClass } from '@utils/tools';
 import {
   CoreParagraph,
   CoreHeading,
@@ -99,9 +99,14 @@ export const ParseBlocks = ({ content, meta }) => {
           );
         } else if (domNode.name === 'hr') {
           return <CoreSeparator props={props} />;
-        } else if (className?.includes('hero-1')) {
-          const data = getVarsFromHTML(domNode);
-          return <CoreGroupHero1 data={data} />;
+        } else if (hasExactClass(className, 'hero-1')) {
+          return (
+            <CoreGroupHero1
+              node={domNode}
+              className={className}
+              props={props}
+            />
+          );
         } else if (className?.includes('wp-block-heading')) {
           return (
             <CoreHeading tag={domNode.name} className={className} props={props}>
