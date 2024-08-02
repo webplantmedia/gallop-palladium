@@ -7,73 +7,11 @@ import Link from 'next/link';
 import { replaceWordPressUrlRelative } from '@utils/tools';
 import { HTMLAttributeProps } from '@lib/types';
 import { castToHTMLAttributeProps } from '@utils/tools';
+import { getVarsFromHTML } from '@utils/tools';
 
 export const CoreGroupHero1 = ({ node, className, props, options }) => {
-  let coverBackground: string = '';
-  let cardBackground: string = '';
-  let playVideoUrl: string = '';
-  let slides: any = [];
-  let slide: any = [];
-
-  let { href } = props;
-  let heading: any = '';
-  let paragraph: any = [];
-  let src: any = '';
-
-  if (props?.href) {
-    href = replaceWordPressUrlRelative(props.href);
-  }
-
-  node.map((block: any) => {
-    if (block.attribs?.class?.includes('wp-block-cover')) {
-      block?.children.map((el: any) => {
-        if (el.name == 'video') {
-          coverBackground = el.attribs?.src;
-        } else if (el.name == 'img') {
-          coverBackground = el.attribs?.src;
-        }
-        el.children.map((el2: any) => {
-          slide = {};
-          el2.children.map((el3: any) => {
-            if (el3.attribs?.class?.includes('wp-block-heading')) {
-              el3?.children?.map((el4: any) => {
-                slide.heading = el4.data;
-              });
-            } else if (el3.name === 'p') {
-              el3?.children?.map((el4: any) => {
-                if (el4.name === 'strong') {
-                  el4?.children?.map((el5: any) => {
-                    slide.subHeading = el5.data;
-                  });
-                } else if (el4.data) {
-                  slide.paragraph = el4.data;
-                }
-              });
-            } else if (el3.attribs?.class?.includes('wp-block-button')) {
-              el3?.children?.map((el4: any) => {
-                playVideoUrl = el4.attribs?.href;
-              });
-            }
-          });
-          if (Object.keys(slide).length !== 0) {
-            slides.push(slide);
-          }
-        });
-      });
-    } else if (block.attribs?.class?.includes('wp-block-group')) {
-      block?.children.map((el: any) => {
-        if (el.attribs?.class?.includes('wp-block-cover')) {
-          el?.children.map((el2: any) => {
-            if (el2.name == 'img') {
-              cardBackground = el2.attribs?.src;
-            }
-          });
-        }
-      });
-    }
-  });
-  console.log(cardBackground);
-
+  const data = getVarsFromHTML(node);
+  console.log(data);
   return <></>;
   /*
 
