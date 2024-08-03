@@ -33,6 +33,7 @@
     "react-instantsearch-core": "^7.0.1",
     "react-popper": "^2.3.0",
     "sharp": "^0.33.4",
+    "swiper": "^11.1.9",
     "swr": "^2.2.5",
     "valtio": "^1.13.0",
     "yet-another-react-lightbox": "^3.16.0"
