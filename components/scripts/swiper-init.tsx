@@ -2,29 +2,34 @@
 
 import { useEffect } from 'react';
 import Swiper from 'swiper';
-import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+import { Pagination, Autoplay, EffectFade } from 'swiper/modules';
+import 'swiper/css';
+// import 'swiper/css/navigation';
+import 'swiper/css/autoplay';
+import 'swiper/css/effect-fade';
 
 const SwiperInit = ({ swiperId }) => {
   useEffect(() => {
-    new Swiper(`#${swiperId}`, {
-      modules: [Navigation, Pagination, Autoplay],
+    const swiper = new Swiper(`#${swiperId}`, {
+      modules: [Pagination, Autoplay, EffectFade],
       spaceBetween: 30,
       loop: true,
-      centeredSlides: false,
+      effect: 'fade', // Use fade effect
+      fadeEffect: { crossFade: true },
       autoplay: {
-        delay: 2500,
+        delay: 3500,
+        pauseOnMouseEnter: false,
         disableOnInteraction: false,
       },
       pagination: {
         el: `#${swiperId} .swiper-pagination`,
         clickable: true,
-      },
-      navigation: {
-        nextEl: `#${swiperId} .swiper-button-next`,
-        prevEl: `#${swiperId} .swiper-button-prev`,
+        renderBullet: (index: number, className: string) => {
+          return `<span class="${className}">0${index + 1}</span>`;
+        },
       },
     });
-  }, []);
+  }, [swiperId]);
 
   return null;
 };

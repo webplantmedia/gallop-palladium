@@ -1,10 +1,5 @@
 import classNames from 'classnames';
 import { getVarsFromHTML } from '@utils/tools';
-// import styles bundle
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-import 'swiper/css/autoplay';
 import SwiperInit from '@components/scripts/swiper-init';
 import { useId } from 'react';
 
@@ -33,7 +28,7 @@ export const CoreGroupHero1 = ({ node, className, props }) => {
       <div className="absolute inset-0 h-full w-full !max-w-none bg-black/50"></div>
       <div className="relative flex flex-row !max-w-screen-3xl py-40">
         <div className="w-7/12">
-          <div id={swiperId} className="swiper">
+          <div id={swiperId} className="relative swiper">
             <div className="swiper-wrapper">
               {data.wpBlockCover?.wpBlockGroup &&
                 data.wpBlockCover.wpBlockGroup.map(
@@ -69,10 +64,7 @@ export const CoreGroupHero1 = ({ node, className, props }) => {
                   }
                 )}
             </div>
-            <div className="swiper-pagination"></div>
-
-            <div className="swiper-button-prev"></div>
-            <div className="swiper-button-next"></div>
+            <div className="absolute bottom-0 right-0 swiper-pagination flex justify-end cursor-pointer [&>.swiper-pagination-bullet:last-child]:after:content-none [&>.swiper-pagination-bullet]:after:px-3 [&>.swiper-pagination-bullet]:after:content-['/'] [&>.swiper-pagination-bullet]:text-white text-lg [&>.swiper-pagination-bullet-active]:font-bold [&>.swiper-pagination-bullet-active]:!text-primary-main [&>.swiper-pagination-bullet]:after:font-normal [&>.swiper-pagination-bullet]:after:text-white"></div>
           </div>
         </div>
         <div className="w-5/12"></div>
