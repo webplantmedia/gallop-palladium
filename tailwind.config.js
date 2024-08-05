@@ -23,9 +23,14 @@ module.exports = {
         'ping-slow': {
           '50%': { transform: 'scale(1.4)' },
         },
+        rotate: {
+          '0%': { transform: 'rotate(0deg)' },
+          '100%': { transform: 'rotate(360deg)' },
+        },
       },
       animation: {
         'ping-slow': 'ping-slow 3s ease-in-out infinite',
+        'spin-slow': 'rotate 10s linear infinite',
       },
       fontSize: {
         sm: ['1rem', '1.5'],
@@ -137,22 +142,47 @@ module.exports = {
       // addVariant('acc', 'body.theme-acc &');
       // addVariant('hocus', ['&:hover', '&:focus']);
     }),
-    plugin(function ({ addUtilities }) {
-      const newUtilities = {
-        '.variant-normal': {
-          fontVariant: 'normal',
-        },
-        '.small-caps': {
-          fontVariant: 'small-caps',
-        },
-        '.column-fill-balance': {
-          columnFill: 'balance',
-        },
-        '.clip-trapazoid': {
-          'clip-path':
-            'polygon(0 0, 100% 0, calc(100% - 30px) 100%, 30px 100%)',
-        },
+    plugin(function ({ addUtilities, theme, e }) {
+      const colors = theme('colors');
+      const newUtilities = {};
+
+      Object.keys(colors).forEach((color) => {
+        const colorValue = colors[color];
+
+        if (typeof colorValue === 'string') {
+          newUtilities[`.text-stroke-${e(color)}`] = {
+            '-webkit-text-stroke-color': `${colorValue} !important`,
+          };
+        }
+        /*else {
+          Object.keys(colorValue).forEach((shade) => {
+            if (typeof colorValue[shade] === 'string') {
+              newUtilities[`.text-stroke-${e(color)}-${shade}`] = {
+                '-webkit-text-stroke-color': colorValue[shade],
+              };
+            }
+          });
+				}*/
+      });
+
+      newUtilities['.text-stroke'] = {
+        '-webkit-text-stroke': '1px',
+        color: 'transparent',
       };
+
+      newUtilities['.variant-normal'] = {
+        fontVariant: 'normal',
+      };
+      newUtilities['.small-caps'] = {
+        fontVariant: 'small-caps',
+      };
+      newUtilities['.column-fill-balance'] = {
+        columnFill: 'balance',
+      };
+      newUtilities['.clip-trapazoid'] = {
+        'clip-path': 'polygon(0 0, 100% 0, calc(100% - 30px) 100%, 30px 100%)',
+      };
+
       addUtilities(newUtilities, ['responsive', 'hover']);
     }),
   ],

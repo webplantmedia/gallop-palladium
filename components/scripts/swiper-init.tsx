@@ -17,7 +17,7 @@ const SwiperInit = ({ swiperId }) => {
       effect: 'fade', // Use fade effect
       fadeEffect: { crossFade: true },
       autoplay: {
-        delay: 3500,
+        delay: 4500,
         pauseOnMouseEnter: false,
         disableOnInteraction: false,
       },

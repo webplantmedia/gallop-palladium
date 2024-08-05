@@ -106,6 +106,10 @@ export function getVarsFromHTML(node: any): Record<string, any> {
       name.push('p');
       value = block.attribs;
       saveNestedObject(name.join('.'), value);
+    } else if (block.name == 'em' && block.children?.length) {
+      name.push('em');
+      value = block.attribs;
+      saveNestedObject(name.join('.'), value);
     } else if (block.name == 'strong' && block.children?.length) {
       name.push('strong');
       value = block.attribs;
