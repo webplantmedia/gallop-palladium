@@ -29,7 +29,7 @@ export const CoreGroupHero1 = ({ node, className, props }) => {
         ></video>
       )}
       <div className="absolute inset-0 h-full w-full !max-w-none bg-black/70"></div>
-      <div className="relative flex flex-row !max-w-screen-3xl py-40">
+      <div className="relative flex flex-row !max-w-screen-3xl py-32">
         <div className="w-7/12">
           <div id={swiperId} className="relative swiper">
             <div className="swiper-wrapper items-start flex py-14">
