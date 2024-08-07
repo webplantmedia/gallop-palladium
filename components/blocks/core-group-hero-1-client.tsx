@@ -2,33 +2,44 @@
 
 import Iconify from '@components/iconify';
 import PlaySolidIcon from '@iconify/icons-heroicons/play-solid';
-import { useState, Fragment, useEffect } from 'react';
+import { useState, Fragment, useEffect, useRef } from 'react';
 import { Dialog, DialogPanel } from '@headlessui/react';
 import { useVimeoPlayerScript } from '@hooks';
 
 export const CoreGroupHero1Client = ({ data }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isIframeLoaded, setIsIframeLoaded] = useState(false);
+
   let circleText = data.wpBlockCover?.wpBlockButtons?.wpBlockButton?.a?.text;
-  let iframe = data.wpBlockGroup[1].wpBlockEmbed.iframe;
-  console.log(iframe);
+  let iframe = { ...data.wpBlockGroup[1].wpBlockEmbed.iframe };
+  delete iframe.frameborder;
+  delete iframe.width;
+  delete iframe.height;
+  delete iframe.loading;
+  delete iframe.allow;
+  iframe.frameBorder = '0';
+  const iframeRef = useRef(null);
+  // console.log(iframe);
+
   circleText += ' - ' + circleText + ' - ';
   const isVimeoPlayerLoaded = useVimeoPlayerScript();
 
   useEffect(() => {
     if (!isVimeoPlayerLoaded) return;
-
     if (!isOpen) return;
+    if (!isIframeLoaded) return;
 
-    const iframe = document.querySelector('iframe[src*="vimeo.com"]');
-    if (iframe) {
-      const player = new window.Vimeo.Player(iframe);
+    const iframeElement = iframeRef.current;
+
+    if (iframeElement) {
+      const player = new window.Vimeo.Player(iframeElement);
       player.play();
 
       return () => {
         player.pause();
       };
     }
-  }, [isOpen]);
+  }, [isOpen, isVimeoPlayerLoaded, isIframeLoaded]);
 
   return (
     <Fragment>
@@ -73,8 +84,13 @@ export const CoreGroupHero1Client = ({ data }) => {
             className="fixed inset-0 bg-base-darker/25 transition-opacity opacity-100"
             onClick={() => setIsOpen(false)}
           />
-          <div className="relative bg-base-card p-7 rounded-lg shadow-lg flex flex-col gap-4">
-            <iframe {...iframe} />
+          <div className="shadow-lg max-w-[700px]">
+            <iframe
+              ref={iframeRef}
+              {...iframe}
+              onLoad={() => setIsIframeLoaded(true)}
+              className="w-full"
+            />
           </div>
         </DialogPanel>
       </Dialog>
