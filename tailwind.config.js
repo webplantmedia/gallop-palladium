@@ -27,10 +27,15 @@ module.exports = {
           '0%': { transform: 'rotate(0deg)' },
           '100%': { transform: 'rotate(360deg)' },
         },
+        'rotate-reverse': {
+          '0%': { transform: 'rotate(0deg)' },
+          '100%': { transform: 'rotate(-360deg)' },
+        },
       },
       animation: {
         'ping-slow': 'ping-slow 3s ease-in-out infinite',
-        'spin-slow': 'rotate 10s linear infinite',
+        'spin-slow': 'rotate 20s linear infinite',
+        'spin-slow-reverse': 'rotate-reverse 20s linear infinite',
       },
       fontSize: {
         sm: ['1rem', '1.5'],

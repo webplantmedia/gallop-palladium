@@ -54,6 +54,10 @@ export function getVarsFromHTML(node: any): Record<string, any> {
       name.push('wpBlockGroup');
       value = block.attribs;
       saveNestedObject(name.join('.'), value);
+    } else if (hasExactClass(props.className, 'wp-block-embed')) {
+      name.push('wpBlockEmbed');
+      value = block.attribs;
+      saveNestedObject(name.join('.'), value);
     } else if (hasExactClass(props.className, 'wp-block-cover')) {
       name.push('wpBlockCover');
       value = block.attribs;
@@ -96,6 +100,10 @@ export function getVarsFromHTML(node: any): Record<string, any> {
       saveNestedObject(name.join('.'), value);
     } else if (block.name == 'img') {
       name.push('img');
+      value = block.attribs;
+      saveNestedObject(name.join('.'), value);
+    } else if (block.name == 'iframe') {
+      name.push('iframe');
       value = block.attribs;
       saveNestedObject(name.join('.'), value);
     } else if (block.name == 'a') {

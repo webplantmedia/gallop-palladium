@@ -1,6 +1,4 @@
-import DynamicSidebar from '@components/sidebar/dynamic';
 import EditLink from '@components/edit-link';
-import H1 from '@components/h-1';
 import { ParseBlocks } from '@components/blocks';
 import TableOfContentsMenu from '@components/table-of-contents';
 import { parseContent } from './parse-content';
