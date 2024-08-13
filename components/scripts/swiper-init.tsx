@@ -29,7 +29,7 @@ const SwiperInit = ({ swiperId }) => {
         el: `#${swiperId} .swiper-pagination`,
         clickable: true,
         renderBullet: (index: number, className: string) => {
-          return `<span class="${className}">0${index + 1}</span>`;
+          return `<span class="${className}"><span>0${index + 1}</span></span>`;
         },
       },
     });

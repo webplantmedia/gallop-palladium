@@ -1,9 +1,15 @@
 'use client';
 
+import classNames from 'classnames';
 import Iconify from '@components/iconify';
 import PlaySolidIcon from '@iconify/icons-heroicons/play-solid';
 import { useState, Fragment, useEffect, useRef } from 'react';
-import { Dialog, DialogPanel } from '@headlessui/react';
+import {
+  Dialog,
+  DialogPanel,
+  Transition,
+  TransitionChild,
+} from '@headlessui/react';
 import { useVimeoPlayerScript } from '@hooks';
 
 export const CoreGroupHero1Client = ({ data }) => {
@@ -18,8 +24,12 @@ export const CoreGroupHero1Client = ({ data }) => {
   delete iframe.loading;
   delete iframe.allow;
   iframe.frameBorder = '0';
+
+  const srcUrl = new URL(iframe.src);
+  srcUrl.searchParams.set('muted', '1');
+  iframe.src = srcUrl.toString();
+
   const iframeRef = useRef(null);
-  // console.log(iframe);
 
   circleText += ' - ' + circleText + ' - ';
   const isVimeoPlayerLoaded = useVimeoPlayerScript();
@@ -74,26 +84,45 @@ export const CoreGroupHero1Client = ({ data }) => {
           </div>
         </div>
       </button>
-      <Dialog
-        open={isOpen}
-        onClose={() => setIsOpen(false)}
-        className="relative z-50"
-      >
-        <DialogPanel className="fixed inset-0 flex items-center justify-center p-4">
-          <div
-            className="fixed inset-0 bg-base-darker/25 transition-opacity opacity-100"
-            onClick={() => setIsOpen(false)}
-          />
-          <div className="shadow-lg max-w-[700px]">
-            <iframe
-              ref={iframeRef}
-              {...iframe}
-              onLoad={() => setIsIframeLoaded(true)}
-              className="w-full"
-            />
-          </div>
-        </DialogPanel>
-      </Dialog>
+      <Transition appear show={isOpen} as={Fragment}>
+        <Dialog
+          static={false}
+          unmount={false}
+          open={isOpen}
+          onClose={() => setIsOpen(false)}
+          className="relative z-50"
+        >
+          <TransitionChild
+            as="div"
+            enter="ease-out duration-300"
+            enterFrom="opacity-0"
+            enterTo="opacity-100"
+            leave="ease-in duration-200"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+          >
+            <DialogPanel
+              className={classNames(
+                'fixed inset-0 items-center justify-center p-4 flex'
+                // isOpen ? 'flex' : 'hidden'
+              )}
+            >
+              <div
+                className="fixed inset-0 bg-black/90 transition-opacity opacity-100"
+                onClick={() => setIsOpen(false)}
+              />
+              <div className="shadow-lg max-w-[700px] w-full relative z-10 aspect-video rounded-md overflow-clip">
+                <iframe
+                  ref={iframeRef}
+                  {...iframe}
+                  onLoad={() => setIsIframeLoaded(true)}
+                  className="w-full block h-full"
+                />
+              </div>
+            </DialogPanel>
+          </TransitionChild>
+        </Dialog>
+      </Transition>
     </Fragment>
   );
 };
