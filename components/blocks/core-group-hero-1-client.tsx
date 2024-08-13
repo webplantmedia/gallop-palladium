@@ -84,15 +84,16 @@ export const CoreGroupHero1Client = ({ data }) => {
           </div>
         </div>
       </button>
-      <Transition appear show={isOpen} as={Fragment}>
+      <Transition unmount={false} appear show={isOpen} as={Fragment}>
         <Dialog
-          static={false}
+          static={true}
           unmount={false}
           open={isOpen}
           onClose={() => setIsOpen(false)}
           className="relative z-50"
         >
           <TransitionChild
+            unmount={false}
             as="div"
             enter="ease-out duration-300"
             enterFrom="opacity-0"
