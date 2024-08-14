@@ -16,6 +16,7 @@ import { useVimeoPlayerScript } from '@hooks';
 export const CoreGroupHero1Client = ({ data }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isIframeLoaded, setIsIframeLoaded] = useState(false);
+  const circleTextRef = useRef<HTMLDivElement>(null);
 
   let circleText = data.wpBlockCover?.wpBlockButtons?.wpBlockButton?.a?.text;
   let iframe = { ...data.wpBlockGroup[1].wpBlockEmbed.iframe };
@@ -30,7 +31,7 @@ export const CoreGroupHero1Client = ({ data }) => {
   srcUrl.searchParams.set('muted', '1');
   iframe.src = srcUrl.toString();
 
-  const iframeRef = useRef(null);
+  const iframeRef = useRef<HTMLIFrameElement>(null);
 
   circleText += ' - ' + circleText + ' - ';
   const isVimeoPlayerLoaded = useVimeoPlayerScript();
@@ -52,6 +53,30 @@ export const CoreGroupHero1Client = ({ data }) => {
     }
   }, [isOpen, isVimeoPlayerLoaded, isIframeLoaded]);
 
+  useEffect(() => {
+    const circleTextElement = circleTextRef.current;
+    if (!circleTextElement) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            circleTextElement.classList.add('animate-spin-slow-reverse');
+          } else {
+            circleTextElement.classList.remove('animate-spin-slow-reverse');
+          }
+        });
+      },
+      { threshold: 0.01 } // Trigger when 50% of the element is visible
+    );
+
+    observer.observe(circleTextElement);
+
+    return () => {
+      if (circleTextElement) observer.unobserve(circleTextElement);
+    };
+  }, []);
+
   return (
     <Fragment>
       <button
@@ -59,7 +84,10 @@ export const CoreGroupHero1Client = ({ data }) => {
         className="relative p-2 bg-white/10 rounded-full border-2 border-white"
       >
         <div className="relative w-36 h-36 flex items-center justify-center">
-          <div className="circle-text absolute w-full h-full animate-spin-slow-reverse">
+          <div
+            ref={circleTextRef}
+            className="circle-text absolute w-full h-full animate-spin-slow-reverse"
+          >
             {circleText.split('').map((letter: string, index: number) => {
               const length = circleText.length;
 
@@ -120,11 +148,11 @@ export const CoreGroupHero1Client = ({ data }) => {
               </div>
               <button
                 type="button"
-                className="absolute z-20 top-0 right-0 rounded-none text-white focus:outline-none focus:ring-0 hover:bg-white/10 p-1"
+                className="absolute z-20 top-0 right-0 rounded-none text-white focus:outline-none focus:ring-0 hover:bg-white/10 p-2"
                 onClick={() => setIsOpen(false)}
               >
                 <span className="sr-only">Close panel</span>
-                <Iconify icon={XMarkIcon} className="h-8 w-8 text-white" />
+                <Iconify icon={XMarkIcon} className="h-10 w-10 text-white" />
               </button>
             </DialogPanel>
           </TransitionChild>

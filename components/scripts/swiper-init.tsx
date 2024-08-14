@@ -10,11 +10,17 @@ import 'swiper/css/effect-fade';
 
 const SwiperInit = ({ swiperId }) => {
   const initializedRef = useRef(false);
+  const swiperInstanceRef = useRef<Swiper | null>(null);
+  const observerRef = useRef<IntersectionObserver | null>(null);
 
   useEffect(() => {
     if (initializedRef.current) return;
 
-    const swiper = new Swiper(`#${swiperId}`, {
+    const swiperContainer = document.getElementById(swiperId);
+
+    if (!swiperContainer) return;
+
+    swiperInstanceRef.current = new Swiper(swiperContainer, {
       modules: [Pagination, Autoplay, EffectFade],
       spaceBetween: 30,
       loop: true,
@@ -35,6 +41,31 @@ const SwiperInit = ({ swiperId }) => {
     });
 
     initializedRef.current = true;
+
+    observerRef.current = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            swiperInstanceRef.current?.autoplay.start();
+          } else {
+            swiperInstanceRef.current?.autoplay.stop();
+          }
+        });
+      },
+      {
+        threshold: 0.1, // 10% of the swiper container should be visible
+      }
+    );
+
+    if (swiperContainer) {
+      observerRef.current.observe(swiperContainer);
+    }
+
+    return () => {
+      // Cleanup the observer and destroy the Swiper instance
+      observerRef.current?.disconnect();
+      // swiperInstanceRef.current?.destroy();
+    };
   }, [swiperId]);
 
   return null;
