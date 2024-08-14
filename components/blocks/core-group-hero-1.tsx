@@ -21,7 +21,7 @@ export const CoreGroupHero1 = ({ node, className, props }) => {
   let slideItems = slide.wpBlockGroup;
   let brand = { ...data.wpBlockGroup[0]?.wpBlockCover[0] };
   let info = { ...data.wpBlockGroup[0]?.wpBlockCover[1] };
-  console.log(brand);
+  console.log(info);
 
   return (
     <Fragment>
@@ -103,7 +103,11 @@ export const CoreGroupHero1 = ({ node, className, props }) => {
         </div>
         <SwiperInit swiperId={swiperId} />
       </div>
-      <div className="!max-w-none bg-secondary-main">
+      <div className="!max-w-screen-4xl mx-auto relative z-[1] bg-secondary-main">
+        <div
+          className="absolute -z-[1] top-0 right-0 bottom-20 w-full bg-contain bg-no-repeat bg-right-top opacity-[.03]"
+          style={info.img?.src && { backgroundImage: `url('${info.img.src}')` }}
+        ></div>
         <div className="flex flex-col xl:flex-row !max-w-screen-3xl px-4 sm:px-8 mx-auto gap-0">
           <div className="py-14 px-8 bg-primary-main text-primary-contrast w-4/12 -mt-20 relative z-20 rounded-t-md overflow-hidden">
             <div className="-z-10 bg-primary-main/90 absolute inset-0"></div>
