@@ -170,6 +170,10 @@ module.exports = {
 				}*/
       });
 
+      newUtilities['.container-type-size'] = {
+        'container-type': 'size',
+      };
+
       newUtilities['.text-stroke'] = {
         '-webkit-text-stroke': '1px',
         color: 'transparent',

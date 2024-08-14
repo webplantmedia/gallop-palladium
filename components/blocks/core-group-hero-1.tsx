@@ -6,14 +6,44 @@ import SwiperInit from '@components/scripts/swiper-init';
 import { useId } from 'react';
 import { CoreGroupHero1Client } from './core-group-hero-1-client';
 
+const appendVimeoParams = (url: string) => {
+  const urlObj = new URL(url);
+  urlObj.searchParams.set('muted', '1');
+  urlObj.searchParams.set('title', '0');
+  urlObj.searchParams.set('byline', '0');
+  urlObj.searchParams.set('portrait', '0');
+  urlObj.searchParams.set('background', '1');
+  return urlObj.toString();
+};
+
 export const CoreGroupHero1 = ({ node, className, props }) => {
   const data = getVarsFromHTML(node);
   let swiperId = 'swiper-' + useId(); // Generate a unique ID
   swiperId = swiperId.replace(/:/g, '-'); // Sanitize the ID
+  let videoSrc: string = '';
+  let vimeoVideo = false;
+  if (data.wpBlockEmbed?.iframe?.src) {
+    videoSrc = appendVimeoParams(data.wpBlockEmbed.iframe.src);
+    vimeoVideo = true;
+  } else if (data.wpBlockCover?.video?.src) {
+    videoSrc = data.wpBlockCover.video.src;
+  }
 
   return (
-    <div className={classNames(className, 'relative overflow-clip')}>
-      {data.wpBlockCover?.video && (
+    <div className={classNames(className, 'relative overflow-hidden')}>
+      {vimeoVideo && (
+        <div className="absolute inset-0 w-full h-full overflow-hidden !p-0 !max-w-none bg-black">
+          <iframe
+            className={classNames(
+              'max-h-[calc(100cqh)] h-[500%] w-[500%]',
+              'absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 pointer-events-none'
+            )}
+            src={videoSrc}
+            allow="autoplay; fullscreen"
+          ></iframe>
+        </div>
+      )}
+      {!vimeoVideo && data.wpBlockCover?.video && (
         <video
           className={classNames(
             'w-full object-cover object-center h-full absolute inset-0 !max-w-none !p-0'
@@ -22,7 +52,7 @@ export const CoreGroupHero1 = ({ node, className, props }) => {
           muted
           loop
           playsInline
-          src={data.wpBlockCover.video.src}
+          src={videoSrc}
           data-object-fit="cover"
         ></video>
       )}
