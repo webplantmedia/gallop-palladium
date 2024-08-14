@@ -13,13 +13,11 @@ import {
 } from '@headlessui/react';
 import { useVimeoPlayerScript } from '@hooks';
 
-export const CoreGroupHero1Client = ({ data }) => {
+export const CoreGroupHero1Client = ({ circleText, iframe }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isIframeLoaded, setIsIframeLoaded] = useState(false);
   const circleTextRef = useRef<HTMLDivElement>(null);
 
-  let circleText = data.wpBlockCover?.wpBlockButtons?.wpBlockButton?.a?.text;
-  let iframe = { ...data.wpBlockGroup[1].wpBlockEmbed.iframe };
   delete iframe.frameborder;
   delete iframe.width;
   delete iframe.height;

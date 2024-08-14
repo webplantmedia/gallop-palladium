@@ -186,13 +186,16 @@ export default function Navbar({ sidebarContent = 'default' }) {
                   />
                 </MenuButton>
                 <TransitionDropdownMenu>
-                  <MenuItems className="bg-primary-main absolute right-0 mt-2 w-auto origin-top-right rounded-md py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                  <MenuItems
+                    className="bg-primary-main absolute right-0 mt-2 w-auto origin-top-right rounded-md py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                    modal={false}
+                  >
                     {_contact.map((item, itemIndex) => (
                       <MenuItem key={itemIndex}>
                         <Link
                           prefetch={false}
                           href={item.href}
-                          className="ui-active:bg-white/10 whitespace-nowrap block px-4 py-2 text-base text-primary-contrast flex items-center"
+                          className="ui-active:bg-white/10 whitespace-nowrap px-4 py-2 text-base text-primary-contrast flex items-center"
                         >
                           {item.icon ? (
                             <item.icon className="flex-shrink-0 h-4 w-4 mr-2" />

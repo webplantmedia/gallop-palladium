@@ -62,11 +62,11 @@ module.exports = {
           contrast: '#ffffff',
         },
         secondary: {
-          lighter: '#db8c3e',
-          light: '#d2761a',
-          main: '#CC6600',
-          dark: '#c46302',
-          darker: '#c06000',
+          lighter: '#555555',
+          light: '#444444',
+          main: '#333333',
+          dark: '#222222',
+          darker: '#111111',
           contrast: '#ffffff',
         },
         base: {

@@ -2,7 +2,12 @@
 
 import { Fragment } from 'react';
 import DisableScroll from '../global/disable-scroll';
-import { Popover, Transition } from '@headlessui/react';
+import {
+  Popover,
+  PopoverPanel,
+  PopoverButton,
+  Transition,
+} from '@headlessui/react';
 import { _neighborhoods, _neighborhoodsCTA } from '@data/_menu';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
 import classNames from 'classnames';
@@ -14,7 +19,7 @@ export default function NeighborhoodDropdown({ isScrolling, item }) {
       {({ open }) => (
         <>
           {open && <DisableScroll />}
-          <Popover.Button
+          <PopoverButton
             as="a"
             href="#"
             className={classNames(
@@ -29,7 +34,7 @@ export default function NeighborhoodDropdown({ isScrolling, item }) {
               )}
               aria-hidden="true"
             />
-          </Popover.Button>
+          </PopoverButton>
 
           <Transition
             as={Fragment}
@@ -41,8 +46,9 @@ export default function NeighborhoodDropdown({ isScrolling, item }) {
             leaveTo="transform opacity-0 scale-95"
             unmount={false}
           >
-            <Popover.Panel
+            <PopoverPanel
               static={true}
+              modal={false}
               className="absolute left-0 right-0 max-w-screen-3xl top-full"
             >
               {({ close }) => (
@@ -115,7 +121,7 @@ export default function NeighborhoodDropdown({ isScrolling, item }) {
                   </div>
                 </div>
               )}
-            </Popover.Panel>
+            </PopoverPanel>
           </Transition>
         </>
       )}

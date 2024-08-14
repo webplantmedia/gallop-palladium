@@ -66,6 +66,10 @@ export function getVarsFromHTML(node: any): Record<string, any> {
       name.push('wpBlockButtons');
       value = block.attribs;
       saveNestedObject(name.join('.'), value);
+    } else if (hasExactClass(props.className, 'wp-block-code')) {
+      name.push('wpBlockCode');
+      value = block.attribs;
+      saveNestedObject(name.join('.'), value);
     } else if (hasExactClass(props.className, 'wp-block-button')) {
       name.push('wpBlockButton');
       value = block.attribs;
