@@ -4,7 +4,6 @@ import { useEffect, useRef } from 'react';
 import Swiper from 'swiper';
 import { Pagination, Autoplay, EffectFade } from 'swiper/modules';
 import 'swiper/css';
-// import 'swiper/css/navigation';
 import 'swiper/css/autoplay';
 import 'swiper/css/effect-fade';
 
@@ -62,9 +61,8 @@ const SwiperInit = ({ swiperId }) => {
     }
 
     return () => {
-      // Cleanup the observer and destroy the Swiper instance
       observerRef.current?.disconnect();
-      // swiperInstanceRef.current?.destroy();
+      swiperInstanceRef.current?.destroy();
     };
   }, [swiperId]);
 
