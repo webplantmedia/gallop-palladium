@@ -9,6 +9,7 @@ import SwiperInit from '@components/scripts/swiper-init';
 import { useId } from 'react';
 import { CoreGroupHero1Client } from './core-group-hero-1-client';
 import { Fragment } from 'react';
+import { permalink } from '@utils/tools';
 
 export const CoreGroupHero1 = ({ node, className, props }) => {
   const data = getVarsFromHTML(node);
@@ -21,7 +22,7 @@ export const CoreGroupHero1 = ({ node, className, props }) => {
   let slideItems = slide.wpBlockGroup;
   let brand = { ...data.wpBlockGroup[0]?.wpBlockCover[0] };
   let info = { ...data.wpBlockGroup[0]?.wpBlockCover[1] };
-  console.log(info);
+  // console.log(info);
 
   return (
     <Fragment>
@@ -119,6 +120,8 @@ export const CoreGroupHero1 = ({ node, className, props }) => {
               <tbody className="divide-y divide-white/10">
                 {brand.table?.tbody?.tr &&
                   brand.table.tbody.tr.map((item: any, index: number) => {
+                    const dayId = permalink(item.td[0].text);
+                    console.log(dayId);
                     return (
                       <tr key={`brand-item-${index}`}>
                         <td className="whitespace-nowrap px-3 py-4 text-sm text-white">
