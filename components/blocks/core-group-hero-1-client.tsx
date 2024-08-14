@@ -3,6 +3,7 @@
 import classNames from 'classnames';
 import Iconify from '@components/iconify';
 import PlaySolidIcon from '@iconify/icons-heroicons/play-solid';
+import XMarkIcon from '@iconify/icons-heroicons/x-mark';
 import { useState, Fragment, useEffect, useRef } from 'react';
 import {
   Dialog,
@@ -108,11 +109,8 @@ export const CoreGroupHero1Client = ({ data }) => {
                 // isOpen ? 'flex' : 'hidden'
               )}
             >
-              <div
-                className="fixed inset-0 bg-black/90 transition-opacity opacity-100"
-                onClick={() => setIsOpen(false)}
-              />
-              <div className="shadow-lg max-w-[700px] w-full relative z-10 aspect-video rounded-md overflow-clip">
+              <div className="fixed inset-0 bg-black/90 transition-opacity opacity-100" />
+              <div className="shadow-lg h-full max-h-[2048px] max-w-[1152px] w-full relative z-10 aspect-video rounded-md overflow-clip">
                 <iframe
                   ref={iframeRef}
                   {...iframe}
@@ -120,6 +118,14 @@ export const CoreGroupHero1Client = ({ data }) => {
                   className="w-full block h-full"
                 />
               </div>
+              <button
+                type="button"
+                className="absolute z-20 top-0 right-0 rounded-none text-white focus:outline-none focus:ring-0 hover:bg-white/10 p-1"
+                onClick={() => setIsOpen(false)}
+              >
+                <span className="sr-only">Close panel</span>
+                <Iconify icon={XMarkIcon} className="h-8 w-8 text-white" />
+              </button>
             </DialogPanel>
           </TransitionChild>
         </Dialog>
