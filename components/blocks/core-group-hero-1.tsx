@@ -12,7 +12,7 @@ export const CoreGroupHero1 = ({ node, className, props }) => {
   swiperId = swiperId.replace(/:/g, '-'); // Sanitize the ID
 
   return (
-    <div className={classNames(className, 'relative overflow-clip')}>
+    <div className={classNames(className, 'relative')}>
       {data.wpBlockCover?.video && (
         <video
           className={classNames(
@@ -41,7 +41,7 @@ export const CoreGroupHero1 = ({ node, className, props }) => {
                       >
                         <div className="flex flex-col gap-10">
                           {group?.h4?.text && (
-                            <strong className="mb-0 !leading-tight text-2xl text-white tracking-[0.5em] uppercase font-normal flex flex-row gap-[0.5em] items-center">
+                            <strong className="mb-0 font-accent !leading-tight text-2xl text-white tracking-[0.3em] uppercase font-normal flex flex-row gap-[0.5em] items-center">
                               {group.h4.text}
                               <Iconify
                                 icon={ArrowLongRightIcon}
