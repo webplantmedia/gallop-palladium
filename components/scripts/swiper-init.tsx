@@ -13,17 +13,18 @@ const SwiperInit = ({ swiperId }) => {
   const observerRef = useRef<IntersectionObserver | null>(null);
 
   useEffect(() => {
-    if (initializedRef.current) return;
+    if (initializedRef.current) return; // Ensure initialization only happens once
 
     const swiperContainer = document.getElementById(swiperId);
 
     if (!swiperContainer) return;
 
+    // Initialize Swiper
     swiperInstanceRef.current = new Swiper(swiperContainer, {
       modules: [Pagination, Autoplay, EffectFade],
       spaceBetween: 30,
       loop: true,
-      effect: 'fade', // Use fade effect
+      effect: 'fade',
       fadeEffect: { crossFade: true },
       autoplay: {
         delay: 4500,
@@ -39,8 +40,10 @@ const SwiperInit = ({ swiperId }) => {
       },
     });
 
+    // Mark as initialized
     initializedRef.current = true;
 
+    // Setup IntersectionObserver
     observerRef.current = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -63,6 +66,7 @@ const SwiperInit = ({ swiperId }) => {
     return () => {
       observerRef.current?.disconnect();
       swiperInstanceRef.current?.destroy();
+      initializedRef.current = false;
     };
   }, [swiperId]);
 

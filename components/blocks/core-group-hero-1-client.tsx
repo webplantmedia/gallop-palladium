@@ -81,7 +81,7 @@ export const CoreGroupHero1Client = ({ data }) => {
     <Fragment>
       <button
         onClick={() => setIsOpen(true)}
-        className="relative p-2 bg-white/10 rounded-full border-2 border-white"
+        className="relative p-2 bg-white/10 hover:bg-white/20 rounded-full border-2 border-white transition-colors duration-300 ease-in-out"
       >
         <div className="relative w-36 h-36 flex items-center justify-center">
           <div
