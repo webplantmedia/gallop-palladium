@@ -1,5 +1,6 @@
 export { CoreEmbed } from './core-embed';
 export { CoreSeparator } from './core-separator';
+export { CoreSpacer } from './core-spacer';
 export { CoreMediaText } from './core-media-text';
 export { TagAnchor } from './tag-anchor';
 export { CoreButton } from './core-button';

@@ -136,13 +136,13 @@ export const CoreGroupHero1Client = ({ circleText, videoUrl }) => {
             >
               <div
                 onClick={() => setIsOpen(false)}
-                className="bg-black/90 transition-opacity opacity-100 fixed inset-0 shadow-lg w-full max-w-full z-10 aspect-16/9 rounded-md overflow-clip flex items-center justify-center"
+                className="bg-black/90 transition-opacity opacity-100 fixed inset-0 shadow-lg w-full max-w-full z-10 aspect-16/9 flex items-center justify-center"
               >
                 <iframe
                   ref={iframeRef}
                   src={iframeVideoSrc}
                   onLoad={() => setIsIframeLoaded(true)}
-                  className="w-[90vw] h-[90vh] max-w-screen-4xl"
+                  className="w-[90vw] h-[90vh] max-w-screen-4xl rounded-md"
                   allow="autoplay; fullscreen; picture-in-picture"
                 />
               </div>

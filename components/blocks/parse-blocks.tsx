@@ -4,13 +4,14 @@ import parse, {
   DOMNode,
   Element,
 } from 'html-react-parser';
-import { getVarsFromHTML, hasExactClass } from '@utils/tools';
+import { hasExactClass } from '@utils/tools';
 import {
   CoreParagraph,
   CoreHeading,
   CoreGallery,
   CoreGroupHero1,
   CoreSeparator,
+  CoreSpacer,
   CoreButtons,
   CoreButton,
   CoreButtonLink,
@@ -107,6 +108,8 @@ export const ParseBlocks = ({ content, meta }) => {
               props={props}
             />
           );
+        } else if (className?.includes('wp-block-spacer')) {
+          return <CoreSpacer props={props} className={className} />;
         } else if (className?.includes('wp-block-heading')) {
           return (
             <CoreHeading tag={domNode.name} className={className} props={props}>
