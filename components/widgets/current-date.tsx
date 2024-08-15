@@ -9,13 +9,13 @@ export default function CurrentDate({ dayString }: { dayString: string }) {
     // Function to calculate the correct occurrence of the specified day
     const calculateNextDayDate = (): string => {
       const daysOfWeek = [
-        'sunday',
         'monday',
         'tuesday',
         'wednesday',
         'thursday',
         'friday',
         'saturday',
+        'sunday',
       ];
 
       const currentDate = new Date();
@@ -23,7 +23,7 @@ export default function CurrentDate({ dayString }: { dayString: string }) {
       const currentCSTDate = new Date(
         currentDate.toLocaleString('en-US', options)
       );
-      const currentDayIndex = currentCSTDate.getDay();
+      const currentDayIndex = (currentCSTDate.getDay() + 6) % 7; // Adjusting so week starts on Monday
       const targetDayIndex = daysOfWeek.indexOf(dayString.toLowerCase());
 
       if (targetDayIndex === -1) {
@@ -33,22 +33,21 @@ export default function CurrentDate({ dayString }: { dayString: string }) {
       // Calculate the number of days difference
       let daysUntilTarget = targetDayIndex - currentDayIndex;
 
-      // If the target day is earlier in the week or today, adjust to get this week's occurrence
-      if (daysUntilTarget > 0) {
-        // Future day in the same week (no adjustment needed)
-      } else if (daysUntilTarget < 0) {
-        // Past day this week, adjust to show this past occurrence
-        daysUntilTarget = daysUntilTarget;
+      // Adjust logic:
+      // - If daysUntilTarget is negative, it means the target day was earlier in the week, so it should stay in this week.
+      // - If daysUntilTarget is positive, it means the target day is later in the week, so use it as is.
+      // - If daysUntilTarget is zero, it is today, so no adjustment needed.
+      if (daysUntilTarget < 0) {
+        // Calculate the past occurrence (this week's occurrence)
+        const targetDate = new Date(currentCSTDate);
+        targetDate.setDate(currentCSTDate.getDate() + daysUntilTarget);
+        return `${targetDate.getMonth() + 1}/${targetDate.getDate()}`;
       } else {
-        // If it's today, no adjustment needed
+        // Calculate the upcoming occurrence
+        const targetDate = new Date(currentCSTDate);
+        targetDate.setDate(currentCSTDate.getDate() + daysUntilTarget);
+        return `${targetDate.getMonth() + 1}/${targetDate.getDate()}`;
       }
-
-      // Calculate the date of the occurrence of the target day
-      const targetDate = new Date(currentCSTDate);
-      targetDate.setDate(currentCSTDate.getDate() + daysUntilTarget);
-
-      // Format the date as "month/day"
-      return `${targetDate.getMonth() + 1}/${targetDate.getDate()}`;
     };
 
     // Calculate and set the formatted date

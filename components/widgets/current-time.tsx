@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { parse, format } from 'date-fns';
+import { parse, format, isValid } from 'date-fns';
 import classNames from 'classnames';
 
 export default function CurrentTime({
@@ -14,60 +14,67 @@ export default function CurrentTime({
   const [currentTime, setCurrentTime] = useState<Date | null>(null);
 
   useEffect(() => {
-    // Set the initial time and start the interval only after the component mounts
     setCurrentTime(new Date());
     const intervalId = setInterval(() => {
       setCurrentTime(new Date());
     }, 1000);
 
-    // Clean up the interval when the component unmounts
     return () => clearInterval(intervalId);
   }, []);
 
   if (!currentTime) {
-    // Avoid rendering until the time is set on the client side
     return null;
   }
 
-  // Function to convert the given date to CST/CDT
+  // Convert date to CST/CDT
   const convertToCST = (date: Date): Date => {
     return new Date(
       date.toLocaleString('en-US', { timeZone: 'America/Chicago' })
     );
   };
 
-  // Function to parse time strings to Date objects in CST/CDT
-  const parseTime = (timeString: string): Date => {
-    const date = parse(timeString, 'h:mma', new Date());
-    return convertToCST(date);
+  // Parse time strings to Date objects in CST/CDT
+  const parseTime = (timeString: string): Date | null => {
+    // Standardize the time string to include minutes if they are missing
+    const standardizedTimeString = timeString.includes(':')
+      ? timeString
+      : timeString.replace(/(am|pm)/, ':00$1');
+
+    // Attempt to parse the time using the standardized format
+    const parsedDate = parse(standardizedTimeString, 'h:mma', new Date());
+    if (!isValid(parsedDate)) {
+      console.error(`Invalid time format: ${timeString}`);
+      return null;
+    }
+    return convertToCST(parsedDate);
   };
 
-  // Get the current time in CST/CDT
   const currentCSTTime = convertToCST(currentTime);
-  const currentDayOfWeek = format(currentCSTTime, 'EEEE').toLowerCase(); // Get current day of the week
+  const currentDayOfWeek = format(currentCSTTime, 'EEEE').toLowerCase();
 
-  // Check if the day matches
   if (dayOfWeek.toLowerCase() !== currentDayOfWeek) {
-    return null; // Return nothing if the day doesn't match
+    return null;
   }
 
   let isWithinLimits = false;
 
-  // Ensure timeRange is defined and in the correct format
   if (timeRange && timeRange.includes('-')) {
-    // Parse the timeRange string into lower and upper limits
     const [lowerLimit, upperLimit] = timeRange.split('-');
     if (lowerLimit && upperLimit) {
       const lowerTime = parseTime(lowerLimit.trim());
       const upperTime = parseTime(upperLimit.trim());
 
-      // Check if current time is within the specified limits
-      isWithinLimits =
-        currentCSTTime >= lowerTime && currentCSTTime <= upperTime;
+      if (lowerTime && upperTime) {
+        console.log('lower', lowerTime);
+        console.log('current', currentCSTTime);
+        console.log('upper', upperTime);
+
+        isWithinLimits =
+          currentCSTTime >= lowerTime && currentCSTTime <= upperTime;
+      }
     }
   }
 
-  // Format the current time for display
   const formattedTime = format(currentCSTTime, 'h:mm:ss a');
 
   return (
