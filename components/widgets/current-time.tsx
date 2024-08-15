@@ -4,8 +4,14 @@ import { useState, useEffect } from 'react';
 import { parse, format } from 'date-fns';
 import classNames from 'classnames';
 
-export default function CurrentTime({ dayOfWeek, timeRange }) {
-  const [currentTime, setCurrentTime] = useState(null);
+export default function CurrentTime({
+  dayOfWeek,
+  timeRange,
+}: {
+  dayOfWeek: string;
+  timeRange: string;
+}) {
+  const [currentTime, setCurrentTime] = useState<Date | null>(null);
 
   useEffect(() => {
     // Set the initial time and start the interval only after the component mounts
@@ -24,14 +30,14 @@ export default function CurrentTime({ dayOfWeek, timeRange }) {
   }
 
   // Function to convert the given date to CST/CDT
-  const convertToCST = (date) => {
+  const convertToCST = (date: Date): Date => {
     return new Date(
       date.toLocaleString('en-US', { timeZone: 'America/Chicago' })
     );
   };
 
   // Function to parse time strings to Date objects in CST/CDT
-  const parseTime = (timeString) => {
+  const parseTime = (timeString: string): Date => {
     const date = parse(timeString, 'h:mma', new Date());
     return convertToCST(date);
   };
@@ -68,9 +74,10 @@ export default function CurrentTime({ dayOfWeek, timeRange }) {
     <div
       className={classNames(
         isWithinLimits ? 'text-green-700' : 'text-red-700',
-        'block font-bold'
+        'font-bold flex justify-between w-full'
       )}
     >
+      <span>{isWithinLimits ? 'Open' : 'Closed'}</span>
       {formattedTime}
     </div>
   );

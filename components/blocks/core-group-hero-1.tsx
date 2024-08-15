@@ -12,6 +12,7 @@ import { CoreGroupHero1Client } from './core-group-hero-1-client';
 import { Fragment } from 'react';
 import { permalink } from '@utils/tools';
 import CurrentTime from '@widgets/current-time';
+import CurrentDate from '@widgets/current-date';
 
 export const CoreGroupHero1 = ({ node, className, props }) => {
   const data = getVarsFromHTML(node);
@@ -117,29 +118,32 @@ export const CoreGroupHero1 = ({ node, className, props }) => {
             <h2 className="mb-7 leading-tight text-2xl md:text-3xl w-full text-center text-primary-contrast">
               {brand.h2.text}
             </h2>
-            <table className="min-w-full divide-y divide-white/10">
-              <thead></thead>
-              <tbody className="divide-y divide-white/10">
-                {brand.table?.tbody?.tr &&
-                  brand.table.tbody.tr.map((item: any, index: number) => {
-                    const dayId = permalink(item.td[0].text);
-                    return (
-                      <tr key={`brand-item-${index}`}>
-                        <td className="whitespace-nowrap px-3 py-4 text-base text-white align-top">
-                          {item.td[0].text}
-                        </td>
-                        <td className="whitespace-nowrap px-3 py-4 text-base text-white text-right align-top">
-                          {item.td[1].text}
-                          <CurrentTime
-                            dayOfWeek={dayId}
-                            timeRange={item.td[1].text}
-                          />{' '}
-                        </td>
-                      </tr>
-                    );
-                  })}
-              </tbody>
-            </table>
+            <div className="min-w-full divide-y divide-white/10">
+              {brand.table?.tbody?.tr &&
+                brand.table.tbody.tr.map((item: any, index: number) => {
+                  const dayId = permalink(item.td[0].text);
+                  return (
+                    <div className="w-full flex flex-wrap justify-between whitespace-nowrap px-0 py-4 text-base text-white align-top">
+                      {item.td[2]?.text && (
+                        <span className="block text-left w-full italic text-white/60 text-base">
+                          {item.td[2].text}
+                        </span>
+                      )}
+                      <span>
+                        {item.td[0].text}{' '}
+                        <span className="text-white/60">
+                          <CurrentDate dayString={dayId} />
+                        </span>
+                      </span>
+                      <span>{item.td[1].text}</span>
+                      <CurrentTime
+                        dayOfWeek={dayId}
+                        timeRange={item.td[1].text}
+                      />{' '}
+                    </div>
+                  );
+                })}
+            </div>
           </div>
           <div className="w-8/12 flex flex-col xl:flex-row">
             {info &&
@@ -181,7 +185,7 @@ export const CoreGroupHero1 = ({ node, className, props }) => {
                       </div>
                     )}
                     <h3 className="text-2xl">{item.h4?.text}</h3>
-                    <p className="text-white/50">{item.p?.a?.text}</p>
+                    <p className="text-white/50 text-lg">{item.p?.a?.text}</p>
                   </a>
                 );
               })}
