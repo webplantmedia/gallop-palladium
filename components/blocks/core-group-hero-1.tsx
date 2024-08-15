@@ -107,13 +107,13 @@ export const CoreGroupHero1 = ({ node, className, props }) => {
         </div>
         <SwiperInit swiperId={swiperId} />
       </div>
-      <div className="!max-w-screen-4xl mx-auto relative z-[1] bg-secondary-main">
+      <div className="!max-w-screen-4xl mx-auto relative z-[1] bg-secondary-main !px-0">
         <div
-          className="absolute -z-[1] top-0 right-0 bottom-20 w-full bg-contain bg-no-repeat bg-right-top opacity-[.03]"
+          className="absolute -z-[1] top-0 right-0 bottom-20 bg-contain bg-no-repeat bg-right-top opacity-[.03] w-2/3 xl:w-full"
           style={info.img?.src && { backgroundImage: `url('${info.img.src}')` }}
         ></div>
-        <div className="flex flex-col xl:flex-row !max-w-screen-3xl px-4 sm:px-8 mx-auto gap-0">
-          <div className="pt-14 pb-7 px-8 bg-primary-main text-primary-contrast w-4/12 -mt-20 relative z-20 rounded-t-md overflow-hidden">
+        <div className="flex flex-col xl:flex-row !max-w-screen-3xl px-4 sm:px-8 mx-auto gap-4 sm:gap-10 xl:gap-0">
+          <div className="pt-14 pb-7 px-8 bg-primary-main text-primary-contrast w-full xl:w-4/12 mb-0 xl:-mb-20 -mt-20 relative z-20 rounded-t-md rounded-b-md xl:rounded-m-none overflow-hidden">
             <div className="-z-10 bg-primary-main/90 absolute inset-0"></div>
             <h2 className="mb-7 leading-tight text-2xl md:text-3xl w-full text-center text-primary-contrast">
               {brand.h2.text}
@@ -145,7 +145,7 @@ export const CoreGroupHero1 = ({ node, className, props }) => {
                 })}
             </div>
           </div>
-          <div className="w-8/12 flex flex-col xl:flex-row">
+          <div className="w-full xl:w-8/12 flex flex-col xl:flex-row gap-4 sm:gap-10 xl:gap-0 mb-4 sm:mb-10 xl:mb-0">
             {info &&
               info.wpBlockGroup?.length &&
               info.wpBlockGroup.map((item: any, index: number) => {
@@ -154,7 +154,7 @@ export const CoreGroupHero1 = ({ node, className, props }) => {
                     href={item.p?.a?.href}
                     key={`info-item-${index}`}
                     className={classNames(
-                      'py-20 px-12 text-white w-1/3 flex flex-col gap-10 shrink-0 hover:!bg-white/10 justify-center'
+                      'py-20 px-12 text-white w-full xl:w-1/3 flex flex-col gap-4 sm:gap-10 shrink-0 hover:!bg-white/10 justify-center items-center xl:items-start rounded-md xl:rounded-none'
                     )}
                     style={{
                       backgroundColor: `rgba(255,255,255,0.0${index + 1})`,

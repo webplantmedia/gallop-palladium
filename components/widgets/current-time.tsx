@@ -65,10 +65,6 @@ export default function CurrentTime({
       const upperTime = parseTime(upperLimit.trim());
 
       if (lowerTime && upperTime) {
-        console.log('lower', lowerTime);
-        console.log('current', currentCSTTime);
-        console.log('upper', upperTime);
-
         isWithinLimits =
           currentCSTTime >= lowerTime && currentCSTTime <= upperTime;
       }
