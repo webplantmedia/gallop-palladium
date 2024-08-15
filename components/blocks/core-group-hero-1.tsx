@@ -2,6 +2,7 @@ import Iconify from '@components/iconify';
 import ArrowLongRightIcon from '@iconify/icons-heroicons/arrow-long-right';
 import PhoneIcon from '@iconify/icons-heroicons/phone';
 import EnvelopeIcon from '@iconify/icons-heroicons/envelope';
+import ArrowInsertIcon from '@iconify/icons-material-symbols/arrow-insert';
 // import BuildingOfficeIcon from '@iconify/icons-heroicons/building-office';
 import BuildingOfficeIcon from '@iconify/icons-fluent/building-people-20-filled';
 import classNames from 'classnames';
@@ -184,7 +185,13 @@ export const CoreGroupHero1 = ({ node, className, props }) => {
                         />
                       </div>
                     )}
-                    <h3 className="text-2xl">{item.h4?.text}</h3>
+                    <h3 className="text-2xl flex">
+                      {item.h4?.text}
+                      <Iconify
+                        icon={ArrowInsertIcon}
+                        className="flex-shrink-0 h-auto w-8 text-white rotate-90"
+                      />
+                    </h3>
                     <p className="text-white/50 text-lg">{item.p?.a?.text}</p>
                   </a>
                 );
