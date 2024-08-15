@@ -127,7 +127,10 @@ export const CoreGroupHero1 = ({ node, className, props }) => {
                 brand.table.tbody.tr.map((item: any, index: number) => {
                   const dayId = permalink(item.td[0].text);
                   return (
-                    <div className="w-full flex flex-wrap justify-between whitespace-nowrap px-0 py-4 text-base text-white align-top">
+                    <div
+                      key={`brand-item-${index}`}
+                      className="w-full flex flex-wrap justify-between whitespace-nowrap px-0 py-4 text-base text-white align-top"
+                    >
                       {item.td[2]?.text && (
                         <span className="block text-left w-full italic text-white/60 text-base">
                           {item.td[2].text}

@@ -25,8 +25,7 @@ import {
   // GallopAlbumCover,
   // GallopSinglePost,
   // GallopExcerptPost,
-  GallopGridder,
-  CoreGrid,
+  CoreGroup,
   // GallopBlogPosts,
   // GallopMap,
   // GallopNeighborhood,
@@ -101,14 +100,6 @@ export const ParseBlocks = ({ content, meta }) => {
           );
         } else if (domNode.name === 'hr') {
           return <CoreSeparator props={props} />;
-        } else if (hasExactClass(className, 'hero-1')) {
-          return (
-            <CoreGroupHero1
-              node={domNode}
-              className={className}
-              props={props}
-            />
-          );
         } else if (className?.includes('wp-block-spacer')) {
           return <CoreSpacer props={props} className={className} />;
         } else if (className?.includes('wp-block-heading')) {
@@ -117,11 +108,14 @@ export const ParseBlocks = ({ content, meta }) => {
               {domToReact(domNode.children as DOMNode[], options)}
             </CoreHeading>
           );
-        } else if (className?.includes('wp-block-group-is-layout-grid')) {
+        } else if (hasExactClass(className, 'wp-block-group')) {
           return (
-            <CoreGrid tag={domNode.name} className={className} props={props}>
-              {domToReact(domNode.children as DOMNode[], options)}
-            </CoreGrid>
+            <CoreGroup
+              className={className}
+              props={props}
+              options={options}
+              node={domNode}
+            />
           );
         } else if (className?.includes('wp-block-buttons')) {
           return (

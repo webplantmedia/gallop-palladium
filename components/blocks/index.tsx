@@ -1,7 +1,8 @@
 export { CoreEmbed } from './core-embed';
 export { CoreSeparator } from './core-separator';
 export { CoreSpacer } from './core-spacer';
-export { CoreGrid } from './core-grid';
+export { CoreGroupGrid } from './core-group-grid';
+export { CoreGroup } from './core-group';
 export { CoreMediaText } from './core-media-text';
 export { TagAnchor } from './tag-anchor';
 export { CoreButton } from './core-button';
@@ -35,6 +36,7 @@ export { GallopGridder } from './gallop-gridder';
 // export { GallopNeighborhood } from './gallop-neighborhood';
 // export { GallopCard } from './gallop-card';
 // export { GallopContactForm } from './gallop-contact-form';
+export { CoreGroupCard1 } from './core-group-card-1';
 export { CoreGroupHero1 } from './core-group-hero-1';
 export { CoreGroupHero1Client } from './core-group-hero-1-client';
 export { ParseBlocks } from './parse-blocks';
