@@ -76,7 +76,7 @@ module.exports = {
           body: '#fff1dc',
           light: '#ffe7bd',
           card: '#e2cca2',
-          contrast: '#482401',
+          contrast: '#000000',
           contrast2: '#603813',
           disabled: '#936f4d',
         },

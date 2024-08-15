@@ -12,27 +12,26 @@ import {
   TransitionChild,
 } from '@headlessui/react';
 import { useVimeoPlayerScript } from '@hooks';
+import { getVimeoIframeSrc } from '@utils/tools';
 
-export const CoreGroupHero1Client = ({ circleText, iframe }) => {
+interface IframeAttributes {
+  frameBorder?: string;
+  src?: string;
+}
+
+export const CoreGroupHero1Client = ({ circleText, videoUrl }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isIframeLoaded, setIsIframeLoaded] = useState(false);
   const circleTextRef = useRef<HTMLDivElement>(null);
-
-  delete iframe.frameborder;
-  delete iframe.width;
-  delete iframe.height;
-  delete iframe.loading;
-  delete iframe.allow;
-  iframe.frameBorder = '0';
-
-  const srcUrl = new URL(iframe.src);
-  srcUrl.searchParams.set('muted', '1');
-  iframe.src = srcUrl.toString();
 
   const iframeRef = useRef<HTMLIFrameElement>(null);
 
   circleText += ' - ' + circleText + ' - ';
   const isVimeoPlayerLoaded = useVimeoPlayerScript();
+  let iframeVideoSrc = getVimeoIframeSrc(videoUrl);
+  // const srcUrl = new URL(iframeVideoSrc);
+  // srcUrl.searchParams.set('muted', '1');
+  // iframeVideoSrc = srcUrl.toString();
 
   useEffect(() => {
     if (!isVimeoPlayerLoaded) return;
@@ -135,13 +134,16 @@ export const CoreGroupHero1Client = ({ circleText, iframe }) => {
                 // isOpen ? 'flex' : 'hidden'
               )}
             >
-              <div className="fixed inset-0 bg-black/90 transition-opacity opacity-100" />
-              <div className="shadow-lg h-full max-h-[2048px] max-w-[1152px] w-full relative z-10 aspect-video rounded-md overflow-clip">
+              <div
+                onClick={() => setIsOpen(false)}
+                className="bg-black/90 transition-opacity opacity-100 fixed inset-0 shadow-lg w-full max-w-full z-10 aspect-16/9 rounded-md overflow-clip flex items-center justify-center"
+              >
                 <iframe
                   ref={iframeRef}
-                  {...iframe}
+                  src={iframeVideoSrc}
                   onLoad={() => setIsIframeLoaded(true)}
-                  className="w-full block h-full"
+                  className="w-[90vw] h-[90vh] max-w-screen-4xl"
+                  allow="autoplay; fullscreen; picture-in-picture"
                 />
               </div>
               <button

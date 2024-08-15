@@ -46,4 +46,4 @@ export { getHoursInserted } from './get-hours-inserted';
 export { getVarsFromHTML } from './get-vars-from-html';
 export { hasExactClass } from './has-exact-class';
 export { printObject } from './print-object';
-export { getNextDayDate } from './get-next-day-date';
+export { getVimeoIframeSrc } from './get-vimeo-iframe-src';

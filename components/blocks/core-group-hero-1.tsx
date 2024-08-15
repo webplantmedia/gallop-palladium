@@ -21,11 +21,11 @@ export const CoreGroupHero1 = ({ node, className, props }) => {
   swiperId = swiperId.replace(/:/g, '-'); // Sanitize the ID
   let slide = { ...data.wpBlockCover };
   let circleText = slide.wpBlockButtons?.wpBlockButton?.a?.text;
-  let iframe = { ...data.wpBlockGroup[1].wpBlockEmbed.iframe };
+  let videoUrl = slide.wpBlockButtons?.wpBlockButton?.a?.href;
   let video = slide.video;
   let slideItems = slide.wpBlockGroup;
-  let brand = { ...data.wpBlockGroup[0]?.wpBlockCover[0] };
-  let info = { ...data.wpBlockGroup[0]?.wpBlockCover[1] };
+  let brand = { ...data.wpBlockGroup?.wpBlockCover[0] };
+  let info = { ...data.wpBlockGroup?.wpBlockCover[1] };
   // console.log(info);
 
   return (
@@ -102,7 +102,10 @@ export const CoreGroupHero1 = ({ node, className, props }) => {
           </div>
           <div className="w-full xl:w-5/12 flex items-start justify-center pt-32">
             {data.wpBlockCover?.wpBlockButtons?.wpBlockButton?.a?.text && (
-              <CoreGroupHero1Client circleText={circleText} iframe={iframe} />
+              <CoreGroupHero1Client
+                circleText={circleText}
+                videoUrl={videoUrl}
+              />
             )}
           </div>
         </div>
