@@ -26,6 +26,7 @@ import {
   // GallopSinglePost,
   // GallopExcerptPost,
   GallopGridder,
+  CoreGrid,
   // GallopBlogPosts,
   // GallopMap,
   // GallopNeighborhood,
@@ -115,6 +116,12 @@ export const ParseBlocks = ({ content, meta }) => {
             <CoreHeading tag={domNode.name} className={className} props={props}>
               {domToReact(domNode.children as DOMNode[], options)}
             </CoreHeading>
+          );
+        } else if (className?.includes('wp-block-group-is-layout-grid')) {
+          return (
+            <CoreGrid tag={domNode.name} className={className} props={props}>
+              {domToReact(domNode.children as DOMNode[], options)}
+            </CoreGrid>
           );
         } else if (className?.includes('wp-block-buttons')) {
           return (
