@@ -2,7 +2,8 @@ import Iconify from '@components/iconify';
 import ArrowLongRightIcon from '@iconify/icons-heroicons/arrow-long-right';
 import PhoneIcon from '@iconify/icons-heroicons/phone';
 import EnvelopeIcon from '@iconify/icons-heroicons/envelope';
-import BuildingOfficeIcon from '@iconify/icons-heroicons/building-office';
+// import BuildingOfficeIcon from '@iconify/icons-heroicons/building-office';
+import BuildingOfficeIcon from '@iconify/icons-fluent/building-people-20-filled';
 import classNames from 'classnames';
 import { getVarsFromHTML } from '@utils/tools';
 import SwiperInit from '@components/scripts/swiper-init';
@@ -10,6 +11,7 @@ import { useId } from 'react';
 import { CoreGroupHero1Client } from './core-group-hero-1-client';
 import { Fragment } from 'react';
 import { permalink } from '@utils/tools';
+import CurrentTime from '@widgets/current-time';
 
 export const CoreGroupHero1 = ({ node, className, props }) => {
   const data = getVarsFromHTML(node);
@@ -110,7 +112,7 @@ export const CoreGroupHero1 = ({ node, className, props }) => {
           style={info.img?.src && { backgroundImage: `url('${info.img.src}')` }}
         ></div>
         <div className="flex flex-col xl:flex-row !max-w-screen-3xl px-4 sm:px-8 mx-auto gap-0">
-          <div className="py-14 px-8 bg-primary-main text-primary-contrast w-4/12 -mt-20 relative z-20 rounded-t-md overflow-hidden">
+          <div className="pt-14 pb-14 px-8 bg-primary-main text-primary-contrast w-4/12 -mb-20 -mt-20 relative z-20 rounded-t-md overflow-hidden">
             <div className="-z-10 bg-primary-main/90 absolute inset-0"></div>
             <h2 className="mb-7 leading-tight text-2xl md:text-3xl w-full text-center text-primary-contrast">
               {brand.h2.text}
@@ -121,14 +123,17 @@ export const CoreGroupHero1 = ({ node, className, props }) => {
                 {brand.table?.tbody?.tr &&
                   brand.table.tbody.tr.map((item: any, index: number) => {
                     const dayId = permalink(item.td[0].text);
-                    console.log(dayId);
                     return (
                       <tr key={`brand-item-${index}`}>
-                        <td className="whitespace-nowrap px-3 py-4 text-sm text-white">
+                        <td className="whitespace-nowrap px-3 py-4 text-base text-white align-top">
                           {item.td[0].text}
                         </td>
-                        <td className="whitespace-nowrap px-3 py-4 text-sm text-white text-right">
+                        <td className="whitespace-nowrap px-3 py-4 text-base text-white text-right align-top">
                           {item.td[1].text}
+                          <CurrentTime
+                            dayOfWeek={dayId}
+                            timeRange={item.td[1].text}
+                          />{' '}
                         </td>
                       </tr>
                     );

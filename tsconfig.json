@@ -26,7 +26,7 @@
     "strictNullChecks": true,
 		"paths": {
 			"@components/*": ["./components/*"],
-			"@widgets/*": ["./widgets/*"],
+			"@widgets/*": ["./components/widgets/*"],
       "@hooks": ["./lib/hooks/index"],
       "@utils/*": ["./lib/utils/*"],
       "@svg/*": ["./svg/*"],
