@@ -5,10 +5,11 @@ import { parse, format } from 'date-fns';
 import classNames from 'classnames';
 
 export default function CurrentTime({ dayOfWeek, timeRange }) {
-  const [currentTime, setCurrentTime] = useState(new Date());
+  const [currentTime, setCurrentTime] = useState(null);
 
   useEffect(() => {
-    // Create an interval to update the time every second
+    // Set the initial time and start the interval only after the component mounts
+    setCurrentTime(new Date());
     const intervalId = setInterval(() => {
       setCurrentTime(new Date());
     }, 1000);
@@ -16,6 +17,11 @@ export default function CurrentTime({ dayOfWeek, timeRange }) {
     // Clean up the interval when the component unmounts
     return () => clearInterval(intervalId);
   }, []);
+
+  if (!currentTime) {
+    // Avoid rendering until the time is set on the client side
+    return null;
+  }
 
   // Function to convert the given date to CST/CDT
   const convertToCST = (date) => {
@@ -39,18 +45,13 @@ export default function CurrentTime({ dayOfWeek, timeRange }) {
     return null; // Return nothing if the day doesn't match
   }
 
-  let checkTime = false;
-  // Ensure timeRange is defined and in the correct format
-  if (!timeRange || !timeRange.includes('-')) {
-    checkTime = true;
-  }
-
   let isWithinLimits = false;
 
-  if (checkTime) {
+  // Ensure timeRange is defined and in the correct format
+  if (timeRange && timeRange.includes('-')) {
     // Parse the timeRange string into lower and upper limits
     const [lowerLimit, upperLimit] = timeRange.split('-');
-    if (checkTime && lowerLimit && upperLimit) {
+    if (lowerLimit && upperLimit) {
       const lowerTime = parseTime(lowerLimit.trim());
       const upperTime = parseTime(upperLimit.trim());
 
