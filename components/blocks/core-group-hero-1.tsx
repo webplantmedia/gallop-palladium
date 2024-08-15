@@ -113,7 +113,7 @@ export const CoreGroupHero1 = ({ node, className, props }) => {
           style={info.img?.src && { backgroundImage: `url('${info.img.src}')` }}
         ></div>
         <div className="flex flex-col xl:flex-row !max-w-screen-3xl px-4 sm:px-8 mx-auto gap-0">
-          <div className="pt-14 pb-14 px-8 bg-primary-main text-primary-contrast w-4/12 -mb-20 -mt-20 relative z-20 rounded-t-md overflow-hidden">
+          <div className="pt-14 pb-7 px-8 bg-primary-main text-primary-contrast w-4/12 -mt-20 relative z-20 rounded-t-md overflow-hidden">
             <div className="-z-10 bg-primary-main/90 absolute inset-0"></div>
             <h2 className="mb-7 leading-tight text-2xl md:text-3xl w-full text-center text-primary-contrast">
               {brand.h2.text}
