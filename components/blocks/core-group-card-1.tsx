@@ -4,12 +4,12 @@ import PlayIcon from '@iconify/icons-heroicons/play';
 // import BuildingOfficeIcon from '@iconify/icons-heroicons/building-office';
 import classNames from 'classnames';
 import { getVarsFromHTML } from '@utils/tools';
-import { useId } from 'react';
-import { Fragment } from 'react';
+import { VideoPopup } from '@widgets/video-popup';
 
 export const CoreGroupCard1 = ({ node, className, props }) => {
   const data = getVarsFromHTML(node);
-  console.log('DATA', data);
+  // console.log('DATA', data);
+
   let img: any = {};
   let href = '#';
   if (data.a?.img) {
@@ -19,11 +19,13 @@ export const CoreGroupCard1 = ({ node, className, props }) => {
     img = { ...data.img };
   }
   img.className = img.class;
+  img.srcSet = img.srcset;
   delete img.class;
+  delete img.srcset;
 
   return (
     <div className="">
-      <a className="relative group" href={href}>
+      <VideoPopup className="relative group" videoUrl={href}>
         <img {...img} />
         <div className="absolute inset-0 z-10 flex items-center justify-center">
           <span className="w-16 h-16 flex justify-center items-center rounded-full border-2 border-white/50 bg-white/20 group-hover:border-white/70 group-hover:bg-white/30">
@@ -33,7 +35,7 @@ export const CoreGroupCard1 = ({ node, className, props }) => {
             />
           </span>
         </div>
-      </a>
+      </VideoPopup>
     </div>
   );
 };

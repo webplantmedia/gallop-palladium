@@ -38,5 +38,4 @@ export { GallopGridder } from './gallop-gridder';
 // export { GallopContactForm } from './gallop-contact-form';
 export { CoreGroupCard1 } from './core-group-card-1';
 export { CoreGroupHero1 } from './core-group-hero-1';
-export { CoreGroupHero1Client } from './core-group-hero-1-client';
 export { ParseBlocks } from './parse-blocks';

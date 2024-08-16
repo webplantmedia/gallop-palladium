@@ -8,17 +8,22 @@ import BuildingOfficeIcon from '@iconify/icons-fluent/building-people-20-filled'
 import classNames from 'classnames';
 import { getVarsFromHTML } from '@utils/tools';
 import SwiperInit from '@components/scripts/swiper-init';
+import CircleAnimation from '@components/scripts/circle-animation';
 import { useId } from 'react';
-import { CoreGroupHero1Client } from './core-group-hero-1-client';
 import { Fragment } from 'react';
 import { permalink } from '@utils/tools';
 import CurrentTime from '@widgets/current-time';
 import CurrentDate from '@widgets/current-date';
+import PlaySolidIcon from '@iconify/icons-heroicons/play-solid';
+// import { useRef } from 'react';
+import { VideoPopup } from '@widgets/video-popup';
 
 export const CoreGroupHero1 = ({ node, className, props }) => {
   const data = getVarsFromHTML(node);
   let swiperId = 'swiper-' + useId(); // Generate a unique ID
+  let circleTextId = 'circle-text-' + useId(); // Generate a unique ID
   swiperId = swiperId.replace(/:/g, '-'); // Sanitize the ID
+  circleTextId = circleTextId.replace(/:/g, '-'); // Sanitize the ID
   let slide = { ...data.wpBlockCover };
   let circleText = slide.wpBlockButtons?.wpBlockButton?.a?.text;
   let videoUrl = slide.wpBlockButtons?.wpBlockButton?.a?.href;
@@ -26,6 +31,8 @@ export const CoreGroupHero1 = ({ node, className, props }) => {
   let slideItems = slide.wpBlockGroup;
   let brand = { ...data.wpBlockGroup?.wpBlockCover[0] };
   let info = { ...data.wpBlockGroup?.wpBlockCover[1] };
+  // const circleTextRef = useRef<HTMLDivElement>(null);
+  circleText += ' - ' + circleText + ' - ';
   // console.log(info);
 
   return (
@@ -102,10 +109,44 @@ export const CoreGroupHero1 = ({ node, className, props }) => {
           </div>
           <div className="w-full xl:w-5/12 flex items-start justify-center pt-32">
             {data.wpBlockCover?.wpBlockButtons?.wpBlockButton?.a?.text && (
-              <CoreGroupHero1Client
-                circleText={circleText}
+              <VideoPopup
+                className="relative p-2 bg-white/10 hover:bg-white/20 rounded-full border-2 border-white transition-colors duration-300 ease-in-out"
                 videoUrl={videoUrl}
-              />
+              >
+                <div className="relative w-36 h-36 flex items-center justify-center">
+                  <div
+                    // ref={circleTextRef}
+                    id={circleTextId}
+                    className="circle-text absolute w-full h-full animate-spin-slow-reverse"
+                  >
+                    {circleText
+                      .split('')
+                      .map((letter: string, index: number) => {
+                        const length = circleText.length;
+
+                        const spacing = Math.round(360 / length);
+                        const angle = spacing * index;
+
+                        return (
+                          <span
+                            className={`absolute top-0 left-0 right-0 h-full flex items-start justify-center origin-center uppercase text-white text-sm`}
+                            style={{ transform: `rotate(${angle}deg)` }}
+                            key={`rotate-letter-${index}`}
+                          >
+                            {letter}
+                          </span>
+                        );
+                      })}
+                  </div>
+                  <CircleAnimation id={circleTextId} />
+                  <div className="absolute w-20 h-20 rounded-full bg-white flex items-center justify-center">
+                    <Iconify
+                      icon={PlaySolidIcon}
+                      className="flex-shrink-0 h-auto w-10 text-primary-main -mr-1"
+                    />
+                  </div>
+                </div>
+              </VideoPopup>
             )}
           </div>
         </div>
