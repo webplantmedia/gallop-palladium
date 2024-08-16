@@ -3,7 +3,6 @@ import ArrowLongRightIcon from '@iconify/icons-heroicons/arrow-long-right';
 import PhoneIcon from '@iconify/icons-heroicons/phone';
 import EnvelopeIcon from '@iconify/icons-heroicons/envelope';
 import ArrowInsertIcon from '@iconify/icons-material-symbols/arrow-insert';
-// import BuildingOfficeIcon from '@iconify/icons-heroicons/building-office';
 import BuildingOfficeIcon from '@iconify/icons-fluent/building-people-20-filled';
 import classNames from 'classnames';
 import { getVarsFromHTML } from '@utils/tools';
@@ -15,7 +14,6 @@ import { permalink } from '@utils/tools';
 import CurrentTime from '@widgets/current-time';
 import CurrentDate from '@widgets/current-date';
 import PlaySolidIcon from '@iconify/icons-heroicons/play-solid';
-// import { useRef } from 'react';
 import { VideoPopup } from '@widgets/video-popup';
 
 export const CoreGroupHero1 = ({ node, className, props }) => {
@@ -31,9 +29,7 @@ export const CoreGroupHero1 = ({ node, className, props }) => {
   let slideItems = slide.wpBlockGroup;
   let brand = { ...data.wpBlockGroup?.wpBlockCover[0] };
   let info = { ...data.wpBlockGroup?.wpBlockCover[1] };
-  // const circleTextRef = useRef<HTMLDivElement>(null);
   circleText += ' - ' + circleText + ' - ';
-  // console.log(info);
 
   return (
     <Fragment>
@@ -115,7 +111,6 @@ export const CoreGroupHero1 = ({ node, className, props }) => {
               >
                 <div className="relative w-36 h-36 flex items-center justify-center">
                   <div
-                    // ref={circleTextRef}
                     id={circleTextId}
                     className="circle-text absolute w-full h-full animate-spin-slow-reverse"
                   >
