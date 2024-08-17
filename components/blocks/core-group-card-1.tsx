@@ -5,13 +5,15 @@ import PlayIcon from '@iconify/icons-heroicons/play';
 import classNames from 'classnames';
 import { getVarsFromHTML } from '@utils/tools';
 import { VideoPopup } from '@widgets/video-popup';
+import { CoreButton, CoreParagraph, CoreHeading } from '@components/blocks';
 
 export const CoreGroupCard1 = ({ node, className, props }) => {
   const data = getVarsFromHTML(node);
-  // console.log('DATA', data);
+  console.log('DATA', data);
 
   let img: any = {};
   let href = '#';
+  let button = data.wpBlockButtons?.wpBlockButton?.a;
   if (data.a?.img) {
     img = { ...data.a.img };
     href = data.a.href;
@@ -24,7 +26,7 @@ export const CoreGroupCard1 = ({ node, className, props }) => {
   delete img.srcset;
 
   return (
-    <div className="">
+    <div className="flex flex-col gap-0 rounded-md overflow-clip shadow-lg">
       <VideoPopup className="relative group" videoUrl={href}>
         <img {...img} />
         <div className="absolute inset-0 z-10 flex items-center justify-center">
@@ -36,6 +38,24 @@ export const CoreGroupCard1 = ({ node, className, props }) => {
           </span>
         </div>
       </VideoPopup>
+      <div className="bg-base-card px-7 pb-7">
+        <CoreHeading tag="h4" props={data} className="is-style-h3 !mb-2 !mt-4">
+          {data.h4?.text}
+        </CoreHeading>
+        <CoreParagraph className="">{data.p?.text}</CoreParagraph>
+        <CoreButton>
+          <a
+            className="text-base py-3 px-5 w-full flex justify-center items-center gap-2"
+            href={button.href}
+          >
+            {button.text}
+            <Iconify
+              icon={ArrowInsertIcon}
+              className="flex-shrink-0 h-auto w-6 rotate-90 inline"
+            />
+          </a>
+        </CoreButton>
+      </div>
     </div>
   );
 };

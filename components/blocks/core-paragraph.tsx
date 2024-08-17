@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-export const CoreParagraph = ({ children, className }) => {
+export const CoreParagraph = ({ children, className = '' }) => {
   if (className) {
     className = className.replace(
       'has-x-large-font-size',

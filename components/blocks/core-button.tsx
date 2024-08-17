@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 
-export const CoreButton = ({ children, tag, className }) => {
+export const CoreButton = ({ children, className = '' }) => {
   className = className.replace(
     'wp-block-button__width-100',
     'w-full basis-full'

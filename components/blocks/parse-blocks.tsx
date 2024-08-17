@@ -9,7 +9,6 @@ import {
   CoreParagraph,
   CoreHeading,
   CoreGallery,
-  CoreGroupHero1,
   CoreSeparator,
   CoreSpacer,
   CoreButtons,

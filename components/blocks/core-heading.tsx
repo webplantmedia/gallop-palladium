@@ -6,16 +6,14 @@ export const CoreHeading = ({ children, tag, className = '', props }) => {
   const { id } = props;
   const Tag = tag;
 
-  let h1Class =
-    'mb-7 leading-tight text-5xl md:text-6xl lg:text-7xl text-base-contrast font-bold';
-  let h2Class =
-    'mb-2 leading-tight text-4xl md:text-5xl lg:text-6xl text-base-contrast mt-14 font-bold';
-  let h3Class =
-    'mb-1 leading-tight text-2xl text-base-contrast small-caps font-medium dmh:font-accent dmh:normal-case dmh:variant-normal dmh:mb-2';
-  let h4Class =
-    'mb-7 leading-tight text-base-contrast font-medium text-base small-caps';
-  let h5Class = 'mb-7 leading-tight';
-  let h6Class = 'mb-7 leading-tight';
+  let headingClass = {
+    h1: 'mb-7 leading-tight text-5xl md:text-6xl lg:text-7xl text-base-contrast font-bold',
+    h2: 'mb-7 leading-tight text-4xl md:text-5xl lg:text-6xl text-base-contrast mt-14 font-bold',
+    h3: 'mb-1 leading-tight text-2xl md:text-3xl text-primary-main font-medium',
+    h4: 'mb-7 leading-tight text-2xl text-base-contrast font-medium text-base',
+    h5: 'mb-7 leading-tight',
+    h6: 'mb-7 leading-tight',
+  };
 
   let hClass = '';
 
@@ -47,20 +45,20 @@ export const CoreHeading = ({ children, tag, className = '', props }) => {
   }
 
   if (className?.includes('is-style-h1')) {
-    hClass = h1Class;
+    hClass = headingClass['h1'];
   }
   if (className?.includes('is-style-h2')) {
-    hClass = h2Class;
+    hClass = headingClass['h2'];
   }
   if (className?.includes('is-style-h3')) {
-    hClass = h3Class;
+    hClass = headingClass['h3'];
   }
 
   return (
     <Tag
       key={id}
       id={id}
-      className={classNames(hClass ? hClass : h1Class, className)}
+      className={classNames(hClass ? hClass : headingClass[tag], className)}
     >
       {children}
     </Tag>

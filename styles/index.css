@@ -150,7 +150,7 @@ p {
 
 .main-content h3.is-style-h2 + h3,
 .main-content h2:not(.is-style-h1) + h3 {
-  @apply -mt-2 mb-7;
+  @apply -mt-2 mb-14;
 }
 
 /* .main-content h1 + h2 { */
