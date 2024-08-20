@@ -21,6 +21,7 @@ import classNames from 'classnames';
 import { useOffSetTop } from '@hooks';
 import Link from 'next/link';
 import MenuLinks from './menu-links';
+import CallToAction from './call-to-action';
 import TopMenuLinks from './top-menu-links';
 import { state, useSnapshot } from '@state';
 // import Image from 'next/image';
@@ -41,7 +42,12 @@ const TransitionDropdownMenu = ({ children }) => {
   );
 };
 
-export default function Navbar({ sidebarContent = 'default', menu, topMenu }) {
+export default function Navbar({
+  sidebarContent = 'default',
+  menu,
+  topMenu,
+  callToAction,
+}) {
   useOffSetTop(100);
   const snap = useSnapshot(state);
   const isScrolling = snap.isScrolling;
@@ -122,43 +128,7 @@ export default function Navbar({ sidebarContent = 'default', menu, topMenu }) {
               </div>
             </div>
             <div className="flex items-center gap-2 xl:gap-2 2xl:gap-3">
-              <Menu as="div" className="relative">
-                <MenuButton
-                  className={classNames(
-                    'overflow-hidden inline-flex items-center border-2 border-primary-main rounded-md px-4 py-2 text-base font-normal bg-primary-main text-primary-contrast shadow-sm hover:bg-primary-light focus:outline-none whitespace-nowrap'
-                  )}
-                >
-                  Contact
-                  <ChevronDownIcon
-                    className="ml-1 -mr-1 h-5 w-5 text-primary-contrast"
-                    aria-hidden="true"
-                  />
-                </MenuButton>
-                <TransitionDropdownMenu>
-                  <MenuItems
-                    className="bg-primary-main absolute right-0 mt-2 w-auto origin-top-right rounded-md py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
-                    modal={false}
-                  >
-                    {_contact.map((item, itemIndex) => (
-                      <MenuItem key={itemIndex}>
-                        <Link
-                          prefetch={false}
-                          href={item.href}
-                          className="ui-active:bg-white/10 whitespace-nowrap px-4 py-2 text-base text-primary-contrast flex items-center"
-                        >
-                          {item.icon ? (
-                            <item.icon className="flex-shrink-0 h-4 w-4 mr-2" />
-                          ) : (
-                            ''
-                          )}
-                          {item.name}
-                        </Link>
-                      </MenuItem>
-                    ))}
-                  </MenuItems>
-                </TransitionDropdownMenu>
-              </Menu>
-
+              <CallToAction menu={callToAction} />
               {/* Profile dropdown */}
               <div
                 className={classNames(

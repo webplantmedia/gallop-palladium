@@ -50,7 +50,7 @@ const bodyStyle = {
 export default async function RootLayout({ children }: RootLayoutProps) {
   const track = process.env.TRACK_ANALYTICS === 'true' ? true : false;
 
-  let menu, footer, mobileMenu, topMenu;
+  let menu, footer, mobileMenu, topMenu, callToAction;
 
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_WORDPRESS_URL}/wp-json/gallop/v1/site-element/`,
@@ -68,6 +68,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
     ({
       menu,
       'top-menu': topMenu,
+      'call-to-action': callToAction,
       footer,
       'mobile-menu': mobileMenu,
     } = jsonResponse);
@@ -83,6 +84,9 @@ export default async function RootLayout({ children }: RootLayoutProps) {
 
     if (topMenu?.post_content)
       topMenu.post_content = compressContent(topMenu.post_content);
+
+    if (callToAction?.post_content)
+      callToAction.post_content = compressContent(callToAction.post_content);
   }
 
   return (
@@ -91,7 +95,12 @@ export default async function RootLayout({ children }: RootLayoutProps) {
         <div className="min-h-screen">
           <main>
             <Container>
-              <Navbar sidebarContent="default" menu={menu} topMenu={topMenu} />
+              <Navbar
+                sidebarContent="default"
+                menu={menu}
+                topMenu={topMenu}
+                callToAction={callToAction}
+              />
               {children}
             </Container>
           </main>
