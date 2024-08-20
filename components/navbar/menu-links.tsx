@@ -1,13 +1,10 @@
+'use client';
+
 import { hasExactClass, castToHTMLAttributeProps } from '@utils/tools';
 import { HTMLAttributeProps } from '@lib/types';
 import Link from 'next/link';
 import classNames from 'classnames';
-import parse, {
-  HTMLReactParserOptions,
-  domToReact,
-  DOMNode,
-  Element,
-} from 'html-react-parser';
+import parse, { HTMLReactParserOptions, Element } from 'html-react-parser';
 import { getVarsFromHTML } from '@utils/tools';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
 import { Fragment } from 'react';
@@ -94,9 +91,9 @@ export default function MenuLinks({ isScrolling, menu }) {
                           <div
                             className={classNames(
                               isScrolling
-                                ? 'max-h-[calc(var(--app-height)-theme(space.28))]'
-                                : 'max-h-[calc(var(--app-height)-theme(space.40))]',
-                              'px-4 pb-4 pt-4 overflow-hidden overflow-y-auto scrollbar-hide grid grid-cols-4 gap-0 shadow-inner'
+                                ? 'max-h-[calc(var(--app-height)-theme(space.28))] grid-cols-4'
+                                : 'max-h-[calc(var(--app-height)-theme(space.40))] grid-cols-3',
+                              'px-4 pb-4 pt-4 overflow-hidden overflow-y-auto scrollbar-hide grid gap-0 shadow-inner'
                             )}
                           >
                             {dropdownItems.map((item: any, index: number) => {

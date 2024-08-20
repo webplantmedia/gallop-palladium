@@ -18,9 +18,6 @@ import MobileMenu from './mobile-menu';
 import StickyProfileMenu from './sticky-profile-menu';
 import { _navTop, _contact, _aboutMinimum, _nav } from '@data/_menu';
 import classNames from 'classnames';
-import NeighborhoodDropdown from './neighborhood-dropdown';
-import ArchitectureDropdown from './architecture-dropdown';
-import ModernDropdown from './modern-dropdown';
 import { useOffSetTop } from '@hooks';
 import Link from 'next/link';
 import MenuLinks from './menu-links';
@@ -41,31 +38,6 @@ const TransitionDropdownMenu = ({ children }) => {
       {children}
     </Transition>
   );
-};
-
-const MenuLink = ({ isScrolling, item }) => {
-  switch (item.name) {
-    case 'Products':
-      return <NeighborhoodDropdown isScrolling={isScrolling} item={item} />;
-    case 'Architecture':
-      return <ArchitectureDropdown isScrolling={isScrolling} item={item} />;
-    case 'Modern':
-      return <ModernDropdown isScrolling={isScrolling} item={item} />;
-    // case 'MLS':
-    // return <MLSDropdown isScrolling={isScrolling} item={item} />;
-    default:
-      return (
-        <Link
-          href={item.href}
-          prefetch={true}
-          className={classNames(
-            'inline-flex items-center border-b-2 border-transparent text-base font-normal text-base-contrast hover:border-base-contrast hover:text-base-contrast transition-all'
-          )}
-        >
-          {item.name}
-        </Link>
-      );
-  }
 };
 
 export default function Navbar({ sidebarContent = 'default', menu = '' }) {
