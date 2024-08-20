@@ -12,7 +12,7 @@ import { _neighborhoods, _neighborhoodsCTA } from '@data/_menu';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
 import classNames from 'classnames';
 import Link from 'next/link';
-import Image from 'next/image';
+
 export default function NeighborhoodDropdown({ isScrolling, item }) {
   return (
     <Popover className="flex items-center isolate">

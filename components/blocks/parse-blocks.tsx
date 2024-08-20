@@ -140,7 +140,7 @@ export const ParseBlocks = ({ content, meta }) => {
           );
         } else if (className?.includes('wp-block-button')) {
           return (
-            <CoreButton tag={domNode.name} className={className}>
+            <CoreButton className={className}>
               {domToReact(domNode.children as DOMNode[], options)}
             </CoreButton>
           );

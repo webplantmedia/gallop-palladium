@@ -18,7 +18,6 @@ export async function POST(req: NextRequest) {
   }
 
   let tag = 'query';
-  let path2 = '';
   if (path) {
     if (path === '/') {
       tag = '/home/';
@@ -35,6 +34,7 @@ export async function POST(req: NextRequest) {
   // }
   try {
     revalidateTag(tag);
+    revalidateTag('site-element');
     revalidatePath(path);
 
     // console.log(tag);

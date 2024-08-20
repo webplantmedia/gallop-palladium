@@ -50,6 +50,7 @@ export function getVarsFromHTML(node: any): Record<string, any> {
 
     const props: HTMLAttributeProps = castToHTMLAttributeProps(block.attribs);
 
+    // console.log('PROPS', block);
     if (hasExactClass(props.className, 'wp-block-group')) {
       name.push('wpBlockGroup');
       value = block.attribs;

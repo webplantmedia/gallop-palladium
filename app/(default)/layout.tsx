@@ -9,6 +9,7 @@ import UseWindowHeightScript from '@components/scripts/use-window-height';
 import FooterScripts from '@components/scripts/footer-scripts';
 import { GoogleAnalytics } from '@next/third-parties/google';
 import type { Metadata } from 'next';
+import { compressContent } from '@utils/tools';
 
 export const metadata: Metadata = {
   metadataBase: new URL(String(process.env.PRODUCTION_URL)),
@@ -46,8 +47,35 @@ const bodyStyle = {
   ['--font-accent' as string]: _accentFont.style.fontFamily,
 };
 
-export default function RootLayout({ children }: RootLayoutProps) {
+export default async function RootLayout({ children }: RootLayoutProps) {
   const track = process.env.TRACK_ANALYTICS === 'true' ? true : false;
+
+  let menu, footer, mobileMenu;
+
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_WORDPRESS_URL}/wp-json/gallop/v1/site-element/`,
+    {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      method: 'POST',
+      next: { tags: ['site-element'] },
+    }
+  );
+
+  if (response.ok) {
+    const jsonResponse = await response.json();
+    ({ menu, footer, 'mobile-menu': mobileMenu } = jsonResponse);
+    if (menu?.post_content) {
+      menu.post_content = compressContent(menu.post_content);
+    }
+
+    if (footer?.post_content)
+      footer.post_content = compressContent(footer.post_content);
+
+    if (mobileMenu?.post_content)
+      mobileMenu.post_content = compressContent(mobileMenu.post_content);
+  }
 
   return (
     <html lang="en">
@@ -55,7 +83,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <div className="min-h-screen">
           <main>
             <Container>
-              <Navbar sidebarContent="default" />
+              <Navbar sidebarContent="default" menu={menu} />
               {children}
             </Container>
           </main>

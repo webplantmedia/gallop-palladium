@@ -58,7 +58,11 @@ export const CoreHeading = ({ children, tag, className = '', props }) => {
     <Tag
       key={id}
       id={id}
-      className={classNames(hClass ? hClass : headingClass[tag], className)}
+      className={classNames(
+        className,
+        hClass ? hClass : headingClass[tag],
+        className
+      )}
     >
       {children}
     </Tag>

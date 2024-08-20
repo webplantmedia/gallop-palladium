@@ -23,6 +23,7 @@ import ArchitectureDropdown from './architecture-dropdown';
 import ModernDropdown from './modern-dropdown';
 import { useOffSetTop } from '@hooks';
 import Link from 'next/link';
+import MenuLinks from './menu-links';
 import { state, useSnapshot } from '@state';
 // import Image from 'next/image';
 
@@ -67,7 +68,7 @@ const MenuLink = ({ isScrolling, item }) => {
   }
 };
 
-export default function Navbar({ sidebarContent = 'default' }) {
+export default function Navbar({ sidebarContent = 'default', menu = '' }) {
   useOffSetTop(100);
   const snap = useSnapshot(state);
   const isScrolling = snap.isScrolling;
@@ -158,13 +159,7 @@ export default function Navbar({ sidebarContent = 'default' }) {
                     'gap-7 2xl:gap-7 xl:flex hidden pr-3 xl:pr-3 2xl:pr-3 h-full'
                   )}
                 >
-                  {_nav.map((item, itemIndex) => (
-                    <MenuLink
-                      isScrolling={isScrolling}
-                      item={item}
-                      key={itemIndex}
-                    />
-                  ))}
+                  <MenuLinks isScrolling={isScrolling} menu={menu} />
                 </div>
                 <div className="flex gap-0 2xl:gap-1 flex-row h-full">
                   <OpenAISearch isScrolling={isScrolling} />

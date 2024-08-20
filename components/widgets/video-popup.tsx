@@ -3,7 +3,6 @@
 import React from 'react';
 import Iconify from '@components/iconify';
 import XMarkIcon from '@iconify/icons-heroicons/x-mark';
-import { getVimeoIframeSrc } from '@utils/tools';
 import classNames from 'classnames';
 import { useState, Fragment, useEffect, useRef } from 'react';
 import {
@@ -16,11 +15,13 @@ import { useVimeoPlayerScript } from '@hooks';
 
 export function VideoPopup({
   children,
-  videoUrl,
+  src = '',
+  url = '',
   className,
 }: {
   children: React.ReactNode;
-  videoUrl: string;
+  src: string;
+  url?: string;
   className: string;
 }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -28,7 +29,6 @@ export function VideoPopup({
   const iframeRef = useRef<HTMLIFrameElement>(null);
 
   const isVimeoPlayerLoaded = useVimeoPlayerScript();
-  const src = getVimeoIframeSrc(videoUrl);
   // const srcUrl = new URL(iframeVideoSrc);
   // srcUrl.searchParams.set('muted', '1');
   // iframeVideoSrc = srcUrl.toString();
@@ -52,7 +52,7 @@ export function VideoPopup({
 
   if (!src) {
     return (
-      <a href={videoUrl} className={classNames(className)}>
+      <a href={url} className={classNames(className)}>
         {children}
       </a>
     );

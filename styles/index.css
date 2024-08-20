@@ -148,9 +148,14 @@ p {
   margin-top: 5rem;
 }
 
-.main-content h3.is-style-h2 + h3,
-.main-content h2:not(.is-style-h1) + h3 {
+.main-content .is-style-h2 + h3,
+.main-content *:not(.is-style-h1) + h3 {
   @apply -mt-2 mb-14;
+}
+
+.main-content .is-style-h2 + h3 + p,
+.main-content *:not(.is-style-h1) + h3 + p {
+  @apply -mt-10 mb-14;
 }
 
 /* .main-content h1 + h2 { */

@@ -1,9 +1,10 @@
 import { decodeHTMLEntities, permalink, stripHTML } from '@utils/tools';
+import { compressContent } from '@utils/tools';
 
 export function parseContent(content: string) {
   let hasH1 = false;
   if (content) {
-    content = content.replace(/(\r\n|\n|\r)/gm, '');
+    content = compressContent(content);
     if (content.match(/<h1.*>/g)) {
       hasH1 = true;
     }

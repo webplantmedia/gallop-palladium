@@ -47,3 +47,4 @@ export { getVarsFromHTML } from './get-vars-from-html';
 export { hasExactClass } from './has-exact-class';
 export { printObject } from './print-object';
 export { getVimeoIframeSrc } from './get-vimeo-iframe-src';
+export { compressContent } from './compress-content';

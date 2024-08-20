@@ -5,12 +5,11 @@ import EnvelopeIcon from '@iconify/icons-heroicons/envelope';
 import ArrowInsertIcon from '@iconify/icons-material-symbols/arrow-insert';
 import BuildingOfficeIcon from '@iconify/icons-fluent/building-people-20-filled';
 import classNames from 'classnames';
-import { getVarsFromHTML } from '@utils/tools';
+import { permalink, getVimeoIframeSrc, getVarsFromHTML } from '@utils/tools';
 import SwiperInit from '@components/scripts/swiper-init';
 import CircleAnimation from '@components/scripts/circle-animation';
 import { useId } from 'react';
 import { Fragment } from 'react';
-import { permalink } from '@utils/tools';
 import CurrentTime from '@widgets/current-time';
 import CurrentDate from '@widgets/current-date';
 import PlaySolidIcon from '@iconify/icons-heroicons/play-solid';
@@ -30,6 +29,8 @@ export const CoreGroupHero1 = ({ node, className, props }) => {
   let brand = { ...data.wpBlockGroup?.wpBlockCover[0] };
   let info = { ...data.wpBlockGroup?.wpBlockCover[1] };
   circleText += ' - ' + circleText + ' - ';
+
+  const src = getVimeoIframeSrc(videoUrl);
 
   return (
     <Fragment>
@@ -107,7 +108,7 @@ export const CoreGroupHero1 = ({ node, className, props }) => {
             {data.wpBlockCover?.wpBlockButtons?.wpBlockButton?.a?.text && (
               <VideoPopup
                 className="relative p-2 bg-white/10 hover:bg-white/20 rounded-full border-2 border-white transition-colors duration-300 ease-in-out"
-                videoUrl={videoUrl}
+                src={src}
               >
                 <div className="relative w-36 h-36 flex items-center justify-center">
                   <div
