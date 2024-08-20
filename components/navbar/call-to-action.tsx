@@ -3,8 +3,6 @@
 import { Fragment } from 'react';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
 import classNames from 'classnames';
-import MapOutlineIcon from '@iconify/icons-ion/map-outline';
-import ClockIcon from '@iconify/icons-heroicons/clock';
 import DevicePhoneMobileIcon from '@iconify/icons-heroicons/device-phone-mobile';
 import EnvelopeIcon from '@iconify/icons-heroicons/envelope';
 import ChatBubbleBottomCenterTextIcon from '@iconify/icons-heroicons/chat-bubble-bottom-center-text';
@@ -74,21 +72,8 @@ export default function CallToAction({ menu }) {
                     const icon = data?.wpBlockCode?.text
                       ? data.wpBlockCode.text
                       : null;
-                    const label = data?.p[0]?.a?.text
-                      ? data.p[0].a.text
-                      : data?.p?.a?.text
-                      ? data.p.a.text
-                      : 'Label';
-                    const mobileLabel = data?.p[1]?.a?.text
-                      ? data.p[1].a.text
-                      : data?.p?.a?.text
-                      ? data.p.a.text
-                      : 'Mobile Label';
-                    const href = data?.p[0]?.a?.href
-                      ? data.p[0].a.href
-                      : data?.p?.a?.href
-                      ? data.p.a.href
-                      : '#';
+                    const label = data?.p?.a?.text ? data.p.a.text : 'Label';
+                    const href = data?.p?.a?.href ? data.p.a.href : '#';
 
                     let menuIcon = <></>;
                     if (icon) {
