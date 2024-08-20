@@ -16,11 +16,12 @@ import Search from './search';
 import OpenAISearch from './openai-search';
 import MobileMenu from './mobile-menu';
 import StickyProfileMenu from './sticky-profile-menu';
-import { _navTop, _contact, _aboutMinimum, _nav } from '@data/_menu';
+import { _contact, _aboutMinimum, _nav } from '@data/_menu';
 import classNames from 'classnames';
 import { useOffSetTop } from '@hooks';
 import Link from 'next/link';
 import MenuLinks from './menu-links';
+import TopMenuLinks from './top-menu-links';
 import { state, useSnapshot } from '@state';
 // import Image from 'next/image';
 
@@ -40,7 +41,7 @@ const TransitionDropdownMenu = ({ children }) => {
   );
 };
 
-export default function Navbar({ sidebarContent = 'default', menu = '' }) {
+export default function Navbar({ sidebarContent = 'default', menu, topMenu }) {
   useOffSetTop(100);
   const snap = useSnapshot(state);
   const isScrolling = snap.isScrolling;
@@ -59,17 +60,7 @@ export default function Navbar({ sidebarContent = 'default', menu = '' }) {
           'xl:hidden h-10 flex xl:w-auto xl:clip-trapazoid items-center justify-center xl:justify-end bg-primary-main text-primary-contrast shadow-xl text-sm'
         )}
       >
-        <ul className="px-4 lg:px-14 relative flex flex-row-reverse gap-8">
-          {_navTop.map((item, itemIndex) => (
-            <li className="flex justify-center" key={`top-nav${itemIndex}`}>
-              <a className="flex gap-2 items-center" href={item.href}>
-                {item.icon && item.icon}
-                <span className="hidden md:block">{item.name}</span>
-                <span className="block md:hidden">{item.mobile}</span>
-              </a>
-            </li>
-          ))}
-        </ul>
+        <TopMenuLinks menu={topMenu} />
       </div>
       <div
         className={classNames(
@@ -108,16 +99,7 @@ export default function Navbar({ sidebarContent = 'default', menu = '' }) {
               'h-10 hidden shrink-0 clip-trapazoid items-center justify-end bg-primary-main text-primary-contrast shadow-xl -mr-[30px] text-sm'
             )}
           >
-            <ul className="px-14 relative flex gap-8 flex-row-reverse">
-              {_navTop.map((item, itemIndex) => (
-                <li key={`top-nav${itemIndex}`}>
-                  <a className="flex gap-2 items-center" href={item.href}>
-                    {item.icon && item.icon}
-                    <span>{item.name}</span>
-                  </a>
-                </li>
-              ))}
-            </ul>
+            <TopMenuLinks menu={topMenu} />
           </div>
           <div className="flex gap-4 justify-between h-full items-center relative">
             <div className="flex px-0 h-full items-center">
