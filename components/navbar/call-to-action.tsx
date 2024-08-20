@@ -123,6 +123,8 @@ export default function CallToAction({ menu }) {
             </Menu>
           );
         }
+
+        return <></>;
       }
     },
   };

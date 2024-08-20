@@ -1,17 +1,8 @@
 'use client';
 
-import { Fragment } from 'react';
 import { _siteLogo, _siteArt } from '@data/_general';
 // import Trolly from '../../lib/svg/dougnewby-trolly.svg';
 // import Logo from '../../lib/svg/dougnewby-logo2.svg';
-import {
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuItems,
-  Transition,
-} from '@headlessui/react';
-import { ChevronDownIcon } from '@heroicons/react/20/solid';
 import Search from './search';
 import OpenAISearch from './openai-search';
 import MobileMenu from './mobile-menu';
@@ -24,29 +15,15 @@ import MenuLinks from './menu-links';
 import CallToAction from './call-to-action';
 import TopMenuLinks from './top-menu-links';
 import { state, useSnapshot } from '@state';
+import Logo from './logo';
 // import Image from 'next/image';
-
-const TransitionDropdownMenu = ({ children }) => {
-  return (
-    <Transition
-      as={Fragment}
-      enter="transition ease-out duration-100"
-      enterFrom="transform opacity-0 scale-95"
-      enterTo="transform opacity-100 scale-100"
-      leave="transition ease-in duration-75"
-      leaveFrom="transform opacity-100 scale-100"
-      leaveTo="transform opacity-0 scale-95"
-    >
-      {children}
-    </Transition>
-  );
-};
 
 export default function Navbar({
   sidebarContent = 'default',
   menu,
   topMenu,
   callToAction,
+  logo,
 }) {
   useOffSetTop(100);
   const snap = useSnapshot(state);
@@ -87,13 +64,7 @@ export default function Navbar({
           >
             <div className="w-full sm:w-auto flex justify-center">
               <Link prefetch={false} href="/">
-                <img
-                  src={_siteLogo.src}
-                  className="block w-[300px]"
-                  alt={_siteLogo.alt}
-                  width={_siteLogo.width}
-                  height={_siteLogo.height}
-                />
+                <Logo post={logo} className="block w-[300px]" />
               </Link>
             </div>
           </div>

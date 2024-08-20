@@ -50,7 +50,7 @@ const bodyStyle = {
 export default async function RootLayout({ children }: RootLayoutProps) {
   const track = process.env.TRACK_ANALYTICS === 'true' ? true : false;
 
-  let menu, footer, mobileMenu, topMenu, callToAction;
+  let menu, footer, mobileMenu, topMenu, callToAction, logo;
 
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_WORDPRESS_URL}/wp-json/gallop/v1/site-element/`,
@@ -70,6 +70,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
       'top-menu': topMenu,
       'call-to-action': callToAction,
       footer,
+      logo,
       'mobile-menu': mobileMenu,
     } = jsonResponse);
     if (menu?.post_content) {
@@ -87,6 +88,9 @@ export default async function RootLayout({ children }: RootLayoutProps) {
 
     if (callToAction?.post_content)
       callToAction.post_content = compressContent(callToAction.post_content);
+
+    if (logo?.post_content)
+      logo.post_content = compressContent(logo.post_content);
   }
 
   return (
@@ -100,6 +104,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
                 menu={menu}
                 topMenu={topMenu}
                 callToAction={callToAction}
+                logo={logo}
               />
               {children}
             </Container>
