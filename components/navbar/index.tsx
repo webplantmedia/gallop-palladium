@@ -1,13 +1,9 @@
 'use client';
 
-import { _siteLogo, _siteArt } from '@data/_general';
-// import Trolly from '../../lib/svg/dougnewby-trolly.svg';
-// import Logo from '../../lib/svg/dougnewby-logo2.svg';
 import Search from './search';
 import OpenAISearch from './openai-search';
 import MobileMenu from './mobile-menu';
 import StickyProfileMenu from './sticky-profile-menu';
-import { _contact, _aboutMinimum, _nav } from '@data/_menu';
 import classNames from 'classnames';
 import { useOffSetTop } from '@hooks';
 import Link from 'next/link';
