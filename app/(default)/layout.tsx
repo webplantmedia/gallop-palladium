@@ -110,7 +110,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
             </Container>
           </main>
         </div>
-        <Footer />
+        <Footer post={footer} />
         <UseWindowHeightScript />
       </body>
       {track && (
