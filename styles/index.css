@@ -113,7 +113,7 @@ p {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
-.wp-block-group.alignfull > *,
+.main-content .wp-block-group.alignfull > *,
 .main-content > * {
   max-width: 750px;
   margin-left: auto;

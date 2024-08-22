@@ -1,9 +1,17 @@
 import classNames from 'classnames';
 import dotMarkIcon from '@iconify/icons-carbon/dot-mark';
-import MapOutlineIcon from '@iconify/icons-ion/map-outline';
-import ClockIcon from '@iconify/icons-heroicons/clock';
+import lineEndIcon from '@iconify/icons-material-symbols/line-end';
+import DevicePhoneMobileIcon from '@iconify/icons-heroicons/device-phone-mobile';
+import EnvelopeIcon from '@iconify/icons-heroicons/envelope';
+import ChatBubbleBottomCenterTextIcon from '@iconify/icons-heroicons/chat-bubble-bottom-center-text';
 import Iconify from '@components/iconify';
-import { hasExactClass, castToHTMLAttributeProps } from '@utils/tools';
+import Link from 'next/link';
+import {
+  hasExactClass,
+  castToHTMLAttributeProps,
+  replaceWordPressUrlRelative,
+  getVarsFromHTML,
+} from '@utils/tools';
 import { HTMLAttributeProps } from '@lib/types';
 import parse, {
   HTMLReactParserOptions,
@@ -11,45 +19,6 @@ import parse, {
   DOMNode,
   Element,
 } from 'html-react-parser';
-import { getVarsFromHTML } from '@utils/tools';
-import { replaceWordPressUrlRelative } from '@utils/tools';
-import {
-  CoreParagraph,
-  CoreHeading,
-  CoreGallery,
-  CoreSeparator,
-  CoreSpacer,
-  CoreButtons,
-  CoreButton,
-  CoreButtonLink,
-  CoreQuote,
-  CoreList,
-  CoreMediaText,
-  CoreImage,
-  TagAnchor,
-  CoreAudio,
-  CoreEmbed,
-  // GallopAlbumCover,
-  // GallopSinglePost,
-  // GallopExcerptPost,
-  CoreGroup,
-  // GallopBlogPosts,
-  // GallopMap,
-  // GallopNeighborhood,
-  // GallopCard,
-  // GallopContactForm,
-} from '@components/blocks';
-
-const Column = ({ node, className, options }) => {
-  // const data = getVarsFromHTML(node);
-  // const heading = data?.h4?.text ? data.h4.text : null;
-  // console.log(data);
-  // return (
-  // <div className="w-full lg:w-1/2 2xl:w-1/4">
-  // {heading && <h4>{heading}</h4>}
-  // </div>
-  // );
-};
 
 export default function FooterColumns({ post }) {
   const options: HTMLReactParserOptions = {
@@ -69,7 +38,7 @@ export default function FooterColumns({ post }) {
               className={classNames(
                 'grid gap-20',
                 columns === 4 &&
-                  'grod-cols-1 sm:grid-cols-2 xl:grid-cols-[3fr_2fr_3fr_2fr]',
+                  'grod-cols-1 md:grid-cols-2 xl:grid-cols-[7fr_4fr_5fr_4fr]',
                 columns === 3 && 'grod-cols-1 sm:grid-cols-2 xl:grid-cols-3'
               )}
             >
@@ -78,25 +47,96 @@ export default function FooterColumns({ post }) {
           );
         } else if (hasExactClass(className, 'wp-block-column')) {
           return (
-            <div className={classNames('')}>
+            <div className={classNames('[&>*:last-child]:mb-0')}>
               {domToReact(domNode.children as DOMNode[], options)}
             </div>
           );
         } else if (hasExactClass(className, 'wp-block-image')) {
-          return (
-            <CoreImage
-              tag={domNode.name}
-              className={className}
-              node={domNode}
-              options={options}
+          const data = getVarsFromHTML(domNode);
+
+          var img: any = {};
+          if (data?.img) {
+            img = { ...data?.img };
+          }
+
+          return img ? (
+            <img
+              className={classNames(
+                className,
+                'max-w-full w-[300px] mb-7 mx-auto sm:mx-0'
+              )}
+              alt={img.alt}
+              src={img.src}
+              srcSet={img.srcset}
+              sizes={img.sizes}
+              width={img.width}
+              height={img.height}
             />
+          ) : (
+            <p>No Image</p>
+          );
+        } else if (hasExactClass(className, 'is-style-site-info')) {
+          return (
+            <div
+              className={classNames(
+                'flex flex-col lg:flex-row items-center lg:items-center justify-center lg:justify-between [&>*]:mb-0'
+              )}
+            >
+              {domToReact(domNode.children as DOMNode[], options)}
+            </div>
+          );
+        } else if (hasExactClass(className, 'is-style-icon-text')) {
+          const data = getVarsFromHTML(domNode);
+
+          const icon = data?.wpBlockCode?.text ? data.wpBlockCode.text : null;
+          const label = data?.p?.a?.text ? data.p.a.text : 'Label';
+          const href = data?.p?.a?.href ? data.p.a.href : '#';
+
+          let menuIcon = <></>;
+          if (icon) {
+            switch (icon) {
+              case 'icon-mobile':
+                menuIcon = (
+                  <Iconify
+                    icon={DevicePhoneMobileIcon}
+                    className="flex-shrink-0 h-6 w-6 mr-2"
+                  />
+                );
+                break;
+              case 'icon-email':
+                menuIcon = (
+                  <Iconify
+                    icon={EnvelopeIcon}
+                    className="flex-shrink-0 h-6 w-6 mr-2"
+                  />
+                );
+                break;
+              case 'icon-chat':
+                menuIcon = (
+                  <Iconify
+                    icon={ChatBubbleBottomCenterTextIcon}
+                    className="flex-shrink-0 h-6 w-6 mr-2"
+                  />
+                );
+                break;
+            }
+          }
+          return (
+            <Link
+              prefetch={false}
+              href={replaceWordPressUrlRelative(href)}
+              className="text-white flex items-center w-full mb-3 hover:underline"
+            >
+              {menuIcon && menuIcon}
+              {label}
+            </Link>
           );
         } else if (hasExactClass(className, 'wp-block-heading')) {
           return (
             <h4
               className={classNames(
                 className,
-                'mb-7 leading-tight text-2xl font-medium text-white'
+                'mb-7 leading-tight text-3xl font-medium text-white'
               )}
             >
               {domToReact(domNode.children as DOMNode[], options)}
@@ -119,22 +159,16 @@ export default function FooterColumns({ post }) {
             href = replaceWordPressUrlRelative(props.href);
           }
           return (
-            <a href={href}>
+            <Link prefetch={false} href={href} className="hover:underline">
               {domToReact(domNode.children as DOMNode[], options)}
-            </a>
+            </Link>
           );
+        } else if (domNode.name === 'hr') {
+          return <hr className="border-white border mt-20 mb-20" />;
         } else if (domNode.name === 'li') {
           return (
-            <li className="flex gap-x-3 items-start">
-              <span className="w-3 shrink-0 mt-[0.45rem]">
-                <Iconify
-                  className="text-primary-main w-3 h-3"
-                  icon={dotMarkIcon}
-                />
-              </span>
-              <span className="text-white">
-                {domToReact(domNode.children as DOMNode[], options)}
-              </span>
+            <li className="text-white">
+              {domToReact(domNode.children as DOMNode[], options)}
             </li>
           );
         } else if (domNode.name === 'ul') {
@@ -143,7 +177,7 @@ export default function FooterColumns({ post }) {
               role="list"
               className={classNames(
                 className,
-                'leading-normal mb-7 flex flex-col gap-2'
+                'leading-normal flex flex-col gap-3'
               )}
             >
               {domToReact(domNode.children as DOMNode[], options)}
