@@ -10,6 +10,9 @@ import FooterScripts from '@components/scripts/footer-scripts';
 import { GoogleAnalytics } from '@next/third-parties/google';
 import type { Metadata } from 'next';
 import { compressContent } from '@utils/tools';
+// import parse from 'html-react-parser';
+// import parse from 'html-dom-parser';
+// import { getVarsFromHTML } from '@utils/tools';
 
 export const metadata: Metadata = {
   metadataBase: new URL(String(process.env.PRODUCTION_URL)),
@@ -73,12 +76,14 @@ export default async function RootLayout({ children }: RootLayoutProps) {
       logo,
       'mobile-menu': mobileMenu,
     } = jsonResponse);
+
     if (menu?.post_content) {
       menu.post_content = compressContent(menu.post_content);
     }
 
-    if (footer?.post_content)
+    if (footer?.post_content) {
       footer.post_content = compressContent(footer.post_content);
+    }
 
     if (mobileMenu?.post_content)
       mobileMenu.post_content = compressContent(mobileMenu.post_content);

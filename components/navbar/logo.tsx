@@ -1,5 +1,3 @@
-'use client';
-
 import classNames from 'classnames';
 import { hasExactClass, castToHTMLAttributeProps } from '@utils/tools';
 import { HTMLAttributeProps } from '@lib/types';

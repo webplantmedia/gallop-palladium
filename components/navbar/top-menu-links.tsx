@@ -1,5 +1,3 @@
-'use client';
-
 import MapOutlineIcon from '@iconify/icons-ion/map-outline';
 import ClockIcon from '@iconify/icons-heroicons/clock';
 import Iconify from '@components/iconify';
