@@ -6,10 +6,7 @@ import {
   _footerButtons,
 } from '@data/_footer';
 import { _cta } from '@data/_sidebar';
-import Link from 'next/link';
-import LoginDialog from '@components/login';
 import FooterColumns from './columns';
-import Form from './form';
 
 export default function Footer({ post }) {
   return (

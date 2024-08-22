@@ -6,6 +6,7 @@ import EnvelopeIcon from '@iconify/icons-heroicons/envelope';
 import ChatBubbleBottomCenterTextIcon from '@iconify/icons-heroicons/chat-bubble-bottom-center-text';
 import Iconify from '@components/iconify';
 import Link from 'next/link';
+import LoginDialog from '@components/login';
 import {
   hasExactClass,
   castToHTMLAttributeProps,
@@ -183,6 +184,12 @@ export default function FooterColumns({ post }) {
               {domToReact(domNode.children as DOMNode[], options)}
             </ul>
           );
+        } else if (domNode.name === 'pre') {
+          const data = getVarsFromHTML(domNode);
+          const code = data?.text ? data.text : 'no-code';
+          if (code === 'login') {
+            return <LoginDialog />;
+          }
         }
       }
     },
