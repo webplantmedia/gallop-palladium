@@ -20,6 +20,7 @@ import parse, {
   DOMNode,
   Element,
 } from 'html-react-parser';
+import { DataIconText } from '@components/blocks';
 
 export default function FooterColumns({ post }) {
   const options: HTMLReactParserOptions = {
@@ -88,49 +89,11 @@ export default function FooterColumns({ post }) {
           );
         } else if (hasExactClass(className, 'is-style-icon-text')) {
           const data = getVarsFromHTML(domNode);
-
-          const icon = data?.wpBlockCode?.text ? data.wpBlockCode.text : null;
-          const label = data?.p?.a?.text ? data.p.a.text : 'Label';
-          const href = data?.p?.a?.href ? data.p.a.href : '#';
-
-          let menuIcon = <></>;
-          if (icon) {
-            switch (icon) {
-              case 'icon-mobile':
-                menuIcon = (
-                  <Iconify
-                    icon={DevicePhoneMobileIcon}
-                    className="flex-shrink-0 h-6 w-6 mr-2"
-                  />
-                );
-                break;
-              case 'icon-email':
-                menuIcon = (
-                  <Iconify
-                    icon={EnvelopeIcon}
-                    className="flex-shrink-0 h-6 w-6 mr-2"
-                  />
-                );
-                break;
-              case 'icon-chat':
-                menuIcon = (
-                  <Iconify
-                    icon={ChatBubbleBottomCenterTextIcon}
-                    className="flex-shrink-0 h-6 w-6 mr-2"
-                  />
-                );
-                break;
-            }
-          }
           return (
-            <Link
-              prefetch={false}
-              href={replaceWordPressUrlRelative(href)}
-              className="text-white flex items-center w-full mb-3 hover:underline"
-            >
-              {menuIcon && menuIcon}
-              {label}
-            </Link>
+            <DataIconText
+              className="text-white mb-3 hover:underline"
+              data={data}
+            />
           );
         } else if (hasExactClass(className, 'wp-block-heading')) {
           return (

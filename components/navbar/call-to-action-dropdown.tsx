@@ -16,6 +16,7 @@ import {
   MenuItems,
   Transition,
 } from '@headlessui/react';
+import { DataIconText } from '@components/blocks';
 
 export default function CallToActionDropdown({ dropdown }) {
   // const menuLabel = dropdown?.p?.text ? dropdown.p.text : 'Menu Label';
@@ -56,51 +57,11 @@ export default function CallToActionDropdown({ dropdown }) {
           modal={false}
         >
           {obj.map((data: any, index: number) => {
-            const icon = data?.wpBlockCode?.text ? data.wpBlockCode.text : null;
-            const label = data?.p?.a?.text ? data.p.a.text : 'Label';
-            const href = data?.p?.a?.href ? data.p.a.href : '#';
-
-            let menuIcon = <></>;
-            if (icon) {
-              switch (icon) {
-                case 'icon-mobile':
-                  menuIcon = (
-                    <Iconify
-                      icon={DevicePhoneMobileIcon}
-                      className="flex-shrink-0 h-4 w-4 mr-2"
-                    />
-                  );
-                  break;
-                case 'icon-email':
-                  menuIcon = (
-                    <Iconify
-                      icon={EnvelopeIcon}
-                      className="flex-shrink-0 h-4 w-4 mr-2"
-                    />
-                  );
-                  break;
-                case 'icon-chat':
-                  menuIcon = (
-                    <Iconify
-                      icon={ChatBubbleBottomCenterTextIcon}
-                      className="flex-shrink-0 h-4 w-4 mr-2"
-                    />
-                  );
-                  break;
-              }
-            }
-
             return (
-              <MenuItem key={`menu-item-${index}`}>
-                <Link
-                  prefetch={false}
-                  href={replaceWordPressUrlRelative(href)}
-                  className="ui-active:bg-white/10 whitespace-nowrap px-4 py-2 text-base text-primary-contrast flex items-center"
-                >
-                  {menuIcon && menuIcon}
-                  {label}
-                </Link>
-              </MenuItem>
+              <DataIconText
+                className="ui-active:bg-white/10 whitespace-nowrap px-4 py-2 text-base text-primary-contrast flex items-center hover:bg-white/10"
+                data={data}
+              />
             );
           })}
         </MenuItems>

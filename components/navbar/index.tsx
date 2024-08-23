@@ -17,6 +17,7 @@ import UseOffSetTopScript from '@components/scripts/use-offset-top';
 export default function Navbar({
   sidebarContent = 'default',
   menu,
+  mobileMenu,
   topMenu,
   callToAction,
   logo,
@@ -79,7 +80,7 @@ export default function Navbar({
               <div className="flex px-0 h-full items-center">
                 <div className={classNames('flex items-center h-full')}>
                   <div className="-ml-2 flex gap-0 2xl:gap-1 flex-row pr-0 xl:pr-2 2xl:pr-3 h-full">
-                    <MobileMenu />
+                    <MobileMenu menu={mobileMenu} />
                   </div>
                   {/* Current: "border-primary-darker text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" */}
                   <div

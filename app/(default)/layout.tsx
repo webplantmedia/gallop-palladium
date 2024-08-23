@@ -107,6 +107,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
               <Navbar
                 sidebarContent="default"
                 menu={menu}
+                mobileMenu={mobileMenu}
                 topMenu={topMenu}
                 callToAction={callToAction}
                 logo={logo}
