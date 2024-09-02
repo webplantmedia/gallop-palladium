@@ -157,7 +157,7 @@ export default function FooterColumns({ post }) {
       }
     },
   };
-  const html = parse(post.post_content, options);
+  const html = parse(post.postContent, options);
 
   return <div className="pb-20 pt-20">{html}</div>;
 }

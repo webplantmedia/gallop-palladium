@@ -13,7 +13,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function Page({ params }) {
-  const uri = `/${params.slug.join('/')}/`;
+  const uri = `/contact/`;
+  // const uri = `/${params.slug.join('/')}/`;
   const headers = {
     'Content-Type': 'application/json',
   };

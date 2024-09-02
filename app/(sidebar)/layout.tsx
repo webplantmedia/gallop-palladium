@@ -9,8 +9,8 @@ import UseWindowHeightScript from '@components/scripts/use-window-height';
 import FooterScripts from '@components/scripts/footer-scripts';
 import { GoogleAnalytics } from '@next/third-parties/google';
 import type { Metadata } from 'next';
-import GridFull from '@components/grid-full';
 import { fetchSiteElements } from '@api/fetch-site-elements';
+import Grid from '@components/grid';
 // import parse from 'html-react-parser';
 // import parse from 'html-dom-parser';
 // import { getVarsFromHTML } from '@utils/tools';
@@ -72,7 +72,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
                 logo={logo}
                 sidebar={sidebar}
               />
-              <GridFull>{children}</GridFull>
+              <Grid>{children}</Grid>
             </Container>
           </main>
         </div>

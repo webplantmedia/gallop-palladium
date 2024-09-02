@@ -40,7 +40,7 @@ export default function Logo({ post, className }) {
       }
     },
   };
-  const html = parse(post.post_content, options);
+  const html = parse(post.postContent, options);
 
   return <>{html}</>;
 }

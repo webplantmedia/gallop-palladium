@@ -59,6 +59,7 @@ export default function CallToActionDropdown({ dropdown }) {
           {obj.map((data: any, index: number) => {
             return (
               <DataIconText
+                key={`data-icon-text-${index}`}
                 className="ui-active:bg-white/10 whitespace-nowrap px-4 py-2 text-base text-primary-contrast flex items-center hover:bg-white/10"
                 data={data}
               />

@@ -70,7 +70,7 @@ export default function TopMenuLinks({ menu }) {
       }
     },
   };
-  const html = parse(menu.post_content, options);
+  const html = parse(menu.postContent, options);
 
   return <ul className="px-4 lg:px-14 relative flex flex-row gap-8">{html}</ul>;
 }

@@ -1,14 +1,21 @@
 'use client';
 
-import { Disclosure, Dialog, Transition } from '@headlessui/react';
-import SidebarContent from '@components/sidebar/content';
-import SidebarContentDMH from '@components/sidebar/content-dmh';
+import { _siteStickyLogo } from '@data/_general';
+import {
+  Dialog,
+  DialogTitle,
+  DialogPanel,
+  Transition,
+  TransitionChild,
+} from '@headlessui/react';
+import ProfileMenuSidebar from './profile-menu-sidebar';
 import { Fragment, useState } from 'react';
 import { XMarkIcon } from '@heroicons/react/24/outline';
+import { _mobileNav } from '../../_data/_menu';
 import { state } from '@state';
 // import Image from 'next/image';
 
-export default function ProfileMenu({ sidebarContent = 'default' }) {
+export default function ProfileMenu({ sidebar }) {
   let [isOpen, setIsOpen] = useState(false);
 
   const closeModal = () => {
@@ -27,19 +34,18 @@ export default function ProfileMenu({ sidebarContent = 'default' }) {
       <div className="flex items-center">
         <button
           onClick={openModal}
-          className="flex bg-white dmh:bg-transparent focus:outline-none transition-all"
+          className="flex rounded-md bg-white focus:outline-none dmh:bg-transparent"
         >
-          <span className="sr-only">Douglas Newby</span>
+          <span className="sr-only">About Douglas Newby</span>
           <span className="relative inline-block">
             <img
-              className="h-28 box-border border-l border-r border-b border-white w-[99px] dmh:w-[64px] dmh:h-[64px] dmh:border-none dmh:rounded-full dmh:object-cover dmh:object-center"
-              src="/dougpicture-198.jpg"
-              alt="Douglas Newby Profile"
-              width={198}
-              height={220}
-              // quality={100}
+              className="h-[48px] w-[48px] rounded-md object-cover object-center box-border border border-white dmh:w-[44px] dmh:h-[44px] dmh:rounded-full"
+              src={_siteStickyLogo.src}
+              alt={_siteStickyLogo.alt}
+              width={_siteStickyLogo.width}
+              height={_siteStickyLogo.height}
             />
-            <span className="absolute top-[5px] block right-[6px] h-3 w-3 rounded-full bg-green-400 ring-1 ring-white dmh:top-[3px] dmh:right-[3px]" />
+            <span className="absolute -top-[3px] block -right-[3px] h-3 w-3 rounded-full bg-green-400 ring-1 ring-white dmh:-top-px dmh:-right-px" />
           </span>
         </button>
       </div>
@@ -50,7 +56,7 @@ export default function ProfileMenu({ sidebarContent = 'default' }) {
           className="relative z-40"
           onClose={closeModal}
         >
-          <Transition.Child
+          <TransitionChild
             as={Fragment}
             enter="ease-in-out duration-500"
             enterFrom="opacity-0"
@@ -60,10 +66,10 @@ export default function ProfileMenu({ sidebarContent = 'default' }) {
             leaveTo="opacity-0"
             unmount={false}
           >
-            <div className="fixed inset-0 bg-base-darker/25 transition-opacity opacity-100 dmh:bg-modern-base-card/30" />
-          </Transition.Child>
+            <div className="fixed inset-0 bg-base-darker/25 transition-opacity opacity-100 dmh:bg-modern-base-card/25" />
+          </TransitionChild>
 
-          <Transition.Child
+          <TransitionChild
             as={Fragment}
             enter="transform transition ease-in-out duration-500"
             enterFrom="translate-x-full"
@@ -75,22 +81,20 @@ export default function ProfileMenu({ sidebarContent = 'default' }) {
           >
             <div className="fixed inset-0 font-body h-[var(--app-height)] text-base max-w-[86%] sm:max-w-[24rem] w-full right-0 left-auto">
               <div className="flex justify-end h-full">
-                <Dialog.Panel className="pointer-events-auto h-full bg-base-body shadow-xl text-left align-middle transition-all overflow-hidden overflow-y-auto scrollbar-hide w-full dmh:bg-modern-base-card">
+                <DialogPanel className="pointer-events-auto h-full bg-base-body shadow-xl text-left align-middle transition-all overflow-hidden overflow-y-auto scrollbar-hide w-full dmh:bg-modern-base-card">
                   <div className="relative flex items-center justify-start flex-col h-full py-6">
                     <div className="px-4 sm:px-8 w-full">
-                      <div className="w-full flex items-start justify-between dmh:justify-end">
-                        {sidebarContent !== 'dmh' && (
-                          <Dialog.Title className="text-primary-main dmh:text-modern-primary-main">
-                            <img
-                              src="/dougnewby-carriage@390.png"
-                              className="block w-[110px] -ml-2"
-                              alt="Douglas Newby Origins"
-                              // quality={100}
-                              width={390}
-                              height={162}
-                            />
-                          </Dialog.Title>
-                        )}
+                      <div className="w-full flex items-start justify-between">
+                        <DialogTitle className="">
+                          <img
+                            src="/dougnewby-carriage@390.png"
+                            className="block w-[110px] -ml-2"
+                            alt="Douglas Newby Origins"
+                            // quality={100}
+                            width={390}
+                            height={162}
+                          />
+                        </DialogTitle>
                         <div className="ml-3 flex h-7 items-center">
                           <button
                             type="button"
@@ -104,14 +108,16 @@ export default function ProfileMenu({ sidebarContent = 'default' }) {
                       </div>
                     </div>
                     <div className="mt-6 w-full flex flex-col gap-3">
-                      {sidebarContent == 'dmh' && <SidebarContentDMH />}
-                      {sidebarContent == 'default' && <SidebarContent />}
+                      <ProfileMenuSidebar
+                        sidebar={sidebar}
+                        closeModal={closeModal}
+                      />
                     </div>
                   </div>
-                </Dialog.Panel>
+                </DialogPanel>
               </div>
             </div>
-          </Transition.Child>
+          </TransitionChild>
         </Dialog>
       </Transition>
     </>

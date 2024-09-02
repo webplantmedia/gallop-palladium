@@ -3,7 +3,7 @@
 import Search from './search';
 import OpenAISearch from './openai-search';
 import MobileMenu from './mobile-menu';
-import StickyProfileMenu from './sticky-profile-menu';
+import ProfileMenu from './profile-menu';
 import classNames from 'classnames';
 import Link from 'next/link';
 import MenuLinks from './menu-links';
@@ -15,12 +15,12 @@ import UseOffSetTopScript from '@components/scripts/use-offset-top';
 // import Image from 'next/image';
 
 export default function Navbar({
-  sidebarContent = 'default',
   menu,
   mobileMenu,
   topMenu,
   callToAction,
   logo,
+  sidebar,
 }) {
   const snap = useSnapshot(state);
   const isScrolling = snap.isScrolling;
@@ -105,7 +105,7 @@ export default function Navbar({
                     'relative flex-shrink-0'
                   )}
                 >
-                  <StickyProfileMenu sidebarContent={sidebarContent} />
+                  <ProfileMenu sidebar={sidebar} />
                 </div>
               </div>
             </div>

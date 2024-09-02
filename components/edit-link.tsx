@@ -5,7 +5,7 @@ import eyeIcon from '@iconify/icons-heroicons/eye';
 import arrowPath20Solid from '@iconify/icons-heroicons/arrow-path-20-solid';
 import Iconify from '@components/iconify';
 import { useState } from 'react';
-import { Dialog } from '@headlessui/react';
+import { Dialog, DialogPanel, DialogTitle } from '@headlessui/react';
 import { useRouter } from 'next/navigation';
 import { usePathname } from 'next/navigation';
 // import { clearCache } from '@components/actions/clear-cache';
@@ -100,11 +100,11 @@ export default function EditLink({ meta }) {
 
         {/* Dialog panel */}
         <div className="fixed inset-0 flex items-center justify-center p-4">
-          <Dialog.Panel className="mx-auto max-w-sm rounded bg-white p-6 shadow-lg">
-            <Dialog.Title className="text-lg font-medium">
+          <DialogPanel className="mx-auto max-w-sm rounded bg-white p-6 shadow-lg">
+            <DialogTitle className="text-lg font-medium">
               {dialogMessage}
-            </Dialog.Title>
-          </Dialog.Panel>
+            </DialogTitle>
+          </DialogPanel>
         </div>
       </Dialog>
     </>

@@ -13,7 +13,7 @@ import { replaceWordPressUrlRelative } from '@utils/tools';
 import MobileMenuLinkDropdown from './mobile-menu-link-dropdown';
 import { DataIconText } from '@components/blocks';
 
-export default function MobileMenuLinks({ menu, closeModal }) {
+export default function ProfileMenuSidebar({ sidebar, closeModal }) {
   const options: HTMLReactParserOptions = {
     replace(domNode) {
       if (domNode instanceof Element && domNode.attribs) {
@@ -73,7 +73,7 @@ export default function MobileMenuLinks({ menu, closeModal }) {
       }
     },
   };
-  const html = parse(menu.postContent, options);
+  const html = parse(sidebar.postContent, options);
 
   return <>{html}</>;
 }

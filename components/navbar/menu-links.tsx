@@ -40,7 +40,7 @@ export default function MenuLinks({ isScrolling, menu }) {
       }
     },
   };
-  const html = parse(menu.post_content, options);
+  const html = parse(menu.postContent, options);
 
   return <>{html}</>;
 }

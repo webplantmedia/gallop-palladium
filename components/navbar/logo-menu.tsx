@@ -1,16 +1,14 @@
 'use client';
 
-import { _siteStickyLogo } from '@data/_general';
 import { Disclosure, Dialog, Transition } from '@headlessui/react';
-import SidebarContent from '../sidebar/content';
-import SidebarContentDMH from '../sidebar/content-dmh';
+import SidebarContent from '@components/sidebar/content';
+import SidebarContentDMH from '@components/sidebar/content-dmh';
 import { Fragment, useState } from 'react';
 import { XMarkIcon } from '@heroicons/react/24/outline';
-import { _mobileNav } from '../../_data/_menu';
 import { state } from '@state';
 // import Image from 'next/image';
 
-export default function MobileMenu({ sidebarContent = 'default' }) {
+export default function LogoMenu({ sidebarContent = 'default' }) {
   let [isOpen, setIsOpen] = useState(false);
 
   const closeModal = () => {
@@ -29,18 +27,19 @@ export default function MobileMenu({ sidebarContent = 'default' }) {
       <div className="flex items-center">
         <button
           onClick={openModal}
-          className="flex rounded-md bg-white focus:outline-none dmh:bg-transparent"
+          className="flex bg-white dmh:bg-transparent focus:outline-none transition-all"
         >
-          <span className="sr-only">About Douglas Newby</span>
+          <span className="sr-only">Douglas Newby</span>
           <span className="relative inline-block">
             <img
-              className="h-[48px] w-[48px] rounded-md object-cover object-center box-border border border-white dmh:w-[44px] dmh:h-[44px] dmh:rounded-full"
-              src={_siteStickyLogo.src}
-              alt={_siteStickyLogo.alt}
-              width={_siteStickyLogo.width}
-              height={_siteStickyLogo.height}
+              className="h-28 box-border border-l border-r border-b border-white w-[99px] dmh:w-[64px] dmh:h-[64px] dmh:border-none dmh:rounded-full dmh:object-cover dmh:object-center"
+              src="/dougpicture-198.jpg"
+              alt="Douglas Newby Profile"
+              width={198}
+              height={220}
+              // quality={100}
             />
-            <span className="absolute -top-[3px] block -right-[3px] h-3 w-3 rounded-full bg-green-400 ring-1 ring-white dmh:-top-px dmh:-right-px" />
+            <span className="absolute top-[5px] block right-[6px] h-3 w-3 rounded-full bg-green-400 ring-1 ring-white dmh:top-[3px] dmh:right-[3px]" />
           </span>
         </button>
       </div>
@@ -61,7 +60,7 @@ export default function MobileMenu({ sidebarContent = 'default' }) {
             leaveTo="opacity-0"
             unmount={false}
           >
-            <div className="fixed inset-0 bg-base-darker/25 transition-opacity opacity-100 dmh:bg-modern-base-card/25" />
+            <div className="fixed inset-0 bg-base-darker/25 transition-opacity opacity-100 dmh:bg-modern-base-card/30" />
           </Transition.Child>
 
           <Transition.Child
@@ -79,17 +78,19 @@ export default function MobileMenu({ sidebarContent = 'default' }) {
                 <Dialog.Panel className="pointer-events-auto h-full bg-base-body shadow-xl text-left align-middle transition-all overflow-hidden overflow-y-auto scrollbar-hide w-full dmh:bg-modern-base-card">
                   <div className="relative flex items-center justify-start flex-col h-full py-6">
                     <div className="px-4 sm:px-8 w-full">
-                      <div className="w-full flex items-start justify-between">
-                        <Dialog.Title className="">
-                          <img
-                            src="/dougnewby-carriage@390.png"
-                            className="block w-[110px] -ml-2"
-                            alt="Douglas Newby Origins"
-                            // quality={100}
-                            width={390}
-                            height={162}
-                          />
-                        </Dialog.Title>
+                      <div className="w-full flex items-start justify-between dmh:justify-end">
+                        {sidebarContent !== 'dmh' && (
+                          <Dialog.Title className="text-primary-main dmh:text-modern-primary-main">
+                            <img
+                              src="/dougnewby-carriage@390.png"
+                              className="block w-[110px] -ml-2"
+                              alt="Douglas Newby Origins"
+                              // quality={100}
+                              width={390}
+                              height={162}
+                            />
+                          </Dialog.Title>
+                        )}
                         <div className="ml-3 flex h-7 items-center">
                           <button
                             type="button"
