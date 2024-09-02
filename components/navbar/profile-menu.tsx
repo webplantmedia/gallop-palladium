@@ -13,9 +13,10 @@ import { Fragment, useState } from 'react';
 import { XMarkIcon } from '@heroicons/react/24/outline';
 import { _mobileNav } from '../../_data/_menu';
 import { state } from '@state';
+import ProfileMenuSidebarHeader from './profile-menu-sidebar-header';
 // import Image from 'next/image';
 
-export default function ProfileMenu({ sidebar }) {
+export default function ProfileMenu({ sidebar, sidebarHeader }) {
   let [isOpen, setIsOpen] = useState(false);
 
   const closeModal = () => {
@@ -86,14 +87,7 @@ export default function ProfileMenu({ sidebar }) {
                     <div className="px-4 sm:px-8 w-full">
                       <div className="w-full flex items-start justify-between">
                         <DialogTitle className="">
-                          <img
-                            src="/dougnewby-carriage@390.png"
-                            className="block w-[110px] -ml-2"
-                            alt="Douglas Newby Origins"
-                            // quality={100}
-                            width={390}
-                            height={162}
-                          />
+                          <ProfileMenuSidebarHeader post={sidebarHeader} />
                         </DialogTitle>
                         <div className="ml-3 flex h-7 items-center">
                           <button
@@ -107,7 +101,7 @@ export default function ProfileMenu({ sidebar }) {
                         </div>
                       </div>
                     </div>
-                    <div className="mt-6 w-full flex flex-col gap-3">
+                    <div className="mt-6 w-full flex flex-col gap-3 px-4 sm:px-8">
                       <ProfileMenuSidebar
                         sidebar={sidebar}
                         closeModal={closeModal}

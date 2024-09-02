@@ -60,7 +60,6 @@ export function PageSeo(seo: SEO, link: string = '') {
         data.openGraph.images.type = seo.opengraphImage.mediaType;
     }
   }
-  console.log('data', data);
 
   return data;
 }

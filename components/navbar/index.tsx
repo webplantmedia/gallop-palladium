@@ -21,6 +21,7 @@ export default function Navbar({
   callToAction,
   logo,
   sidebar,
+  sidebarHeader,
 }) {
   const snap = useSnapshot(state);
   const isScrolling = snap.isScrolling;
@@ -105,7 +106,10 @@ export default function Navbar({
                     'relative flex-shrink-0'
                   )}
                 >
-                  <ProfileMenu sidebar={sidebar} />
+                  <ProfileMenu
+                    sidebar={sidebar}
+                    sidebarHeader={sidebarHeader}
+                  />
                 </div>
               </div>
             </div>

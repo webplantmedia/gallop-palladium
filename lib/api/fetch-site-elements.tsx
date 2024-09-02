@@ -7,7 +7,8 @@ export async function fetchSiteElements() {
     topMenu: any = null,
     callToAction: any = null,
     logo: any = null,
-    sidebar: any = null;
+    sidebar: any = null,
+    sidebarHeader: any = null;
 
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_WORDPRESS_URL}/wp-json/gallop/v1/site-element/`,
@@ -30,6 +31,7 @@ export async function fetchSiteElements() {
       logo,
       sidebar,
       'mobile-menu': mobileMenu,
+      'sidebar-graphic': sidebarHeader,
     } = jsonResponse);
 
     if (menu && 'postContent' in menu) {
@@ -53,7 +55,19 @@ export async function fetchSiteElements() {
 
     if (sidebar?.postContent)
       sidebar.postContent = compressContent(sidebar.postContent);
+
+    if (sidebarHeader?.postContent)
+      sidebarHeader.postContent = compressContent(sidebarHeader.postContent);
   }
 
-  return { menu, footer, mobileMenu, topMenu, callToAction, logo, sidebar };
+  return {
+    menu,
+    footer,
+    mobileMenu,
+    topMenu,
+    callToAction,
+    logo,
+    sidebar,
+    sidebarHeader,
+  };
 }
