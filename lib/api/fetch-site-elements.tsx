@@ -31,7 +31,7 @@ export async function fetchSiteElements() {
       logo,
       sidebar,
       'mobile-menu': mobileMenu,
-      'sidebar-graphic': sidebarHeader,
+      'sidebar-header': sidebarHeader,
     } = jsonResponse);
 
     if (menu && 'postContent' in menu) {

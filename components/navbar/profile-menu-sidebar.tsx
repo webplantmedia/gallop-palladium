@@ -6,12 +6,11 @@ import parse, {
 } from 'html-react-parser';
 import { hasExactClass, castToHTMLAttributeProps } from '@utils/tools';
 import { HTMLAttributeProps } from '@lib/types';
-import Link from 'next/link';
 import classNames from 'classnames';
 import { getVarsFromHTML } from '@utils/tools';
-import { replaceWordPressUrlRelative } from '@utils/tools';
 import MobileMenuLinkDropdown from './mobile-menu-link-dropdown';
 import { DataIconText } from '@components/blocks';
+import { DataSeeMore } from '@components/blocks/data-see-more';
 
 export default function ProfileMenuSidebar({ sidebar, closeModal }) {
   const options: HTMLReactParserOptions = {
@@ -24,25 +23,49 @@ export default function ProfileMenuSidebar({ sidebar, closeModal }) {
 
         if (domNode.name === 'p') {
           const data = getVarsFromHTML(domNode);
-          const href = data?.a?.href
-            ? replaceWordPressUrlRelative(data.a.href)
-            : '#';
+          return <DataSeeMore className={className} data={data} />;
+        } else if (domNode.name === 'h2') {
           return (
-            <Link
-              prefetch={true}
-              href={href}
-              onClick={closeModal}
+            <h2
               className={classNames(
-                'text-base-contrast border border-base-contrast/20 align-center inline-flex w-full justify-start rounded-md py-3 px-4 bg-base-body cursor-pointer hover:bg-white/30 items-center gap-x-2 dmh:bg-modern-base-card dmh:hover:bg-white/30'
+                className,
+                'leading-tight text-base text-primary-main'
               )}
             >
-              {/* Correct way to include the Iconify component */}
-              {/*<Iconify
-								className="w-5 h-5 shrink-0 mr-2"
-								icon={item.icon} // Ensure `item.icon` has the correct Iconify icon identifier
-							/>*/}
-              <span>{data?.a?.text}</span>
-            </Link>
+              {domToReact(domNode.children as DOMNode[], options)}
+            </h2>
+          );
+        } else if (domNode.name === 'h3') {
+          return (
+            <h3
+              className={classNames(
+                className,
+                'leading-tight text-2xl text-base-contrast mt-3 mb-5'
+              )}
+            >
+              {domToReact(domNode.children as DOMNode[], options)}
+            </h3>
+          );
+        } else if (hasExactClass(className, 'wp-block-image')) {
+          const data = getVarsFromHTML(domNode);
+
+          var img: any = {};
+          if (data?.img) {
+            img = { ...data?.img };
+          }
+
+          return img ? (
+            <img
+              className={classNames(className, 'rounded-sm')}
+              alt={img.alt}
+              src={img.src}
+              srcSet={img.srcset}
+              sizes={img.sizes}
+              width={img.width}
+              height={img.height}
+            />
+          ) : (
+            <p>No Image</p>
           );
         } else if (hasExactClass(className, 'is-style-icon-text')) {
           const data = getVarsFromHTML(domNode);
