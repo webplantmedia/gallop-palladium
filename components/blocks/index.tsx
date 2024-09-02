@@ -40,3 +40,4 @@ export { CoreGroupCard1 } from './core-group-card-1';
 export { CoreGroupHero1 } from './core-group-hero-1';
 export { ParseBlocks } from './parse-blocks';
 export { DataIconText } from './data-icon-text';
+export { GallopAccordion } from './gallop-accordion';

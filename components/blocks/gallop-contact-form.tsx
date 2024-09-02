@@ -1,26 +1,33 @@
 'use client';
 
 import { useState } from 'react';
-import { _footerSignup } from '@data/_footer';
 import { usePathname } from 'next/navigation';
 import { useSearchParams } from 'next/navigation';
-import { mlsState, state, useSnapshot } from '@state';
-import { Suspense } from 'react';
+import { Suspense, useEffect } from 'react';
+import { getDomainFromUrl } from '@utils/tools';
 
-export const GallopContactForm = ({ source, homeUrl }) => {
+export const GallopContactForm = () => {
   return (
     <Suspense>
-      <GallopContactFormInner source={source} homeUrl={homeUrl} />
+      <GallopContactFormInner />
     </Suspense>
   );
 };
-const GallopContactFormInner = ({ source, homeUrl }) => {
+const GallopContactFormInner = () => {
   const [status, setStatus] = useState('');
   const path = usePathname();
-
   var search = useSearchParams().toString();
 
-  const clearForm = (event) => {
+  const [url, setUrl] = useState('');
+
+  useEffect(() => {
+    const fullUrl = `${window.location.origin}${path}${
+      search ? '?' + search : ''
+    }`;
+    setUrl(fullUrl);
+  }, [path, search]);
+
+  const clearForm = (event: any) => {
     event.target.firstname.value = '';
     event.target.lastname.value = '';
     event.target.emailaddress.value = '';
@@ -37,11 +44,8 @@ const GallopContactFormInner = ({ source, homeUrl }) => {
       email: event.target.emailaddress.value,
       phone: event.target.telnumber.value,
       message: event.target.message.value,
-      sourceUrl:
-        process.env.NEXT_PUBLIC_LIVE_URL +
-        path +
-        (source == 'mls' ? '?' + search : ''),
-      homeUrl: homeUrl ? process.env.NEXT_PUBLIC_LIVE_URL + homeUrl : '',
+      sourceUrl: url,
+      domain: getDomainFromUrl(url),
     };
 
     const response = await fetch('/api/message/', {
@@ -62,7 +66,7 @@ const GallopContactFormInner = ({ source, homeUrl }) => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex flex-col max-w-full gap-x-4 gap-y-4 mt-7 mb-14"
+      className="flex flex-col max-w-full gap-x-4 gap-y-4 mb-14"
     >
       <input
         type="text"
@@ -114,7 +118,7 @@ const GallopContactFormInner = ({ source, homeUrl }) => {
         type="submit"
         className="shrink-0 w-full text-center rounded-md shadow-sm flex items-center justify-center text-base py-3 px-5 bg-secondary-main text-secondary-contrast hover:bg-secondary-light dmh:bg-modern-primary-main dmh:text-modern-primary-contrast dmh:hover:bg-modern-primary-light"
       >
-        Message Douglas Newby
+        Message
       </button>
     </form>
   );

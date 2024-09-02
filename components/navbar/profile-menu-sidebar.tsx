@@ -11,6 +11,8 @@ import { getVarsFromHTML } from '@utils/tools';
 import MobileMenuLinkDropdown from './mobile-menu-link-dropdown';
 import { DataIconText } from '@components/blocks';
 import { DataSeeMore } from '@components/blocks/data-see-more';
+import { GallopContactForm } from '@components/blocks/gallop-contact-form';
+import { GallopAccordion } from '@components/blocks';
 
 export default function ProfileMenuSidebar({ sidebar, closeModal }) {
   const options: HTMLReactParserOptions = {
@@ -67,18 +69,19 @@ export default function ProfileMenuSidebar({ sidebar, closeModal }) {
           ) : (
             <p>No Image</p>
           );
-        } else if (hasExactClass(className, 'is-style-icon-text')) {
-          const data = getVarsFromHTML(domNode);
-          return (
-            <DataIconText
-              className="border-2 border-primary-main rounded-md px-4 py-3 text-base font-normal bg-primary-main text-primary-contrast shadow-sm hover:bg-primary-light focus:outline-none whitespace-nowrap"
-              data={data}
-            />
-          );
+        } else if (hasExactClass(className, 'is-style-accordion')) {
+          return <GallopAccordion node={domNode} props={props} />;
         } else if (hasExactClass(className, 'wp-block-group')) {
           const data = getVarsFromHTML(domNode);
 
           return <MobileMenuLinkDropdown data={data} closeModal={closeModal} />;
+        } else if (hasExactClass(className, 'wp-block-code')) {
+          const data = getVarsFromHTML(domNode);
+          const text = data?.text ? data.text : null;
+          switch (text) {
+            case 'contact-form':
+              return <GallopContactForm />;
+          }
         } else if (domNode.name === 'hr') {
           return <hr className="border-base-contrast border mt-10 mb-10" />;
         }
