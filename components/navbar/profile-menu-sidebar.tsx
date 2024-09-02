@@ -81,17 +81,6 @@ export default function ProfileMenuSidebar({ sidebar, closeModal }) {
           return <MobileMenuLinkDropdown data={data} closeModal={closeModal} />;
         } else if (domNode.name === 'hr') {
           return <hr className="border-base-contrast border mt-10 mb-10" />;
-        } else if (hasExactClass(className, 'wp-block-heading')) {
-          return (
-            <h4
-              className={classNames(
-                className,
-                'mb-2 leading-tight text-2xl font-medium text-base-contrast'
-              )}
-            >
-              {domToReact(domNode.children as DOMNode[], options)}
-            </h4>
-          );
         }
       }
     },
