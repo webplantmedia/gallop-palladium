@@ -210,12 +210,14 @@ export const GallopAccordion = ({ node, props }) => {
                     <h3 className="text-base w-full group-hover:text-primary-main">
                       {heading}
                     </h3>
-                    <ChevronRightIcon
-                      className={classNames(
-                        open ? 'rotate-90 transform' : '',
-                        'transition self-start h-4 w-4 shrink-0'
-                      )}
-                    />
+                    <span>
+                      <ChevronRightIcon
+                        className={classNames(
+                          open ? 'rotate-90 transform' : '',
+                          'transition self-start h-4 w-4 shrink-0'
+                        )}
+                      />
+                    </span>
                   </div>
                   <p className="pl-8 text-base-contrast/50 text-sm italic">
                     {paragraph}

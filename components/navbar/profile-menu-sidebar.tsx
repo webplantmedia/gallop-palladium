@@ -7,8 +7,7 @@ import parse, {
 import { hasExactClass, castToHTMLAttributeProps } from '@utils/tools';
 import { HTMLAttributeProps } from '@lib/types';
 import classNames from 'classnames';
-import { getVarsFromHTML } from '@utils/tools';
-import MobileMenuLinkDropdown from './mobile-menu-link-dropdown';
+import { getDomNodeText } from '@utils/tools';
 import {
   GallopContactForm,
   GallopAccordion,
@@ -71,16 +70,13 @@ export default function ProfileMenuSidebar({ sidebar, closeModal }) {
           );
         } else if (hasExactClass(className, 'is-style-accordion')) {
           return <GallopAccordion node={domNode} props={props} />;
-        } else if (hasExactClass(className, 'wp-block-group')) {
-          const data = getVarsFromHTML(domNode);
-
-          return <MobileMenuLinkDropdown data={data} closeModal={closeModal} />;
         } else if (hasExactClass(className, 'wp-block-code')) {
-          const data = getVarsFromHTML(domNode);
-          const text = data?.text ? data.text : null;
-          switch (text) {
-            case 'contact-form':
-              return <GallopContactForm />;
+          const text = getDomNodeText(domNode);
+          if (text) {
+            switch (text) {
+              case 'contact-form':
+                return <GallopContactForm />;
+            }
           }
         } else if (domNode.name === 'hr') {
           return <hr className="border-base-contrast border mt-10 mb-10" />;
