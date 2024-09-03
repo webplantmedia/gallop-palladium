@@ -1,6 +1,6 @@
 import { Element } from 'html-react-parser';
 
-export function getDOMNodeText(node: Element) {
+export function getDomNodeText(node: Element) {
   const text = node.children
     .map((child: any) => {
       if (child instanceof Element) {
@@ -11,7 +11,7 @@ export function getDOMNodeText(node: Element) {
             }
             return '';
           })
-          .join();
+          .join('');
       } else {
         if (child.type === 'text') {
           return child.data;
@@ -19,7 +19,7 @@ export function getDOMNodeText(node: Element) {
         return '';
       }
     })
-    .join();
+    .join('');
 
   return text;
 }

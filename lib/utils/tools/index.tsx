@@ -49,4 +49,4 @@ export { printObject } from './print-object';
 export { getVimeoIframeSrc } from './get-vimeo-iframe-src';
 export { compressContent } from './compress-content';
 export { getDomainFromUrl } from './get-domain-from-url';
-export { getDOMNodeText } from './get-domnode-text';
+export { getDomNodeText } from './get-dom-node-text';

@@ -9,10 +9,12 @@ import { HTMLAttributeProps } from '@lib/types';
 import classNames from 'classnames';
 import { getVarsFromHTML } from '@utils/tools';
 import MobileMenuLinkDropdown from './mobile-menu-link-dropdown';
-import { DataIconText } from '@components/blocks';
-import { DataSeeMore } from '@components/blocks/data-see-more';
-import { GallopContactForm } from '@components/blocks/gallop-contact-form';
-import { GallopAccordion } from '@components/blocks';
+import {
+  GallopContactForm,
+  GallopAccordion,
+  GallopSeeMore,
+  CoreParagraph,
+} from '@components/blocks';
 
 export default function ProfileMenuSidebar({ sidebar, closeModal }) {
   const options: HTMLReactParserOptions = {
@@ -23,15 +25,20 @@ export default function ProfileMenuSidebar({ sidebar, closeModal }) {
         );
         let { className } = props;
 
-        if (domNode.name === 'p') {
-          const data = getVarsFromHTML(domNode);
-          return <DataSeeMore className={className} data={data} />;
+        if (hasExactClass(className, 'is-style-see-more')) {
+          return <GallopSeeMore node={domNode} props={props} />;
+        } else if (domNode.name === 'p') {
+          return (
+            <CoreParagraph className={className}>
+              {domToReact(domNode.children as DOMNode[], options)}
+            </CoreParagraph>
+          );
         } else if (domNode.name === 'h2') {
           return (
             <h2
               className={classNames(
                 className,
-                'leading-tight text-base text-primary-main'
+                'leading-tight text-base text-primary-main mb-7 mt-2'
               )}
             >
               {domToReact(domNode.children as DOMNode[], options)}
@@ -42,32 +49,25 @@ export default function ProfileMenuSidebar({ sidebar, closeModal }) {
             <h3
               className={classNames(
                 className,
-                'leading-tight text-2xl text-base-contrast mt-3 mb-5'
+                'leading-tight text-2xl text-base-contrast mt-9 mb-5'
               )}
             >
               {domToReact(domNode.children as DOMNode[], options)}
             </h3>
           );
-        } else if (hasExactClass(className, 'wp-block-image')) {
-          const data = getVarsFromHTML(domNode);
-
-          var img: any = {};
-          if (data?.img) {
-            img = { ...data?.img };
-          }
-
-          return img ? (
+          // } else if (hasExactClass(className, 'wp-block-image')) {
+          // return <>{domToReact(domNode.children as DOMNode[], options)}</>;
+        } else if (domNode.name === 'img') {
+          return (
             <img
-              className={classNames(className, 'rounded-sm')}
-              alt={img.alt}
-              src={img.src}
-              srcSet={img.srcset}
-              sizes={img.sizes}
-              width={img.width}
-              height={img.height}
+              className={classNames(className, 'rounded-sm mb-3')}
+              alt={props.alt}
+              src={props.src}
+              srcSet={props.srcSet}
+              sizes={props.sizes}
+              width={props.width}
+              height={props.height}
             />
-          ) : (
-            <p>No Image</p>
           );
         } else if (hasExactClass(className, 'is-style-accordion')) {
           return <GallopAccordion node={domNode} props={props} />;

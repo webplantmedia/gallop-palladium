@@ -6,12 +6,26 @@ import {
 } from 'html-react-parser';
 import { hasExactClass, castToHTMLAttributeProps } from '@utils/tools';
 import { HTMLAttributeProps } from '@lib/types';
-import { getDOMNodeText } from '@utils/tools';
+import { getDomNodeText } from '@utils/tools';
 import classNames from 'classnames';
 import PersonIcon from '@iconify/icons-carbon/person';
 import DotMarkIcon from '@iconify/icons-carbon/dot-mark';
 import PhoneIcon from '@iconify/icons-carbon/phone';
 import Iconify from '@components/iconify';
+import EmailIcon from '@iconify/icons-carbon/email';
+import ChatIcon from '@iconify/icons-carbon/chat';
+import DevicePhoneMobileIcon from '@iconify/icons-heroicons/device-phone-mobile';
+import MapPinIcon from '@iconify/icons-heroicons/map-pin';
+import PlayFilledAltIcon from '@iconify/icons-carbon/play-filled-alt';
+import EnvelopeIcon from '@iconify/icons-heroicons/envelope';
+import ChatBubbleBottomCenterTextIcon from '@iconify/icons-heroicons/chat-bubble-bottom-center-text';
+import LogoLinkedin from '@iconify/icons-carbon/logo-linkedin';
+import LogoFacebook from '@iconify/icons-carbon/logo-facebook';
+import LogoTwitter from '@iconify/icons-carbon/logo-twitter';
+import LogoInstagram from '@iconify/icons-carbon/logo-instagram';
+import LogoYouTube from '@iconify/icons-carbon/logo-youtube';
+import InstagramLogo from '@svg/instagram-logo.svg';
+
 // import Link from 'next/link';
 import {
   Disclosure,
@@ -21,10 +35,11 @@ import {
 import { ChevronRightIcon } from '@heroicons/react/20/solid';
 import React from 'react';
 
-export const GallopAccordionGroup = ({ node, props }) => {
+export const getGallopAccordionGroup = (node: Element) => {
   let icon = <></>;
   let heading = '';
   let paragraph = '';
+  let link = '';
   const options: HTMLReactParserOptions = {
     replace(domNode) {
       if (domNode instanceof Element && domNode.attribs) {
@@ -34,7 +49,7 @@ export const GallopAccordionGroup = ({ node, props }) => {
         let { className } = props;
 
         if (hasExactClass(className, 'wp-block-code')) {
-          const text = getDOMNodeText(domNode);
+          const text = getDomNodeText(domNode);
           if (text) {
             switch (text) {
               case 'icon-person':
@@ -45,10 +60,34 @@ export const GallopAccordionGroup = ({ node, props }) => {
                   />
                 );
                 break;
-              case 'icon-mobile':
+              case 'icon-map':
+                icon = (
+                  <Iconify
+                    icon={MapPinIcon}
+                    className="flex-shrink-0 h-5 w-5 text-primary-main"
+                  />
+                );
+                break;
+              case 'icon-email':
+                icon = (
+                  <Iconify
+                    icon={EnvelopeIcon}
+                    className="flex-shrink-0 h-5 w-5 text-primary-main"
+                  />
+                );
+                break;
+              case 'icon-phone':
                 icon = (
                   <Iconify
                     icon={PhoneIcon}
+                    className="flex-shrink-0 h-5 w-5 text-primary-main"
+                  />
+                );
+                break;
+              case 'icon-mobile':
+                icon = (
+                  <Iconify
+                    icon={DevicePhoneMobileIcon}
                     className="flex-shrink-0 h-5 w-5 text-primary-main"
                   />
                 );
@@ -64,31 +103,26 @@ export const GallopAccordionGroup = ({ node, props }) => {
             }
           }
         } else if (hasExactClass(className, 'wp-block-heading')) {
-          heading = getDOMNodeText(domNode);
+          heading = getDomNodeText(domNode);
         } else if (domNode.name === 'p') {
-          paragraph = getDOMNodeText(domNode);
+          paragraph = getDomNodeText(domNode);
+        } else if (domNode.name === 'a') {
+          const { href } = props;
+          link = href;
         }
-
-        return <></>;
       }
     },
   };
   domToReact(node.children as DOMNode[], options);
 
-  return (
-    <div className="w-full flex flex-col">
-      <div className="w-full flex flex-row items-center">
-        <div className="shrink-0 w-7">{icon}</div>
-        <h3 className="text-base">{heading}</h3>
-      </div>
-      <p className="pl-7 text-base-contrast/50 text-sm italic">{paragraph}</p>
-    </div>
-  );
+  return { icon, heading, paragraph, link };
 };
 
 export const GallopAccordionItem = ({ node, props }) => {
-  // let index = 0;
-  // let content: React.ReactElement[] = [];
+  let icon = <></>;
+  let heading = '';
+  let paragraph = '';
+  let link = '';
 
   const options: HTMLReactParserOptions = {
     replace(domNode) {
@@ -99,16 +133,33 @@ export const GallopAccordionItem = ({ node, props }) => {
         let { className } = props;
 
         if (hasExactClass(className, 'wp-block-group')) {
+          ({ icon, heading, paragraph, link } =
+            getGallopAccordionGroup(domNode));
           return (
             <div className="flex w-full items-start justify-between gap-4 text-left text-base-contrast text-sm mb-4">
-              <GallopAccordionGroup node={domNode} props={props} />
+              <div className="w-full flex flex-col">
+                <div className="w-full flex flex-row items-center">
+                  <div className="shrink-0 w-7">{icon}</div>
+                  {link && (
+                    <h3 className="text-base w-full">
+                      <a className="hover:text-base-contrast/70" href={link}>
+                        {heading}
+                      </a>
+                    </h3>
+                  )}
+                  {!link && <h3 className="text-base w-full">{heading}</h3>}
+                </div>
+                {paragraph && (
+                  <p className="pl-7 text-base-contrast/50 text-sm italic">
+                    {paragraph}
+                  </p>
+                )}
+              </div>
             </div>
           );
         }
 
-        // index++;
-
-        return <></>;
+        return <></>; //this prevents recursion.
       }
     },
   };
@@ -116,8 +167,10 @@ export const GallopAccordionItem = ({ node, props }) => {
 };
 
 export const GallopAccordion = ({ node, props }) => {
-  let heading: React.ReactElement | null = null;
   let content: React.ReactElement | null = null;
+  let icon = <></>;
+  let heading = '';
+  let paragraph = '';
 
   const options: HTMLReactParserOptions = {
     replace(domNode) {
@@ -128,12 +181,12 @@ export const GallopAccordion = ({ node, props }) => {
         let { className } = props;
 
         if (!heading && hasExactClass(className, 'wp-block-group')) {
-          heading = <GallopAccordionGroup node={domNode} props={props} />;
+          ({ icon, heading, paragraph } = getGallopAccordionGroup(domNode));
         } else if (!content && hasExactClass(className, 'wp-block-group')) {
           content = <GallopAccordionItem node={domNode} props={props} />;
         }
 
-        return <></>;
+        return <></>; //this prevents recursion
       }
     },
   };
@@ -141,26 +194,34 @@ export const GallopAccordion = ({ node, props }) => {
 
   if (heading && content) {
     return (
-      <Disclosure as="div" className="w-full mb-4">
+      <Disclosure as="div" className="w-full">
         {({ open }) => (
           <>
             <DisclosureButton
               className={classNames(
                 open ? '' : '',
-                'flex w-full gap-4 items-start justify-between cursor-pointer text-left text-base-contrast'
+                'flex w-full gap-4 items-start justify-between cursor-pointer text-left text-base-contrast mb-4'
               )}
             >
               <div className="flex w-full items-start justify-between gap-4 text-left text-base-contrast text-sm">
-                {heading}
-                <ChevronRightIcon
-                  className={classNames(
-                    open ? 'rotate-90 transform' : '',
-                    'transition self-start h-4 w-4 shrink-0 mt-[2px]'
-                  )}
-                />
+                <div className="w-full flex flex-col">
+                  <div className="w-full flex flex-row items-center">
+                    <div className="shrink-0 w-7">{icon}</div>
+                    <h3 className="text-base w-full">{heading}</h3>
+                    <ChevronRightIcon
+                      className={classNames(
+                        open ? 'rotate-90 transform' : '',
+                        'transition self-start h-4 w-4 shrink-0'
+                      )}
+                    />
+                  </div>
+                  <p className="pl-7 text-base-contrast/50 text-sm italic">
+                    {paragraph}
+                  </p>
+                </div>
               </div>
             </DisclosureButton>
-            <DisclosurePanel className="text-base-contrast">
+            <DisclosurePanel className="text-base-contrast mb-8">
               {content}
             </DisclosurePanel>
           </>
