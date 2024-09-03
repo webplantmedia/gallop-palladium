@@ -11,6 +11,14 @@ import classNames from 'classnames';
 import PersonIcon from '@iconify/icons-carbon/person';
 import DotMarkIcon from '@iconify/icons-carbon/dot-mark';
 import Iconify from '@components/iconify';
+import Link from 'next/link';
+import {
+  Disclosure,
+  DisclosurePanel,
+  DisclosureButton,
+} from '@headlessui/react';
+import { ChevronRightIcon } from '@heroicons/react/20/solid';
+import React from 'react';
 
 export const GallopAccordionGroup = ({ node, props }) => {
   let icon = <></>;
@@ -32,7 +40,7 @@ export const GallopAccordionGroup = ({ node, props }) => {
                 icon = (
                   <Iconify
                     icon={PersonIcon}
-                    className="flex-shrink-0 h-6 w-6 mr-2"
+                    className="flex-shrink-0 h-5 w-5 text-primary-main"
                   />
                 );
                 break;
@@ -40,7 +48,7 @@ export const GallopAccordionGroup = ({ node, props }) => {
                 icon = (
                   <Iconify
                     icon={DotMarkIcon}
-                    className="flex-shrink-0 h-6 w-6 mr-2"
+                    className="flex-shrink-0 h-3 w-3 text-primary-main"
                   />
                 );
                 break;
@@ -59,17 +67,22 @@ export const GallopAccordionGroup = ({ node, props }) => {
   domToReact(node.children as DOMNode[], options);
 
   return (
-    <>
-      <div className={'mt-[2px] shrink-0'}>{icon}</div>
+    <div className="flex w-full items-start justify-between gap-4 py-2 text-left text-base-contrast text-sm">
       <div className="w-full flex flex-col">
-        <h3>{heading}</h3>
-        <p className="text-base-contrast/50 text-sm italic">{paragraph}</p>
+        <div className="w-full flex flex-row items-center">
+          <div className="shrink-0 w-7">{icon}</div>
+          <h3 className="text-base">{heading}</h3>
+        </div>
+        <p className="pl-7 text-base-contrast/50 text-sm italic">{paragraph}</p>
       </div>
-    </>
+    </div>
   );
 };
 
 export const GallopAccordionItem = ({ node, props }) => {
+  let index = 0;
+  let content: React.ReactElement[] = [];
+
   const options: HTMLReactParserOptions = {
     replace(domNode) {
       if (domNode instanceof Element && domNode.attribs) {
@@ -79,19 +92,34 @@ export const GallopAccordionItem = ({ node, props }) => {
         let { className } = props;
 
         if (hasExactClass(className, 'wp-block-group')) {
-          return <GallopAccordionGroup node={domNode} props={props} />;
-          // return domToReact(domNode.children as DOMNode[], options);
+          content.push(
+            <GallopAccordionGroup
+              key={`gallop-accordion-group-${index}`} // Use a unique key, like startIndex or a fallback
+              node={domNode}
+              props={props}
+            />
+          );
         }
 
-        // return <></>;
+        index++;
+
+        return <></>;
       }
     },
   };
+  domToReact(node.children as DOMNode[], options);
 
-  return <>{domToReact(node.children as DOMNode[], options)}</>;
+  if (content && content.length) {
+    return <>{content}</>;
+  }
+
+  return null;
 };
 
 export const GallopAccordion = ({ node, props }) => {
+  let heading: React.ReactElement | null = null;
+  let content: React.ReactElement | null = null;
+
   const options: HTMLReactParserOptions = {
     replace(domNode) {
       if (domNode instanceof Element && domNode.attribs) {
@@ -100,14 +128,39 @@ export const GallopAccordion = ({ node, props }) => {
         );
         let { className } = props;
 
-        if (hasExactClass(className, 'wp-block-group')) {
-          return <GallopAccordionItem node={domNode} props={props} />;
+        if (!heading && hasExactClass(className, 'wp-block-group')) {
+          heading = <GallopAccordionGroup node={domNode} props={props} />;
+        } else if (!content && hasExactClass(className, 'wp-block-group')) {
+          content = <GallopAccordionItem node={domNode} props={props} />;
         }
 
-        // return <></>;
+        return <></>;
       }
     },
   };
+  domToReact(node.children as DOMNode[], options);
 
-  return <>{domToReact(node.children as DOMNode[], options)}</>;
+  if (heading && content) {
+    return (
+      <Disclosure as="div" className="w-full">
+        {({ open }) => (
+          <>
+            <DisclosureButton
+              className={classNames(
+                open ? '' : '',
+                'flex w-full gap-4 items-start justify-between cursor-pointer py-2 text-left text-base-contrast'
+              )}
+            >
+              {heading}
+            </DisclosureButton>
+            <DisclosurePanel className="text-base-contrast mb-4">
+              {content}
+            </DisclosurePanel>
+          </>
+        )}
+      </Disclosure>
+    );
+  }
+
+  return <></>;
 };
