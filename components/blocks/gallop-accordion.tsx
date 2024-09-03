@@ -139,10 +139,10 @@ export const GallopAccordionItem = ({ node, props }) => {
             <div className="flex w-full items-start justify-between gap-4 text-left text-base-contrast text-sm mb-4">
               <div className="w-full flex flex-col">
                 <div className="w-full flex flex-row items-center">
-                  <div className="shrink-0 w-7">{icon}</div>
+                  <div className="shrink-0 w-8">{icon}</div>
                   {link && (
                     <h3 className="text-base w-full">
-                      <a className="hover:text-base-contrast/70" href={link}>
+                      <a className="hover:text-primary-main" href={link}>
                         {heading}
                       </a>
                     </h3>
@@ -150,7 +150,7 @@ export const GallopAccordionItem = ({ node, props }) => {
                   {!link && <h3 className="text-base w-full">{heading}</h3>}
                 </div>
                 {paragraph && (
-                  <p className="pl-7 text-base-contrast/50 text-sm italic">
+                  <p className="pl-8 text-base-contrast/50 text-sm italic">
                     {paragraph}
                   </p>
                 )}
@@ -204,10 +204,12 @@ export const GallopAccordion = ({ node, props }) => {
               )}
             >
               <div className="flex w-full items-start justify-between gap-4 text-left text-base-contrast text-sm">
-                <div className="w-full flex flex-col">
+                <div className="w-full flex flex-col group">
                   <div className="w-full flex flex-row items-center">
-                    <div className="shrink-0 w-7">{icon}</div>
-                    <h3 className="text-base w-full">{heading}</h3>
+                    <div className="shrink-0 w-8">{icon}</div>
+                    <h3 className="text-base w-full group-hover:text-primary-main">
+                      {heading}
+                    </h3>
                     <ChevronRightIcon
                       className={classNames(
                         open ? 'rotate-90 transform' : '',
@@ -215,7 +217,7 @@ export const GallopAccordion = ({ node, props }) => {
                       )}
                     />
                   </div>
-                  <p className="pl-7 text-base-contrast/50 text-sm italic">
+                  <p className="pl-8 text-base-contrast/50 text-sm italic">
                     {paragraph}
                   </p>
                 </div>
