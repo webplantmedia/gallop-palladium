@@ -101,7 +101,7 @@ export default function ProfileMenu({ sidebar, sidebarHeader }) {
                         </div>
                       </div>
                     </div>
-                    <div className="mt-6 w-full flex flex-col gap-3 px-4 sm:px-8">
+                    <div className="mt-6 w-full flex flex-col gap-0 px-4 sm:px-8">
                       <ProfileMenuSidebar
                         sidebar={sidebar}
                         closeModal={closeModal}

@@ -1,4 +1,4 @@
-import parse, {
+import {
   HTMLReactParserOptions,
   domToReact,
   DOMNode,
@@ -10,8 +10,9 @@ import { getDOMNodeText } from '@utils/tools';
 import classNames from 'classnames';
 import PersonIcon from '@iconify/icons-carbon/person';
 import DotMarkIcon from '@iconify/icons-carbon/dot-mark';
+import PhoneIcon from '@iconify/icons-carbon/phone';
 import Iconify from '@components/iconify';
-import Link from 'next/link';
+// import Link from 'next/link';
 import {
   Disclosure,
   DisclosurePanel,
@@ -44,6 +45,14 @@ export const GallopAccordionGroup = ({ node, props }) => {
                   />
                 );
                 break;
+              case 'icon-mobile':
+                icon = (
+                  <Iconify
+                    icon={PhoneIcon}
+                    className="flex-shrink-0 h-5 w-5 text-primary-main"
+                  />
+                );
+                break;
               case 'icon-dot':
                 icon = (
                   <Iconify
@@ -67,21 +76,19 @@ export const GallopAccordionGroup = ({ node, props }) => {
   domToReact(node.children as DOMNode[], options);
 
   return (
-    <div className="flex w-full items-start justify-between gap-4 py-2 text-left text-base-contrast text-sm">
-      <div className="w-full flex flex-col">
-        <div className="w-full flex flex-row items-center">
-          <div className="shrink-0 w-7">{icon}</div>
-          <h3 className="text-base">{heading}</h3>
-        </div>
-        <p className="pl-7 text-base-contrast/50 text-sm italic">{paragraph}</p>
+    <div className="w-full flex flex-col">
+      <div className="w-full flex flex-row items-center">
+        <div className="shrink-0 w-7">{icon}</div>
+        <h3 className="text-base">{heading}</h3>
       </div>
+      <p className="pl-7 text-base-contrast/50 text-sm italic">{paragraph}</p>
     </div>
   );
 };
 
 export const GallopAccordionItem = ({ node, props }) => {
-  let index = 0;
-  let content: React.ReactElement[] = [];
+  // let index = 0;
+  // let content: React.ReactElement[] = [];
 
   const options: HTMLReactParserOptions = {
     replace(domNode) {
@@ -92,28 +99,20 @@ export const GallopAccordionItem = ({ node, props }) => {
         let { className } = props;
 
         if (hasExactClass(className, 'wp-block-group')) {
-          content.push(
-            <GallopAccordionGroup
-              key={`gallop-accordion-group-${index}`} // Use a unique key, like startIndex or a fallback
-              node={domNode}
-              props={props}
-            />
+          return (
+            <div className="flex w-full items-start justify-between gap-4 text-left text-base-contrast text-sm mb-4">
+              <GallopAccordionGroup node={domNode} props={props} />
+            </div>
           );
         }
 
-        index++;
+        // index++;
 
         return <></>;
       }
     },
   };
-  domToReact(node.children as DOMNode[], options);
-
-  if (content && content.length) {
-    return <>{content}</>;
-  }
-
-  return null;
+  return <>{domToReact(node.children as DOMNode[], options)}</>;
 };
 
 export const GallopAccordion = ({ node, props }) => {
@@ -142,18 +141,26 @@ export const GallopAccordion = ({ node, props }) => {
 
   if (heading && content) {
     return (
-      <Disclosure as="div" className="w-full">
+      <Disclosure as="div" className="w-full mb-4">
         {({ open }) => (
           <>
             <DisclosureButton
               className={classNames(
                 open ? '' : '',
-                'flex w-full gap-4 items-start justify-between cursor-pointer py-2 text-left text-base-contrast'
+                'flex w-full gap-4 items-start justify-between cursor-pointer text-left text-base-contrast'
               )}
             >
-              {heading}
+              <div className="flex w-full items-start justify-between gap-4 text-left text-base-contrast text-sm">
+                {heading}
+                <ChevronRightIcon
+                  className={classNames(
+                    open ? 'rotate-90 transform' : '',
+                    'transition self-start h-4 w-4 shrink-0 mt-[2px]'
+                  )}
+                />
+              </div>
             </DisclosureButton>
-            <DisclosurePanel className="text-base-contrast mb-4">
+            <DisclosurePanel className="text-base-contrast">
               {content}
             </DisclosurePanel>
           </>
