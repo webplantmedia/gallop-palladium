@@ -54,8 +54,12 @@ export default function ProfileMenuSidebar({ sidebar, closeModal }) {
               {domToReact(domNode.children as DOMNode[], options)}
             </h3>
           );
-          // } else if (hasExactClass(className, 'wp-block-image')) {
-          // return <>{domToReact(domNode.children as DOMNode[], options)}</>;
+        } else if (hasExactClass(className, 'wp-block-image')) {
+          return (
+            <figure>
+              {domToReact(domNode.children as DOMNode[], options)}
+            </figure>
+          );
         } else if (domNode.name === 'img') {
           return (
             <img

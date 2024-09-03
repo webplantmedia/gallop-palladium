@@ -29,34 +29,28 @@ export default function ProfileMenuSidebarHeader({ post }) {
               {domToReact(domNode.children as DOMNode[], options)}
             </div>
           );
-        }
-        if (hasExactClass(className, 'wp-block-image')) {
-          const data = getVarsFromHTML(domNode);
-
-          var img: any = {};
-          if (data?.img) {
-            img = { ...data?.img };
-          }
-
-          return img ? (
+        } else if (hasExactClass(className, 'wp-block-image')) {
+          return (
+            <figure>
+              {domToReact(domNode.children as DOMNode[], options)}
+            </figure>
+          );
+        } else if (domNode.name === 'img') {
+          return (
             <img
               className={classNames(
                 className,
                 'inline-block h-10 w-10 rounded-full ring-2 ring-white'
               )}
-              alt={img.alt}
-              src={img.src}
-              srcSet={img.srcset}
-              sizes={img.sizes}
-              width={img.width}
-              height={img.height}
+              alt={props.alt}
+              src={props.src}
+              srcSet={props.srcSet}
+              sizes={props.sizes}
+              width={props.width}
+              height={props.height}
             />
-          ) : (
-            <p>No Image</p>
           );
         }
-
-        return <></>;
       }
     },
   };

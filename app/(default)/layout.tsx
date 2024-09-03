@@ -11,9 +11,6 @@ import { GoogleAnalytics } from '@next/third-parties/google';
 import type { Metadata } from 'next';
 import GridFull from '@components/grid-full';
 import { fetchSiteElements } from '@api/fetch-site-elements';
-// import parse from 'html-react-parser';
-// import parse from 'html-dom-parser';
-// import { getVarsFromHTML } from '@utils/tools';
 
 export const metadata: Metadata = {
   metadataBase: new URL(String(process.env.PRODUCTION_URL)),
