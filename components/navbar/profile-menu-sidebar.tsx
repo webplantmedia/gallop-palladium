@@ -54,12 +54,6 @@ export default function ProfileMenuSidebar({ sidebar, closeModal }) {
               {domToReact(domNode.children as DOMNode[], options)}
             </h3>
           );
-        } else if (hasExactClass(className, 'wp-block-image')) {
-          return (
-            <figure>
-              {domToReact(domNode.children as DOMNode[], options)}
-            </figure>
-          );
         } else if (domNode.name === 'img') {
           return (
             <img
@@ -84,6 +78,8 @@ export default function ProfileMenuSidebar({ sidebar, closeModal }) {
           }
         } else if (domNode.name === 'hr') {
           return <hr className="border-base-contrast border mt-10 mb-10" />;
+        } else {
+          return <>{domToReact(domNode.children as DOMNode[], options)}</>;
         }
       }
     },

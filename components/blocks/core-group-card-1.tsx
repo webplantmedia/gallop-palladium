@@ -54,15 +54,15 @@ export const CoreGroupCard1 = ({ node, className, props }) => {
       </VideoPopup>
       <div className="bg-base-card px-7 pb-7 h-full flex flex-col">
         <CoreHeading tag="h4" props={data} className="is-style-h3 !mb-2 !mt-4">
-          {data.h4?.text}
+          {data?.h4?.text}
         </CoreHeading>
         <CoreParagraph className="">{data.p?.text}</CoreParagraph>
         <div className="text-center rounded-md shadow-sm flex items-center justify-center mt-auto bg-primary-main text-primary-contrast hover:bg-primary-light">
           <a
             className="text-base py-3 px-5 w-full flex justify-center items-center gap-2"
-            href={button.href}
+            href={button?.href}
           >
-            {button.text}
+            {button?.text}
             <Iconify
               icon={ArrowInsertIcon}
               className="flex-shrink-0 h-auto w-6 rotate-90 inline"

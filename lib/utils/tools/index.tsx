@@ -50,3 +50,4 @@ export { getVimeoIframeSrc } from './get-vimeo-iframe-src';
 export { compressContent } from './compress-content';
 export { getDomainFromUrl } from './get-domain-from-url';
 export { getDomNodeText } from './get-dom-node-text';
+export { getDomNodeData } from './get-dom-node-data';

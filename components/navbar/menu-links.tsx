@@ -29,7 +29,7 @@ export default function MenuLinks({ isScrolling, menu }) {
                 'inline-flex items-center border-b-2 border-transparent text-base font-normal text-base-contrast hover:border-base-contrast hover:text-base-contrast transition-all'
               )}
             >
-              {data?.a.text}
+              {data?.a?.text}
             </Link>
           );
         } else if (hasExactClass(className, 'wp-block-group')) {

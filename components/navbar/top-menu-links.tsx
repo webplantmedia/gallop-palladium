@@ -19,17 +19,17 @@ export default function TopMenuLinks({ menu }) {
         if (hasExactClass(className, 'wp-block-group')) {
           const data = getVarsFromHTML(domNode);
           const icon = data?.wpBlockCode?.text ? data.wpBlockCode.text : null;
-          const label = data?.p[0]?.a?.text
+          const label = data?.p?.[0]?.a?.text
             ? data.p[0].a.text
             : data?.p?.a?.text
             ? data.p.a.text
             : 'Label';
-          const mobileLabel = data?.p[1]?.a?.text
+          const mobileLabel = data?.p?.[1]?.a?.text
             ? data.p[1].a.text
             : data?.p?.a?.text
             ? data.p.a.text
             : 'Mobile Label';
-          const href = data?.p[0]?.a?.href
+          const href = data?.p?.[0]?.a?.href
             ? data.p[0].a.href
             : data?.p?.a?.href
             ? data.p.a.href

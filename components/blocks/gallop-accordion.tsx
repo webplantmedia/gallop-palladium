@@ -1,9 +1,3 @@
-import {
-  HTMLReactParserOptions,
-  domToReact,
-  DOMNode,
-  Element,
-} from 'html-react-parser';
 import { hasExactClass, castToHTMLAttributeProps } from '@utils/tools';
 import { HTMLAttributeProps } from '@lib/types';
 import { getDomNodeText } from '@utils/tools';
@@ -26,6 +20,12 @@ import LogoInstagram from '@iconify/icons-carbon/logo-instagram';
 import LogoYouTube from '@iconify/icons-carbon/logo-youtube';
 import InstagramLogo from '@svg/instagram-logo.svg';
 
+import {
+  HTMLReactParserOptions,
+  domToReact,
+  DOMNode,
+  Element,
+} from 'html-react-parser';
 // import Link from 'next/link';
 import {
   Disclosure,

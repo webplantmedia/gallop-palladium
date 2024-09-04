@@ -20,31 +20,164 @@ import {
   DOMNode,
   Element,
 } from 'html-react-parser';
-import {
-  hasExactClass,
-  castToHTMLAttributeProps,
-  printObject,
-} from '@utils/tools';
+import { hasExactClass, castToHTMLAttributeProps } from '@utils/tools';
 import { HTMLAttributeProps } from '@lib/types';
+import { getDomNodeText, getDomNodeData } from '@utils/tools';
 
+export const getHero1SlideItems = (node: Element) => {
+  let h1: React.ReactElement | null = null;
+  let h2: React.ReactElement | null = null;
+  let h4: React.ReactElement | null = null;
+  let paragraph: React.ReactElement | null = null;
+
+  const options: HTMLReactParserOptions = {
+    replace(domNode) {
+      if (domNode instanceof Element && domNode.attribs) {
+        const props: HTMLAttributeProps = castToHTMLAttributeProps(
+          domNode.attribs
+        );
+
+        if (domNode.name === 'em') {
+          return (
+            <span className="text-stroke text-stroke-white block">
+              {domToReact(domNode.children as DOMNode[], options)}
+            </span>
+          );
+        } else if (domNode.name === 'h1') {
+          h1 = (
+            <h1 className="mb-0 !leading-tight text-5xl md:text-6xl lg:text-6xl 3xl:text-7xl text-white font-bold">
+              {domToReact(domNode.children as DOMNode[], options)}
+            </h1>
+          );
+        } else if (domNode.name === 'h2') {
+          h2 = (
+            <h2 className="mb-0 !leading-tight text-5xl md:text-6xl lg:text-6xl 3xl:text-7xl text-white font-bold">
+              {domToReact(domNode.children as DOMNode[], options)}
+            </h2>
+          );
+        } else if (domNode.name === 'h4') {
+          h4 = (
+            <strong className="mb-0 font-accent !leading-tight text-2xl text-white tracking-[0.3em] uppercase font-normal flex flex-row gap-[0.5em] items-center">
+              {domToReact(domNode.children as DOMNode[], options)}
+              <Iconify
+                icon={ArrowLongRightIcon}
+                className="flex-shrink-0 h-auto w-10"
+              />
+            </strong>
+          );
+        } else if (domNode.name === 'p') {
+          paragraph = (
+            <p className="mb-0 text-xl font-bold !leading-normal text-white max-w-[700px]">
+              {domToReact(domNode.children as DOMNode[], options)}
+            </p>
+          );
+        }
+      }
+    },
+  };
+  domToReact(node.children as DOMNode[], options);
+
+  return { h1, h2, h4, paragraph };
+};
+export const getHero1Slides = (node) => {
+  let slides: React.ReactElement[] = [];
+  let videoUrl = '';
+  let index = 0;
+
+  const options: HTMLReactParserOptions = {
+    replace(domNode) {
+      if (domNode instanceof Element && domNode.attribs) {
+        const props: HTMLAttributeProps = castToHTMLAttributeProps(
+          domNode.attribs
+        );
+        let { className } = props;
+
+        if (hasExactClass(className, 'wp-block-group')) {
+          index++;
+          const { h1, h2, h4, paragraph } = getHero1SlideItems(domNode);
+          slides.push(
+            <div key={`slide-group-${index}`} className="swiper-slide">
+              <div className="flex flex-col gap-10">
+                {h4 && h4}
+                {h1 && h1}
+                {h2 && h2}
+                {paragraph && paragraph}
+              </div>
+            </div>
+          );
+          return <></>;
+        } else if (hasExactClass(className, 'wp-block-button__link')) {
+          videoUrl = props.href;
+          return <></>;
+        }
+
+        // return <></>; //this prevents recursion.
+      }
+    },
+  };
+  domToReact(node.children as DOMNode[], options);
+
+  return { slides, videoUrl };
+};
 export const CoreGroupHero1 = ({ node, className, props }) => {
-  const data = getVarsFromHTML(node);
-
+  // const data = getVarsFromHTML(node);
   let swiperId = 'swiper-' + useId(); // Generate a unique ID
   let circleTextId = 'circle-text-' + useId(); // Generate a unique ID
   swiperId = swiperId.replace(/:/g, '-'); // Sanitize the ID
   circleTextId = circleTextId.replace(/:/g, '-'); // Sanitize the ID
 
-  let slide = { ...data.wpBlockCover };
-  let circleText = slide.wpBlockButtons?.wpBlockButton?.a?.text;
-  let videoUrl = slide.wpBlockButtons?.wpBlockButton?.a?.href;
-  let video = slide.video;
-  let slideItems = slide.wpBlockGroup;
-  let brand = { ...data.wpBlockGroup?.wpBlockCover[0] };
-  let info = { ...data.wpBlockGroup?.wpBlockCover[1] };
-  circleText += ' - ' + circleText + ' - ';
+  // let slide = { ...data.wpBlockCover };
+  // let circleText = slide.wpBlockButtons?.wpBlockButton?.a?.text;
+  // let videoUrl = slide.wpBlockButtons?.wpBlockButton?.a?.href;
+  // let video = slide.video;
+  // let slideItems = slide.wpBlockGroup;
+  // let brand = { ...data.wpBlockGroup?.wpBlockCover[0] };
+  // let info = { ...data.wpBlockGroup?.wpBlockCover[1] };
+  // circleText += ' - ' + circleText + ' - ';
+  // console.log('slide', slide);
 
-  const src = getVimeoIframeSrc(videoUrl);
+  // const src = getVimeoIframeSrc(videoUrl);
+
+  let slides: React.ReactElement[] = [];
+  let videoUrl = '';
+
+  const options: HTMLReactParserOptions = {
+    replace(domNode) {
+      if (domNode instanceof Element && domNode.attribs) {
+        const props: HTMLAttributeProps = castToHTMLAttributeProps(
+          domNode.attribs
+        );
+        let { className } = props;
+
+        console.log(className);
+        if (hasExactClass(className, 'wp-block-cover')) {
+          ({ slides, videoUrl } = getHero1Slides(domNode));
+        } else if (hasExactClass(className, 'wp-block-group')) {
+          // domToReact(domNode.children as DOMNode[], options);
+        }
+
+        return <></>; //this prevents recursion
+      }
+    },
+  };
+  domToReact(node.children as DOMNode[], options);
+
+  return (
+    <Fragment>
+      <div className={classNames(className, 'relative')}>
+        <div className="absolute inset-0 h-full w-full !max-w-none bg-black/60"></div>
+        <div className="relative flex flex-col xl:flex-row !max-w-screen-3xl py-32">
+          <div className="w-full xl:w-7/12 flex justify-center">
+            <div id={swiperId} className="swiper max-w-[950px] xl:max-w-none">
+              <div className="swiper-wrapper items-start flex mb-20">
+                {slides}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Fragment>
+  );
 
   return (
     <Fragment>

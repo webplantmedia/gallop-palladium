@@ -20,16 +20,9 @@ import {
   DOMNode,
   Element,
 } from 'html-react-parser';
-import {
-  hasExactClass,
-  castToHTMLAttributeProps,
-  printObject,
-} from '@utils/tools';
-import { HTMLAttributeProps } from '@lib/types';
 
 export const CoreGroupHero1 = ({ node, className, props }) => {
   const data = getVarsFromHTML(node);
-
   let swiperId = 'swiper-' + useId(); // Generate a unique ID
   let circleTextId = 'circle-text-' + useId(); // Generate a unique ID
   swiperId = swiperId.replace(/:/g, '-'); // Sanitize the ID
@@ -45,6 +38,8 @@ export const CoreGroupHero1 = ({ node, className, props }) => {
   circleText += ' - ' + circleText + ' - ';
 
   const src = getVimeoIframeSrc(videoUrl);
+
+  return <>{domToReact(node.children as DOMNode[])}</>;
 
   return (
     <Fragment>

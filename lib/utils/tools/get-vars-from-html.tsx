@@ -5,8 +5,8 @@ import {
 } from '@utils/tools';
 import { HTMLAttributeProps } from '@lib/types';
 
-export function getVarsFromHTML(node: any): Record<string, any> {
-  let data: Record<string, any> = {};
+export function getVarsFromHTML(node: any) {
+  let data = {};
 
   const saveNestedObject = (path: string, value: any) => {
     let parts = path.split('.');
@@ -46,102 +46,79 @@ export function getVarsFromHTML(node: any): Record<string, any> {
     // delete block.next;
     // delete block.parent;
 
-    let value: any = '';
-
     const props: HTMLAttributeProps = castToHTMLAttributeProps(block.attribs);
+    const { className } = props;
+    let value: any = { ...block.attribs };
 
     // console.log('PROPS', block);
-    if (hasExactClass(props.className, 'wp-block-group')) {
+    if (hasExactClass(className, 'wp-block-group')) {
       name.push('wpBlockGroup');
-      value = block.attribs;
       saveNestedObject(name.join('.'), value);
-    } else if (hasExactClass(props.className, 'wp-block-embed')) {
+    } else if (hasExactClass(className, 'wp-block-embed')) {
       name.push('wpBlockEmbed');
-      value = block.attribs;
       saveNestedObject(name.join('.'), value);
-    } else if (hasExactClass(props.className, 'wp-block-cover')) {
+    } else if (hasExactClass(className, 'wp-block-cover')) {
       name.push('wpBlockCover');
-      value = block.attribs;
       saveNestedObject(name.join('.'), value);
-    } else if (hasExactClass(props.className, 'wp-block-buttons')) {
+    } else if (hasExactClass(className, 'wp-block-buttons')) {
       name.push('wpBlockButtons');
-      value = block.attribs;
       saveNestedObject(name.join('.'), value);
-    } else if (hasExactClass(props.className, 'wp-block-code')) {
+    } else if (hasExactClass(className, 'wp-block-code')) {
       name.push('wpBlockCode');
-      value = block.attribs;
       saveNestedObject(name.join('.'), value);
-    } else if (hasExactClass(props.className, 'wp-block-button')) {
+    } else if (hasExactClass(className, 'wp-block-button')) {
       name.push('wpBlockButton');
-      value = block.attribs;
       saveNestedObject(name.join('.'), value);
     } else if (block.name == 'h1') {
       name.push('h1');
-      value = block.attribs;
       saveNestedObject(name.join('.'), value);
     } else if (block.name == 'h2') {
       name.push('h2');
-      value = block.attribs;
       saveNestedObject(name.join('.'), value);
     } else if (block.name == 'h3') {
       name.push('h3');
-      value = block.attribs;
       saveNestedObject(name.join('.'), value);
     } else if (block.name == 'h4') {
       name.push('h4');
-      value = block.attribs;
       saveNestedObject(name.join('.'), value);
     } else if (block.name == 'h5') {
       name.push('h5');
-      value = block.attribs;
       saveNestedObject(name.join('.'), value);
     } else if (block.name == 'h6') {
       name.push('h6');
-      value = block.attribs;
       saveNestedObject(name.join('.'), value);
     } else if (block.name == 'video') {
       name.push('video');
-      value = block.attribs;
       saveNestedObject(name.join('.'), value);
     } else if (block.name == 'img') {
       name.push('img');
-      value = block.attribs;
       saveNestedObject(name.join('.'), value);
     } else if (block.name == 'iframe') {
       name.push('iframe');
-      value = block.attribs;
       saveNestedObject(name.join('.'), value);
     } else if (block.name == 'a') {
       name.push('a');
-      value = block.attribs;
       saveNestedObject(name.join('.'), value);
     } else if (block.name == 'p' && block.children?.length) {
       name.push('p');
-      value = block.attribs;
       saveNestedObject(name.join('.'), value);
     } else if (block.name == 'em' && block.children?.length) {
       name.push('em');
-      value = block.attribs;
       saveNestedObject(name.join('.'), value);
     } else if (block.name == 'strong' && block.children?.length) {
       name.push('strong');
-      value = block.attribs;
       saveNestedObject(name.join('.'), value);
     } else if (block.name == 'table' && block.children?.length) {
       name.push('table');
-      value = block.attribs;
       saveNestedObject(name.join('.'), value);
     } else if (block.name == 'tbody' && block.children?.length) {
       name.push('tbody');
-      value = block.attribs;
       saveNestedObject(name.join('.'), value);
     } else if (block.name == 'tr' && block.children?.length) {
       name.push('tr');
-      value = block.attribs;
       saveNestedObject(name.join('.'), value);
     } else if (block.name == 'td' && block.children?.length) {
       name.push('td');
-      value = block.attribs;
       saveNestedObject(name.join('.'), value);
     } else if (block.type === 'text' && block.data) {
       name.push('text');
@@ -164,6 +141,5 @@ export function getVarsFromHTML(node: any): Record<string, any> {
     });
   }
 
-  // printObject(data);
   return data;
 }
