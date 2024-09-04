@@ -34,11 +34,15 @@ import {
 } from '@headlessui/react';
 import { ChevronRightIcon } from '@heroicons/react/20/solid';
 import React from 'react';
+import { getVarsFromHTML } from '@utils/tools';
 
-export const getGallopAccordionGroup = (node: Element) => {
+export const getGallopAccordionHeader = (node: Element) => {
+  const data = getVarsFromHTML(node);
+  console.log(data);
+  const iconText = data?.wpBlockCode?.text ? data.wpBlockCode.text : 'no-icon';
   let icon = <></>;
-  let heading = '';
-  let paragraph = '';
+  let heading = data?.h4 ? data.h4 : 'Heading';
+  let paragraph = data?.p?.text ? data.p?.text : 'Paragraph';
   let link = '';
   const options: HTMLReactParserOptions = {
     replace(domNode) {
@@ -103,9 +107,9 @@ export const getGallopAccordionGroup = (node: Element) => {
             }
           }
         } else if (hasExactClass(className, 'wp-block-heading')) {
-          heading = getDomNodeText(domNode);
+          heading = domToReact(domNode.children as DOMNode[]);
         } else if (domNode.name === 'p') {
-          paragraph = getDomNodeText(domNode);
+          paragraph = domToReact(domNode.children as DOMNode[]);
         } else if (domNode.name === 'a') {
           const { href } = props;
           link = href;
@@ -118,7 +122,7 @@ export const getGallopAccordionGroup = (node: Element) => {
   return { icon, heading, paragraph, link };
 };
 
-export const GallopAccordionItem = ({ node, props }) => {
+export const GallopAccordionContent = ({ node, props }) => {
   let icon = <></>;
   let heading = '';
   let paragraph = '';
@@ -134,7 +138,7 @@ export const GallopAccordionItem = ({ node, props }) => {
 
         if (hasExactClass(className, 'wp-block-group')) {
           ({ icon, heading, paragraph, link } =
-            getGallopAccordionGroup(domNode));
+            getGallopAccordionHeader(domNode));
           return (
             <div className="flex w-full items-start justify-between gap-4 text-left text-base-contrast text-sm mb-4">
               <div className="w-full flex flex-col">
@@ -181,9 +185,9 @@ export const GallopAccordion = ({ node, props }) => {
         let { className } = props;
 
         if (!heading && hasExactClass(className, 'wp-block-group')) {
-          ({ icon, heading, paragraph } = getGallopAccordionGroup(domNode));
+          ({ icon, heading, paragraph } = getGallopAccordionHeader(domNode));
         } else if (!content && hasExactClass(className, 'wp-block-group')) {
-          content = <GallopAccordionItem node={domNode} props={props} />;
+          content = <GallopAccordionContent node={domNode} props={props} />;
         }
 
         return <></>; //this prevents recursion

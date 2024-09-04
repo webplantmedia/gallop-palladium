@@ -38,15 +38,10 @@ export function getVarsFromHTML(node: any): Record<string, any> {
   };
 
   const recurseNode = (block: any, name: string[]) => {
-    // delete block.prev;
-    // delete block.next;
-    // delete block.parent;
-
     const props: HTMLAttributeProps = castToHTMLAttributeProps(block.attribs);
     const { className } = props;
     let value: any = { ...block.attribs };
 
-    // console.log('PROPS', block);
     if (hasExactClass(className, 'wp-block-group')) {
       name.push('wpBlockGroup');
       saveNestedObject(name.join('.'), value);
