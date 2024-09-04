@@ -1,12 +1,8 @@
-import {
-  hasExactClass,
-  castToHTMLAttributeProps,
-  printObject,
-} from '@utils/tools';
+import { hasExactClass, castToHTMLAttributeProps } from '@utils/tools';
 import { HTMLAttributeProps } from '@lib/types';
 
-export function getVarsFromHTML(node: any) {
-  let data = {};
+export function getVarsFromHTML(node: any): Record<string, any> {
+  let data: Record<string, any> = {};
 
   const saveNestedObject = (path: string, value: any) => {
     let parts = path.split('.');

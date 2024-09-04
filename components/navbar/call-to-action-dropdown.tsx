@@ -3,19 +3,7 @@
 import { Fragment } from 'react';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
 import classNames from 'classnames';
-import DevicePhoneMobileIcon from '@iconify/icons-heroicons/device-phone-mobile';
-import EnvelopeIcon from '@iconify/icons-heroicons/envelope';
-import ChatBubbleBottomCenterTextIcon from '@iconify/icons-heroicons/chat-bubble-bottom-center-text';
-import Iconify from '@components/iconify';
-import { replaceWordPressUrlRelative } from '@utils/tools';
-import Link from 'next/link';
-import {
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuItems,
-  Transition,
-} from '@headlessui/react';
+import { Menu, MenuButton, MenuItems, Transition } from '@headlessui/react';
 import { DataIconText } from '@components/blocks';
 
 export default function CallToActionDropdown({ dropdown }) {

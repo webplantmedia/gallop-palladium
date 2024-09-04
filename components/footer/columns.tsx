@@ -20,7 +20,7 @@ import parse, {
   DOMNode,
   Element,
 } from 'html-react-parser';
-import { DataIconText } from '@components/blocks';
+import { GallopIconText } from '@components/blocks';
 
 export default function FooterColumns({ post }) {
   const options: HTMLReactParserOptions = {
@@ -88,11 +88,10 @@ export default function FooterColumns({ post }) {
             </div>
           );
         } else if (hasExactClass(className, 'is-style-icon-text')) {
-          const data = getVarsFromHTML(domNode);
           return (
-            <DataIconText
+            <GallopIconText
+              node={domNode}
               className="text-white mb-3 hover:underline"
-              data={data}
             />
           );
         } else if (hasExactClass(className, 'wp-block-heading')) {

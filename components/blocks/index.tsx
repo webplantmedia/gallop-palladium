@@ -40,6 +40,7 @@ export { CoreGroupCard1 } from './core-group-card-1';
 export { CoreGroupHero1 } from './core-group-hero-1';
 export { ParseBlocks } from './parse-blocks';
 export { DataIconText } from './data-icon-text';
+export { GallopIconText } from './gallop-icon-text';
 export { GallopAccordion } from './gallop-accordion';
 export { GallopContactForm } from './gallop-contact-form';
 export { GallopSeeMore } from './gallop-see-more';

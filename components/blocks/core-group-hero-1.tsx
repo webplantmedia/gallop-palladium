@@ -14,18 +14,6 @@ import CurrentTime from '@widgets/current-time';
 import CurrentDate from '@widgets/current-date';
 import PlaySolidIcon from '@iconify/icons-heroicons/play-solid';
 import { VideoPopup } from '@widgets/video-popup';
-import {
-  HTMLReactParserOptions,
-  domToReact,
-  DOMNode,
-  Element,
-} from 'html-react-parser';
-import {
-  hasExactClass,
-  castToHTMLAttributeProps,
-  printObject,
-} from '@utils/tools';
-import { HTMLAttributeProps } from '@lib/types';
 
 export const CoreGroupHero1 = ({ node, className, props }) => {
   const data = getVarsFromHTML(node);
@@ -35,13 +23,13 @@ export const CoreGroupHero1 = ({ node, className, props }) => {
   swiperId = swiperId.replace(/:/g, '-'); // Sanitize the ID
   circleTextId = circleTextId.replace(/:/g, '-'); // Sanitize the ID
 
-  let slide = { ...data.wpBlockCover };
+  let slide = { ...data?.wpBlockCover };
   let circleText = slide.wpBlockButtons?.wpBlockButton?.a?.text;
   let videoUrl = slide.wpBlockButtons?.wpBlockButton?.a?.href;
   let video = slide.video;
   let slideItems = slide.wpBlockGroup;
-  let brand = { ...data.wpBlockGroup?.wpBlockCover[0] };
-  let info = { ...data.wpBlockGroup?.wpBlockCover[1] };
+  let times = { ...data.wpBlockGroup?.wpBlockCover?.[0] };
+  let info = { ...data.wpBlockGroup?.wpBlockCover?.[1] };
   circleText += ' - ' + circleText + ' - ';
 
   const src = getVimeoIframeSrc(videoUrl);
@@ -171,15 +159,15 @@ export const CoreGroupHero1 = ({ node, className, props }) => {
           <div className="pt-14 pb-7 px-8 bg-primary-main text-primary-contrast w-full xl:w-4/12 mb-0 xl:-mb-20 -mt-20 relative z-20 rounded-t-md rounded-b-md xl:rounded-m-none overflow-hidden">
             <div className="-z-10 bg-primary-main/90 absolute inset-0"></div>
             <h2 className="mb-7 leading-tight text-2xl md:text-3xl w-full text-center text-primary-contrast">
-              {brand.h2.text}
+              {times?.h2?.text}
             </h2>
             <div className="min-w-full divide-y divide-white/10">
-              {brand.table?.tbody?.tr &&
-                brand.table.tbody.tr.map((item: any, index: number) => {
+              {times.table?.tbody?.tr &&
+                times.table.tbody.tr.map((item: any, index: number) => {
                   const dayId = permalink(item.td[0].text);
                   return (
                     <div
-                      key={`brand-item-${index}`}
+                      key={`times-item-${index}`}
                       className="w-full flex flex-wrap justify-between whitespace-nowrap px-0 py-4 text-base text-white align-top"
                     >
                       {item.td[2]?.text && (
