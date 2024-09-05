@@ -45,24 +45,27 @@ export function getVarsFromHTML(node: any): Record<string, any> {
     }
   };
 
-  function extractTextFromJSX(jsx: ReactNode): string {
-    let textContent = '';
+  function getTextFromJSX(jsx: ReactNode): string {
+    // If it's a string, return it
+    if (typeof jsx === 'string') {
+      return jsx;
+    }
 
-    // Function to recursively extract text from jsx
-    const traverse = (node: ReactNode): void => {
-      if (typeof node === 'string') {
-        textContent += node;
-      } else if (React.isValidElement(node)) {
-        const element = node as ReactElement; // Cast node to ReactElement to access props
-        React.Children.forEach(element.props.children, (child) =>
-          traverse(child)
-        );
-      }
-    };
+    // If it's a React element, process its children recursively
+    if (React.isValidElement(jsx)) {
+      const element = jsx as ReactElement;
+      return React.Children.toArray(element.props.children)
+        .map(getTextFromJSX) // Recursively get text from children
+        .join(''); // Join the text content
+    }
 
-    traverse(jsx);
+    // If it's an object (like nested JSX), process it recursively
+    if (Array.isArray(jsx)) {
+      return jsx.map(getTextFromJSX).join(''); // Handle arrays of children
+    }
 
-    return textContent;
+    // Return an empty string for other non-text elements
+    return '';
   }
 
   const saveJSX = (path: Array<string>, domNode: any) => {
@@ -70,8 +73,8 @@ export function getVarsFromHTML(node: any): Record<string, any> {
     path.push('jsx');
     saveNestedObject(path, jsx);
     path.pop();
-    const txt: string = extractTextFromJSX(jsx);
-    path.push('text');
+    path.push('txt');
+    const txt = getTextFromJSX(jsx);
     saveNestedObject(path, txt);
     path.pop();
   };
@@ -108,6 +111,8 @@ export function getVarsFromHTML(node: any): Record<string, any> {
               'span',
               'em',
               'strong',
+              'pre',
+              'code',
             ].includes(domNode.name) &&
             domNode.children
           ) {
@@ -121,29 +126,12 @@ export function getVarsFromHTML(node: any): Record<string, any> {
       domToReact(domNode.children as DOMNode[], {
         replace: (child) => handleNode(child, index + 1, path),
       });
-    }
-    /*else if (domNode.type === 'text') {
-      let parentPathName: string | undefined = '';
-      let parentPath = [...path];
-      parentPathName = parentPath.pop();
-      parentPathName = parentPath.pop();
-
+    } /*else if (domNode.type === 'text') {
       path.push('text');
       const value = domNode.data;
       saveNestedObject(path, value);
+		}*/
 
-      if (parentPathName) {
-        if (
-          ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'a', 'td'].includes(
-            parentPathName
-          )
-        ) {
-          parentPath.push(parentPathName);
-          parentPath.push('text');
-          saveNestedObject(parentPath, value);
-        }
-			}
-    }*/
     return <></>;
   }
 
