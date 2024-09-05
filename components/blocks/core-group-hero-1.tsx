@@ -22,21 +22,23 @@ import { VideoPopup } from '@widgets/video-popup';
 
 export const CoreGroupHero1 = ({ node, className, props }) => {
   const data = getVarsFromHTML(node);
-  console.log(data.div[0].div.div[0]);
 
   let swiperId = 'swiper-' + useId(); // Generate a unique ID
   let circleTextId = 'circle-text-' + useId(); // Generate a unique ID
   swiperId = swiperId.replace(/:/g, '-'); // Sanitize the ID
   circleTextId = circleTextId.replace(/:/g, '-'); // Sanitize the ID
 
-  let slide = { ...data?.wpBlockCover };
-  let circleText = slide.wpBlockButtons?.wpBlockButton?.a?.text;
-  let videoUrl = slide.wpBlockButtons?.wpBlockButton?.a?.href;
-  let video = slide.video;
-  let slideItems = slide.wpBlockGroup;
-  let times = { ...data.wpBlockGroup?.wpBlockCover?.[0] };
-  let info = { ...data.wpBlockGroup?.wpBlockCover?.[1] };
+  let circleText = data?.div?.[0]?.div?.div?.[1]?.div?.a?.text;
+  let videoUrl = data?.div?.[0]?.div?.div?.[1]?.div?.a?.href;
+  let video = data?.div?.[0]?.video;
+  let slideItems = data?.div?.[0]?.div?.div[0].div;
+  let times = data?.div?.[1]?.div?.[0]?.div;
+  let tr = data?.div?.[1]?.div?.[0]?.div?.figure?.table?.tbody?.tr;
+  let info = data?.div?.[1]?.div?.[1]?.div?.div;
+  let infoImg = data?.div?.[1]?.div?.[1].img;
   circleText += ' - ' + circleText + ' - ';
+
+  console.log(infoImg);
 
   const src = getVimeoIframeSrc(videoUrl);
 
@@ -70,31 +72,31 @@ export const CoreGroupHero1 = ({ node, className, props }) => {
                         className="swiper-slide"
                       >
                         <div className="flex flex-col gap-10">
-                          {slide?.h4?.text && (
+                          {slide?.h4?.jsx && (
                             <strong className="mb-0 font-accent !leading-tight text-2xl text-white tracking-[0.3em] uppercase font-normal flex flex-row gap-[0.5em] items-center">
-                              {slide.h4.text}
+                              {slide.h4.jsx}
                               <Iconify
                                 icon={ArrowLongRightIcon}
                                 className="flex-shrink-0 h-auto w-10"
                               />
                             </strong>
                           )}
-                          {slide?.h1?.text && (
+                          {slide?.h1?.strong?.jsx && (
                             <h1 className="mb-0 !leading-tight text-5xl md:text-6xl lg:text-6xl 3xl:text-7xl text-white font-bold">
-                              {slide.h1.text}
-                              {slide.h1?.em?.text && (
+                              {slide.h1.strong.jsx}
+                              {slide.h1?.em?.jsx && (
                                 <span className="text-stroke text-stroke-white block">
-                                  {slide.h1.em.text}
+                                  {slide.h1.em.jsx}
                                 </span>
                               )}
                             </h1>
                           )}
-                          {slide?.h2?.text && (
+                          {slide?.h2?.strong?.jsx && (
                             <h2 className="mb-0 !leading-tight text-5xl md:text-6xl lg:text-6xl 3xl:text-7xl text-white font-bold">
-                              {slide.h2.text}
-                              {slide.h2?.em?.text && (
+                              {slide.h2.strong.jsx}
+                              {slide.h2?.em?.jsx && (
                                 <span className="text-stroke text-stroke-white block">
-                                  {slide.h2.em.text}
+                                  {slide.h2.em.jsx}
                                 </span>
                               )}
                             </h2>
@@ -113,7 +115,7 @@ export const CoreGroupHero1 = ({ node, className, props }) => {
             </div>
           </div>
           <div className="w-full xl:w-5/12 flex items-start justify-center pt-32">
-            {data.wpBlockCover?.wpBlockButtons?.wpBlockButton?.a?.text && (
+            {videoUrl && (
               <VideoPopup
                 className="relative p-2 bg-white/10 hover:bg-white/20 rounded-full border-2 border-white transition-colors duration-300 ease-in-out"
                 src={src}
@@ -159,7 +161,7 @@ export const CoreGroupHero1 = ({ node, className, props }) => {
       <div className="!max-w-screen-4xl mx-auto relative z-[1] bg-secondary-main !px-0">
         <div
           className="absolute -z-[1] top-0 right-0 bottom-20 bg-contain bg-no-repeat bg-right-top opacity-[.03] w-2/3 xl:w-full"
-          style={info.img?.src && { backgroundImage: `url('${info.img.src}')` }}
+          style={infoImg?.src && { backgroundImage: `url('${infoImg.src}')` }}
         ></div>
         <div className="flex flex-col xl:flex-row !max-w-screen-3xl px-4 sm:px-8 mx-auto gap-4 sm:gap-10 xl:gap-0">
           <div className="pt-14 pb-7 px-8 bg-primary-main text-primary-contrast w-full xl:w-4/12 mb-0 xl:-mb-20 -mt-20 relative z-20 rounded-t-md rounded-b-md xl:rounded-m-none overflow-hidden">
@@ -168,8 +170,8 @@ export const CoreGroupHero1 = ({ node, className, props }) => {
               {times?.h2?.text}
             </h2>
             <div className="min-w-full divide-y divide-white/10">
-              {times.table?.tbody?.tr &&
-                times.table.tbody.tr.map((item: any, index: number) => {
+              {tr &&
+                tr.map((item: any, index: number) => {
                   const dayId = permalink(item.td[0].text);
                   return (
                     <div
@@ -199,8 +201,8 @@ export const CoreGroupHero1 = ({ node, className, props }) => {
           </div>
           <div className="w-full xl:w-8/12 flex flex-col xl:flex-row gap-4 sm:gap-10 xl:gap-0 mb-4 sm:mb-10 xl:mb-0">
             {info &&
-              info.wpBlockGroup?.length &&
-              info.wpBlockGroup.map((item: any, index: number) => {
+              info.length &&
+              info.map((item: any, index: number) => {
                 return (
                   <a
                     href={item.p?.a?.href}
@@ -212,7 +214,7 @@ export const CoreGroupHero1 = ({ node, className, props }) => {
                       backgroundColor: `rgba(255,255,255,0.0${index + 1})`,
                     }}
                   >
-                    {item.wpBlockCode?.text === 'icon-phone' && (
+                    {item?.pre?.code?.text === 'icon-phone' && (
                       <div className="w-20 h-20 flex items-center justify-center bg-primary-main rounded-full">
                         <Iconify
                           icon={PhoneIcon}
@@ -220,7 +222,7 @@ export const CoreGroupHero1 = ({ node, className, props }) => {
                         />
                       </div>
                     )}
-                    {item.wpBlockCode?.text === 'icon-email' && (
+                    {item?.pre?.code?.text === 'icon-email' && (
                       <div className="w-20 h-20 flex items-center justify-center bg-primary-main rounded-full">
                         <Iconify
                           icon={EnvelopeIcon}
@@ -228,7 +230,7 @@ export const CoreGroupHero1 = ({ node, className, props }) => {
                         />
                       </div>
                     )}
-                    {item.wpBlockCode?.text === 'icon-public' && (
+                    {item?.pre?.code?.text === 'icon-public' && (
                       <div className="w-20 h-20 flex items-center justify-center bg-primary-main rounded-full">
                         <Iconify
                           icon={BuildingOfficeIcon}

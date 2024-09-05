@@ -73,9 +73,9 @@ export function getVarsFromHTML(node: any): Record<string, any> {
     path.push('jsx');
     saveNestedObject(path, jsx);
     path.pop();
-    path.push('txt');
-    const txt = getTextFromJSX(jsx);
-    saveNestedObject(path, txt);
+    path.push('text');
+    const text = getTextFromJSX(jsx);
+    saveNestedObject(path, text);
     path.pop();
   };
 
@@ -114,7 +114,7 @@ export function getVarsFromHTML(node: any): Record<string, any> {
               'pre',
               'code',
             ].includes(domNode.name) &&
-            domNode.children
+            domNode.children.length
           ) {
             saveJSX(path, domNode);
           }

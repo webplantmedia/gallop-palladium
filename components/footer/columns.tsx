@@ -148,7 +148,7 @@ export default function FooterColumns({ post }) {
           );
         } else if (domNode.name === 'pre') {
           const data = getVarsFromHTML(domNode);
-          const code = data?.text ? data.text : 'no-code';
+          const code = data?.code?.text ? data.code.text : 'no-code';
           if (code === 'login') {
             return <LoginDialog />;
           }
