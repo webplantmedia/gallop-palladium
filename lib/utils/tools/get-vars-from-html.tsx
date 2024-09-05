@@ -1,5 +1,3 @@
-import { hasExactClass, castToHTMLAttributeProps } from '@utils/tools';
-import { HTMLAttributeProps } from '@lib/types';
 import React, { ReactNode, ReactElement } from 'react';
 
 import {
