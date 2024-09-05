@@ -1,5 +1,6 @@
 import { hasExactClass, castToHTMLAttributeProps } from '@utils/tools';
 import { HTMLAttributeProps } from '@lib/types';
+import { domToReact, Element, HTMLReactParserOptions } from 'html-react-parser';
 
 export function getVarsFromHTML(node: any): Record<string, any> {
   let data: Record<string, any> = {};
@@ -37,100 +38,99 @@ export function getVarsFromHTML(node: any): Record<string, any> {
     }
   };
 
-  const recurseNode = (block: any, name: string[]) => {
-    const props: HTMLAttributeProps = castToHTMLAttributeProps(block.attribs);
-    const { className } = props;
-    let value: any = { ...block.attribs };
+  // let name: Array<string> = [];
 
-    if (hasExactClass(className, 'wp-block-group')) {
-      name.push('wpBlockGroup');
-      saveNestedObject(name.join('.'), value);
-    } else if (hasExactClass(className, 'wp-block-embed')) {
-      name.push('wpBlockEmbed');
-      saveNestedObject(name.join('.'), value);
-    } else if (hasExactClass(className, 'wp-block-cover')) {
-      name.push('wpBlockCover');
-      saveNestedObject(name.join('.'), value);
-    } else if (hasExactClass(className, 'wp-block-buttons')) {
-      name.push('wpBlockButtons');
-      saveNestedObject(name.join('.'), value);
-    } else if (hasExactClass(className, 'wp-block-code')) {
-      name.push('wpBlockCode');
-      saveNestedObject(name.join('.'), value);
-    } else if (hasExactClass(className, 'wp-block-button')) {
-      name.push('wpBlockButton');
-      saveNestedObject(name.join('.'), value);
-    } else if (block.name == 'h1') {
-      name.push('h1');
-      saveNestedObject(name.join('.'), value);
-    } else if (block.name == 'h2') {
-      name.push('h2');
-      saveNestedObject(name.join('.'), value);
-    } else if (block.name == 'h3') {
-      name.push('h3');
-      saveNestedObject(name.join('.'), value);
-    } else if (block.name == 'h4') {
-      name.push('h4');
-      saveNestedObject(name.join('.'), value);
-    } else if (block.name == 'h5') {
-      name.push('h5');
-      saveNestedObject(name.join('.'), value);
-    } else if (block.name == 'h6') {
-      name.push('h6');
-      saveNestedObject(name.join('.'), value);
-    } else if (block.name == 'video') {
-      name.push('video');
-      saveNestedObject(name.join('.'), value);
-    } else if (block.name == 'img') {
-      name.push('img');
-      saveNestedObject(name.join('.'), value);
-    } else if (block.name == 'iframe') {
-      name.push('iframe');
-      saveNestedObject(name.join('.'), value);
-    } else if (block.name == 'a') {
-      name.push('a');
-      saveNestedObject(name.join('.'), value);
-    } else if (block.name == 'p' && block.children?.length) {
-      name.push('p');
-      saveNestedObject(name.join('.'), value);
-    } else if (block.name == 'em' && block.children?.length) {
-      name.push('em');
-      saveNestedObject(name.join('.'), value);
-    } else if (block.name == 'strong' && block.children?.length) {
-      name.push('strong');
-      saveNestedObject(name.join('.'), value);
-    } else if (block.name == 'table' && block.children?.length) {
-      name.push('table');
-      saveNestedObject(name.join('.'), value);
-    } else if (block.name == 'tbody' && block.children?.length) {
-      name.push('tbody');
-      saveNestedObject(name.join('.'), value);
-    } else if (block.name == 'tr' && block.children?.length) {
-      name.push('tr');
-      saveNestedObject(name.join('.'), value);
-    } else if (block.name == 'td' && block.children?.length) {
-      name.push('td');
-      saveNestedObject(name.join('.'), value);
-    } else if (block.type === 'text' && block.data) {
-      name.push('text');
-      value = block.data;
-      saveNestedObject(name.join('.'), value);
+  function handleNode(domNode: any, name: Array<string>) {
+    if (domNode instanceof Element && domNode.attribs) {
+      const props: HTMLAttributeProps = castToHTMLAttributeProps(
+        domNode.attribs
+      );
+      let { className } = props;
+      let value: any = { ...domNode.attribs };
+
+      if (hasExactClass(className, 'wp-block-group')) {
+        name.push('wpBlockGroup');
+        saveNestedObject(name.join('.'), value);
+      } else if (hasExactClass(className, 'wp-block-embed')) {
+        name.push('wpBlockEmbed');
+        saveNestedObject(name.join('.'), value);
+      } else if (hasExactClass(className, 'wp-block-cover')) {
+        name.push('wpBlockCover');
+        saveNestedObject(name.join('.'), value);
+      } else if (hasExactClass(className, 'wp-block-buttons')) {
+        name.push('wpBlockButtons');
+        saveNestedObject(name.join('.'), value);
+      } else if (hasExactClass(className, 'wp-block-code')) {
+        name.push('wpBlockCode');
+        saveNestedObject(name.join('.'), value);
+      } else if (hasExactClass(className, 'wp-block-button')) {
+        name.push('wpBlockButton');
+        saveNestedObject(name.join('.'), value);
+      } else if (domNode.name == 'h1') {
+        name.push('h1');
+        saveNestedObject(name.join('.'), value);
+      } else if (domNode.name == 'h2') {
+        name.push('h2');
+        saveNestedObject(name.join('.'), value);
+      } else if (domNode.name == 'h3') {
+        name.push('h3');
+        saveNestedObject(name.join('.'), value);
+      } else if (domNode.name == 'h4') {
+        name.push('h4');
+        saveNestedObject(name.join('.'), value);
+      } else if (domNode.name == 'h5') {
+        name.push('h5');
+        saveNestedObject(name.join('.'), value);
+      } else if (domNode.name == 'h6') {
+        name.push('h6');
+        saveNestedObject(name.join('.'), value);
+      } else if (domNode.name == 'video') {
+        name.push('video');
+        saveNestedObject(name.join('.'), value);
+      } else if (domNode.name == 'img') {
+        name.push('img');
+        saveNestedObject(name.join('.'), value);
+      } else if (domNode.name == 'iframe') {
+        name.push('iframe');
+        saveNestedObject(name.join('.'), value);
+      } else if (domNode.name == 'a') {
+        name.push('a');
+        saveNestedObject(name.join('.'), value);
+      } else if (domNode.name == 'p' && domNode.children?.length) {
+        name.push('p');
+        saveNestedObject(name.join('.'), value);
+      } else if (domNode.name == 'em' && domNode.children?.length) {
+        name.push('em');
+        saveNestedObject(name.join('.'), value);
+      } else if (domNode.name == 'strong' && domNode.children?.length) {
+        name.push('strong');
+        saveNestedObject(name.join('.'), value);
+      } else if (domNode.name == 'table' && domNode.children?.length) {
+        name.push('table');
+        saveNestedObject(name.join('.'), value);
+      } else if (domNode.name == 'tbody' && domNode.children?.length) {
+        name.push('tbody');
+        saveNestedObject(name.join('.'), value);
+      } else if (domNode.name == 'tr' && domNode.children?.length) {
+        name.push('tr');
+        saveNestedObject(name.join('.'), value);
+      } else if (domNode.name == 'td' && domNode.children?.length) {
+        name.push('td');
+        saveNestedObject(name.join('.'), value);
+      } else if (String(domNode.type) === 'text' && 'data' in domNode) {
+        name.push('text');
+        value = domNode.data;
+        saveNestedObject(name.join('.'), value);
+      }
     }
+  }
 
-    if (block.children) {
-      block.children.map((el: any) => {
-        recurseNode(el, [...name]);
-      });
-    }
-
-    return;
+  const options: HTMLReactParserOptions = {
+    replace: (domNode) => handleNode(domNode, []),
   };
 
-  if (node.children) {
-    node.children.map((block: any) => {
-      recurseNode(block, []);
-    });
-  }
+  // Parse the node using html-react-parser
+  domToReact([node], options);
 
   return data;
 }

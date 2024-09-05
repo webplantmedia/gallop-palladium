@@ -5,7 +5,12 @@ import EnvelopeIcon from '@iconify/icons-heroicons/envelope';
 import ArrowInsertIcon from '@iconify/icons-material-symbols/arrow-insert';
 import BuildingOfficeIcon from '@iconify/icons-fluent/building-people-20-filled';
 import classNames from 'classnames';
-import { permalink, getVimeoIframeSrc, getVarsFromHTML } from '@utils/tools';
+import {
+  permalink,
+  getVimeoIframeSrc,
+  getVarsFromHTML,
+  printObject,
+} from '@utils/tools';
 import SwiperInit from '@components/scripts/swiper-init';
 import CircleAnimation from '@components/scripts/circle-animation';
 import { useId } from 'react';
@@ -17,6 +22,7 @@ import { VideoPopup } from '@widgets/video-popup';
 
 export const CoreGroupHero1 = ({ node, className, props }) => {
   const data = getVarsFromHTML(node);
+  console.log(data);
 
   let swiperId = 'swiper-' + useId(); // Generate a unique ID
   let circleTextId = 'circle-text-' + useId(); // Generate a unique ID

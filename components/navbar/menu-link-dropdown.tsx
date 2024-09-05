@@ -15,7 +15,7 @@ import { replaceWordPressUrlRelative } from '@utils/tools';
 
 export default function MenuLinkDropdown({ data, isScrolling }) {
   const dropdownText = data.p?.text ? data.p.text : 'Dropdown';
-  const dropdownItems = data.wpBlockGroup?.wpBlockGroup
+  const dropdownItems = Array.isArray(data?.wpBlockGroup?.wpBlockGroup)
     ? data.wpBlockGroup.wpBlockGroup
     : [];
 
