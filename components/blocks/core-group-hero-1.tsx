@@ -38,8 +38,6 @@ export const CoreGroupHero1 = ({ node, className, props }) => {
   let infoImg = data?.div?.[1]?.div?.[1].img;
   circleText += ' - ' + circleText + ' - ';
 
-  console.log(infoImg);
-
   const src = getVimeoIframeSrc(videoUrl);
 
   return (
