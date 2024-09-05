@@ -37,11 +37,12 @@ import React from 'react';
 import { getVarsFromHTML } from '@utils/tools';
 
 export const getGallopAccordionHeader = (node: Element) => {
-  const data = getVarsFromHTML(node);
-  const iconText = data?.wpBlockCode?.text ? data.wpBlockCode.text : 'no-icon';
+  // const data = getVarsFromHTML(node);
+  // console.log(data);
+  // const iconText = data?.wpBlockCode?.text ? data.wpBlockCode.text : 'no-icon';
   let icon = <></>;
-  let heading = data?.h4 ? data.h4 : 'Heading';
-  let paragraph = data?.p?.text ? data.p?.text : 'Paragraph';
+  let heading = <></>;
+  let paragraph = <></>;
   let link = '';
   const options: HTMLReactParserOptions = {
     replace(domNode) {

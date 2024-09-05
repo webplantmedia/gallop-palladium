@@ -3,12 +3,12 @@ import { HTMLAttributeProps } from '@lib/types';
 import {
   domToReact,
   Element,
-  // HTMLReactParserOptions,
+  HTMLReactParserOptions,
   DOMNode,
 } from 'html-react-parser';
-// import { printObject } from '@utils/tools';
+import { printObject } from '@utils/tools';
 
-export function getVarsFromHTML(node: any): Record<string, any> {
+export function getVarsFromHTML2(node: any): Record<string, any> {
   let data: Record<string, any> = {};
 
   const saveNestedObject = (path: string, value: any) => {
