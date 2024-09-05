@@ -9,7 +9,6 @@ import parse, {
 } from 'html-react-parser';
 import { hasExactClass, castToHTMLAttributeProps } from '@utils/tools';
 import { HTMLAttributeProps } from '@lib/types';
-import { getVarsFromHTML } from '@utils/tools';
 
 export default function ProfileMenuSidebarHeader({ post }) {
   if (!post) {

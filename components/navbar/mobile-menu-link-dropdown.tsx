@@ -10,6 +10,7 @@ import Link from 'next/link';
 import { replaceWordPressUrlRelative } from '@utils/tools';
 
 const SubMenu = ({ items, onClick }) => {
+  console.log(items);
   return items.map((item: any, index: number) => {
     const href = item?.p?.a?.href
       ? replaceWordPressUrlRelative(item.p.a.href)
@@ -58,10 +59,8 @@ const SubMenu = ({ items, onClick }) => {
   });
 };
 export default function MobileMenuLinkDropdown({ data, closeModal }) {
-  const dropdownText = data.p?.text ? data.p.text : 'Dropdown';
-  const dropdownItems = data.wpBlockGroup?.wpBlockGroup
-    ? data.wpBlockGroup.wpBlockGroup
-    : [];
+  const dropdownText = data?.p?.text ? data.p.text : 'Dropdown';
+  const dropdownItems = data?.div?.div ? data.div.div : [];
   const href = data?.a?.href ? replaceWordPressUrlRelative(data.a.href) : '#';
 
   return (

@@ -34,12 +34,8 @@ import {
 } from '@headlessui/react';
 import { ChevronRightIcon } from '@heroicons/react/20/solid';
 import React from 'react';
-import { getVarsFromHTML } from '@utils/tools';
 
 export const getGallopAccordionHeader = (node: Element) => {
-  // const data = getVarsFromHTML(node);
-  // console.log(data);
-  // const iconText = data?.wpBlockCode?.text ? data.wpBlockCode.text : 'no-icon';
   let icon = <></>;
   let heading = <></>;
   let paragraph = <></>;

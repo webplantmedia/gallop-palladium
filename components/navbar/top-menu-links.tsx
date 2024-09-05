@@ -18,7 +18,7 @@ export default function TopMenuLinks({ menu }) {
 
         if (hasExactClass(className, 'wp-block-group')) {
           const data = getVarsFromHTML(domNode);
-          const icon = data?.wpBlockCode?.text ? data.wpBlockCode.text : null;
+          const icon = data?.pre?.code?.text ? data.pre.code.text : null;
           const label = data?.p?.[0]?.a?.text
             ? data.p[0].a.text
             : data?.p?.a?.text

@@ -7,8 +7,8 @@ import Link from 'next/link';
 import classNames from 'classnames';
 
 export const DataIconText = ({ className, data }) => {
-  const icon = data?.wpBlockCode?.text ? data.wpBlockCode.text : null;
-  const label = data?.p?.a?.text ? data.p.a.text : 'Label';
+  const icon = data?.pre?.code?.text ? data.pre.code.text : null;
+  const label = data?.p?.a?.jsx ? data.p.a.jsx : 'Label';
   const href = data?.p?.a?.href ? data.p.a.href : '#';
 
   let menuIcon = <></>;

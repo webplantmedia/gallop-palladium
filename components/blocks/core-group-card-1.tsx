@@ -9,7 +9,7 @@ import { CoreParagraph, CoreHeading } from '@components/blocks';
 
 export const CoreGroupCard1 = ({ node, className, props }) => {
   const data = getVarsFromHTML(node);
-  console.log('DATA', data);
+  // console.log('DATA', data);
 
   let img: any = {};
   let href = '#';
