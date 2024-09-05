@@ -10,11 +10,12 @@ export default function CallToActionDropdown({ dropdown }) {
   // const menuLabel = dropdown?.p?.text ? dropdown.p.text : 'Menu Label';
 
   let obj: Array<any> = [];
-  if (dropdown?.wpBlockGroup) {
-    if (Array.isArray(dropdown?.wpBlockGroup)) {
-      obj = [...dropdown.wpBlockGroup];
+  console.log(dropdown);
+  if (dropdown?.div) {
+    if (Array.isArray(dropdown?.div)) {
+      obj = [...dropdown.div];
     } else {
-      obj = [dropdown.wpBlockGroup];
+      obj = [dropdown.div];
     }
   }
 

@@ -10,7 +10,6 @@ import Link from 'next/link';
 import { replaceWordPressUrlRelative } from '@utils/tools';
 
 const SubMenu = ({ items, onClick }) => {
-  console.log(items);
   return items.map((item: any, index: number) => {
     const href = item?.p?.a?.href
       ? replaceWordPressUrlRelative(item.p.a.href)
@@ -18,8 +17,8 @@ const SubMenu = ({ items, onClick }) => {
     const text = item?.p?.a?.text ? item.p.a.text : 'Menu Item';
 
     var img: any = {};
-    if (item?.img) {
-      img = { ...item.img };
+    if (item?.figure?.img) {
+      img = { ...item.figure.img };
     }
     const description = '';
 
