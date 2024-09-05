@@ -22,8 +22,7 @@ import { VideoPopup } from '@widgets/video-popup';
 
 export const CoreGroupHero1 = ({ node, className, props }) => {
   const data = getVarsFromHTML(node);
-  // console.log(data);
-  printObject(data);
+  console.log(data.div[0].div.div);
 
   let swiperId = 'swiper-' + useId(); // Generate a unique ID
   let circleTextId = 'circle-text-' + useId(); // Generate a unique ID
@@ -100,9 +99,9 @@ export const CoreGroupHero1 = ({ node, className, props }) => {
                               )}
                             </h2>
                           )}
-                          {slide?.p?.text && (
+                          {slide?.p?.jsx && (
                             <p className="mb-0 text-xl font-bold !leading-normal text-white max-w-[700px]">
-                              {slide?.p?.text}
+                              {slide?.p?.jsx}
                             </p>
                           )}
                         </div>

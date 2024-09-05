@@ -11,8 +11,7 @@ import {
 export function getVarsFromHTML(node: any): Record<string, any> {
   let data: Record<string, any> = {};
 
-  const saveNestedObject = (path: string, value: any) => {
-    let parts = path.split('.');
+  const saveNestedObject = (parts: Array<string>, value: any) => {
     let current = data;
 
     for (let i = 0; i < parts.length; i++) {
@@ -21,10 +20,14 @@ export function getVarsFromHTML(node: any): Record<string, any> {
       if (current[part]) {
         if (i === parts.length - 1) {
           // If the final part already exists, handle it as an array
-          if (!Array.isArray(current[part])) {
-            current[part] = [current[part]]; // Convert to array if it's not already one
+          if (part === 'text') {
+            current[part] += value; // Append the new value to the array
+          } else {
+            if (!Array.isArray(current[part])) {
+              current[part] = [current[part]]; // Convert to array if it's not already one
+            }
+            current[part].push(value); // Append the new value to the array
           }
-          current[part].push(value); // Append the new value to the array
         } else {
           // At each level, check if the current part is an array
           if (Array.isArray(current[part])) {
@@ -44,95 +47,44 @@ export function getVarsFromHTML(node: any): Record<string, any> {
     }
   };
 
-  function handleNode(domNode: any, index: number, name: Array<string>) {
-    name = name.slice(0, index);
+  const saveJSX = (domNode: any, path: Array<string>) => {
+    const jsx = domToReact(domNode.children as DOMNode[]);
+    path.push('jsx');
+    saveNestedObject(path, jsx);
+    path.pop();
+  };
+
+  function handleNode(domNode: any, index: number, path: Array<string>) {
+    path = path.slice(0, index);
 
     if (domNode instanceof Element && domNode.attribs) {
-      const props: HTMLAttributeProps = castToHTMLAttributeProps(
-        domNode.attribs
-      );
-      let { className } = props;
+      // const props: HTMLAttributeProps = castToHTMLAttributeProps(
+      // domNode.attribs
+      // );
+      // let { className } = props;
       let value: any = { ...domNode.attribs };
+      value.className = value.class;
+      delete value.class;
 
-      if (hasExactClass(className, 'wp-block-group')) {
-        name.push('wpBlockGroup');
-        saveNestedObject(name.join('.'), value);
-      } else if (hasExactClass(className, 'wp-block-embed')) {
-        name.push('wpBlockEmbed');
-        saveNestedObject(name.join('.'), value);
-      } else if (hasExactClass(className, 'wp-block-cover')) {
-        name.push('wpBlockCover');
-        saveNestedObject(name.join('.'), value);
-      } else if (hasExactClass(className, 'wp-block-buttons')) {
-        name.push('wpBlockButtons');
-        saveNestedObject(name.join('.'), value);
-      } else if (hasExactClass(className, 'wp-block-code')) {
-        name.push('wpBlockCode');
-        saveNestedObject(name.join('.'), value);
-      } else if (hasExactClass(className, 'wp-block-button')) {
-        name.push('wpBlockButton');
-        saveNestedObject(name.join('.'), value);
-      } else if (domNode.name == 'h1') {
-        name.push('h1');
-        saveNestedObject(name.join('.'), value);
-      } else if (domNode.name == 'h2') {
-        name.push('h2');
-        saveNestedObject(name.join('.'), value);
-      } else if (domNode.name == 'h3') {
-        name.push('h3');
-        saveNestedObject(name.join('.'), value);
-      } else if (domNode.name == 'h4') {
-        name.push('h4');
-        saveNestedObject(name.join('.'), value);
-      } else if (domNode.name == 'h5') {
-        name.push('h5');
-        saveNestedObject(name.join('.'), value);
-      } else if (domNode.name == 'h6') {
-        name.push('h6');
-        saveNestedObject(name.join('.'), value);
-      } else if (domNode.name == 'video') {
-        name.push('video');
-        saveNestedObject(name.join('.'), value);
-      } else if (domNode.name == 'img') {
-        name.push('img');
-        saveNestedObject(name.join('.'), value);
-      } else if (domNode.name == 'iframe') {
-        name.push('iframe');
-        saveNestedObject(name.join('.'), value);
-      } else if (domNode.name == 'a') {
-        name.push('a');
-        saveNestedObject(name.join('.'), value);
-      } else if (domNode.name == 'p' && domNode.children?.length) {
-        name.push('p');
-        saveNestedObject(name.join('.'), value);
-      } else if (domNode.name == 'em' && domNode.children?.length) {
-        name.push('em');
-        saveNestedObject(name.join('.'), value);
-      } else if (domNode.name == 'strong' && domNode.children?.length) {
-        name.push('strong');
-        saveNestedObject(name.join('.'), value);
-      } else if (domNode.name == 'table' && domNode.children?.length) {
-        name.push('table');
-        saveNestedObject(name.join('.'), value);
-      } else if (domNode.name == 'tbody' && domNode.children?.length) {
-        name.push('tbody');
-        saveNestedObject(name.join('.'), value);
-      } else if (domNode.name == 'tr' && domNode.children?.length) {
-        name.push('tr');
-        saveNestedObject(name.join('.'), value);
-      } else if (domNode.name == 'td' && domNode.children?.length) {
-        name.push('td');
-        saveNestedObject(name.join('.'), value);
+      if (domNode.tagName) {
+        path.push(domNode.tagName);
+        saveNestedObject(path, value);
+        if (domNode.name) {
+          if (['h1,h2,h3,h4,h5,h6,p,a,td'].includes(domNode.name)) {
+            saveJSX(domNode, path);
+          }
+        }
       }
+
       // console.log(index, className, name);
       // printObject(data);
       domToReact(domNode.children as DOMNode[], {
-        replace: (child) => handleNode(child, index + 1, name),
+        replace: (child) => handleNode(child, index + 1, path),
       });
     } else if (domNode.type === 'text') {
-      name.push('text');
+      path.push('text');
       const value = domNode.data;
-      saveNestedObject(name.join('.'), value);
+      saveNestedObject(path, value);
     }
     return <></>;
   }
