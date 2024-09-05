@@ -10,7 +10,6 @@ export default function CallToActionDropdown({ dropdown }) {
   // const menuLabel = dropdown?.p?.text ? dropdown.p.text : 'Menu Label';
 
   let obj: Array<any> = [];
-  console.log(dropdown);
   if (dropdown?.div) {
     if (Array.isArray(dropdown?.div)) {
       obj = [...dropdown.div];
