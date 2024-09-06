@@ -35,11 +35,11 @@ export interface HTMLAttributeProps {
   className: string;
   src: string;
   style: CSSProperties;
-  srcSet: string;
+  srcSet: string; // Ensure srcSet is either a string or undefined
   sizes: string;
   alt: string;
   title: string;
   width: string;
   height: string;
-  [key: string]: string | boolean | CSSProperties;
+  [key: string]: any; // Keep other dynamic props flexible
 }

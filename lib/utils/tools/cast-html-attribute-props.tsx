@@ -1,12 +1,16 @@
 import { attributesToProps } from 'html-react-parser';
 import { HTMLAttributeProps } from '@lib/types';
+import { CSSProperties } from 'react';
 
 export function castToHTMLAttributeProps(props: any): HTMLAttributeProps {
   props = attributesToProps(props);
   return {
     src: typeof props.src === 'string' ? props.src : '',
     id: typeof props.id === 'string' ? props.id : '',
-    style: typeof props.style === 'object' ? props.style : undefined,
+    style:
+      typeof props.style === 'object' && !Array.isArray(props.style)
+        ? (props.style as CSSProperties)
+        : {}, // Ensure it's a valid CSSProperties object
     srcSet: typeof props.srcSet === 'string' ? props.srcSet : '',
     sizes: typeof props.sizes === 'string' ? props.sizes : '',
     alt: typeof props.alt === 'string' ? props.alt : '',
