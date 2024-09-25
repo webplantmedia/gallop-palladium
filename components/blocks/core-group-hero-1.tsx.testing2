@@ -10,6 +10,10 @@ import {
   getVimeoIframeSrc,
   getVarsFromHTML,
   getObjectFromHTML,
+  printObject,
+  hasExactClass,
+  castToHTMLAttributeProps,
+  getDomNodeText,
 } from '@utils/tools';
 import SwiperInit from '@components/scripts/swiper-init';
 import CircleAnimation from '@components/scripts/circle-animation';
@@ -19,34 +23,96 @@ import CurrentTime from '@widgets/current-time';
 import CurrentDate from '@widgets/current-date';
 import PlaySolidIcon from '@iconify/icons-heroicons/play-solid';
 import { VideoPopup } from '@widgets/video-popup';
+import { HTMLAttributeProps } from '@lib/types';
+import {
+  HTMLReactParserOptions,
+  domToReact,
+  DOMNode,
+  Element,
+} from 'html-react-parser';
 
 export const CoreGroupHero1 = ({ node, className, props }) => {
-  const data = getObjectFromHTML(node);
+  const data = getVarsFromHTML(node);
+  const data2 = getObjectFromHTML(node);
+  console.log(data2);
+
   let swiperId = 'swiper-' + useId(); // Generate a unique ID
   let circleTextId = 'circle-text-' + useId(); // Generate a unique ID
   swiperId = swiperId.replace(/:/g, '-'); // Sanitize the ID
   circleTextId = circleTextId.replace(/:/g, '-'); // Sanitize the ID
 
-  let circleText =
-    data?.wpBlockCover?.wpBlockCoverInnerContainer?.wpBlockButtons
-      ?.wpBlockButton?.wpBlockButtonLink?.text;
-  let videoUrl =
-    data?.wpBlockCover?.wpBlockCoverInnerContainer?.wpBlockButtons
-      ?.wpBlockButton?.wpBlockButtonLink?.href;
-  let video = data?.wpBlockCover?.wpBlockCoverVideoBackground;
-  let slideItems =
-    data?.wpBlockCover?.wpBlockCoverInnerContainer?.wpBlockGroup?.wpBlockGroup;
-  let times =
-    data?.wpBlockGroup?.wpBlockCover?.[0]?.wpBlockCoverInnerContainer?.h2;
-  let tr =
-    data?.wpBlockGroup?.wpBlockCover?.[0]?.wpBlockCoverInnerContainer
-      ?.wpBlockTable?.table?.tbody?.tr;
-  let info =
-    data?.wpBlockGroup?.wpBlockCover?.[1]?.wpBlockCoverInnerContainer
-      ?.wpBlockGroup;
-  let infoImg =
-    data?.wpBlockGroup?.wpBlockCover?.[1]?.wpBlockCoverImageBackground;
+  let video: any = {};
+  let td: Array<any> = [];
+  let tr: Array<any> = [];
+  let slideItems: Array<any> = [];
+  let slideItem: Array<any> = [];
 
+  // let header: React.ReactElement | null = null;
+  // let content: React.ReactElement | null = null;
+
+  const opSlides: HTMLReactParserOptions = {
+    replace(domNode) {
+      if (domNode instanceof Element && domNode.attribs) {
+        if (domNode.name === 'h1') {
+          if (td.length) {
+            tr.push({ td: td });
+            td = [];
+          }
+        } else if (domNode.name === 'td') {
+          td.push({ text: getDomNodeText(domNode) });
+        }
+
+        return <></>;
+      }
+    },
+  };
+
+  const opTable: HTMLReactParserOptions = {
+    replace(domNode) {
+      if (domNode instanceof Element && domNode.attribs) {
+        if (domNode.name === 'tr') {
+          if (td.length) {
+            tr.push({ td: td });
+            td = [];
+          }
+        } else if (domNode.name === 'td') {
+          td.push({ text: getDomNodeText(domNode) });
+        }
+      }
+    },
+  };
+
+  const op: HTMLReactParserOptions = {
+    replace(domNode) {
+      if (domNode instanceof Element && domNode.attribs) {
+        const props: HTMLAttributeProps = castToHTMLAttributeProps(
+          domNode.attribs
+        );
+        let { className: classes } = props;
+
+        if (hasExactClass(classes, 'wp-block-cover__video-background')) {
+          ({ src: video.src } = props);
+        } else if (hasExactClass(classes, 'wp-block-table')) {
+          domToReact(domNode.children as DOMNode[], opTable);
+          return <></>;
+        } else if (hasExactClass(classes, 'gallop-slide')) {
+          domToReact(domNode.children as DOMNode[], opSlides);
+          return <></>;
+        }
+      }
+    },
+  };
+
+  domToReact(node.children as DOMNode[], op);
+
+  let circleText = data?.div?.[0]?.div?.div?.[1]?.div?.a?.text;
+  let videoUrl = data?.div?.[0]?.div?.div?.[1]?.div?.a?.href;
+  // let video = data?.div?.[0]?.video;
+  // slideItems = data?.div?.[0]?.div?.div[0].div;
+  let times = data?.div?.[1]?.div?.[0]?.div;
+  // tr = data?.div?.[1]?.div?.[0]?.div?.figure?.table?.tbody?.tr;
+  let info = data?.div?.[1]?.div?.[1]?.div?.div;
+  let infoImg = data?.div?.[1]?.div?.[1].img;
   circleText += ' - ' + circleText + ' - ';
 
   const src = getVimeoIframeSrc(videoUrl);
@@ -176,7 +242,7 @@ export const CoreGroupHero1 = ({ node, className, props }) => {
           <div className="pt-14 pb-7 px-8 bg-primary-main text-primary-contrast w-full xl:w-4/12 mb-0 xl:-mb-20 -mt-20 relative z-20 rounded-t-md rounded-b-md xl:rounded-m-none overflow-hidden">
             <div className="-z-10 bg-primary-main/90 absolute inset-0"></div>
             <h2 className="mb-7 leading-tight text-2xl md:text-3xl w-full text-center text-primary-contrast">
-              {times?.text}
+              {times?.h2?.text}
             </h2>
             <div className="min-w-full divide-y divide-white/10">
               {tr &&
