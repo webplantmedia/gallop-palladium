@@ -5,12 +5,7 @@ import EnvelopeIcon from '@iconify/icons-heroicons/envelope';
 import ArrowInsertIcon from '@iconify/icons-material-symbols/arrow-insert';
 import BuildingOfficeIcon from '@iconify/icons-fluent/building-people-20-filled';
 import classNames from 'classnames';
-import {
-  permalink,
-  getVimeoIframeSrc,
-  getVarsFromHTML,
-  getObjectFromHTML,
-} from '@utils/tools';
+import { permalink, getVimeoIframeSrc, getVarsFromNode } from '@utils/tools';
 import SwiperInit from '@components/scripts/swiper-init';
 import CircleAnimation from '@components/scripts/circle-animation';
 import { useId } from 'react';
@@ -21,11 +16,12 @@ import PlaySolidIcon from '@iconify/icons-heroicons/play-solid';
 import { VideoPopup } from '@widgets/video-popup';
 
 export const CoreGroupHero1 = ({ node, className, props }) => {
-  const data = getObjectFromHTML(node);
+  const data = getVarsFromNode(node);
   let swiperId = 'swiper-' + useId(); // Generate a unique ID
   let circleTextId = 'circle-text-' + useId(); // Generate a unique ID
   swiperId = swiperId.replace(/:/g, '-'); // Sanitize the ID
   circleTextId = circleTextId.replace(/:/g, '-'); // Sanitize the ID
+  console.log(data);
 
   let circleText =
     data?.wpBlockCover?.wpBlockCoverInnerContainer?.wpBlockButtons
@@ -33,19 +29,17 @@ export const CoreGroupHero1 = ({ node, className, props }) => {
   let videoUrl =
     data?.wpBlockCover?.wpBlockCoverInnerContainer?.wpBlockButtons
       ?.wpBlockButton?.wpBlockButtonLink?.href;
-  let video = data?.wpBlockCover?.wpBlockCoverVideoBackground;
+  let videoSrc = data?.wpBlockCover?.wpBlockCoverVideoBackground?.src;
   let slideItems =
     data?.wpBlockCover?.wpBlockCoverInnerContainer?.wpBlockGroup?.wpBlockGroup;
   let times =
-    data?.wpBlockGroup?.wpBlockCover?.[0]?.wpBlockCoverInnerContainer?.h2;
+    data?.wpBlockGroup?.gallopOpeningTimes?.wpBlockCoverInnerContainer?.h2;
   let tr =
-    data?.wpBlockGroup?.wpBlockCover?.[0]?.wpBlockCoverInnerContainer
+    data?.wpBlockGroup?.gallopOpeningTimes?.wpBlockCoverInnerContainer
       ?.wpBlockTable?.table?.tbody?.tr;
   let info =
-    data?.wpBlockGroup?.wpBlockCover?.[1]?.wpBlockCoverInnerContainer
-      ?.wpBlockGroup;
-  let infoImg =
-    data?.wpBlockGroup?.wpBlockCover?.[1]?.wpBlockCoverImageBackground;
+    data?.wpBlockGroup?.gallopInfo?.wpBlockCoverInnerContainer?.wpBlockGroup;
+  let infoImg = data?.wpBlockGroup?.gallopInfo?.wpBlockCoverImageBackground;
 
   circleText += ' - ' + circleText + ' - ';
 
@@ -54,7 +48,7 @@ export const CoreGroupHero1 = ({ node, className, props }) => {
   return (
     <Fragment>
       <div className={classNames(className, 'relative')}>
-        {video?.src && (
+        {videoSrc && (
           <video
             className={classNames(
               'w-full object-cover object-center h-full absolute inset-0 !max-w-none !p-0'
@@ -63,7 +57,7 @@ export const CoreGroupHero1 = ({ node, className, props }) => {
             muted
             loop
             playsInline
-            src={video.src}
+            src={videoSrc}
             data-object-fit="cover"
           ></video>
         )}

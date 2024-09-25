@@ -12,11 +12,17 @@ function getImportantClassName(classList: string) {
   // Split the class list into an array
   const classes = classList.split(' ');
 
-  // Find the first class name that starts with "wp-" or "gallop-"
-  const targetClass = classes.find(
-    (className: string) =>
-      className.startsWith('wp-') || className.startsWith('gallop-')
+  // Prioritize finding a class name that starts with "gallop-"
+  let targetClass = classes.find((className: string) =>
+    className.startsWith('gallop-')
   );
+
+  // If no "gallop-" class found, look for a class name that starts with "wp-block-"
+  if (!targetClass) {
+    targetClass = classes.find((className: string) =>
+      className.startsWith('wp-block-')
+    );
+  }
 
   // If no class name found, return an empty string
   if (!targetClass) return '';
@@ -34,7 +40,7 @@ function getImportantClassName(classList: string) {
   return `${prefix}${formattedClass}`;
 }
 
-export function getObjectFromHTML(node: any): Record<string, any> {
+export function getVarsFromNode(node: any): Record<string, any> {
   let data: Record<string, any> = {};
 
   const saveNestedObject = (parts: Array<string>, value: any) => {

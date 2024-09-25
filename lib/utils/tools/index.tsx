@@ -44,7 +44,7 @@ export { blockFontImports } from './block-font-imports';
 export { getAddressSlug } from './get-address-slug';
 export { getHoursInserted } from './get-hours-inserted';
 export { getVarsFromHTML } from './get-vars-from-html';
-export { getObjectFromHTML } from './get-object-from-html';
+export { getVarsFromNode } from './get-vars-from-node';
 export { hasExactClass } from './has-exact-class';
 export { printObject } from './print-object';
 export { getVimeoIframeSrc } from './get-vimeo-iframe-src';

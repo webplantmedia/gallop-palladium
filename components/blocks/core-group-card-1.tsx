@@ -3,18 +3,18 @@ import ArrowInsertIcon from '@iconify/icons-material-symbols/arrow-insert';
 import PlayIcon from '@iconify/icons-heroicons/play';
 // import BuildingOfficeIcon from '@iconify/icons-heroicons/building-office';
 import classNames from 'classnames';
-import { getVimeoIframeSrc, getVarsFromHTML } from '@utils/tools';
+import { getVimeoIframeSrc, getVarsFromNode } from '@utils/tools';
 import { VideoPopup } from '@widgets/video-popup';
 import { CoreParagraph, CoreHeading } from '@components/blocks';
 
 export const CoreGroupCard1 = ({ node, className, props }) => {
-  const data = getVarsFromHTML(node);
+  const data = getVarsFromNode(node);
   // console.log('DATA', data);
 
   let img: any = {};
   let href = '#';
   let button = data?.div?.div?.a;
-  let figure = data?.figure;
+  let figure = data?.wpBlockImage;
   if (figure?.a?.img) {
     img = { ...figure.a.img };
     href = figure.a.href;

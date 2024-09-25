@@ -4,7 +4,7 @@ import Iconify from '@components/iconify';
 import { hasExactClass, castToHTMLAttributeProps } from '@utils/tools';
 import { HTMLAttributeProps } from '@lib/types';
 import parse, { HTMLReactParserOptions, Element } from 'html-react-parser';
-import { getVarsFromHTML } from '@utils/tools';
+import { getVarsFromNode } from '@utils/tools';
 import { replaceWordPressUrlRelative } from '@utils/tools';
 
 export default function TopMenuLinks({ menu }) {
@@ -17,7 +17,7 @@ export default function TopMenuLinks({ menu }) {
         let { className } = props;
 
         if (hasExactClass(className, 'wp-block-group')) {
-          const data = getVarsFromHTML(domNode);
+          const data = getVarsFromNode(domNode);
           const icon = data?.pre?.code?.text ? data.pre.code.text : null;
           const label = data?.p?.[0]?.a?.text
             ? data.p[0].a.text
@@ -67,6 +67,8 @@ export default function TopMenuLinks({ menu }) {
             </li>
           );
         }
+
+        return <></>;
       }
     },
   };
