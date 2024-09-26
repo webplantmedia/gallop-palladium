@@ -2,11 +2,13 @@ import classNames from 'classnames';
 import { domToReact, DOMNode } from 'html-react-parser';
 import { ChevronRightIcon } from '@heroicons/react/20/solid';
 import { Fragment } from 'react';
-import { replaceWordPressUrl } from '@utils/tools';
 import Link from 'next/link';
-import { replaceWordPressUrlRelative } from '@utils/tools';
 import { HTMLAttributeProps } from '@lib/types';
-import { castToHTMLAttributeProps } from '@utils/tools';
+import {
+  replaceWordPressUrl,
+  replaceWordPressUrlRelative,
+  castToHTMLAttributeProps,
+} from '@utils/tools';
 
 export const GallopCard = ({ node, className, props, options }) => {
   let { href } = props;

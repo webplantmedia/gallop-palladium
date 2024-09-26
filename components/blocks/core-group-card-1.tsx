@@ -13,13 +13,13 @@ export const CoreGroupCard1 = ({ node, className, props }) => {
 
   let img: any = {};
   let href = '#';
-  let button = data?.div?.div?.a;
-  let figure = data?.wpBlockImage;
-  if (figure?.a?.img) {
-    img = { ...figure.a.img };
-    href = figure.a.href;
+  let button = data?.wpBlockButtons?.wpBlockButton?.a;
+  let blockImage = data?.wpBlockImage;
+  if (blockImage?.a?.img) {
+    img = { ...blockImage.a.img };
+    href = blockImage.a.href;
   } else {
-    img = { ...figure.img };
+    img = { ...blockImage.img };
   }
 
   const src = getVimeoIframeSrc(href);
