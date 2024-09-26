@@ -6,15 +6,15 @@ import classNames from 'classnames';
 import { Menu, MenuButton, MenuItems, Transition } from '@headlessui/react';
 import { DataIconText } from '@components/blocks';
 
-export default function CallToActionDropdown({ dropdown }) {
-  // const menuLabel = dropdown?.p?.text ? dropdown.p.text : 'Menu Label';
+export default function CallToActionDropdown({ data }) {
+  // const menuLabel = data?.p?.text ? data.p.text : 'Menu Label';
 
   let obj: Array<any> = [];
-  if (dropdown?.div) {
-    if (Array.isArray(dropdown?.div)) {
-      obj = [...dropdown.div];
+  if (data?.wpBlockGroup) {
+    if (Array.isArray(data?.wpBlockGroup)) {
+      obj = [...data.wpBlockGroup];
     } else {
-      obj = [dropdown.div];
+      obj = [data.wpBlockGroup];
     }
   }
 

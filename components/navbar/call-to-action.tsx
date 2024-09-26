@@ -3,7 +3,7 @@
 import { hasExactClass, castToHTMLAttributeProps } from '@utils/tools';
 import { HTMLAttributeProps } from '@lib/types';
 import parse, { HTMLReactParserOptions, Element } from 'html-react-parser';
-import { getVarsFromHTML } from '@utils/tools';
+import { getVarsFromNode } from '@utils/tools';
 import CallToActionDropdown from './call-to-action-dropdown';
 
 export default function CallToAction({ menu }) {
@@ -16,8 +16,8 @@ export default function CallToAction({ menu }) {
         let { className } = props;
 
         if (hasExactClass(className, 'wp-block-group')) {
-          const dropdown = getVarsFromHTML(domNode);
-          return <CallToActionDropdown dropdown={dropdown} />;
+          const data = getVarsFromNode(domNode);
+          return <CallToActionDropdown data={data} />;
         }
 
         return <></>;

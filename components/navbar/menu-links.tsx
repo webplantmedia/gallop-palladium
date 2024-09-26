@@ -3,7 +3,7 @@ import { HTMLAttributeProps } from '@lib/types';
 import Link from 'next/link';
 import classNames from 'classnames';
 import parse, { HTMLReactParserOptions, Element } from 'html-react-parser';
-import { getVarsFromHTML } from '@utils/tools';
+import { getVarsFromNode } from '@utils/tools';
 import { replaceWordPressUrlRelative } from '@utils/tools';
 import MenuLinkDropdown from './menu-link-dropdown';
 
@@ -17,7 +17,7 @@ export default function MenuLinks({ isScrolling, menu }) {
         let { className } = props;
 
         if (domNode.name === 'p') {
-          const data = getVarsFromHTML(domNode);
+          const data = getVarsFromNode(domNode);
           const href = data?.a?.href
             ? replaceWordPressUrlRelative(data.a.href)
             : '#';
@@ -33,7 +33,7 @@ export default function MenuLinks({ isScrolling, menu }) {
             </Link>
           );
         } else if (hasExactClass(className, 'wp-block-group')) {
-          const data = getVarsFromHTML(domNode);
+          const data = getVarsFromNode(domNode);
 
           return <MenuLinkDropdown data={data} isScrolling={isScrolling} />;
         }

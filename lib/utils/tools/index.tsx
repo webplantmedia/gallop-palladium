@@ -43,7 +43,6 @@ export { castToHTMLAttributeProps } from './cast-html-attribute-props';
 export { blockFontImports } from './block-font-imports';
 export { getAddressSlug } from './get-address-slug';
 export { getHoursInserted } from './get-hours-inserted';
-export { getVarsFromHTML } from './get-vars-from-html';
 export { getVarsFromNode } from './get-vars-from-node';
 export { hasExactClass } from './has-exact-class';
 export { printObject } from './print-object';

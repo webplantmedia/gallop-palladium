@@ -21,17 +21,17 @@ export const CoreGroupHero1 = ({ node, className, props }) => {
   let circleTextId = 'circle-text-' + useId(); // Generate a unique ID
   swiperId = swiperId.replace(/:/g, '-'); // Sanitize the ID
   circleTextId = circleTextId.replace(/:/g, '-'); // Sanitize the ID
-  console.log(data);
+  // console.log(data.wpBlockCover.wpBlockCoverInnerContainer);
 
   let circleText =
     data?.wpBlockCover?.wpBlockCoverInnerContainer?.wpBlockButtons
-      ?.wpBlockButton?.wpBlockButtonLink?.text;
+      ?.wpBlockButton?.a?.text;
   let videoUrl =
     data?.wpBlockCover?.wpBlockCoverInnerContainer?.wpBlockButtons
-      ?.wpBlockButton?.wpBlockButtonLink?.href;
+      ?.wpBlockButton?.a?.href;
   let videoSrc = data?.wpBlockCover?.wpBlockCoverVideoBackground?.src;
   let slideItems =
-    data?.wpBlockCover?.wpBlockCoverInnerContainer?.wpBlockGroup?.wpBlockGroup;
+    data?.wpBlockCover?.wpBlockCoverInnerContainer?.gallopSlides?.gallopSlide;
   let times =
     data?.wpBlockGroup?.gallopOpeningTimes?.wpBlockCoverInnerContainer?.h2;
   let tr =

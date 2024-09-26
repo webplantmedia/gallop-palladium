@@ -11,7 +11,7 @@ import {
   hasExactClass,
   castToHTMLAttributeProps,
   replaceWordPressUrlRelative,
-  getVarsFromHTML,
+  getVarsFromNode,
 } from '@utils/tools';
 import { HTMLAttributeProps } from '@lib/types';
 import parse, {
@@ -54,7 +54,7 @@ export default function FooterColumns({ post }) {
             </div>
           );
         } else if (hasExactClass(className, 'wp-block-image')) {
-          const data = getVarsFromHTML(domNode);
+          const data = getVarsFromNode(domNode);
 
           var img: any = {};
           if (data?.img) {
@@ -147,7 +147,7 @@ export default function FooterColumns({ post }) {
             </ul>
           );
         } else if (domNode.name === 'pre') {
-          const data = getVarsFromHTML(domNode);
+          const data = getVarsFromNode(domNode);
           const code = data?.code?.text ? data.code.text : 'no-code';
           if (code === 'login') {
             return <LoginDialog />;

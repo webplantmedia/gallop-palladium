@@ -17,8 +17,8 @@ const SubMenu = ({ items, onClick }) => {
     const text = item?.p?.a?.text ? item.p.a.text : 'Menu Item';
 
     var img: any = {};
-    if (item?.figure?.img) {
-      img = { ...item.figure.img };
+    if (item?.wpBlockImage?.img) {
+      img = { ...item.wpBlockImage.img };
     }
     const description = '';
 
@@ -59,7 +59,9 @@ const SubMenu = ({ items, onClick }) => {
 };
 export default function MobileMenuLinkDropdown({ data, closeModal }) {
   const dropdownText = data?.p?.text ? data.p.text : 'Dropdown';
-  const dropdownItems = data?.div?.div ? data.div.div : [];
+  const dropdownItems = data?.wpBlockGroup?.wpBlockGroup
+    ? data.wpBlockGroup.wpBlockGroup
+    : [];
   const href = data?.a?.href ? replaceWordPressUrlRelative(data.a.href) : '#';
 
   return (

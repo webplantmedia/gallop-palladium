@@ -8,7 +8,7 @@ import { hasExactClass, castToHTMLAttributeProps } from '@utils/tools';
 import { HTMLAttributeProps } from '@lib/types';
 import Link from 'next/link';
 import classNames from 'classnames';
-import { getVarsFromHTML } from '@utils/tools';
+import { getVarsFromNode } from '@utils/tools';
 import { replaceWordPressUrlRelative } from '@utils/tools';
 import MobileMenuLinkDropdown from './mobile-menu-link-dropdown';
 import { GallopIconText } from '@components/blocks';
@@ -23,7 +23,7 @@ export default function MobileMenuLinks({ menu, closeModal }) {
         let { className } = props;
 
         if (domNode.name === 'p') {
-          const data = getVarsFromHTML(domNode);
+          const data = getVarsFromNode(domNode);
           const href = data?.a?.href
             ? replaceWordPressUrlRelative(data.a.href)
             : '#';
@@ -52,7 +52,7 @@ export default function MobileMenuLinks({ menu, closeModal }) {
             />
           );
         } else if (hasExactClass(className, 'wp-block-group')) {
-          const data = getVarsFromHTML(domNode);
+          const data = getVarsFromNode(domNode);
 
           return <MobileMenuLinkDropdown data={data} closeModal={closeModal} />;
         } else if (domNode.name === 'hr') {

@@ -131,7 +131,9 @@ export function getVarsFromNode(node: any): Record<string, any> {
       if (domNode?.tagName) {
         let key = domNode.tagName;
         if (
-          ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'pre'].includes(domNode.tagName)
+          ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'pre', 'a'].includes(
+            domNode.tagName
+          )
         ) {
           key = domNode.tagName;
         } else if (value.className) {

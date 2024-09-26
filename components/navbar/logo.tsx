@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import { hasExactClass, castToHTMLAttributeProps } from '@utils/tools';
 import { HTMLAttributeProps } from '@lib/types';
 import parse, { HTMLReactParserOptions, Element } from 'html-react-parser';
-import { getVarsFromHTML } from '@utils/tools';
+import { getVarsFromNode } from '@utils/tools';
 
 export default function Logo({ post, className }) {
   const options: HTMLReactParserOptions = {
@@ -14,7 +14,7 @@ export default function Logo({ post, className }) {
         let { className: classes } = props;
 
         if (hasExactClass(classes, 'wp-block-image')) {
-          const data = getVarsFromHTML(domNode);
+          const data = getVarsFromNode(domNode);
 
           var img: any = {};
           if (data?.img) {

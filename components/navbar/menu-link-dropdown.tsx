@@ -15,7 +15,9 @@ import { replaceWordPressUrlRelative } from '@utils/tools';
 
 export default function MenuLinkDropdown({ data, isScrolling }) {
   const dropdownText = data.p?.jsx ? data.p.jsx : 'Dropdown';
-  const dropdownItems = Array.isArray(data?.div?.div) ? data.div.div : [];
+  const dropdownItems = Array.isArray(data?.wpBlockGroup?.wpBlockGroup)
+    ? data.wpBlockGroup.wpBlockGroup
+    : [];
 
   return (
     <Popover className="flex items-center isolate">
@@ -73,8 +75,8 @@ export default function MenuLinkDropdown({ data, isScrolling }) {
                         : 'Menu Item';
 
                       var img: any = {};
-                      if (item?.figure?.img) {
-                        img = { ...item.figure.img };
+                      if (item?.wpBlockImage?.img) {
+                        img = { ...item.wpBlockImage.img };
                       }
                       const description = '';
 
