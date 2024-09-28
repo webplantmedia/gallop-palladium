@@ -6,7 +6,7 @@ import ArrowInsertIcon from '@iconify/icons-material-symbols/arrow-insert';
 import BuildingOfficeIcon from '@iconify/icons-fluent/building-people-20-filled';
 import classNames from 'classnames';
 import { permalink, getVimeoIframeSrc, getVarsFromNode } from '@utils/tools';
-import SwiperInit from '@components/scripts/swiper-init';
+import SwiperSliderInit from '@components/scripts/swiper-slider-init';
 import CircleAnimation from '@components/scripts/circle-animation';
 import { useId } from 'react';
 import { Fragment } from 'react';
@@ -159,7 +159,7 @@ export const CoreGroupHero1 = ({ node, className, props }) => {
             )}
           </div>
         </div>
-        <SwiperInit swiperId={swiperId} />
+        <SwiperSliderInit swiperId={swiperId} />
       </div>
       <div className="!max-w-screen-4xl mx-auto relative z-[1] bg-secondary-main !px-0">
         <div

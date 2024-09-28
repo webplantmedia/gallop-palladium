@@ -44,3 +44,5 @@ export { GallopIconText } from './gallop-icon-text';
 export { GallopAccordion } from './gallop-accordion';
 export { GallopContactForm } from './gallop-contact-form';
 export { GallopSeeMore } from './gallop-see-more';
+export { GallopSwiper } from './gallop-swiper';
+export { GallopSidebar } from './gallop-sidebar';

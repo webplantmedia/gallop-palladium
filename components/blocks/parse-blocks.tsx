@@ -30,6 +30,8 @@ import {
   // GallopNeighborhood,
   // GallopCard,
   // GallopContactForm,
+  GallopSidebar,
+  GallopSwiper,
 } from '@components/blocks';
 import { HTMLAttributeProps } from '@lib/types';
 import { castToHTMLAttributeProps } from '@utils/tools';
@@ -196,6 +198,22 @@ export const ParseBlocks = ({ content, meta }) => {
               tag={domNode.name}
               className={className}
               node={domNode.children}
+              options={options}
+            />
+          );
+        } else if (className?.includes('wp-block-gallop-swiper')) {
+          return (
+            <GallopSwiper
+              className={className}
+              node={domNode}
+              options={options}
+            />
+          );
+        } else if (className?.includes('wp-block-gallop-sidebar')) {
+          return (
+            <GallopSidebar
+              className={className}
+              node={domNode}
               options={options}
             />
           );

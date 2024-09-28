@@ -2,12 +2,12 @@
 
 import { useEffect, useRef } from 'react';
 import Swiper from 'swiper';
-import { Pagination, Autoplay, EffectFade } from 'swiper/modules';
+import { Autoplay, Navigation, Keyboard } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/autoplay';
-import 'swiper/css/effect-fade';
+// import 'swiper/css/navigation';
 
-const SwiperInit = ({ swiperId }) => {
+const SwiperCarouselInit = ({ swiperId }) => {
   const initializedRef = useRef(false);
   const swiperInstanceRef = useRef<Swiper | null>(null);
   const observerRef = useRef<IntersectionObserver | null>(null);
@@ -21,24 +21,41 @@ const SwiperInit = ({ swiperId }) => {
 
     // Initialize Swiper
     swiperInstanceRef.current = new Swiper(swiperContainer, {
-      modules: [Pagination, Autoplay, EffectFade],
-      spaceBetween: 30,
-      loop: true,
-      effect: 'fade',
-      fadeEffect: { crossFade: true },
+      modules: [Autoplay, Navigation, Keyboard],
+      spaceBetween: 20,
+      autoHeight: true,
+      loop: false,
       autoplay: {
-        delay: 4500,
-        pauseOnMouseEnter: false,
-        disableOnInteraction: false,
+        delay: 3000,
+        pauseOnMouseEnter: true,
+        disableOnInteraction: true,
       },
-      pagination: {
-        el: `#${swiperId} .swiper-pagination`,
-        clickable: true,
-        renderBullet: (index: number, className: string) => {
-          return `<span class="${className}"><span>0${index + 1}</span></span>`;
+      navigation: {
+        prevEl: '.swiper-button-prev',
+        nextEl: '.swiper-button-next',
+      },
+      keyboard: {
+        enabled: true, // Enable keyboard navigation
+        onlyInViewport: true, // Only activate when Swiper is in the viewport
+      },
+      breakpoints: {
+        // When window width is >= 1024px (Desktop)
+        1024: {
+          slidesPerView: 3,
+        },
+        // When window width is >= 768px (Tablet)
+        768: {
+          slidesPerView: 2,
+        },
+        // When window width is <= 767px (Mobile)
+        0: {
+          slidesPerView: 1,
         },
       },
+      // freeMode: true,
     });
+
+    swiperContainer.classList.remove('!hidden');
 
     // Mark as initialized
     initializedRef.current = true;
@@ -73,4 +90,4 @@ const SwiperInit = ({ swiperId }) => {
   return null;
 };
 
-export default SwiperInit;
+export default SwiperCarouselInit;
