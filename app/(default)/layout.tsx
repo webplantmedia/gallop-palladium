@@ -64,8 +64,6 @@ export default async function RootLayout({ children }: RootLayoutProps) {
     site,
   } = await fetchSiteElements();
 
-  console.log(site);
-
   return (
     <html lang="en">
       <body className="font-body bg-base-body text-base" style={bodyStyle}>

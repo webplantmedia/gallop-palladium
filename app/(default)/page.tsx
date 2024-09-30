@@ -30,7 +30,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (response.ok) {
     const { seo, site } = await response.json();
     site.permalink = replaceWordPressUrl(site.permalink).replace('/home/', '/');
-    return PageSeo(seo, site.permalink);
+    return PageSeo(seo, site.permalink, site);
   }
   return {};
 }

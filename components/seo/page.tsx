@@ -1,11 +1,10 @@
 import { replaceWordPressUrl } from '@utils/tools';
-import { _siteTitle, _siteDescription, _siteAuthor } from '@data/_general';
 import Script from 'next/script';
 // import GetBreadcrumbList from './breadcrumbs';
 import type { Metadata } from 'next';
 import { SEO } from '@lib/types';
 
-export function PageSeo(seo: SEO, link: string = '') {
+export function PageSeo(seo: SEO, link: string = '', site: any) {
   var data: Metadata = {};
 
   if (seo?.title) data.title = seo.title;
@@ -39,7 +38,7 @@ export function PageSeo(seo: SEO, link: string = '') {
       data.openGraph.modifiedTime = seo.opengraphModifiedTime;
 
     if (seo?.opengraphSiteName) data.openGraph.siteName = seo.opengraphSiteName;
-    data.openGraph.authors = [_siteAuthor];
+    data.openGraph.authors = [site.siteAuthor];
 
     if (seo?.opengraphSiteName) data.openGraph.siteName = seo.opengraphSiteName;
 
@@ -64,7 +63,7 @@ export function PageSeo(seo: SEO, link: string = '') {
   return data;
 }
 
-export function PageStructuredData({ seo }) {
+export function PageStructuredData({ seo, site }) {
   // let breadcrumbList = GetBreadcrumbList(seo, meta);
 
   let schema = {
@@ -101,8 +100,8 @@ export function PageStructuredData({ seo }) {
         '@type': 'WebSite',
         '@id': '/#website',
         url: process.env.NEXT_PUBLIC_LIVE_URL,
-        name: _siteTitle,
-        description: _siteDescription,
+        name: site.siteTitle,
+        description: site.siteDescription,
         inLanguage: 'en-US',
       },
     ],
