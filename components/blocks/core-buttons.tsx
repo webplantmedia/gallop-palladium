@@ -1,6 +1,8 @@
 import classNames from 'classnames';
+import { domToReact, DOMNode } from 'html-react-parser';
+import { BlockProps } from '@lib/types';
 
-export const CoreButtons = ({ children, tag, className }) => {
+export const CoreButtons = ({ node, options, className }: BlockProps) => {
   // ['justify-center']: justifyContent === 'center',
   // ['justify-end']: justifyContent === 'right',
   // ['flex-nowrap flex-col md:flex-row']: flexWrap === 'nowrap',
@@ -24,7 +26,7 @@ export const CoreButtons = ({ children, tag, className }) => {
         wrap
       )}
     >
-      {children}
+      {domToReact(node.children as DOMNode[], options)}
     </div>
   );
 };

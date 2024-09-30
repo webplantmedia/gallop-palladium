@@ -1,6 +1,5 @@
 'use client';
 
-import { _siteStickyLogo } from '@data/_general';
 import {
   Dialog,
   DialogTitle,
@@ -11,12 +10,12 @@ import {
 import ProfileMenuSidebar from './profile-menu-sidebar';
 import { Fragment, useState } from 'react';
 import { XMarkIcon } from '@heroicons/react/24/outline';
-import { _mobileNav } from '../../_data/_menu';
 import { state } from '@state';
 import ProfileMenuSidebarHeader from './profile-menu-sidebar-header';
+import StickyLogo from './sticky-logo';
 // import Image from 'next/image';
 
-export default function ProfileMenu({ sidebar, sidebarHeader }) {
+export default function ProfileMenu({ sidebar, sidebarHeader, stickyLogo }) {
   let [isOpen, setIsOpen] = useState(false);
 
   const closeModal = () => {
@@ -39,12 +38,9 @@ export default function ProfileMenu({ sidebar, sidebarHeader }) {
         >
           <span className="sr-only">About Douglas Newby</span>
           <span className="relative inline-block">
-            <img
+            <StickyLogo
+              post={stickyLogo}
               className="h-[48px] w-[48px] rounded-md object-cover object-center box-border border border-white dmh:w-[44px] dmh:h-[44px] dmh:rounded-full"
-              src={_siteStickyLogo.src}
-              alt={_siteStickyLogo.alt}
-              width={_siteStickyLogo.width}
-              height={_siteStickyLogo.height}
             />
             <span className="absolute -top-[3px] block -right-[3px] h-3 w-3 rounded-full bg-green-400 ring-1 ring-white dmh:-top-px dmh:-right-px" />
           </span>

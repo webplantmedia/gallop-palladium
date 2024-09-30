@@ -5,14 +5,14 @@ import Grid from '@components/grid';
 export const revalidate = 3600;
 
 type Props = {
-  params: { slug: string };
+  params: { slug: Array<string> };
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {};
 }
 
-export default async function Page({ params }) {
+export default async function Page({ params }: Props) {
   const uri = `/${params.slug.join('/')}/`;
   const headers = {
     'Content-Type': 'application/json',

@@ -12,7 +12,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {};
 }
 
-export default async function Page({ params }) {
+export default async function Page({ params }: Props) {
   const uri = `/contact/`;
   // const uri = `/${params.slug.join('/')}/`;
   const headers = {

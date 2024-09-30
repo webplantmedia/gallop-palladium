@@ -1,4 +1,7 @@
 import { CSSProperties } from 'react';
+import { DOMNode, Element, HTMLReactParserOptions } from 'html-react-parser';
+import { HTMLAttributeProps } from '@lib/types';
+import { ReactNode } from 'react';
 
 export interface SEOGraphImageDetails {
   height: number;
@@ -42,4 +45,13 @@ export interface HTMLAttributeProps {
   width: string;
   height: string;
   [key: string]: any; // Keep other dynamic props flexible
+}
+
+export interface BlockProps {
+  node?: Element;
+  className?: string;
+  children?: ReactNode;
+  tag?: string;
+  options?: HTMLReactParserOptions;
+  props?: HTMLAttributeProps;
 }

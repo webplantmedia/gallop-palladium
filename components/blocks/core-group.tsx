@@ -6,8 +6,9 @@ import {
 } from '@components/blocks';
 import { hasExactClass } from '@utils/tools';
 import { domToReact, DOMNode } from 'html-react-parser';
+import { BlockProps } from '@lib/types';
 
-export const CoreGroup = ({ className, props, options, node }) => {
+export const CoreGroup = ({ className, props, options, node }: BlockProps) => {
   const { id } = props;
 
   if (hasExactClass(className, 'wp-block-group-is-layout-grid')) {

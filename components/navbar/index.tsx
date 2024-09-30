@@ -20,8 +20,10 @@ export default function Navbar({
   topMenu,
   callToAction,
   logo,
+  stickyLogo,
   sidebar,
   sidebarHeader,
+  site,
 }) {
   const snap = useSnapshot(state);
   const isScrolling = snap.isScrolling;
@@ -109,6 +111,7 @@ export default function Navbar({
                   <ProfileMenu
                     sidebar={sidebar}
                     sidebarHeader={sidebarHeader}
+                    stickyLogo={stickyLogo}
                   />
                 </div>
               </div>

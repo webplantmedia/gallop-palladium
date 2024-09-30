@@ -1,5 +1,6 @@
 'use client';
 
+import ProfileMenuSidebarHeader from '../navbar/profile-menu-sidebar-header';
 import classNames from 'classnames';
 import { Fragment, useState } from 'react';
 import { XMarkIcon } from '@heroicons/react/24/outline';
@@ -13,7 +14,12 @@ import {
 
 // Fix "Loading..." state when closing the bar
 
-export default function DynamicSidebar({ children, className, header }) {
+export default function DynamicSidebar({
+  children,
+  className,
+  header,
+  sidebarHeader,
+}) {
   let [isOpen, setIsOpen] = useState(false);
 
   const closeModal = () => {
@@ -71,15 +77,8 @@ export default function DynamicSidebar({ children, className, header }) {
                   <div className="relative flex items-center justify-start flex-col h-full pt-6 pb-14">
                     <div className="px-4 md:px-8 w-full">
                       <div className="w-full flex items-start justify-between">
-                        <DialogTitle className="text-primary-main dmh:text-modern-primary-main">
-                          <img
-                            src="/dougnewby-carriage@390.png"
-                            className="block w-[110px] -ml-2"
-                            alt="Douglas Newby Origins"
-                            // quality={100}
-                            width={390}
-                            height={162}
-                          />
+                        <DialogTitle className="">
+                          <ProfileMenuSidebarHeader post={sidebarHeader} />
                         </DialogTitle>
                         <div className="ml-3 flex h-7 items-center">
                           <button

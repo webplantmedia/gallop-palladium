@@ -1,6 +1,8 @@
 import classNames from 'classnames';
+import { domToReact, DOMNode } from 'html-react-parser';
+import { BlockProps } from '@lib/types';
 
-export const CoreButton = ({ children, className = '' }) => {
+export const CoreButton = ({ node, options, className = '' }: BlockProps) => {
   className = className.replace(
     'wp-block-button__width-100',
     'w-full basis-full'
@@ -44,7 +46,7 @@ export const CoreButton = ({ children, className = '' }) => {
         'text-center rounded-md shadow-sm flex items-center justify-center'
       )}
     >
-      {children}
+      {domToReact(node.children as DOMNode[], options)}
     </div>
   );
 };

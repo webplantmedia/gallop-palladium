@@ -6,8 +6,9 @@ import classNames from 'classnames';
 import { getVimeoIframeSrc, getVarsFromNode } from '@utils/tools';
 import { VideoPopup } from '@widgets/video-popup';
 import { CoreParagraph, CoreHeading } from '@components/blocks';
+import { BlockProps } from '@lib/types';
 
-export const CoreGroupCard1 = ({ node, className, props }) => {
+export const CoreGroupCard1 = ({ node, className, props }: BlockProps) => {
   const data = getVarsFromNode(node);
   // console.log('DATA', data);
 

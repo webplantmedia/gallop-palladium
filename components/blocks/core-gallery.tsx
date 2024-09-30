@@ -1,8 +1,9 @@
 import classNames from 'classnames';
 import { domToReact, DOMNode } from 'html-react-parser';
 import { Fragment } from 'react';
+import { BlockProps } from '@lib/types';
 
-export const CoreGallery = ({ node, className, tag, options }) => {
+export const CoreGallery = ({ node, className, tag, options }: BlockProps) => {
   // if (hasClassName('collage-3', block)) {
   // return (
   // <Collage3
@@ -60,7 +61,7 @@ const getGridGalleryClass = (node: any) => {
   };
 };
 
-const GalleryTag = ({ node, className, tag, options }) => {
+const GalleryTag = ({ node, className, tag, options }: BlockProps) => {
   let match = className.match(/columns-(\d)/);
   let columns = 3;
   let figcaption: any = null;
@@ -69,7 +70,7 @@ const GalleryTag = ({ node, className, tag, options }) => {
   }
   let caption: any = [];
   let figure: any = [];
-  node.map((block: any, index: number) => {
+  node.children.map((block: any, index: number) => {
     if (block.name === 'figure') {
       figure.push(block);
     } else if (block.name === 'figcaption' && block.children) {

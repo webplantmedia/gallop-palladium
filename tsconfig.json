@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "ES2017",
+    "target": "ESNext",
     "lib": [
       "dom",
       "dom.iterable",
@@ -24,20 +24,46 @@
       }
     ],
     "strictNullChecks": true,
-		"paths": {
-			"@components/*": ["./components/*"],
-			"@widgets/*": ["./components/widgets/*"],
-      "@hooks": ["./lib/hooks/index"],
-      "@utils/*": ["./lib/utils/*"],
-      "@svg/*": ["./svg/*"],
-      "@api": ["./lib/api/index.tsx"],
-      "@api/*": ["./lib/api/*"],
-      "@state": ["./lib/state.tsx"],
-      "@styles/*": ["./styles/*"],
-      "@data/*": ["./_data/*"],
-      "@lib/*": ["./lib/*"],
-      "@app/*": ["./app/*"],
-      "@utils/tools": ["./lib/utils/tools/index.tsx"]
+    "paths": {
+      "@components/*": [
+        "./components/*"
+      ],
+      "@widgets/*": [
+        "./components/widgets/*"
+      ],
+      "@hooks": [
+        "./lib/hooks/index"
+      ],
+      "@utils/*": [
+        "./lib/utils/*"
+      ],
+      "@svg/*": [
+        "./svg/*"
+      ],
+      "@api": [
+        "./lib/api/index.tsx"
+      ],
+      "@api/*": [
+        "./lib/api/*"
+      ],
+      "@state": [
+        "./lib/state.tsx"
+      ],
+      "@styles/*": [
+        "./styles/*"
+      ],
+      "@data/*": [
+        "./_data/*"
+      ],
+      "@lib/*": [
+        "./lib/*"
+      ],
+      "@app/*": [
+        "./app/*"
+      ],
+      "@utils/tools": [
+        "./lib/utils/tools/index.tsx"
+      ]
     }
   },
   "include": [

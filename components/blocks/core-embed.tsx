@@ -4,8 +4,9 @@ import { Fragment } from 'react';
 import { HTMLAttributeProps } from '@lib/types';
 import { castToHTMLAttributeProps } from '@utils/tools';
 import VimeoHandler from '@components/vimeo-handler';
+import { BlockProps } from '@lib/types';
 
-export const CoreEmbed = ({ node, tag, className, options }) => {
+export const CoreEmbed = ({ node, tag, className, options }: BlockProps) => {
   className = className.replace(
     'wp-block-embed',
     'wp-block-embed [&_iframe]:w-full [&_iframe]:h-auto'
@@ -29,7 +30,7 @@ export const CoreEmbed = ({ node, tag, className, options }) => {
   return (
     <Fragment>
       <figure className={classNames(className, 'mb-7')}>
-        {node?.map((block: any, index: number) => {
+        {node?.children?.map((block: any, index: number) => {
           const props: HTMLAttributeProps = castToHTMLAttributeProps(
             block.attribs
           );

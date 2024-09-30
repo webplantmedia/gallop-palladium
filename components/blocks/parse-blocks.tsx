@@ -93,9 +93,9 @@ export const ParseBlocks = ({ content, meta }) => {
         } else if (domNode.name === 'ul') {
           return (
             <CoreList
-              tag={domNode.name}
               className={className}
-              node={domNode.children}
+              props={props}
+              node={domNode}
               options={options}
             />
           );
@@ -120,9 +120,11 @@ export const ParseBlocks = ({ content, meta }) => {
           );
         } else if (className?.includes('wp-block-buttons')) {
           return (
-            <CoreButtons tag={domNode.name} className={className}>
-              {domToReact(domNode.children as DOMNode[], options)}
-            </CoreButtons>
+            <CoreButtons
+              node={domNode}
+              options={options}
+              className={className}
+            />
           );
         } else if (className?.includes('wp-block-button__link')) {
           return (
@@ -142,9 +144,11 @@ export const ParseBlocks = ({ content, meta }) => {
           );
         } else if (className?.includes('wp-block-button')) {
           return (
-            <CoreButton className={className}>
-              {domToReact(domNode.children as DOMNode[], options)}
-            </CoreButton>
+            <CoreButton
+              node={domNode}
+              options={options}
+              className={className}
+            />
           );
         } else if (className?.includes('wp-block-quote')) {
           return (
@@ -161,7 +165,7 @@ export const ParseBlocks = ({ content, meta }) => {
             <CoreGallery
               tag={domNode.name}
               className={className}
-              node={domNode.children}
+              node={domNode}
               options={options}
             />
           );
@@ -188,7 +192,7 @@ export const ParseBlocks = ({ content, meta }) => {
             <CoreAudio
               tag={domNode.name}
               className={className}
-              node={domNode.children}
+              node={domNode}
               options={options}
             />
           );
@@ -197,7 +201,7 @@ export const ParseBlocks = ({ content, meta }) => {
             <CoreEmbed
               tag={domNode.name}
               className={className}
-              node={domNode.children}
+              node={domNode}
               options={options}
             />
           );

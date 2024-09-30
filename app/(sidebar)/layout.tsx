@@ -51,8 +51,16 @@ const bodyStyle = {
 export default async function RootLayout({ children }: RootLayoutProps) {
   const track = process.env.TRACK_ANALYTICS === 'true' ? true : false;
 
-  const { menu, footer, mobileMenu, topMenu, callToAction, logo, sidebar } =
-    await fetchSiteElements();
+  const {
+    menu,
+    footer,
+    mobileMenu,
+    topMenu,
+    callToAction,
+    logo,
+    sidebar,
+    sidebarHeader,
+  } = await fetchSiteElements();
 
   return (
     <html lang="en">
@@ -61,13 +69,13 @@ export default async function RootLayout({ children }: RootLayoutProps) {
           <main>
             <Container>
               <Navbar
-                sidebarContent="default"
                 menu={menu}
                 mobileMenu={mobileMenu}
                 topMenu={topMenu}
                 callToAction={callToAction}
                 logo={logo}
                 sidebar={sidebar}
+                sidebarHeader={sidebarHeader}
               />
               <Grid>{children}</Grid>
             </Container>

@@ -1,5 +1,7 @@
 import classNames from 'classnames';
-export const CoreParagraph = ({ children, className = '' }) => {
+import { BlockProps } from '@lib/types';
+
+export const CoreParagraph = ({ className = '', children }: BlockProps) => {
   if (className) {
     className = className.replace(
       'has-x-large-font-size',

@@ -1,11 +1,11 @@
-import { domToReact, DOMNode } from 'html-react-parser';
+import { BlockProps } from '@lib/types';
 import { replaceWordPressUrlRelative } from '@utils/tools';
 import classNames from 'classnames';
 import Link from 'next/link';
 import { HTMLAttributeProps } from '@lib/types';
 import { castToHTMLAttributeProps } from '@utils/tools';
 
-export const CoreButtonLink = ({ node, children, tag, className }) => {
+export const CoreButtonLink = ({ node, children, className }: BlockProps) => {
   className = className ? className : '';
   const props: HTMLAttributeProps = castToHTMLAttributeProps(node.attribs);
 

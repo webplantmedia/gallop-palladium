@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Content from '@components/content';
 import { PageSeo } from '@components/seo/page';
 import { replaceWordPressUrl } from '@utils/tools';
+import { fetchSiteElements } from '@api/fetch-site-elements';
 
 export const revalidate = 3600;
 
@@ -34,7 +35,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {};
 }
 
-export default async function Page({ params }) {
+export default async function Page({ params }: Props) {
   const uri = '/home/';
 
   const response = await fetch(
