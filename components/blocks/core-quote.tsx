@@ -6,15 +6,22 @@ import { Fragment } from 'react';
 import classNames from 'classnames';
 import { HTMLAttributeProps } from '@lib/types';
 import { castToHTMLAttributeProps } from '@utils/tools';
+import { BlockProps } from '@lib/types';
 
-export const CoreQuote = ({ node, props, className, tag, options }) => {
-  if (className.includes('is-style-plain')) {
+export const CoreQuote = ({
+  node,
+  props,
+  className,
+  tag,
+  options,
+}: BlockProps) => {
+  if (className?.includes('is-style-plain')) {
     return (
       <blockquote
         className={classNames('flex flex-nowrap gap-2 mb-7', className)}
-        id={props.id ? props.id : undefined}
+        id={props?.id ? props.id : undefined}
       >
-        {node?.map((block: any, index: number) => {
+        {node?.children?.map((block: any, index: number) => {
           const props: HTMLAttributeProps = castToHTMLAttributeProps(
             block.attribs
           );
@@ -41,16 +48,16 @@ export const CoreQuote = ({ node, props, className, tag, options }) => {
         })}
       </blockquote>
     );
-  } else if (className.includes('is-style-title')) {
+  } else if (className?.includes('is-style-title')) {
     return (
       <blockquote
         className={classNames(
           'mx-auto !max-w-none clear-both relative mt-0 mb-7 flex flex-wrap flex-col pl-8 md:pl-20',
           className
         )}
-        id={props.id ? props.id : undefined}
+        id={props?.id ? props.id : undefined}
       >
-        {node?.map((block: any, index: number) => {
+        {node?.children?.map((block: any, index: number) => {
           const props: HTMLAttributeProps = castToHTMLAttributeProps(
             block.attribs
           );
@@ -77,16 +84,16 @@ export const CoreQuote = ({ node, props, className, tag, options }) => {
         })}
       </blockquote>
     );
-  } else if (className.includes('is-style-small-title')) {
+  } else if (className?.includes('is-style-small-title')) {
     return (
       <blockquote
         className={classNames(
           'mx-auto !max-w-none clear-both relative mt-0 mb-7 flex flex-wrap flex-col pl-8 md:pl-32',
           className
         )}
-        id={props.id ? props.id : undefined}
+        id={props?.id ? props.id : undefined}
       >
-        {node?.map((block: any, index: number) => {
+        {node?.children?.map((block: any, index: number) => {
           const props: HTMLAttributeProps = castToHTMLAttributeProps(
             block.attribs
           );
@@ -120,7 +127,7 @@ export const CoreQuote = ({ node, props, className, tag, options }) => {
           'relative mt-16 mb-14 flex flex-wrap gap-2 pl-[30px] sm:pl-[90px] pr-[20px] sm:pr-[40px]',
           className
         )}
-        id={props.id ? props.id : undefined}
+        id={props?.id ? props.id : undefined}
       >
         <div className="relative">
           <div
@@ -129,7 +136,7 @@ export const CoreQuote = ({ node, props, className, tag, options }) => {
           >
             <Iconify className="w-16 h-16 sm:w-20 sm:h-20" icon={QuoteIcon} />
           </div>
-          {node?.map((block: any, index: number) => {
+          {node?.children?.map((block: any, index: number) => {
             const props: HTMLAttributeProps = castToHTMLAttributeProps(
               block.attribs
             );

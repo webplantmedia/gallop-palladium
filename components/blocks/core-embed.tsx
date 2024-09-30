@@ -7,15 +7,18 @@ import VimeoHandler from '@components/vimeo-handler';
 import { BlockProps } from '@lib/types';
 
 export const CoreEmbed = ({ node, tag, className, options }: BlockProps) => {
-  className = className.replace(
+  className = className?.replace(
     'wp-block-embed',
     'wp-block-embed [&_iframe]:w-full [&_iframe]:h-auto'
   );
-  className = className.replace(
+  className = className?.replace(
     'wp-embed-aspect-16-9',
     '[&_iframe]:aspect-video'
   );
-  className = className.replace('wp-embed-aspect-4-3', '[&_iframe]:aspect-4/3');
+  className = className?.replace(
+    'wp-embed-aspect-4-3',
+    '[&_iframe]:aspect-4/3'
+  );
 
   const appendVimeoParams = (url: string) => {
     const urlObj = new URL(url);

@@ -7,7 +7,7 @@ import { castToHTMLAttributeProps } from '@utils/tools';
 
 export const CoreButtonLink = ({ node, children, className }: BlockProps) => {
   className = className ? className : '';
-  const props: HTMLAttributeProps = castToHTMLAttributeProps(node.attribs);
+  const props: HTMLAttributeProps = castToHTMLAttributeProps(node?.attribs);
 
   if (className.includes('is-style-large')) {
     className = className.replace('is-style-large', 'text-base py-4 px-6');

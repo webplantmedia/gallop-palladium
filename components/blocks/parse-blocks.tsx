@@ -16,7 +16,6 @@ import {
   CoreButtonLink,
   CoreQuote,
   CoreList,
-  CoreMediaText,
   CoreImage,
   TagAnchor,
   CoreAudio,
@@ -156,7 +155,7 @@ export const ParseBlocks = ({ content, meta }) => {
               tag={domNode.name}
               props={props}
               className={className}
-              node={domNode.children}
+              node={domNode}
               options={options}
             />
           );
@@ -175,15 +174,6 @@ export const ParseBlocks = ({ content, meta }) => {
               tag={domNode.name}
               className={className}
               node={domNode}
-              options={options}
-            />
-          );
-        } else if (className?.includes('wp-block-media-text')) {
-          return (
-            <CoreMediaText
-              tag={domNode.name}
-              className={className}
-              node={domNode.children}
               options={options}
             />
           );

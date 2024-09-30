@@ -9,7 +9,7 @@ export const CoreButtons = ({ node, options, className }: BlockProps) => {
   // ['flex-wrap']: flexWrap !== 'nowrap',
 
   // className = className.replace('is-vertical', 'is-vertical');
-  className = className.replace(
+  className = className?.replace(
     'is-content-justification-center',
     'justify-center'
   );
@@ -26,7 +26,7 @@ export const CoreButtons = ({ node, options, className }: BlockProps) => {
         wrap
       )}
     >
-      {domToReact(node.children as DOMNode[], options)}
+      {domToReact(node?.children as DOMNode[], options)}
     </div>
   );
 };

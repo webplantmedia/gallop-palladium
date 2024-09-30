@@ -14,8 +14,9 @@ import CurrentTime from '@widgets/current-time';
 import CurrentDate from '@widgets/current-date';
 import PlaySolidIcon from '@iconify/icons-heroicons/play-solid';
 import { VideoPopup } from '@widgets/video-popup';
+import { BlockProps } from '@lib/types';
 
-export const CoreGroupHero1 = ({ node, className, props }) => {
+export const CoreGroupHero1 = ({ node, className, props }: BlockProps) => {
   const data = getVarsFromNode(node);
   let swiperId = 'swiper-' + useId(); // Generate a unique ID
   let circleTextId = 'circle-text-' + useId(); // Generate a unique ID

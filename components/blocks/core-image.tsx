@@ -4,17 +4,27 @@ import {
   getSrcSet,
   replaceWordPressUrl,
 } from '@utils/tools';
-import { toBase64, shimmer, shimmerGlow } from '@utils/shimmer';
 import classNames from 'classnames';
 import { domToReact, DOMNode } from 'html-react-parser';
 import Link from 'next/link';
 import { Fragment } from 'react';
 import { HTMLAttributeProps } from '@lib/types';
 import { castToHTMLAttributeProps } from '@utils/tools';
+import { BlockProps } from '@lib/types';
 
-// import Image from 'next/image';
+interface ImageBlockProps extends BlockProps {
+  block?: any;
+  hasCaption?: string;
+  marginClass?: string;
+}
 
-const ImageTag = ({ block, tag, className, options, hasCaption }) => {
+const ImageTag = ({
+  block,
+  tag,
+  className,
+  options,
+  hasCaption,
+}: ImageBlockProps) => {
   const props: HTMLAttributeProps = castToHTMLAttributeProps(block.attribs);
   let img = <></>;
 
@@ -138,8 +148,14 @@ function TailwindCSSClasses(className: string) {
   return className;
 }
 
-const ImageBlock = ({ node, tag, className, options, marginClass }) => {
-  className = TailwindCSSClasses(className);
+const ImageBlock = ({
+  node,
+  tag,
+  className,
+  options,
+  marginClass,
+}: ImageBlockProps) => {
+  className = TailwindCSSClasses(className || '');
 
   // node is <figure>
   let hasCaption = false;
@@ -191,7 +207,7 @@ export const CoreImage = ({
   tag = '',
   options,
   marginClass = 'mb-7',
-}) => {
+}: ImageBlockProps) => {
   return (
     <ImageBlock
       tag={tag}

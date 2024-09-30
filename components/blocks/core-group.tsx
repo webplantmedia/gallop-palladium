@@ -9,7 +9,7 @@ import { domToReact, DOMNode } from 'html-react-parser';
 import { BlockProps } from '@lib/types';
 
 export const CoreGroup = ({ className, props, options, node }: BlockProps) => {
-  const { id } = props;
+  const { id } = props || {};
 
   if (hasExactClass(className, 'wp-block-group-is-layout-grid')) {
     return (
@@ -34,7 +34,7 @@ export const CoreGroup = ({ className, props, options, node }: BlockProps) => {
         'mb-10 [&>*]:mt-0 [&>*]:mb-0 [&>*>*:first-child]:mt-0 [&>*>*:last-child]:mb-0'
       )}
     >
-      {domToReact(node.children as DOMNode[], options)}
+      {domToReact(node?.children as DOMNode[], options)}
     </div>
   );
 };

@@ -46,7 +46,7 @@ export const CoreButton = ({ node, options, className = '' }: BlockProps) => {
         'text-center rounded-md shadow-sm flex items-center justify-center'
       )}
     >
-      {domToReact(node.children as DOMNode[], options)}
+      {domToReact(node?.children as DOMNode[], options)}
     </div>
   );
 };

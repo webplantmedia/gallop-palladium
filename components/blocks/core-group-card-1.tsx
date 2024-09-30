@@ -55,7 +55,7 @@ export const CoreGroupCard1 = ({ node, className, props }: BlockProps) => {
         )}
       </VideoPopup>
       <div className="bg-base-card px-7 pb-7 h-full flex flex-col">
-        <CoreHeading tag="h4" props={data} className="is-style-h3 !mb-2 !mt-4">
+        <CoreHeading tag="h4" props={props} className="is-style-h3 !mb-2 !mt-4">
           {data?.h4?.jsx}
         </CoreHeading>
         <CoreParagraph className="">{data.p?.jsx}</CoreParagraph>

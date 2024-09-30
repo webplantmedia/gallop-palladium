@@ -1,10 +1,17 @@
 import Iconify from '@components/iconify';
 import ArrowInsertIcon from '@iconify/icons-material-symbols/arrow-insert';
 import classNames from 'classnames';
+import { BlockProps } from '@lib/types';
+import { ElementType } from 'react';
 
-export const CoreHeading = ({ children, tag, className = '', props }) => {
-  const { id } = props;
-  const Tag = tag;
+export const CoreHeading = ({
+  children,
+  tag = 'h2',
+  className = '',
+  props,
+}: BlockProps) => {
+  const { id } = props ?? {};
+  const Tag: ElementType = tag as ElementType;
 
   let headingClass = {
     h1: 'mb-7 leading-tight text-5xl md:text-6xl lg:text-7xl text-base-contrast font-bold',
@@ -60,7 +67,7 @@ export const CoreHeading = ({ children, tag, className = '', props }) => {
       id={id}
       className={classNames(
         className,
-        hClass ? hClass : headingClass[tag],
+        hClass || headingClass[tag as keyof typeof headingClass],
         className
       )}
     >

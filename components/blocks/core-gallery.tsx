@@ -62,7 +62,7 @@ const getGridGalleryClass = (node: any) => {
 };
 
 const GalleryTag = ({ node, className, tag, options }: BlockProps) => {
-  let match = className.match(/columns-(\d)/);
+  let match = className?.match(/columns-(\d)/);
   let columns = 3;
   let figcaption: any = null;
   if (match && match[1]) {
@@ -70,7 +70,7 @@ const GalleryTag = ({ node, className, tag, options }: BlockProps) => {
   }
   let caption: any = [];
   let figure: any = [];
-  node.children.map((block: any, index: number) => {
+  node?.children.map((block: any, index: number) => {
     if (block.name === 'figure') {
       figure.push(block);
     } else if (block.name === 'figcaption' && block.children) {
@@ -114,7 +114,7 @@ const GalleryTag = ({ node, className, tag, options }: BlockProps) => {
   // );
   // className = className.replace('is-layout-flex', 'gap-3');
   if (1 === columns) {
-    className = className.replace(
+    className = className?.replace(
       'columns-1',
       'grid grid-cols-1 gap-7 justify-center'
     );
@@ -127,7 +127,7 @@ const GalleryTag = ({ node, className, tag, options }: BlockProps) => {
       </Fragment>
     );
   } else if (2 === columns) {
-    className = className.replace(
+    className = className?.replace(
       'columns-2',
       'grid grid-cols-1 md:grid-cols-2 gap-7 justify-center'
     );
@@ -143,7 +143,7 @@ const GalleryTag = ({ node, className, tag, options }: BlockProps) => {
     // console.log(gridTemplateColumns);
     let { gridTemplateColumns, gridGalleryClass } = getGridGalleryClass(figure);
 
-    className = className.replace('gap-3', '');
+    className = className?.replace('gap-3', '');
 
     return (
       <Fragment>
@@ -171,7 +171,7 @@ const GalleryTag = ({ node, className, tag, options }: BlockProps) => {
   // remainder of images when divided by number of columns
   let overflow = columns - (figureLength % columns);
 
-  if (className.includes('is-style-lead-image')) {
+  if (className?.includes('is-style-lead-image')) {
     var first = figure.shift();
     figureLength = figure.length;
     overflow = columns - (figureLength % columns);
