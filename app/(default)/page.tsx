@@ -3,6 +3,7 @@ import Content from '@components/content';
 import { PageSeo } from '@components/seo/page';
 import { replaceWordPressUrl } from '@utils/tools';
 import { fetchSiteElements } from '@api/fetch-site-elements';
+import { fetchPost } from '@api';
 
 export const revalidate = 3600;
 
@@ -38,32 +39,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function Page({ params }: Props) {
   const uri = '/home/';
 
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_WORDPRESS_URL}/wp-json/gallop/v1/post/`,
-    {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      method: 'POST',
-      body: JSON.stringify({
-        uri: uri,
-      }),
-      next: { tags: [uri] },
-    }
-  );
+  const { sidebarHeader } = await fetchSiteElements();
+  const { post, meta } = await fetchPost(uri);
 
-  if (response.ok) {
-    const { post, seo } = await response.json();
+  console.log('POST', post);
 
-    if (post) {
-      const meta = {
-        title: post.post_title,
-        postType: post.post_type,
-        databaseId: post.ID,
-        ...seo,
-      };
-
-      return <Content post={post} meta={meta} />;
-    }
-  }
+  return <Content post={post} meta={meta} sidebarHeader={sidebarHeader} />;
 }

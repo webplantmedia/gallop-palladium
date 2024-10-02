@@ -12,16 +12,17 @@ export async function fetchSiteElements() {
     sidebarHeader: any = null,
     site: any = null;
 
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_WORDPRESS_URL}/wp-json/gallop/v1/site-element/`,
-    {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      method: 'POST',
-      next: { tags: ['site-element'] },
-    }
-  );
+  const headers = {
+    'Content-Type': 'application/json',
+  };
+
+  const url = `${process.env.NEXT_PUBLIC_WORDPRESS_URL}/wp-json/gallop/v1/site-element/`;
+
+  const response = await fetch(url, {
+    headers,
+    method: 'POST',
+    next: { tags: ['site-element'] },
+  });
 
   if (response.ok) {
     const jsonResponse = await response.json();

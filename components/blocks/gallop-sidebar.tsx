@@ -4,7 +4,7 @@ import { hasExactClass, castToHTMLAttributeProps } from '@utils/tools';
 import { HTMLAttributeProps } from '@lib/types';
 import React from 'react';
 import DynamicSidebar from '@components/sidebar/dynamic';
-import { fetchSiteElements } from '@api/fetch-site-elements';
+import { BlockProps } from '@lib/types';
 
 import {
   HTMLReactParserOptions,
@@ -13,9 +13,16 @@ import {
   Element,
 } from 'html-react-parser';
 
-export const GallopSidebar = async ({ node, className, options }) => {
-  const { sidebarHeader } = await fetchSiteElements();
+interface GallopSidebarBlockProps extends BlockProps {
+  sidebarHeader?: any;
+}
 
+export const GallopSidebar = ({
+  node,
+  className,
+  options,
+  sidebarHeader,
+}: GallopSidebarBlockProps) => {
   let header: React.ReactElement | null = null;
   let content: React.ReactElement | null = null;
 
@@ -37,7 +44,7 @@ export const GallopSidebar = async ({ node, className, options }) => {
     },
   };
 
-  domToReact(node.children as DOMNode[], op);
+  domToReact(node?.children as DOMNode[], op);
 
   return (
     <DynamicSidebar

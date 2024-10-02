@@ -22,7 +22,7 @@ import {
   CoreEmbed,
   // GallopAlbumCover,
   // GallopSinglePost,
-  // GallopExcerptPost,
+  GallopExcerptPost,
   CoreGroup,
   // GallopBlogPosts,
   // GallopMap,
@@ -69,7 +69,7 @@ function TailwindCSSClasses(className: string) {
   return className;
 }
 
-export const ParseBlocks = ({ content, meta }) => {
+export const ParseBlocks = ({ content, meta, sidebarHeader }) => {
   if (content === null) {
     return <></>;
   }
@@ -208,6 +208,16 @@ export const ParseBlocks = ({ content, meta }) => {
             <GallopSidebar
               className={className}
               node={domNode}
+              options={options}
+              sidebarHeader={sidebarHeader}
+            />
+          );
+        } else if (className?.includes('wp-block-gallop-excerpt-post')) {
+          return (
+            <GallopExcerptPost
+              node={domNode}
+              className={className}
+              props={props}
               options={options}
             />
           );

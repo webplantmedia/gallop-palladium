@@ -14,12 +14,19 @@ import {
 
 // Fix "Loading..." state when closing the bar
 
+interface Props {
+  children?: any;
+  className?: any;
+  header?: any;
+  sidebarHeader?: any;
+}
+
 export default function DynamicSidebar({
   children,
   className,
   header,
   sidebarHeader,
-}) {
+}: Props) {
   let [isOpen, setIsOpen] = useState(false);
 
   const closeModal = () => {

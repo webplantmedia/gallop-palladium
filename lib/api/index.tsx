@@ -43,5 +43,5 @@ export { getSeo } from './get-seo';
 export { getBlogData } from './get-blog-data';
 export { getMLSHomeData } from './get-mls-home-data';
 export { getMLSBoundary } from './get-mls-boundary';
-export { fetchAPI } from './fetch-api';
+export { fetchPost } from './fetch-post';
 export { fetchAPIBlog } from './fetch-api-blog';
