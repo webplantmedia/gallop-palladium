@@ -15,7 +15,7 @@ export async function fetchPost(uri = '') {
   });
 
   if (response.ok) {
-    const { post, seo } = await response.json();
+    const { post, seo, site } = await response.json();
 
     if (post) {
       const meta = {
@@ -25,9 +25,9 @@ export async function fetchPost(uri = '') {
         ...seo,
       };
 
-      return { post: post, meta: meta };
+      return { post: post, meta: meta, site: site };
     }
   }
 
-  return { post: null, meta: null };
+  return { post: null, meta: null, site: null };
 }

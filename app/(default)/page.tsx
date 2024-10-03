@@ -14,24 +14,11 @@ type Props = {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const uri = '/home/';
 
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_WORDPRESS_URL}/wp-json/gallop/v1/post/`,
-    {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      method: 'POST',
-      body: JSON.stringify({
-        uri: uri,
-      }),
-      next: { tags: [uri] },
-    }
-  );
+  const { meta, site } = await fetchPost(uri);
 
-  if (response.ok) {
-    const { seo, site } = await response.json();
+  if (meta && site) {
     site.permalink = replaceWordPressUrl(site.permalink).replace('/home/', '/');
-    return PageSeo(seo, site.permalink, site);
+    return PageSeo(meta, site.permalink, site);
   }
   return {};
 }
