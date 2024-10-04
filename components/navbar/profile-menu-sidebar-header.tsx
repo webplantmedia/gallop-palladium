@@ -8,7 +8,7 @@ import parse, {
 import { hasExactClass, castToHTMLAttributeProps } from '@utils/tools';
 import { HTMLAttributeProps } from '@lib/types';
 
-export default function ProfileMenuSidebarHeader({ post }) {
+export default function ProfileMenuSidebarHeader({ post }: { post: any }) {
   if (!post) {
     return <></>;
   }

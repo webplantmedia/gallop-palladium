@@ -6,7 +6,7 @@ import { BlockProps } from '@lib/types';
 export const CoreAudio = ({ node, className, options }: BlockProps) => {
   return (
     <>
-      {node.children.map((el: any, index: number) => {
+      {node?.children.map((el: any, index: number) => {
         const props: HTMLAttributeProps = castToHTMLAttributeProps(el.attribs);
         return (
           <figure

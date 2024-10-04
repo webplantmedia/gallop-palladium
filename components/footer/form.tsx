@@ -1,6 +1,5 @@
 'use client';
 
-import { _footerSignup } from '@data/_footer';
 import { useState } from 'react';
 
 export default function Form() {
@@ -60,7 +59,7 @@ export default function Form() {
           type="submit"
           className="shrink-0 w-full md:w-[130px] text-center rounded-md shadow-sm flex items-center justify-center text-base py-3 px-5 bg-secondary-main text-secondary-contrast hover:bg-secondary-light dmh:bg-modern-primary-main dmh:text-modern-primary-contrast dmh:hover:bg-modern-primary-light"
         >
-          {_footerSignup}
+          Submit
         </button>
       </form>
       {submitted && !message && (

@@ -26,10 +26,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function Page({ params }: Props) {
   const uri = '/home/';
 
-  const { sidebarHeader } = await fetchSiteElements();
   const { post, meta } = await fetchPost(uri);
-
-  console.log('POST', post);
+  const { sidebarHeader } = await fetchSiteElements();
 
   return <Content post={post} meta={meta} sidebarHeader={sidebarHeader} />;
 }

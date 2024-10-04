@@ -1,8 +1,6 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { _profile } from '@data/_sidebar';
-import { _slogans } from '@data/_slogans';
 import classNames from 'classnames';
 import Link from 'next/link';
 import { ArrowRightIcon } from '@heroicons/react/24/outline';
@@ -14,11 +12,6 @@ export default function SidebarAbout({ className = '' }) {
   };
   const randomNumber = Math.floor(Math.random() * 4);
   const [message, setMessage] = useState(''); // Default message
-
-  useEffect(() => {
-    const randomIndex = Math.floor(Math.random() * _slogans.length);
-    setMessage(_slogans[randomIndex]);
-  }, []);
 
   return (
     <>

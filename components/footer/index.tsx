@@ -1,14 +1,6 @@
-import {
-  _footerInfo,
-  _footerHeading,
-  _footerContactHeading,
-  _footerContent,
-  _footerButtons,
-} from '@data/_footer';
-import { _cta } from '@data/_sidebar';
 import FooterColumns from './columns';
 
-export default function Footer({ post }) {
+export default function Footer({ post }: { post: any }) {
   return (
     <footer
       className="w-full bg-secondary-main"

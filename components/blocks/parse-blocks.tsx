@@ -43,15 +43,15 @@ function TailwindCSSClasses(className: string) {
   className = className.replace('has-text-align-', 'text-');
   className = className.replace(
     'aligncenter',
-    'aligncenter text-center mx-auto table justify-center table ml-0 mr-0'
+    'aligncenter text-center mx-auto justify-center ml-0 mr-0'
   );
   className = className.replace(
     'alignleft',
-    'alignleft text-center md:float-left md:mr-10 md:mb-10 table ml-0 mr-0'
+    'alignleft text-center md:float-left md:mr-10 md:mb-10 ml-0 mr-0'
   );
   className = className.replace(
     'alignright',
-    'alignright text-center md:float-right md:ml-10 md:mb-10 table ml-0 mr-0'
+    'alignright text-center md:float-right md:ml-10 md:mb-10 ml-0 mr-0'
   );
   className = className.replace(
     'alignfull',
@@ -61,15 +61,19 @@ function TailwindCSSClasses(className: string) {
     'alignwide',
     'alignwide mx-auto !max-w-screen-3xl clear-both'
   );
-  className = className.replace(
-    'wp-block-image',
-    'wp-block-image table [&>figcaption]:table-caption [&>figcaption]:caption-bottom'
-  );
 
   return className;
 }
 
-export const ParseBlocks = ({ content, meta, sidebarHeader }) => {
+export const ParseBlocks = ({
+  content,
+  meta,
+  sidebarHeader,
+}: {
+  content: any;
+  meta: any;
+  sidebarHeader: any;
+}) => {
   if (content === null) {
     return <></>;
   }
@@ -170,12 +174,7 @@ export const ParseBlocks = ({ content, meta, sidebarHeader }) => {
           );
         } else if (className?.includes('wp-block-image')) {
           return (
-            <CoreImage
-              tag={domNode.name}
-              className={className}
-              node={domNode}
-              options={options}
-            />
+            <CoreImage className={className} node={domNode} options={options} />
           );
         } else if (className?.includes('wp-block-audio')) {
           return (

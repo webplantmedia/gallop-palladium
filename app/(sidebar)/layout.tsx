@@ -58,8 +58,10 @@ export default async function RootLayout({ children }: RootLayoutProps) {
     topMenu,
     callToAction,
     logo,
+    stickyLogo,
     sidebar,
     sidebarHeader,
+    site,
   } = await fetchSiteElements();
 
   return (
@@ -74,8 +76,10 @@ export default async function RootLayout({ children }: RootLayoutProps) {
                 topMenu={topMenu}
                 callToAction={callToAction}
                 logo={logo}
+                stickyLogo={stickyLogo}
                 sidebar={sidebar}
                 sidebarHeader={sidebarHeader}
+                site={site}
               />
               <Grid>{children}</Grid>
             </Container>

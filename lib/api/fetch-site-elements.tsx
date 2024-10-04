@@ -21,8 +21,9 @@ export async function fetchSiteElements() {
   const response = await fetch(url, {
     headers,
     method: 'POST',
-    next: { tags: ['site-element'] },
+    next: { revalidate: 60, tags: ['site-element'] },
   });
+  // console.log(response.headers);
 
   if (response.ok) {
     const jsonResponse = await response.json();
