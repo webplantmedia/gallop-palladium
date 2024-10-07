@@ -1,13 +1,6 @@
-import {
-  permalink,
-  getUploadPath,
-  getSrcSet,
-  replaceWordPressUrl,
-  getVarsFromNode,
-} from '@utils/tools';
+import { replaceWordPressUrl } from '@utils/tools';
 import classNames from 'classnames';
 import Link from 'next/link';
-import { Fragment } from 'react';
 import { HTMLAttributeProps } from '@lib/types';
 import { castToHTMLAttributeProps } from '@utils/tools';
 import { BlockProps } from '@lib/types';
@@ -29,13 +22,8 @@ export const CoreImage = ({
   className = '',
   options,
 }: ImageBlockProps) => {
-  // const html = parse(post.postContent, options);
-  // return <div className="pb-20 pt-20">{html}</div>;
-
-  // const data = getVarsFromNode(node);
   let hasCaption = false;
   let style = {};
-  // console.log(data);
 
   const op: HTMLReactParserOptions = {
     replace(domNode) {
