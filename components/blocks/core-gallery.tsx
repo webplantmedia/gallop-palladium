@@ -213,51 +213,38 @@ export const CoreGallery = ({ node, className, tag, options }: BlockProps) => {
   // If so, this algorithm might try to do 3|3|2 instead of 4|4.
 
   if (1 === columns) {
-    className = className?.replace(
-      'columns-1',
-      'grid grid-cols-1 gap-7 justify-center'
-    );
     return (
-      <Fragment>
-        <div className={classNames(className, 'mb-7 items-start')}>
+      <div className={classNames(className, 'mb-7 items-start !columns-auto')}>
+        <div className="grid grid-cols-1 justify-center gap-x-[1.5%] pb-[1.5%]">
           {figure}
         </div>
         {figcaption && figcaption}
-      </Fragment>
+      </div>
     );
   } else if (2 === columns) {
-    className = className?.replace(
-      'columns-2',
-      'grid grid-cols-1 md:grid-cols-2 gap-7 justify-center'
-    );
     return (
-      <Fragment>
-        <div className={classNames(className, 'mb-7 items-start')}>
+      <div className={classNames(className, 'mb-7 items-start !columns-auto')}>
+        <div className="grid grid-cols-1 md:grid-cols-2 justify-center gap-x-[1.5%] pb-[1.5%]">
           {figure}
         </div>
         {figcaption && figcaption}
-      </Fragment>
+      </div>
     );
-  } else if (gallerySize === columns) {
-    // console.log(gridTemplateColumns);
-    let { gridTemplateColumns, gridGalleryClass } = getGridGalleryClass(figure);
-
-    className = className?.replace('gap-3', '');
-
+  } else if (className?.includes('is-style-lead-image')) {
     return (
-      <Fragment>
-        <div
-          className={classNames(
-            className,
-            'mb-7 items-start [&>figure>figcaption]:hidden !columns-auto',
-            gridGalleryClass
-          )}
-          style={{ gridTemplateColumns: gridTemplateColumns }}
-        >
-          {figure}
-        </div>
-        {figcaption && figcaption}
-      </Fragment>
+      <LeadImageGallery
+        figure={figure}
+        figureLength={figureLength}
+        imageNumber={imageNumber}
+        className={className}
+        overflow={overflow}
+        columns={columns}
+        firstImageInRow={firstImageInRow}
+        figureProps={figureProps}
+        figcaption={figcaption}
+        a={a}
+        row={row}
+      />
     );
   }
 
@@ -275,6 +262,86 @@ export const CoreGallery = ({ node, className, tag, options }: BlockProps) => {
       a={a}
       row={row}
     />
+  );
+};
+
+const LeadImageGallery = ({
+  figure,
+  figureLength,
+  imageNumber,
+  className,
+  overflow,
+  columns,
+  firstImageInRow,
+  figureProps,
+  figcaption,
+  a,
+  row,
+}: GalleryVars) => {
+  var first = figure.shift();
+  var firstProp = figureProps.shift();
+  figureLength = figure.length;
+  overflow = columns - (figureLength % columns);
+  return (
+    <div className={classNames(className, 'mb-7 items-start !columns-auto')}>
+      <div
+        key={'gallery-item-lead'}
+        className={classNames(
+          '[&>figure>figcaption]:hidden grid gap-x-[1.5%] pb-[1.5%] [&_img]:w-full'
+        )}
+        style={{ gridTemplateColumns: '100%' }}
+      >
+        {first}
+      </div>
+      {figure.map((block: any, index: number) => {
+        imageNumber = index + 1;
+        // console.log(row + ' <= ' + overflow);
+
+        // Should the first few rows be fewer columns than the default columns?
+        // Let's check. But make sure we are not dealing with an exact 2 row gallery
+        // Or an exact single row gallery.
+        // If so, this algorithm might try to do 3|3|2 instead of 4|4.
+        const maxColumns =
+          row <= overflow &&
+          columns * 2 !== figureLength &&
+          columns !== figureLength
+            ? columns - 1
+            : columns;
+
+        // console.log(maxColumns);
+
+        // if we reached the number of max columns in a row of images,
+        // or are at the last image of a row, let's display all the row images.
+        // Otherwise, keep increasing imageNumber which will add more images to a row.
+        if (
+          figureLength <= imageNumber ||
+          imageNumber - firstImageInRow >= maxColumns
+        ) {
+          const n = figureProps.slice(a, imageNumber);
+          console.log(n);
+          const rowGallery = figure.slice(a, imageNumber);
+          a = imageNumber;
+          row = row + 1;
+          firstImageInRow = imageNumber;
+          let { gridTemplateColumns, gridGalleryClass } =
+            getGridGalleryClass(n);
+          return (
+            <div
+              key={'gallery-item-' + imageNumber}
+              className={classNames(
+                '[&>figure>figcaption]:hidden',
+                'flex flex-row gap-x-[1.5%] pb-[1.5%]',
+                gridGalleryClass
+              )}
+              style={{ gridTemplateColumns: gridTemplateColumns }}
+            >
+              {rowGallery}
+            </div>
+          );
+        }
+      })}
+      {figcaption && figcaption}
+    </div>
   );
 };
 
