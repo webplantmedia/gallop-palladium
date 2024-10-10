@@ -1,5 +1,4 @@
 import classNames from 'classnames';
-import { domToReact, DOMNode } from 'html-react-parser';
 import Link from 'next/link';
 import {
   CoreHeading,
@@ -8,13 +7,19 @@ import {
   CoreImage,
 } from '@components/blocks';
 import { replaceWordPressUrlRelative } from '@utils/tools';
+import { BlockProps } from '@lib/types';
 import { HTMLAttributeProps } from '@lib/types';
 import { castToHTMLAttributeProps } from '@utils/tools';
-import { BlockProps } from '@lib/types';
+import {
+  HTMLReactParserOptions,
+  domToReact,
+  DOMNode,
+  Element,
+} from 'html-react-parser';
 
 export const GallopExcerptPost = ({
   node,
-  className,
+  className: classes,
   props,
   options,
 }: BlockProps) => {
@@ -26,62 +31,84 @@ export const GallopExcerptPost = ({
 
   const { id } = props || {};
 
-  node?.children?.map((block: any, index: number) => {
-    const props: HTMLAttributeProps = castToHTMLAttributeProps(block.attribs);
-    const { className } = props;
-    if (block.name === 'a' && block.children) {
-      ({ href } = props);
-      href = replaceWordPressUrlRelative(href);
-      block.children.map((el: any, index2: number) => {
-        if (el.name == 'figure') {
+  const op: HTMLReactParserOptions = {
+    replace(domNode) {
+      if (domNode instanceof Element && domNode.attribs) {
+        const props: HTMLAttributeProps = castToHTMLAttributeProps(
+          domNode.attribs
+        );
+        const { className } = props;
+        if (domNode.name === 'a') {
+          const parent = (domNode?.parent as Element)?.name;
+          if (parent === 'p') {
+            hasTextLink = true;
+          } else {
+            ({ href } = props);
+            href = replaceWordPressUrlRelative(href);
+          }
+        } else if (className?.includes('wp-block-image')) {
           figure = (
             <CoreImage
-              tag={el.name}
               className={classNames(className, '!mb-0 [&_img]:!rounded-none')}
-              node={el}
+              node={domNode}
               options={options}
             />
           );
+        } else if (className?.includes('wp-block-heading')) {
+          heading = (
+            <CoreHeading
+              tag={domNode.name}
+              className={classNames(className, 'p-4 !mb-0 !mt-0')}
+              props={props}
+            >
+              {domToReact(domNode.children as DOMNode[], options)}
+            </CoreHeading>
+          );
+        } else if (domNode.name == 'p') {
+          // block?.children?.map((c: any) => {
+          // if (c.type == 'tag' && c.name == 'a') {
+          // hasTextLink = true;
+          // }
+          // });
+          paragraph = (
+            <CoreParagraph className={classNames(className, 'p-4')}>
+              {domToReact(domNode.children as DOMNode[], options)}
+            </CoreParagraph>
+          );
         }
-      });
-    } else if (className?.includes('wp-block-heading')) {
-      heading = (
-        <CoreHeading
-          tag={block.name}
-          className={classNames(className, 'p-4 !mb-0 !mt-0')}
-          props={props}
-        >
-          {domToReact(block.children as DOMNode[], options)}
-        </CoreHeading>
-      );
-    } else if (block.name == 'p') {
-      block?.children?.map((c: any) => {
-        if (c.type == 'tag' && c.name == 'a') {
-          hasTextLink = true;
-        }
-      });
-      paragraph = (
-        <CoreParagraph className={classNames(className, 'p-4')}>
-          {domToReact(block.children as DOMNode[], options)}
-        </CoreParagraph>
-      );
-    }
-  });
+      }
+    },
+  };
+
+  domToReact(node?.children as DOMNode[], op);
+  let content = (
+    <Link prefetch={false} id={id} href={href} className="block">
+      {heading && heading}
+      {figure && figure}
+      {!hasTextLink && paragraph && paragraph}
+    </Link>
+  );
+
+  if (!href || href === '#') {
+    content = (
+      <div id={id} className="block">
+        {heading && heading}
+        {figure && figure}
+        {!hasTextLink && paragraph && paragraph}
+      </div>
+    );
+  }
 
   return (
-    <div className={classNames(className, 'mb-14')}>
+    <div className={classNames(classes, 'mb-14')}>
       <div
         className={classNames(
-          'block bg-white/10 rounded-sm hover:bg-white/30 shadow-lg [&_p]:mb-0',
+          'block bg-base-card rounded-sm hover:bg-base-card/70 shadow-lg [&_p]:mb-0',
           false &&
             '[&_img]:object-center [&_img]:object-cover [&_img]:aspect-4/3'
         )}
       >
-        <Link prefetch={false} id={id} href={href} className="block">
-          {heading && heading}
-          {figure && figure}
-          {!hasTextLink && paragraph && paragraph}
-        </Link>
+        {content}
         {hasTextLink && paragraph && paragraph}
       </div>
     </div>

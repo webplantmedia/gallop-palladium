@@ -1,9 +1,9 @@
 import { replaceWordPressUrl } from '@utils/tools';
 import classNames from 'classnames';
 import Link from 'next/link';
+import { BlockProps } from '@lib/types';
 import { HTMLAttributeProps } from '@lib/types';
 import { castToHTMLAttributeProps } from '@utils/tools';
-import { BlockProps } from '@lib/types';
 import {
   HTMLReactParserOptions,
   domToReact,
