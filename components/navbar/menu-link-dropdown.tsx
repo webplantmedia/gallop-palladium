@@ -13,7 +13,13 @@ import {
 import Link from 'next/link';
 import { replaceWordPressUrlRelative } from '@utils/tools';
 
-export default function MenuLinkDropdown({ data, isScrolling }) {
+export default function MenuLinkDropdown({
+  data,
+  isScrolling,
+}: {
+  data: any;
+  isScrolling: any;
+}) {
   const dropdownText = data.p?.jsx ? data.p.jsx : 'Dropdown';
   const dropdownItems = Array.isArray(data?.wpBlockGroup?.wpBlockGroup)
     ? data.wpBlockGroup.wpBlockGroup

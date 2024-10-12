@@ -17,6 +17,10 @@ interface GallopSidebarBlockProps extends BlockProps {
   sidebarHeader?: any;
 }
 
+const SEOContent = ({ children }: { children: any }) => {
+  return <div className="absolute -left-[9999px] invisible">{children}</div>;
+};
+
 export const GallopSidebar = ({
   node,
   className,
@@ -47,12 +51,15 @@ export const GallopSidebar = ({
   domToReact(node?.children as DOMNode[], op);
 
   return (
-    <DynamicSidebar
-      className={className}
-      header={header}
-      sidebarHeader={sidebarHeader}
-    >
-      {content}
-    </DynamicSidebar>
+    <>
+      <DynamicSidebar
+        className={className}
+        header={header}
+        sidebarHeader={sidebarHeader}
+      >
+        {content}
+      </DynamicSidebar>
+      <SEOContent>{content}</SEOContent>
+    </>
   );
 };

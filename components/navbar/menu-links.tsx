@@ -7,7 +7,13 @@ import { getVarsFromNode } from '@utils/tools';
 import { replaceWordPressUrlRelative } from '@utils/tools';
 import MenuLinkDropdown from './menu-link-dropdown';
 
-export default function MenuLinks({ isScrolling, menu }) {
+export default function MenuLinks({
+  isScrolling,
+  menu,
+}: {
+  isScrolling: any;
+  menu: any;
+}) {
   const options: HTMLReactParserOptions = {
     replace(domNode) {
       if (domNode instanceof Element && domNode.attribs) {

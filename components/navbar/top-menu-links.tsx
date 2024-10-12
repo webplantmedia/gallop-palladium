@@ -7,7 +7,7 @@ import parse, { HTMLReactParserOptions, Element } from 'html-react-parser';
 import { getVarsFromNode } from '@utils/tools';
 import { replaceWordPressUrlRelative } from '@utils/tools';
 
-export default function TopMenuLinks({ menu }) {
+export default function TopMenuLinks({ menu }: { menu: any }) {
   const options: HTMLReactParserOptions = {
     replace(domNode) {
       if (domNode instanceof Element && domNode.attribs) {

@@ -14,6 +14,18 @@ import Logo from './logo';
 import UseOffSetTopScript from '@components/scripts/use-offset-top';
 // import Image from 'next/image';
 
+interface NavbarProps {
+  menu: any;
+  mobileMenu: any;
+  topMenu: any;
+  callToAction: any;
+  logo: any;
+  stickyLogo: any;
+  sidebar: any;
+  sidebarHeader: any;
+  site: any;
+}
+
 export default function Navbar({
   menu,
   mobileMenu,
@@ -24,7 +36,7 @@ export default function Navbar({
   sidebar,
   sidebarHeader,
   site,
-}) {
+}: NavbarProps) {
   const snap = useSnapshot(state);
   const isScrolling = snap.isScrolling;
 

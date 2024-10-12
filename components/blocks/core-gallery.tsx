@@ -71,7 +71,7 @@ export const CoreGallery = ({ node, className, tag, options }: BlockProps) => {
   let figure: Array<React.ReactElement> = [];
   let figureProps: Array<Object> = [];
   let figcaption: React.ReactElement | null = null;
-  let index: 0;
+  let index = 0;
   let hasCaption = false;
 
   const op: HTMLReactParserOptions = {
@@ -215,9 +215,7 @@ export const CoreGallery = ({ node, className, tag, options }: BlockProps) => {
   if (1 === columns) {
     return (
       <div className={classNames(className, 'mb-7 items-start !columns-auto')}>
-        <div className="grid grid-cols-1 justify-center gap-x-[1.5%] pb-[1.5%]">
-          {figure}
-        </div>
+        <div className="grid grid-cols-1 justify-center gap-7">{figure}</div>
         {figcaption && figcaption}
       </div>
     );

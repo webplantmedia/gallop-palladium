@@ -13,13 +13,11 @@ import {
   XMarkIcon,
   ArrowRightIcon,
 } from '@heroicons/react/24/outline';
-import { _mobileNav } from '@data/_menu';
-import { _cta } from '@data/_sidebar';
 import Link from 'next/link';
 import { state } from '@state';
 import MobileMenuLinks from './mobile-menu-links';
 
-export default function MobileMenu({ menu }) {
+export default function MobileMenu({ menu }: { menu: any }) {
   let [isOpen, setIsOpen] = useState(false);
 
   const closeModal = () => {

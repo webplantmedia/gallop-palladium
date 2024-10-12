@@ -48,9 +48,8 @@ export default function DynamicSidebar({
       >
         {header}
       </div>
-      <Transition appear={true} unmount={false} show={isOpen} as={Fragment}>
+      <Transition appear={true} show={isOpen} as={Fragment}>
         <Dialog
-          unmount={false}
           as="div"
           className="relative z-40 dynamic-content"
           onClose={closeModal}
@@ -63,7 +62,6 @@ export default function DynamicSidebar({
             leave="ease-in-out duration-500"
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
-            unmount={false}
           >
             <div className="fixed inset-0 bg-base-darker/25 transition-opacity opacity-100 dmh:bg-modern-primary-main/25" />
           </TransitionChild>
@@ -76,7 +74,6 @@ export default function DynamicSidebar({
             leave="transform transition ease-in-out duration-500"
             leaveFrom="-translate-x-0"
             leaveTo="translate-x-full"
-            unmount={false}
           >
             <div className="fixed inset-0 font-body h-[var(--app-height)] text-base max-w-[86%] md:max-w-[77%] lg:max-w-[67%] xl:max-w-[700px] w-full right-0 left-auto scroll-smooth">
               <div className="flex justify-end h-full">

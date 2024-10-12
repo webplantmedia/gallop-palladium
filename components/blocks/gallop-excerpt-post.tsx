@@ -24,7 +24,7 @@ export const GallopExcerptPost = ({
   options,
 }: BlockProps) => {
   let heading: any;
-  let paragraph: any;
+  let paragraph: React.ReactElement | null = null;
   let figure: any;
   let href = '';
   let hasTextLink = false;
@@ -54,6 +54,7 @@ export const GallopExcerptPost = ({
               options={options}
             />
           );
+          return <></>;
         } else if (className?.includes('wp-block-heading')) {
           heading = (
             <CoreHeading
@@ -64,17 +65,19 @@ export const GallopExcerptPost = ({
               {domToReact(domNode.children as DOMNode[], options)}
             </CoreHeading>
           );
+          return <></>;
         } else if (domNode.name == 'p') {
-          // block?.children?.map((c: any) => {
-          // if (c.type == 'tag' && c.name == 'a') {
-          // hasTextLink = true;
-          // }
-          // });
-          paragraph = (
-            <CoreParagraph className={classNames(className, 'p-4')}>
-              {domToReact(domNode.children as DOMNode[], options)}
-            </CoreParagraph>
-          );
+          if (domNode?.children?.length > 0) {
+            const p = domToReact(domNode.children as DOMNode[], options);
+            if (p) {
+              paragraph = (
+                <CoreParagraph className={classNames(className, 'p-4')}>
+                  {p}
+                </CoreParagraph>
+              );
+            }
+          }
+          return <></>;
         }
       }
     },
