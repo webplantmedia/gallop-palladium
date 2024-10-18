@@ -51,3 +51,5 @@ export { compressContent } from './compress-content';
 export { getDomainFromUrl } from './get-domain-from-url';
 export { getDomNodeText } from './get-dom-node-text';
 export { getDomNodeData } from './get-dom-node-data';
+export { tailwindAlignClasses } from './tailwind-align-classes';
+export { tailwindGetAlignClasses } from './tailwind-get-align-classes';

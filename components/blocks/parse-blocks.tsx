@@ -4,7 +4,11 @@ import parse, {
   DOMNode,
   Element,
 } from 'html-react-parser';
-import { hasExactClass } from '@utils/tools';
+import {
+  tailwindAlignClasses,
+  tailwindGetAlignClasses,
+  hasExactClass,
+} from '@utils/tools';
 import {
   CoreParagraph,
   CoreHeading,
@@ -20,6 +24,7 @@ import {
   TagAnchor,
   CoreAudio,
   CoreEmbed,
+  CoreCover,
   // GallopAlbumCover,
   // GallopSinglePost,
   GallopExcerptPost,
@@ -34,36 +39,6 @@ import {
 } from '@components/blocks';
 import { HTMLAttributeProps } from '@lib/types';
 import { castToHTMLAttributeProps } from '@utils/tools';
-
-function TailwindCSSClasses(className: string) {
-  if (!className) {
-    return className;
-  }
-
-  className = className.replace('has-text-align-', 'text-');
-  className = className.replace(
-    'aligncenter',
-    'aligncenter text-center mx-auto justify-center ml-0 mr-0'
-  );
-  className = className.replace(
-    'alignleft',
-    'alignleft text-center md:float-left md:mr-10 md:mb-10 ml-0 mr-0'
-  );
-  className = className.replace(
-    'alignright',
-    'alignright text-center md:float-right md:ml-10 md:mb-10 ml-0 mr-0'
-  );
-  className = className.replace(
-    'alignfull',
-    'alignfull mx-auto !max-w-screen-4xl clear-both !px-0'
-  );
-  className = className.replace(
-    'alignwide',
-    'alignwide mx-auto !max-w-screen-3xl clear-both'
-  );
-
-  return className;
-}
 
 export const ParseBlocks = ({
   content,
@@ -85,15 +60,16 @@ export const ParseBlocks = ({
           domNode.attribs
         );
         let { className } = props;
-        className = TailwindCSSClasses(className);
 
         if (domNode.name === 'p') {
+          className = tailwindAlignClasses(className);
           return (
             <CoreParagraph className={className}>
               {domToReact(domNode.children as DOMNode[], options)}
             </CoreParagraph>
           );
         } else if (domNode.name === 'ul') {
+          className = tailwindAlignClasses(className);
           return (
             <CoreList
               className={className}
@@ -103,16 +79,20 @@ export const ParseBlocks = ({
             />
           );
         } else if (domNode.name === 'hr') {
+          className = tailwindAlignClasses(className);
           return <CoreSeparator props={props} />;
         } else if (className?.includes('wp-block-spacer')) {
+          className = tailwindAlignClasses(className);
           return <CoreSpacer props={props} className={className} />;
         } else if (className?.includes('wp-block-heading')) {
+          className = tailwindAlignClasses(className);
           return (
             <CoreHeading tag={domNode.name} className={className} props={props}>
               {domToReact(domNode.children as DOMNode[], options)}
             </CoreHeading>
           );
         } else if (hasExactClass(className, 'wp-block-group')) {
+          className = tailwindAlignClasses(className);
           return (
             <CoreGroup
               className={className}
@@ -122,6 +102,7 @@ export const ParseBlocks = ({
             />
           );
         } else if (className?.includes('wp-block-buttons')) {
+          className = tailwindAlignClasses(className);
           return (
             <CoreButtons
               node={domNode}
@@ -130,6 +111,7 @@ export const ParseBlocks = ({
             />
           );
         } else if (className?.includes('wp-block-button__link')) {
+          className = tailwindAlignClasses(className);
           return (
             <CoreButtonLink
               tag={domNode.name}
@@ -140,12 +122,14 @@ export const ParseBlocks = ({
             </CoreButtonLink>
           );
         } else if (domNode.name === 'a') {
+          className = tailwindAlignClasses(className);
           return (
             <TagAnchor tag={domNode.name} className={className} node={domNode}>
               {domToReact(domNode.children as DOMNode[], options)}
             </TagAnchor>
           );
         } else if (className?.includes('wp-block-button')) {
+          className = tailwindAlignClasses(className);
           return (
             <CoreButton
               node={domNode}
@@ -154,6 +138,7 @@ export const ParseBlocks = ({
             />
           );
         } else if (className?.includes('wp-block-quote')) {
+          className = tailwindAlignClasses(className);
           return (
             <CoreQuote
               tag={domNode.name}
@@ -164,6 +149,7 @@ export const ParseBlocks = ({
             />
           );
         } else if (className?.includes('wp-block-gallery')) {
+          className = tailwindAlignClasses(className);
           return (
             <CoreGallery
               tag={domNode.name}
@@ -173,10 +159,12 @@ export const ParseBlocks = ({
             />
           );
         } else if (className?.includes('wp-block-image')) {
+          className = tailwindAlignClasses(className);
           return (
             <CoreImage className={className} node={domNode} options={options} />
           );
         } else if (className?.includes('wp-block-audio')) {
+          className = tailwindAlignClasses(className);
           return (
             <CoreAudio
               tag={domNode.name}
@@ -185,7 +173,17 @@ export const ParseBlocks = ({
               options={options}
             />
           );
+        } else if (className?.includes('wp-block-cover')) {
+          return (
+            <CoreCover
+              className={className}
+              props={props}
+              node={domNode}
+              options={options}
+            />
+          );
         } else if (className?.includes('wp-block-embed')) {
+          className = tailwindAlignClasses(className);
           return (
             <CoreEmbed
               tag={domNode.name}
@@ -195,6 +193,7 @@ export const ParseBlocks = ({
             />
           );
         } else if (className?.includes('wp-block-gallop-swiper')) {
+          className = tailwindAlignClasses(className);
           return (
             <GallopSwiper
               className={className}
@@ -203,6 +202,7 @@ export const ParseBlocks = ({
             />
           );
         } else if (className?.includes('wp-block-gallop-sidebar')) {
+          className = tailwindAlignClasses(className);
           return (
             <GallopSidebar
               className={className}
@@ -212,6 +212,7 @@ export const ParseBlocks = ({
             />
           );
         } else if (className?.includes('wp-block-gallop-excerpt-post')) {
+          className = tailwindAlignClasses(className);
           return (
             <GallopExcerptPost
               node={domNode}

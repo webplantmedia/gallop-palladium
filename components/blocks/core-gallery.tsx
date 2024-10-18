@@ -285,7 +285,7 @@ const LeadImageGallery = ({
       <div
         key={'gallery-item-lead'}
         className={classNames(
-          '[&>figure>figcaption]:hidden grid gap-x-[1.5%] pb-[1.5%] [&_img]:w-full'
+          '[&>figure>figcaption]:sr-only grid gap-x-[1.5%] pb-[1.5%] [&_img]:w-full'
         )}
         style={{ gridTemplateColumns: '100%' }}
       >
@@ -327,7 +327,7 @@ const LeadImageGallery = ({
             <div
               key={'gallery-item-' + imageNumber}
               className={classNames(
-                '[&>figure>figcaption]:hidden',
+                '[&>figure>figcaption]:sr-only',
                 'flex flex-row gap-x-[1.5%] pb-[1.5%]',
                 gridGalleryClass
               )}
@@ -388,7 +388,7 @@ const DefaultGallery = ({
             <div
               key={'gallery-item-' + imageNumber}
               className={classNames(
-                '[&>figure>figcaption]:hidden',
+                '[&>figure>figcaption]:sr-only',
                 'flex flex-row gap-x-[1.5%] pb-[1.5%]',
                 gridGalleryClass
               )}

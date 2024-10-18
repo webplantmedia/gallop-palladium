@@ -14,6 +14,7 @@ export { CoreParagraph } from './core-paragraph';
 export { CoreAudio } from './core-audio';
 export { CoreQuote } from './core-quote';
 export { CoreList } from './core-list';
+export { CoreCover } from './core-cover';
 // export { GallopAlbumCover } from './gallop-album-cover';
 export { GallopGridder } from './gallop-gridder';
 export { GallopCard } from './gallop-card';

@@ -172,7 +172,7 @@ figcaption > a,
 .main-content ul span > a,
 .main-content p > * > a,
 .main-content p > a {
-  @apply text-secondary-main underline underline-offset-2 hover:text-secondary-lighter dmh:text-modern-primary-main dmh:hover:text-modern-primary-lighter;
+  @apply text-secondary-main underline underline-offset-2 hover:text-secondary-lighter;
 }
 
 .children-y-0 > *:first-child > *:first-child,
