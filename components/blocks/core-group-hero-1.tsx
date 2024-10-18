@@ -165,7 +165,11 @@ export const CoreGroupHero1 = ({ node, className, props }: BlockProps) => {
       <div className="!max-w-screen-4xl mx-auto relative z-[1] bg-secondary-main !px-0">
         <div
           className="absolute -z-[1] top-0 right-0 bottom-20 bg-contain bg-no-repeat bg-right-top opacity-[.03] w-2/3 xl:w-full"
-          style={infoImg?.src && { backgroundImage: `url('${infoImg.src}')` }}
+          style={
+            infoImg?.src
+              ? { backgroundImage: `url('${infoImg.src}')` }
+              : undefined
+          }
         ></div>
         <div className="flex flex-col xl:flex-row !max-w-screen-3xl px-4 sm:px-8 mx-auto gap-4 sm:gap-10 xl:gap-0">
           <div className="pt-14 pb-7 px-8 bg-primary-main text-primary-contrast w-full xl:w-4/12 mb-0 xl:-mb-20 -mt-20 relative z-20 rounded-t-md rounded-b-md xl:rounded-m-none overflow-hidden">
