@@ -3,7 +3,6 @@
 import { blockFontImports } from '@utils/tools';
 import { Wrapper, Status } from '@googlemaps/react-wrapper';
 import classNames from 'classnames';
-import { customMapStyle } from '@data/mapStyle';
 import {
   ReactNode,
   Children,
@@ -15,6 +14,7 @@ import {
   useRef,
 } from 'react';
 import { setKey, setLocationType, fromAddress } from 'react-geocode';
+import ReactDOM from 'react-dom/client';
 
 setKey(process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY!);
 setLocationType('ROOFTOP');
@@ -27,13 +27,16 @@ const render = (status: Status): ReactElement => {
 
 interface MapProps {
   address?: string;
+  heading?: ReactElement | null;
+  description?: ReactElement | null;
+  image?: ReactElement | null;
   map?: google.maps.Map | null;
   center?: google.maps.LatLngLiteral | null;
   zoom?: number;
   children?: ReactNode;
 }
 
-const SetPin = ({ center, map }: MapProps) => {
+const SetPin = ({ center, map, heading, image, description }: MapProps) => {
   const activeMarkersRef = useRef<google.maps.marker.AdvancedMarkerElement[]>(
     []
   );
@@ -47,16 +50,30 @@ const SetPin = ({ center, map }: MapProps) => {
           var areaBound = new google.maps.LatLngBounds();
 
           if (center) {
-            const title = document.createElement('h2');
-            title.className =
-              'px-1 py-1 font-body rounded-md text-xs bg-primary-main text-primary-contrast price-tag shadow-lg max-w-[200px]';
-            title.textContent = 'JNL Steel';
+            const info = document.createElement('div');
+            info.className =
+              'px-0 py-0 font-body rounded-md bg-white text-base-contrast shadow-lg max-w-[300px]';
+
+            // Create a container for React content
+            const reactContent = document.createElement('div');
+
+            const root = ReactDOM.createRoot(reactContent);
+
+            // Render the heading, image, and description into the container
+            root.render(
+              <>
+                {heading && <>{heading}</>}
+                {image && <>{image}</>}
+                {description && <>{description}</>}
+              </>
+            );
+            info.appendChild(reactContent);
 
             let position = new google.maps.LatLng(center.lat, center.lng);
             let mark = new AdvancedMarkerElement({
               position: position,
               map: map,
-              content: title,
+              content: info,
             });
             areaBound.extend(position);
             activeMarkersRef.current.push(mark);
@@ -82,7 +99,14 @@ const SetPin = ({ center, map }: MapProps) => {
   return null;
 };
 
-const Map = ({ children, address, zoom }: MapProps) => {
+const Map = ({
+  children,
+  address,
+  zoom,
+  heading,
+  image,
+  description,
+}: MapProps) => {
   const mapRef = useRef<any>(null);
 
   const [map, setMap] = useState<google.maps.Map | null>(null);
@@ -140,6 +164,9 @@ const Map = ({ children, address, zoom }: MapProps) => {
           return cloneElement(child as ReactElement<MapProps>, {
             map,
             center,
+            heading,
+            image,
+            description,
           });
         }
         return child; // Return as is if not a valid element
@@ -148,13 +175,25 @@ const Map = ({ children, address, zoom }: MapProps) => {
   );
 };
 
-export const GallopMapClient = ({ address, zoom }: MapProps) => {
+export const GallopMapClient = ({
+  address,
+  zoom,
+  heading,
+  image,
+  description,
+}: MapProps) => {
   return (
     <Wrapper
       apiKey={`${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}`}
       render={render}
     >
-      <Map address={address} zoom={zoom}>
+      <Map
+        heading={heading}
+        image={image}
+        description={description}
+        address={address}
+        zoom={zoom}
+      >
         <SetPin />
       </Map>
     </Wrapper>

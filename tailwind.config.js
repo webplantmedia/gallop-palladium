@@ -38,7 +38,8 @@ module.exports = {
         'spin-slow-reverse': 'rotate-reverse 20s linear infinite',
       },
       fontSize: {
-        sm: ['1rem', '1.5'],
+        xs: ['0.9rem', '1.5'],
+        sm: ['1.1rem', '1.5'],
         base: ['1.2rem', '1.5'],
         lg: ['1.3rem', '1.5'],
         xl: ['1.4rem', '1.5'],
