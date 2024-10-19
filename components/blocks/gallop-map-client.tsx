@@ -52,7 +52,9 @@ const SetPin = ({ center, map, heading, image, description }: MapProps) => {
           if (center) {
             const info = document.createElement('div');
             info.className =
-              'px-0 py-0 font-body rounded-md bg-white text-base-contrast shadow-lg max-w-[250px]';
+              'relative px-0 py-0 font-body rounded-md bg-white text-base-contrast shadow-lg translate-x-1/2 translate-y-1/2';
+            info.style.clipPath =
+              'polygon(20px 0%, 100% 0%, 100% 100%, 20px 100%, 0% 50%)'; // Creates an arrow on the left side
 
             // Create a container for React content
             const reactContent = document.createElement('div');
@@ -61,14 +63,19 @@ const SetPin = ({ center, map, heading, image, description }: MapProps) => {
 
             // Render the heading, image, and description into the container
             root.render(
-              <>
-                {heading && <>{heading}</>}
-                {image && <>{image}</>}
-                {description && <>{description}</>}
-              </>
+              <div className="flex flex-row gap-0 items-center">
+                <div className="block grow-0 shrink-0 max-w-[150px]">
+                  {image && <>{image}</>}
+                </div>
+                <div className="block px-4 max-w-[300px]">
+                  {heading && <>{heading}</>}
+                  {description && <>{description}</>}
+                </div>
+              </div>
             );
             info.appendChild(reactContent);
 
+            // Position the marker slightly to the right
             let position = new google.maps.LatLng(center.lat, center.lng);
             let mark = new AdvancedMarkerElement({
               position: position,

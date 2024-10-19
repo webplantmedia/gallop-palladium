@@ -2,7 +2,6 @@ import { BlockProps } from '@lib/types';
 import { GallopMapClient } from './gallop-map-client';
 import { tailwindGetAlignClasses } from '@utils/tools';
 import classNames from 'classnames';
-import { CoreImage } from '@components/blocks';
 import { ReactElement, isValidElement } from 'react';
 import {
   HTMLReactParserOptions,
@@ -32,16 +31,24 @@ export const GallopMap = ({ node, options, className, props }: BlockProps) => {
 
         if (domNode.name === 'p') {
           const content = domToReact(domNode?.children as DOMNode[], options);
-          description = <p className="text-xs pb-2 px-2">{content}</p>;
+          description = <p className="text-xs">{content}</p>;
           return <></>;
-        } else if (className?.includes('wp-block-image')) {
-          console.log(domNode.name);
-          className = tailwindAlignClasses(className);
+        } else if (domNode.name === 'img') {
           const content = (
-            <CoreImage
-              className={classNames(className, '[&_img]:!max-w-full !mb-2')}
-              node={domNode}
-              options={options}
+            <img
+              className={classNames(
+                props.className,
+                '!mb-0 !max-w-full aspect-4/3 object-cover object-center'
+              )}
+              loading="lazy"
+              src={props.src}
+              style={props.style}
+              width={parseInt(props.width)}
+              height={parseInt(props.height)}
+              srcSet={props.srcSet}
+              sizes={props.sizes}
+              alt={props.alt}
+              title={props.title}
             />
           );
           if (isValidElement(content)) {
@@ -50,9 +57,7 @@ export const GallopMap = ({ node, options, className, props }: BlockProps) => {
         } else if (domNode.name === 'h2') {
           const content = domToReact(domNode?.children as DOMNode[], options);
           heading = (
-            <h3 className="text-base-contrast text-sm font-bold mb-2 pt-2 px-4">
-              {content}
-            </h3>
+            <h3 className="text-base-contrast text-sm font-bold">{content}</h3>
           );
           return <></>;
         } else if (domNode.name === 'h3') {
