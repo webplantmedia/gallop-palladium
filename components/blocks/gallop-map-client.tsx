@@ -3,9 +3,11 @@
 import { blockFontImports } from '@utils/tools';
 import { Wrapper, Status } from '@googlemaps/react-wrapper';
 import classNames from 'classnames';
+import { customMapStyle } from '@data/mapStyle';
 import {
   ReactNode,
   Children,
+  isValidElement,
   cloneElement,
   ReactElement,
   useEffect,
@@ -125,14 +127,23 @@ const Map = ({ children, address, zoom }: MapProps) => {
     <div
       className={classNames(
         '[&_.gm-style-moc]:!top-auto [&_.gm-style-moc]:!bottom-0 [&_.gm-style-moc]:!w-full [&_.gm-style-moc]:!h-[48px]',
-        'overflow-clip w-full h-full'
+        'overflow-clip w-full h-full',
+        'focus:outline-none'
       )}
       ref={mapRef}
       id="map"
     >
-      {Children.map(children, (child) =>
-        child ? cloneElement(child, { map, center }) : child
-      )}
+      {Children.map(children, (child) => {
+        // Ensure the child is a valid React element
+        if (isValidElement(child)) {
+          // Cast child to the expected type to avoid type errors
+          return cloneElement(child as ReactElement<MapProps>, {
+            map,
+            center,
+          });
+        }
+        return child; // Return as is if not a valid element
+      })}
     </div>
   );
 };
