@@ -32,7 +32,6 @@ interface MapProps {
   image?: ReactElement | null;
   map?: google.maps.Map | null;
   center?: google.maps.LatLngLiteral | null;
-  zoom?: number;
   children?: ReactNode;
 }
 
@@ -51,18 +50,14 @@ const SetPin = ({ center, map, heading, image, description }: MapProps) => {
 
           if (center) {
             const info = document.createElement('div');
-            info.className =
-              'relative px-0 py-0 font-body rounded-md bg-white text-base-contrast shadow-lg translate-x-1/2 translate-y-1/2';
-            info.style.clipPath =
-              'polygon(20px 0%, 100% 0%, 100% 100%, 20px 100%, 0% 50%)'; // Creates an arrow on the left side
-
-            // Create a container for React content
-            const reactContent = document.createElement('div');
-
-            const root = ReactDOM.createRoot(reactContent);
-
-            // Render the heading, image, and description into the container
-            root.render(
+            info.className = classNames(
+              'relative px-0 py-0 font-body rounded-md bg-white text-base-contrast shadow-lg',
+              'lg:translate-x-1/2 lg:translate-y-1/2 lg:[clip-path:polygon(20px_0%,100%_0%,100%_100%,20px_100%,0%_50%)] -translate-y-1/2',
+              'lg:ml-10'
+            );
+            const infoContent = document.createElement('div');
+            const infoRoot = ReactDOM.createRoot(infoContent);
+            infoRoot.render(
               <div className="flex flex-row gap-0 items-center">
                 <div className="block grow-0 shrink-0 max-w-[150px]">
                   {image && <>{image}</>}
@@ -73,7 +68,19 @@ const SetPin = ({ center, map, heading, image, description }: MapProps) => {
                 </div>
               </div>
             );
-            info.appendChild(reactContent);
+            info.appendChild(infoContent);
+
+            const dot = document.createElement('div');
+            dot.className = classNames('translate-y-1/2');
+            const pingContent = document.createElement('div');
+            const pingRoot = ReactDOM.createRoot(pingContent);
+            pingRoot.render(
+              <span className="relative flex h-5 w-5">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-main opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-5 w-5 bg-primary-main"></span>
+              </span>
+            );
+            dot.appendChild(pingContent);
 
             // Position the marker slightly to the right
             let position = new google.maps.LatLng(center.lat, center.lng);
@@ -82,8 +89,14 @@ const SetPin = ({ center, map, heading, image, description }: MapProps) => {
               map: map,
               content: info,
             });
+            let markDot = new AdvancedMarkerElement({
+              position: position,
+              map: map,
+              content: dot,
+            });
             areaBound.extend(position);
             activeMarkersRef.current.push(mark);
+            activeMarkersRef.current.push(markDot);
           }
         } catch (error) {
           console.error(
@@ -106,14 +119,7 @@ const SetPin = ({ center, map, heading, image, description }: MapProps) => {
   return null;
 };
 
-const Map = ({
-  children,
-  address,
-  zoom,
-  heading,
-  image,
-  description,
-}: MapProps) => {
+const Map = ({ children, address, heading, image, description }: MapProps) => {
   const mapRef = useRef<any>(null);
 
   const [map, setMap] = useState<google.maps.Map | null>(null);
@@ -126,7 +132,7 @@ const Map = ({
 
       const m = new window.google.maps.Map(mapRef.current, {
         center: center,
-        zoom: zoom,
+        zoom: 9,
         gestureHandling: 'cooperative',
         zoomControl: true,
         mapTypeControl: true,
@@ -183,7 +189,6 @@ const Map = ({
 
 export const GallopMapClient = ({
   address,
-  zoom,
   heading,
   image,
   description,
@@ -198,7 +203,6 @@ export const GallopMapClient = ({
         image={image}
         description={description}
         address={address}
-        zoom={zoom}
       >
         <SetPin />
       </Map>

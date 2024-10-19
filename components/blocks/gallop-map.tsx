@@ -19,7 +19,6 @@ export const GallopMap = ({ node, options, className, props }: BlockProps) => {
   let heading: ReactElement | null = null;
   let description: ReactElement | null = null;
   let image: ReactElement | null = null;
-  let zoom: number = 12;
 
   const op: HTMLReactParserOptions = {
     replace(domNode) {
@@ -72,10 +71,9 @@ export const GallopMap = ({ node, options, className, props }: BlockProps) => {
 
   return (
     <div className={classNames('mb-14', className)}>
-      <div className="relative rounded-b-none overflow-clip w-full aspect-video h-full">
+      <div className="relative rounded-b-none overflow-clip w-full aspect-square lg:aspect-[16/7] h-full">
         <GallopMapClient
           address={address}
-          zoom={zoom}
           heading={heading}
           image={image}
           description={description}
