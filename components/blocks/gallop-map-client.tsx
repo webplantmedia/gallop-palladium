@@ -52,7 +52,7 @@ const SetPin = ({ center, map, heading, image, description }: MapProps) => {
           if (center) {
             const info = document.createElement('div');
             info.className =
-              'px-0 py-0 font-body rounded-md bg-white text-base-contrast shadow-lg max-w-[300px]';
+              'px-0 py-0 font-body rounded-md bg-white text-base-contrast shadow-lg max-w-[250px]';
 
             // Create a container for React content
             const reactContent = document.createElement('div');
@@ -151,8 +151,7 @@ const Map = ({
     <div
       className={classNames(
         '[&_.gm-style-moc]:!top-auto [&_.gm-style-moc]:!bottom-0 [&_.gm-style-moc]:!w-full [&_.gm-style-moc]:!h-[48px]',
-        'overflow-clip w-full h-full',
-        'focus:outline-none'
+        'overflow-clip w-full h-full [&_*]:!border-none'
       )}
       ref={mapRef}
       id="map"
