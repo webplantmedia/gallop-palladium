@@ -30,7 +30,7 @@ import {
   GallopExcerptPost,
   CoreGroup,
   // GallopBlogPosts,
-  // GallopMap,
+  GallopMap,
   // GallopNeighborhood,
   // GallopCard,
   // GallopContactForm,
@@ -209,6 +209,15 @@ export const ParseBlocks = ({
               node={domNode}
               options={options}
               sidebarHeader={sidebarHeader}
+            />
+          );
+        } else if (className?.includes('wp-block-gallop-map')) {
+          return (
+            <GallopMap
+              node={domNode}
+              className={className}
+              props={props}
+              options={options}
             />
           );
         } else if (className?.includes('wp-block-gallop-excerpt-post')) {

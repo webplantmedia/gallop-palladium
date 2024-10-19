@@ -29,3 +29,5 @@ export { GallopSeeMore } from './gallop-see-more';
 export { GallopSwiper } from './gallop-swiper';
 export { GallopSidebar } from './gallop-sidebar';
 export { GallopExcerptPost } from './gallop-excerpt-post';
+export { GallopMap } from './gallop-map';
+export { GallopMapClient } from './gallop-map-client';

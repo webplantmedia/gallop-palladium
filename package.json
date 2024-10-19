@@ -30,6 +30,7 @@
     "openai": "^4.29.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-geocode": "^1.0.0-alpha.1",
     "react-instantsearch": "^7.5.4",
     "react-instantsearch-core": "^7.0.1",
     "react-popper": "^2.3.0",
