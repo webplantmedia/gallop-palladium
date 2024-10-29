@@ -4,8 +4,7 @@ import {
   Dialog,
   DialogTitle,
   DialogPanel,
-  Transition,
-  TransitionChild,
+  DialogBackdrop,
 } from '@headlessui/react';
 import ProfileMenuSidebar from './profile-menu-sidebar';
 import { Fragment, useState } from 'react';
@@ -15,7 +14,15 @@ import ProfileMenuSidebarHeader from './profile-menu-sidebar-header';
 import StickyLogo from './sticky-logo';
 // import Image from 'next/image';
 
-export default function ProfileMenu({ sidebar, sidebarHeader, stickyLogo }) {
+export default function ProfileMenu({
+  sidebar,
+  sidebarHeader,
+  stickyLogo,
+}: {
+  sidebar: any;
+  sidebarHeader: any;
+  stickyLogo: any;
+}) {
   let [isOpen, setIsOpen] = useState(false);
 
   const closeModal = () => {
@@ -46,70 +53,53 @@ export default function ProfileMenu({ sidebar, sidebarHeader, stickyLogo }) {
           </span>
         </button>
       </div>
-      <Transition appear={true} unmount={false} show={isOpen} as={Fragment}>
-        <Dialog
-          unmount={false}
-          as="div"
-          className="relative z-40"
-          onClose={closeModal}
-        >
-          <TransitionChild
-            as={Fragment}
-            enter="ease-in-out duration-500"
-            enterFrom="opacity-0"
-            enterTo="opacity-100"
-            leave="ease-in-out duration-500"
-            leaveFrom="opacity-100"
-            leaveTo="opacity-0"
-            unmount={false}
-          >
-            <div className="fixed inset-0 bg-base-darker/25 transition-opacity opacity-100 dmh:bg-modern-base-card/25" />
-          </TransitionChild>
+      <Dialog
+        unmount={false}
+        as="div"
+        className="relative z-40"
+        onClose={closeModal}
+        open={isOpen}
+      >
+        <DialogBackdrop
+          transition
+          className="fixed inset-0 bg-base-darker/25 duration-500 ease-out data-[closed]:opacity-0"
+        />
 
-          <TransitionChild
-            as={Fragment}
-            enter="transform transition ease-in-out duration-500"
-            enterFrom="translate-x-full"
-            enterTo="translate-x-0"
-            leave="transform transition ease-in-out duration-500"
-            leaveFrom="-translate-x-0"
-            leaveTo="translate-x-full"
-            unmount={false}
-          >
-            <div className="fixed inset-0 font-body h-[var(--app-height)] text-base max-w-[86%] sm:max-w-[24rem] w-full right-0 left-auto">
-              <div className="flex justify-end h-full">
-                <DialogPanel className="pointer-events-auto h-full bg-base-body shadow-xl text-left align-middle transition-all overflow-hidden overflow-y-auto scrollbar-hide w-full dmh:bg-modern-base-card">
-                  <div className="relative flex items-center justify-start flex-col h-full py-6">
-                    <div className="px-4 sm:px-8 w-full">
-                      <div className="w-full flex items-start justify-between">
-                        <DialogTitle className="">
-                          <ProfileMenuSidebarHeader post={sidebarHeader} />
-                        </DialogTitle>
-                        <div className="ml-3 flex h-7 items-center">
-                          <button
-                            type="button"
-                            className="rounded-full bg-base-body text-base-contrast focus:outline-none focus:ring-0 hover:bg-white/10 p-1.5 -mx-2.5 dmh:bg-modern-base-card dmh:text-modern-primary-main dmh:hover:bg-white/50"
-                            onClick={closeModal}
-                          >
-                            <span className="sr-only">Close panel</span>
-                            <XMarkIcon className="h-6 w-6" aria-hidden="true" />
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="mt-6 w-full px-4 sm:px-8">
-                      <ProfileMenuSidebar
-                        sidebar={sidebar}
-                        closeModal={closeModal}
-                      />
+        <div className="fixed inset-0 font-body h-[var(--app-height)] text-base max-w-[86%] sm:max-w-[24rem] w-full right-0 left-auto">
+          <div className="flex justify-end h-full">
+            <DialogPanel
+              transition
+              className="pointer-events-auto h-full bg-base-body shadow-xl text-left align-middle overflow-hidden overflow-y-auto scrollbar-hide w-full duration-500 ease-in-out transition data-[closed]:translate-x-full"
+            >
+              <div className="relative flex items-center justify-start flex-col h-full py-6">
+                <div className="px-4 sm:px-8 w-full">
+                  <div className="w-full flex items-start justify-between">
+                    <DialogTitle className="">
+                      <ProfileMenuSidebarHeader post={sidebarHeader} />
+                    </DialogTitle>
+                    <div className="ml-3 flex h-7 items-center">
+                      <button
+                        type="button"
+                        className="rounded-full bg-base-body text-base-contrast focus:outline-none focus:ring-0 hover:bg-white/10 p-1.5 -mx-2.5 dmh:bg-modern-base-card dmh:text-modern-primary-main dmh:hover:bg-white/50"
+                        onClick={closeModal}
+                      >
+                        <span className="sr-only">Close panel</span>
+                        <XMarkIcon className="h-6 w-6" aria-hidden="true" />
+                      </button>
                     </div>
                   </div>
-                </DialogPanel>
+                </div>
+                <div className="mt-6 w-full px-4 sm:px-8">
+                  <ProfileMenuSidebar
+                    sidebar={sidebar}
+                    closeModal={closeModal}
+                  />
+                </div>
               </div>
-            </div>
-          </TransitionChild>
-        </Dialog>
-      </Transition>
+            </DialogPanel>
+          </div>
+        </div>
+      </Dialog>
     </>
   );
 }
