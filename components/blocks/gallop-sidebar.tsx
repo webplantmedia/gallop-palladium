@@ -18,7 +18,11 @@ interface GallopSidebarBlockProps extends BlockProps {
 }
 
 const SEOContent = ({ children }: { children: any }) => {
-  return <div className="absolute -left-[9999px] invisible">{children}</div>;
+  return (
+    <div className="absolute -left-[9999px] invisible h-0 w-0 overflow-hidden">
+      {children}
+    </div>
+  );
 };
 
 export const GallopSidebar = ({

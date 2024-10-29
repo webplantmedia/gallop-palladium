@@ -68,7 +68,7 @@ export const GallopExcerptPost = ({
           return <></>;
         } else if (domNode.name == 'p') {
           if (domNode?.children?.length > 0) {
-            const p = domToReact(domNode.children as DOMNode[], options);
+            const p = domToReact(domNode.children as DOMNode[], op);
             if (p) {
               paragraph = (
                 <CoreParagraph className={classNames(className, 'p-4')}>

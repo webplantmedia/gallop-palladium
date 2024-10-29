@@ -33,7 +33,7 @@ export const CoreCover = ({ node, className, options }: BlockProps) => {
           if (props?.style?.backgroundImage) {
             img = (
               <div
-                className="absolute inset-0 bg-cover bg-no-repeat bg-center bg-fixed"
+                className="absolute inset-0 bg-cover bg-no-repeat bg-center bg-fixed grayscale"
                 style={{
                   backgroundImage: props.style.backgroundImage,
                 }}

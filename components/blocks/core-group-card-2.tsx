@@ -8,7 +8,7 @@ import { VideoPopup } from '@widgets/video-popup';
 import { CoreParagraph, CoreHeading } from '@components/blocks';
 import { BlockProps } from '@lib/types';
 
-export const CoreGroupCard1 = ({ node, className, props }: BlockProps) => {
+export const CoreGroupCard2 = ({ node, className, props }: BlockProps) => {
   const data = getVarsFromNode(node);
 
   let img: any = {};
@@ -48,14 +48,6 @@ export const CoreGroupCard1 = ({ node, className, props }: BlockProps) => {
     </>
   );
 
-  if (href) {
-    image = (
-      <VideoPopup className="relative group" src={src} url={href}>
-        {image}
-      </VideoPopup>
-    );
-  }
-
   // img.className = img.class;
   // img.srcSet = img.srcset;
   // delete img.class;
@@ -65,7 +57,7 @@ export const CoreGroupCard1 = ({ node, className, props }: BlockProps) => {
   return (
     <div className="flex flex-col gap-0 rounded-md overflow-clip shadow-lg">
       {image}
-      <div className="bg-base-card px-7 py-7 h-full flex flex-col [&>*:last-child]:!mb-0">
+      <div className="bg-base-card px-5 py-5 h-full flex flex-col [&>*:last-child]:!mb-0">
         <CoreHeading tag="h4" props={props} className="is-style-h3">
           {data?.h4?.jsx}
         </CoreHeading>

@@ -17,6 +17,7 @@ import {
   CoreSpacer,
   CoreButtons,
   CoreButton,
+  CoreCode,
   CoreButtonLink,
   CoreQuote,
   CoreList,
@@ -224,6 +225,15 @@ export const ParseBlocks = ({
           className = tailwindAlignClasses(className);
           return (
             <GallopExcerptPost
+              node={domNode}
+              className={className}
+              props={props}
+              options={options}
+            />
+          );
+        } else if (className?.includes('wp-block-code')) {
+          return (
+            <CoreCode
               node={domNode}
               className={className}
               props={props}

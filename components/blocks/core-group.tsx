@@ -2,6 +2,7 @@ import classNames from 'classnames';
 import {
   CoreGroupGrid,
   CoreGroupCard1,
+  CoreGroupCard2,
   CoreGroupHero1,
 } from '@components/blocks';
 import { hasExactClass } from '@utils/tools';
@@ -24,6 +25,8 @@ export const CoreGroup = ({ className, props, options, node }: BlockProps) => {
     return <CoreGroupHero1 node={node} className={className} props={props} />;
   } else if (hasExactClass(className, 'is-style-card-1')) {
     return <CoreGroupCard1 node={node} className={className} props={props} />;
+  } else if (hasExactClass(className, 'is-style-card-2')) {
+    return <CoreGroupCard2 node={node} className={className} props={props} />;
   }
 
   return (

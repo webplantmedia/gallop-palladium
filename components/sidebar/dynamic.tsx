@@ -52,6 +52,7 @@ export default function DynamicSidebar({
         <Dialog
           as="div"
           className="relative z-40 dynamic-content"
+          static={true}
           onClose={closeModal}
         >
           <TransitionChild
@@ -63,7 +64,7 @@ export default function DynamicSidebar({
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <div className="fixed inset-0 bg-base-darker/25 transition-opacity opacity-100 dmh:bg-modern-primary-main/25" />
+            <div className="fixed inset-0 bg-base-darker/25 transition-opacity opacity-100" />
           </TransitionChild>
 
           <TransitionChild
@@ -77,7 +78,7 @@ export default function DynamicSidebar({
           >
             <div className="fixed inset-0 font-body h-[var(--app-height)] text-base max-w-[86%] md:max-w-[77%] lg:max-w-[67%] xl:max-w-[700px] w-full right-0 left-auto scroll-smooth">
               <div className="flex justify-end h-full">
-                <DialogPanel className="pointer-events-auto h-full bg-base-body shadow-xl text-left align-middle transition-all overflow-hidden overflow-y-auto scrollbar-hide w-full dmh:bg-modern-base-body">
+                <DialogPanel className="pointer-events-auto h-full bg-base-body shadow-xl text-left align-middle transition-all overflow-hidden overflow-y-auto scrollbar-hide w-full">
                   <div className="relative flex items-center justify-start flex-col h-full pt-6 pb-14">
                     <div className="px-4 md:px-8 w-full">
                       <div className="w-full flex items-start justify-between">
@@ -87,7 +88,7 @@ export default function DynamicSidebar({
                         <div className="ml-3 flex h-7 items-center">
                           <button
                             type="button"
-                            className="rounded-full bg-base-body text-base-contrast focus:outline-none focus:ring-0 hover:bg-white/10 p-1.5 -mx-2.5 dmh:text-modern-primary-contrast dmh:bg-modern-primary-main hover:dmh:bg-modern-primary-light hover:dmh:text-modern-primary-contrast"
+                            className="rounded-full bg-base-body text-base-contrast focus:outline-none focus:ring-0 hover:bg-white/10 p-1.5 -mx-2.5"
                             onClick={closeModal}
                           >
                             <span className="sr-only">Close panel</span>
