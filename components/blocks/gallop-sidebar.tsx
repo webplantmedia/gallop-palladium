@@ -1,21 +1,6 @@
-'use server';
-
-import { hasExactClass, castToHTMLAttributeProps } from '@utils/tools';
-import { HTMLAttributeProps } from '@lib/types';
 import React from 'react';
 import DynamicSidebar from '@components/sidebar/dynamic';
 import { BlockProps } from '@lib/types';
-
-import {
-  HTMLReactParserOptions,
-  domToReact,
-  DOMNode,
-  Element,
-} from 'html-react-parser';
-
-interface GallopSidebarBlockProps extends BlockProps {
-  sidebarHeader?: any;
-}
 
 const SEOContent = ({ children }: { children: any }) => {
   return (
@@ -25,35 +10,17 @@ const SEOContent = ({ children }: { children: any }) => {
   );
 };
 
-export const GallopSidebar = async ({
-  node,
+export const GallopSidebar = ({
+  header,
+  content,
   className,
-  options,
   sidebarHeader,
-}: GallopSidebarBlockProps) => {
-  let header: React.ReactElement | null = null;
-  let content: React.ReactElement | null = null;
-
-  const op: HTMLReactParserOptions = {
-    replace(domNode) {
-      if (domNode instanceof Element && domNode.attribs) {
-        const props: HTMLAttributeProps = castToHTMLAttributeProps(
-          domNode.attribs
-        );
-        let { className: classes } = props;
-
-        if (hasExactClass(classes, 'wp-block-group') && !header) {
-          header = <>{domToReact(domNode.children as DOMNode[], options)}</>;
-        } else if (hasExactClass(classes, 'wp-block-group') && !content) {
-          content = <>{domToReact(domNode.children as DOMNode[], options)}</>;
-        }
-        return <></>; //this prevents recursion
-      }
-    },
-  };
-
-  domToReact(node?.children as DOMNode[], op);
-
+}: {
+  header: any;
+  content: any;
+  className: any;
+  sidebarHeader: any;
+}) => {
   return (
     <>
       <DynamicSidebar

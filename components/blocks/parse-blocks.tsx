@@ -9,6 +9,7 @@ import {
   tailwindGetAlignClasses,
   hasExactClass,
   getVarsFromNode,
+  replaceWordPressUrlRelative,
 } from '@utils/tools';
 import {
   CoreParagraph,
@@ -22,7 +23,6 @@ import {
   CoreButtonLink,
   CoreQuote,
   CoreList,
-  CoreListLi,
   CoreImage,
   TagAnchor,
   CoreAudio,
@@ -46,8 +46,7 @@ import {
 } from '@components/blocks';
 import { HTMLAttributeProps } from '@lib/types';
 import { castToHTMLAttributeProps } from '@utils/tools';
-
-import { BlockProps } from '@lib/types';
+import classNames from 'classnames';
 
 export const ParseBlocks = ({
   content,
@@ -167,7 +166,7 @@ export const ParseBlocks = ({
         } else if (className?.includes('wp-block-audio')) {
           className = tailwindAlignClasses(className);
           return <CoreAudio props={props} className={className} />;
-        } else if (className?.includes('wp-block-cover')) {
+        } /*else if (className?.includes('wp-block-cover')) {
           return (
             <CoreCover
               className={className}
@@ -186,45 +185,136 @@ export const ParseBlocks = ({
               options={options}
             />
           );
-        } else if (className?.includes('wp-block-gallop-swiper')) {
+				}*/ else if (className?.includes('wp-block-gallop-swiper')) {
           className = tailwindAlignClasses(className);
           return (
-            <GallopSwiper
-              className={className}
-              node={domNode}
-              options={options}
-            />
+            <GallopSwiper className={className}>
+              {domToReact(domNode.children as DOMNode[], options)}
+            </GallopSwiper>
           );
         } else if (className?.includes('wp-block-gallop-sidebar')) {
           className = tailwindAlignClasses(className);
+          let header: React.ReactElement | null = null;
+          let content: React.ReactElement | null = null;
+
+          const op: HTMLReactParserOptions = {
+            replace(domNode) {
+              if (domNode instanceof Element && domNode.attribs) {
+                const props: HTMLAttributeProps = castToHTMLAttributeProps(
+                  domNode.attribs
+                );
+                let { className: classes } = props;
+
+                if (hasExactClass(classes, 'wp-block-group') && !header) {
+                  header = (
+                    <>{domToReact(domNode.children as DOMNode[], options)}</>
+                  );
+                } else if (
+                  hasExactClass(classes, 'wp-block-group') &&
+                  !content
+                ) {
+                  content = (
+                    <>{domToReact(domNode.children as DOMNode[], options)}</>
+                  );
+                }
+                return <></>; //this prevents recursion
+              }
+            },
+          };
+
+          domToReact(domNode?.children as DOMNode[], op);
+
           return (
             <GallopSidebar
               className={className}
-              node={domNode}
-              options={options}
+              header={header}
               sidebarHeader={sidebarHeader}
+              content={content}
             />
           );
         } else if (className?.includes('wp-block-gallop-map')) {
-          return (
-            <GallopMap
-              node={domNode}
-              className={className}
-              props={props}
-              options={options}
-            />
-          );
+          const data = getVarsFromNode(domNode);
+          return <GallopMap data={data} className={className} />;
         } else if (className?.includes('wp-block-gallop-excerpt-post')) {
           className = tailwindAlignClasses(className);
+          let heading: any;
+          let paragraph: React.ReactElement | null = null;
+          let figure: any;
+          let href = '';
+          let hasTextLink = false;
+
+          const { id } = props || {};
+
+          const op: HTMLReactParserOptions = {
+            replace(domNode) {
+              if (domNode instanceof Element && domNode.attribs) {
+                const props: HTMLAttributeProps = castToHTMLAttributeProps(
+                  domNode.attribs
+                );
+                const { className: classes } = props;
+
+                if (domNode.name === 'a') {
+                  const parent = (domNode?.parent as Element)?.name;
+                  if (parent === 'p') {
+                    hasTextLink = true;
+                  } else {
+                    ({ href } = props);
+                    href = replaceWordPressUrlRelative(href);
+                  }
+                } else if (classes?.includes('wp-block-image')) {
+                  const data = getVarsFromNode(domNode);
+                  figure = (
+                    <CoreImage
+                      className={classNames(
+                        className,
+                        '!mb-0 [&_img]:!rounded-none'
+                      )}
+                      data={data}
+                    />
+                  );
+                  return <></>;
+                } else if (className?.includes('wp-block-heading')) {
+                  heading = (
+                    <CoreHeading
+                      tag={domNode.name}
+                      className={classNames(className, 'p-4 !mb-0 !mt-0')}
+                      props={props}
+                    >
+                      {domToReact(domNode.children as DOMNode[], options)}
+                    </CoreHeading>
+                  );
+                  return <></>;
+                } else if (domNode.name == 'p') {
+                  if (domNode?.children?.length > 0) {
+                    const p = domToReact(domNode.children as DOMNode[], op);
+                    if (p) {
+                      paragraph = (
+                        <CoreParagraph className={classNames(className, 'p-4')}>
+                          {p}
+                        </CoreParagraph>
+                      );
+                    }
+                  }
+                  return <></>;
+                }
+              }
+            },
+          };
+
+          domToReact(domNode?.children as DOMNode[], op);
+
           return (
             <GallopExcerptPost
-              node={domNode}
               className={className}
-              props={props}
-              options={options}
+              heading={heading}
+              paragraph={paragraph}
+              figure={figure}
+              href={href}
+              hasTextLink={hasTextLink}
+              id={id}
             />
           );
-        } else if (className?.includes('wp-block-code')) {
+        } /*else if (className?.includes('wp-block-code')) {
           return (
             <CoreCode
               node={domNode}

@@ -9,11 +9,9 @@ import { BlockProps } from '@lib/types';
 
 import { domToReact, DOMNode } from 'html-react-parser';
 
-export const GallopSwiper = ({ node, className, options }: BlockProps) => {
+export const GallopSwiper = ({ children, className }: BlockProps) => {
   let swiperId = 'swiper-' + useId(); // Generate a unique ID
   swiperId = swiperId.replace(/:/g, '-'); // Sanitize the ID
-
-  const domChildren = domToReact(node?.children as DOMNode[], options);
 
   return (
     <div className="!max-w-none !overflow-hidden">
@@ -43,8 +41,8 @@ export const GallopSwiper = ({ node, className, options }: BlockProps) => {
             </div>
           </div>
           <div className="relative swiper-wrapper items-start flex">
-            {Array.isArray(domChildren) &&
-              domChildren.map((item, index) => {
+            {Array.isArray(children) &&
+              children.map((item, index) => {
                 return (
                   <div className="swiper-slide" key={`swiper-slide-${index}`}>
                     <div className="w-auto [&>*>*]:!mb-0">{item}</div>

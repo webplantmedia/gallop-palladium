@@ -27,8 +27,10 @@ export const CoreList = ({ data, className }: BlockProps) => {
         'leading-normal mb-7 flex flex-col gap-2'
       )}
     >
-      {data?.li?.map((item: any) => {
-        return <CoreListLi>{item?.jsx}</CoreListLi>;
+      {data?.li?.map((item: any, index: number) => {
+        return (
+          <CoreListLi key={`core-list-li-${index}`}>{item?.jsx}</CoreListLi>
+        );
       })}
     </ul>
   );

@@ -2,72 +2,48 @@ import { BlockProps } from '@lib/types';
 import { GallopMapClient } from './gallop-map-client';
 import { tailwindGetAlignClasses } from '@utils/tools';
 import classNames from 'classnames';
-import { ReactElement, isValidElement } from 'react';
-import {
-  HTMLReactParserOptions,
-  domToReact,
-  DOMNode,
-  Element,
-} from 'html-react-parser';
-import { tailwindAlignClasses, getDomNodeText } from '@utils/tools';
-import { HTMLAttributeProps } from '@lib/types';
-import { castToHTMLAttributeProps } from '@utils/tools';
+import { ReactElement } from 'react';
 
-export const GallopMap = ({ node, options, className, props }: BlockProps) => {
+export const GallopMap = ({ data, className }: BlockProps) => {
   className = tailwindGetAlignClasses(className);
   let address: string = '';
   let heading: ReactElement | null = null;
   let description: ReactElement | null = null;
   let image: ReactElement | null = null;
 
-  const op: HTMLReactParserOptions = {
-    replace(domNode) {
-      if (domNode instanceof Element && domNode.attribs) {
-        const props: HTMLAttributeProps = castToHTMLAttributeProps(
-          domNode.attribs
-        );
-        let { className } = props;
+  if (data.wpBlockImage) {
+    image = (
+      <img
+        className={classNames(
+          data.wpBlockImage.className,
+          '!mb-0 !max-w-full aspect-4/3 object-cover object-center'
+        )}
+        loading="lazy"
+        src={data.wpBlockImage.src}
+        style={data.wpBlockImage.style}
+        width={parseInt(data.wpBlockImage.width)}
+        height={parseInt(data.wpBlockImage.height)}
+        srcSet={data.wpBlockImage.srcSet}
+        sizes={data.wpBlockImage.sizes}
+        alt={data.wpBlockImage.alt}
+        title={data.wpBlockImage.title}
+      />
+    );
+  }
 
-        if (domNode.name === 'p') {
-          const content = domToReact(domNode?.children as DOMNode[], options);
-          description = <p className="text-xs">{content}</p>;
-          return <></>;
-        } else if (domNode.name === 'img') {
-          const content = (
-            <img
-              className={classNames(
-                props.className,
-                '!mb-0 !max-w-full aspect-4/3 object-cover object-center'
-              )}
-              loading="lazy"
-              src={props.src}
-              style={props.style}
-              width={parseInt(props.width)}
-              height={parseInt(props.height)}
-              srcSet={props.srcSet}
-              sizes={props.sizes}
-              alt={props.alt}
-              title={props.title}
-            />
-          );
-          if (isValidElement(content)) {
-            image = content;
-          }
-        } else if (domNode.name === 'h2') {
-          const content = domToReact(domNode?.children as DOMNode[], options);
-          heading = (
-            <h3 className="text-base-contrast text-sm font-bold">{content}</h3>
-          );
-          return <></>;
-        } else if (domNode.name === 'h3') {
-          address = getDomNodeText(domNode);
-          return <></>;
-        }
-      }
-    },
-  };
+  if (data.p) {
+    description = <p className="text-xs">{data.p.jsx}</p>;
+  }
 
-  domToReact(node?.children as DOMNode[], op);
+  if (data.h2) {
+    heading = (
+      <h3 className="text-base-contrast text-sm font-bold">{data.h2.jsx}</h3>
+    );
+  }
+
+  if (data.h3) {
+    heading = <>{data.h3.jsx}</>;
+  }
 
   return (
     <div className={classNames('mb-14', className)}>
