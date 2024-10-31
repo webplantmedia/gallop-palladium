@@ -49,6 +49,7 @@ export interface HTMLAttributeProps {
 
 export interface BlockProps {
   node?: Element;
+  data?: any;
   className?: string;
   children?: ReactNode;
   tag?: string;

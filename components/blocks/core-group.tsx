@@ -9,25 +9,8 @@ import { hasExactClass } from '@utils/tools';
 import { domToReact, DOMNode } from 'html-react-parser';
 import { BlockProps } from '@lib/types';
 
-export const CoreGroup = ({ className, props, options, node }: BlockProps) => {
+export const CoreGroup = ({ className, props, children }: BlockProps) => {
   const { id } = props || {};
-
-  if (hasExactClass(className, 'wp-block-group-is-layout-grid')) {
-    return (
-      <CoreGroupGrid
-        className={className}
-        props={props}
-        options={options}
-        node={node}
-      />
-    );
-  } else if (hasExactClass(className, 'is-style-hero-1')) {
-    return <CoreGroupHero1 node={node} className={className} props={props} />;
-  } else if (hasExactClass(className, 'is-style-card-1')) {
-    return <CoreGroupCard1 node={node} className={className} props={props} />;
-  } else if (hasExactClass(className, 'is-style-card-2')) {
-    return <CoreGroupCard2 node={node} className={className} props={props} />;
-  }
 
   return (
     <div
@@ -37,7 +20,7 @@ export const CoreGroup = ({ className, props, options, node }: BlockProps) => {
         'mb-10 [&>*]:mt-0 [&>*]:mb-0 [&>*>*:first-child]:mt-0 [&>*>*:last-child]:mb-0'
       )}
     >
-      {domToReact(node?.children as DOMNode[], options)}
+      {children}
     </div>
   );
 };

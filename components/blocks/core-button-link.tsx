@@ -2,12 +2,10 @@ import { BlockProps } from '@lib/types';
 import { replaceWordPressUrlRelative } from '@utils/tools';
 import classNames from 'classnames';
 import Link from 'next/link';
-import { HTMLAttributeProps } from '@lib/types';
-import { castToHTMLAttributeProps } from '@utils/tools';
 
-export const CoreButtonLink = ({ node, children, className }: BlockProps) => {
+export const CoreButtonLink = ({ children, className, props }: BlockProps) => {
   className = className ? className : '';
-  const props: HTMLAttributeProps = castToHTMLAttributeProps(node?.attribs);
+  const href = props?.href;
 
   if (className.includes('is-style-large')) {
     className = className.replace('is-style-large', 'text-base py-4 px-6');
@@ -19,7 +17,7 @@ export const CoreButtonLink = ({ node, children, className }: BlockProps) => {
     <Link
       prefetch={false}
       className={classNames(className, 'w-full')}
-      href={props?.href ? replaceWordPressUrlRelative(props.href) : '#'}
+      href={href ? replaceWordPressUrlRelative(href) : '#'}
     >
       {children}
     </Link>

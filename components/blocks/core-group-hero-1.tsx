@@ -16,8 +16,7 @@ import PlaySolidIcon from '@iconify/icons-heroicons/play-solid';
 import { VideoPopup } from '@widgets/video-popup';
 import { BlockProps } from '@lib/types';
 
-export const CoreGroupHero1 = ({ node, className, props }: BlockProps) => {
-  const data = getVarsFromNode(node);
+export const CoreGroupHero1 = ({ data, className, props }: BlockProps) => {
   let swiperId = 'swiper-' + useId(); // Generate a unique ID
   let circleTextId = 'circle-text-' + useId(); // Generate a unique ID
   swiperId = swiperId.replace(/:/g, '-'); // Sanitize the ID

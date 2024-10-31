@@ -10,7 +10,7 @@ import {
   Element,
 } from 'html-react-parser';
 import { tailwindAlignClasses, getDomNodeText } from '@utils/tools';
-import { CoreCodeCanvas } from '@components/blocks';
+// import { CoreCodeCanvas } from '@components/blocks';
 import { HTMLAttributeProps } from '@lib/types';
 import { castToHTMLAttributeProps } from '@utils/tools';
 
@@ -22,7 +22,7 @@ export const CoreCode = ({ node, options, className, props }: BlockProps) => {
   let image: ReactElement | null = null;
 
   if (className?.includes('r-panel-profile')) {
-    return <CoreCodeCanvas id="r-panel-profile" />;
+    // return <CoreCodeCanvas id="r-panel-profile" />;
   }
 
   return (

@@ -5,9 +5,8 @@ import Link from 'next/link';
 import { HTMLAttributeProps } from '@lib/types';
 import { castToHTMLAttributeProps } from '@utils/tools';
 
-export const TagAnchor = ({ node, children, tag, className }) => {
+export const TagAnchor = ({ children, className, props }) => {
   className = className ? className : '';
-  const props: HTMLAttributeProps = castToHTMLAttributeProps(node.attribs);
   let href = '#';
   if (props?.href) {
     href = replaceWordPressUrlRelative(props.href);

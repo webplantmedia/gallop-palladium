@@ -8,6 +8,7 @@ import {
   tailwindAlignClasses,
   tailwindGetAlignClasses,
   hasExactClass,
+  getVarsFromNode,
 } from '@utils/tools';
 import {
   CoreParagraph,
@@ -21,6 +22,7 @@ import {
   CoreButtonLink,
   CoreQuote,
   CoreList,
+  CoreListLi,
   CoreImage,
   TagAnchor,
   CoreAudio,
@@ -30,6 +32,10 @@ import {
   // GallopSinglePost,
   GallopExcerptPost,
   CoreGroup,
+  CoreGroupGrid,
+  CoreGroupCard1,
+  CoreGroupCard2,
+  CoreGroupHero1,
   // GallopBlogPosts,
   GallopMap,
   // GallopNeighborhood,
@@ -40,6 +46,8 @@ import {
 } from '@components/blocks';
 import { HTMLAttributeProps } from '@lib/types';
 import { castToHTMLAttributeProps } from '@utils/tools';
+
+import { BlockProps } from '@lib/types';
 
 export const ParseBlocks = ({
   content,
@@ -71,14 +79,8 @@ export const ParseBlocks = ({
           );
         } else if (domNode.name === 'ul') {
           className = tailwindAlignClasses(className);
-          return (
-            <CoreList
-              className={className}
-              props={props}
-              node={domNode}
-              options={options}
-            />
-          );
+          const data = getVarsFromNode(domNode);
+          return <CoreList data={data} className={className} />;
         } else if (domNode.name === 'hr') {
           className = tailwindAlignClasses(className);
           return <CoreSeparator props={props} />;
@@ -94,86 +96,77 @@ export const ParseBlocks = ({
           );
         } else if (hasExactClass(className, 'wp-block-group')) {
           className = tailwindAlignClasses(className);
-          return (
-            <CoreGroup
-              className={className}
-              props={props}
-              options={options}
-              node={domNode}
-            />
-          );
+          if (hasExactClass(className, 'wp-block-group-is-layout-grid')) {
+            return (
+              <CoreGroupGrid className={className} props={props}>
+                {domToReact(domNode.children as DOMNode[], options)}
+              </CoreGroupGrid>
+            );
+          } else if (hasExactClass(className, 'is-style-hero-1')) {
+            const data = getVarsFromNode(domNode);
+            return (
+              <CoreGroupHero1 data={data} className={className} props={props} />
+            );
+          } else if (hasExactClass(className, 'is-style-card-1')) {
+            const data = getVarsFromNode(domNode);
+            return (
+              <CoreGroupCard1 data={data} className={className} props={props} />
+            );
+          } else if (hasExactClass(className, 'is-style-card-2')) {
+            const data = getVarsFromNode(domNode);
+            return (
+              <CoreGroupCard2 data={data} className={className} props={props} />
+            );
+          } else {
+            return (
+              <CoreGroup className={className} props={props}>
+                {domToReact(domNode.children as DOMNode[], options)}
+              </CoreGroup>
+            );
+          }
         } else if (className?.includes('wp-block-buttons')) {
           className = tailwindAlignClasses(className);
           return (
-            <CoreButtons
-              node={domNode}
-              options={options}
-              className={className}
-            />
+            <CoreButtons className={className}>
+              {domToReact(domNode.children as DOMNode[], options)}
+            </CoreButtons>
           );
         } else if (className?.includes('wp-block-button__link')) {
           className = tailwindAlignClasses(className);
           return (
-            <CoreButtonLink
-              tag={domNode.name}
-              className={className}
-              node={domNode}
-            >
+            <CoreButtonLink className={className} props={props}>
               {domToReact(domNode.children as DOMNode[], options)}
             </CoreButtonLink>
           );
         } else if (domNode.name === 'a') {
           className = tailwindAlignClasses(className);
           return (
-            <TagAnchor tag={domNode.name} className={className} node={domNode}>
+            <TagAnchor className={className} props={props}>
               {domToReact(domNode.children as DOMNode[], options)}
             </TagAnchor>
           );
         } else if (className?.includes('wp-block-button')) {
           className = tailwindAlignClasses(className);
           return (
-            <CoreButton
-              node={domNode}
-              options={options}
-              className={className}
-            />
+            <CoreButton options={options} className={className}>
+              {domToReact(domNode.children as DOMNode[], options)}
+            </CoreButton>
           );
         } else if (className?.includes('wp-block-quote')) {
           className = tailwindAlignClasses(className);
-          return (
-            <CoreQuote
-              tag={domNode.name}
-              props={props}
-              className={className}
-              node={domNode}
-              options={options}
-            />
-          );
+          const data = getVarsFromNode(domNode);
+          return <CoreQuote data={data} props={props} className={className} />;
         } else if (className?.includes('wp-block-gallery')) {
           className = tailwindAlignClasses(className);
-          return (
-            <CoreGallery
-              tag={domNode.name}
-              className={className}
-              node={domNode}
-              options={options}
-            />
-          );
+          const data = getVarsFromNode(domNode);
+          return <CoreGallery data={data} className={className} />;
         } else if (className?.includes('wp-block-image')) {
           className = tailwindAlignClasses(className);
-          return (
-            <CoreImage className={className} node={domNode} options={options} />
-          );
+          const data = getVarsFromNode(domNode);
+          return <CoreImage className={className} data={data} />;
         } else if (className?.includes('wp-block-audio')) {
           className = tailwindAlignClasses(className);
-          return (
-            <CoreAudio
-              tag={domNode.name}
-              className={className}
-              node={domNode}
-              options={options}
-            />
-          );
+          return <CoreAudio props={props} className={className} />;
         } else if (className?.includes('wp-block-cover')) {
           return (
             <CoreCover
@@ -183,7 +176,7 @@ export const ParseBlocks = ({
               options={options}
             />
           );
-        } else if (className?.includes('wp-block-embed')) {
+        } /*else if (className?.includes('wp-block-embed')) {
           className = tailwindAlignClasses(className);
           return (
             <CoreEmbed
@@ -240,7 +233,7 @@ export const ParseBlocks = ({
               options={options}
             />
           );
-        }
+				}*/
       }
     },
   };

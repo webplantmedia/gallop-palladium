@@ -22,7 +22,7 @@ import parse, {
 } from 'html-react-parser';
 import { GallopIconText } from '@components/blocks';
 
-export default function FooterColumns({ post }) {
+export default function FooterColumns({ post }: { post: any }) {
   const options: HTMLReactParserOptions = {
     replace(domNode) {
       if (domNode instanceof Element && domNode.attribs) {
@@ -88,12 +88,8 @@ export default function FooterColumns({ post }) {
             </div>
           );
         } else if (hasExactClass(className, 'is-style-icon-text')) {
-          return (
-            <GallopIconText
-              node={domNode}
-              className="text-white mb-3 hover:underline"
-            />
-          );
+          const data = getVarsFromNode(domNode);
+          return <GallopIconText data={data} className={className} />;
         } else if (hasExactClass(className, 'wp-block-heading')) {
           return (
             <h4

@@ -2,12 +2,7 @@ import classNames from 'classnames';
 import { domToReact, DOMNode } from 'html-react-parser';
 import { BlockProps } from '@lib/types';
 
-export const CoreGroupGrid = ({
-  className,
-  props,
-  options,
-  node,
-}: BlockProps) => {
+export const CoreGroupGrid = ({ className, props, children }: BlockProps) => {
   const { id } = props || {};
   // const masonry = className.includes('is-style-masonry-2') ? true : false;
   className = className?.replace(
@@ -45,7 +40,7 @@ export const CoreGroupGrid = ({
         'mb-10 [&>*]:mt-0 [&>*]:mb-0 [&>*>*:first-child]:mt-0 [&>*>*:last-child]:mb-0'
       )}
     >
-      {domToReact(node?.children as DOMNode[], options)}
+      {children}
     </div>
   );
 };

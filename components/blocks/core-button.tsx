@@ -1,8 +1,11 @@
 import classNames from 'classnames';
-import { domToReact, DOMNode } from 'html-react-parser';
 import { BlockProps } from '@lib/types';
 
-export const CoreButton = ({ node, options, className = '' }: BlockProps) => {
+export const CoreButton = ({
+  children,
+  options,
+  className = '',
+}: BlockProps) => {
   className = className.replace(
     'wp-block-button__width-100',
     'w-full basis-full'
@@ -36,7 +39,8 @@ export const CoreButton = ({ node, options, className = '' }: BlockProps) => {
       'border-2 border-secondary-main text-secondary-main bg-transparent hover:bg-white/30'
     );
   } else {
-    className += 'bg-primary-main text-primary-contrast hover:bg-primary-light';
+    className +=
+      ' bg-primary-main text-primary-contrast hover:bg-primary-light';
   }
 
   return (
@@ -46,7 +50,7 @@ export const CoreButton = ({ node, options, className = '' }: BlockProps) => {
         'text-center rounded-md shadow-sm flex items-center justify-center'
       )}
     >
-      {domToReact(node?.children as DOMNode[], options)}
+      {children}
     </div>
   );
 };

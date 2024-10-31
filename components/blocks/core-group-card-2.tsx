@@ -3,14 +3,12 @@ import ArrowInsertIcon from '@iconify/icons-material-symbols/arrow-insert';
 import PlayIcon from '@iconify/icons-heroicons/play';
 // import BuildingOfficeIcon from '@iconify/icons-heroicons/building-office';
 import classNames from 'classnames';
-import { getVimeoIframeSrc, getVarsFromNode } from '@utils/tools';
+import { getVimeoIframeSrc } from '@utils/tools';
 import { VideoPopup } from '@widgets/video-popup';
 import { CoreParagraph, CoreHeading } from '@components/blocks';
 import { BlockProps } from '@lib/types';
 
-export const CoreGroupCard2 = ({ node, className, props }: BlockProps) => {
-  const data = getVarsFromNode(node);
-
+export const CoreGroupCard2 = ({ data, className, props }: BlockProps) => {
   let img: any = {};
   let href = '';
   let button = data?.wpBlockButtons?.wpBlockButton?.a;

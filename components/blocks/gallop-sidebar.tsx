@@ -25,7 +25,7 @@ const SEOContent = ({ children }: { children: any }) => {
   );
 };
 
-export const GallopSidebar = ({
+export const GallopSidebar = async ({
   node,
   className,
   options,

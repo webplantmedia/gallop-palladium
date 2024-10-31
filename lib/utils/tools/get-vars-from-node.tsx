@@ -157,8 +157,11 @@ export function getVarsFromNode(node: any): Record<string, any> {
               'a',
               'td',
               'span',
+              'li',
               'em',
+              'cite',
               'strong',
+              'figcaption',
               'pre',
               'code',
             ].includes(domNode.name) &&

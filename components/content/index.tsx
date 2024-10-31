@@ -35,7 +35,7 @@ export default function Content({ post, meta = {}, sidebarHeader }: Props) {
   return (
     <>
       {article}
-      <GalleryPopup slides={slides} />
+      <GalleryPopup />
     </>
   );
 }
