@@ -1,8 +1,10 @@
 import classNames from 'classnames';
 import { domToReact, DOMNode } from 'html-react-parser';
 import { BlockProps } from '@lib/types';
+import { tailwindAlignClasses } from '@utils/tools';
 
 export const CoreButtons = ({ children, className }: BlockProps) => {
+  className = tailwindAlignClasses(className);
   // ['justify-center']: justifyContent === 'center',
   // ['justify-end']: justifyContent === 'right',
   // ['flex-nowrap flex-col md:flex-row']: flexWrap === 'nowrap',

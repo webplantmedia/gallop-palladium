@@ -1,6 +1,6 @@
-export function tailwindAlignClasses(className: string): string {
+export function tailwindAlignClasses(className: string | undefined): string {
   if (!className) {
-    return className;
+    return '';
   }
 
   className = className.replace('has-text-align-', 'text-');

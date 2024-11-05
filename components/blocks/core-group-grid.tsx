@@ -1,8 +1,11 @@
 import classNames from 'classnames';
 import { domToReact, DOMNode } from 'html-react-parser';
 import { BlockProps } from '@lib/types';
+import { tailwindAlignClasses } from '@utils/tools';
 
 export const CoreGroupGrid = ({ className, props, children }: BlockProps) => {
+  className = tailwindAlignClasses(className);
+
   const { id } = props || {};
   // const masonry = className.includes('is-style-masonry-2') ? true : false;
   className = className?.replace(

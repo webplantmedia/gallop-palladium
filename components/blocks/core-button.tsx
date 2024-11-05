@@ -1,11 +1,13 @@
 import classNames from 'classnames';
 import { BlockProps } from '@lib/types';
+import { tailwindAlignClasses } from '@utils/tools';
 
 export const CoreButton = ({
   children,
   options,
   className = '',
 }: BlockProps) => {
+  className = tailwindAlignClasses(className);
   className = className.replace(
     'wp-block-button__width-100',
     'w-full basis-full'

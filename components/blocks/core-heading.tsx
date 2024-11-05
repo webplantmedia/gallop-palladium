@@ -3,6 +3,7 @@ import ArrowInsertIcon from '@iconify/icons-material-symbols/arrow-insert';
 import classNames from 'classnames';
 import { BlockProps } from '@lib/types';
 import { ElementType } from 'react';
+import { tailwindAlignClasses } from '@utils/tools';
 
 export const CoreHeading = ({
   children,
@@ -10,6 +11,8 @@ export const CoreHeading = ({
   className = '',
   props,
 }: BlockProps) => {
+  className = tailwindAlignClasses(className);
+
   const { id } = props ?? {};
   const Tag: ElementType = tag as ElementType;
 

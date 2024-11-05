@@ -22,7 +22,9 @@ import {
   CoreCode,
   CoreButtonLink,
   CoreQuote,
+  coreQuote,
   CoreList,
+  coreList,
   CoreImage,
   TagAnchor,
   CoreAudio,
@@ -73,31 +75,25 @@ export const ParseBlocks = ({
         let { className } = props;
 
         if (domNode.name === 'p') {
-          className = tailwindAlignClasses(className);
           return (
             <CoreParagraph className={className}>
               {domToReact(domNode.children as DOMNode[], options)}
             </CoreParagraph>
           );
         } else if (domNode.name === 'ul') {
-          className = tailwindAlignClasses(className);
-          const data = getVarsFromNode(domNode);
-          return <CoreList data={data} className={className} />;
+          const { content } = coreList(domNode, options);
+          return <CoreList content={content} className={className} />;
         } else if (domNode.name === 'hr') {
-          className = tailwindAlignClasses(className);
           return <CoreSeparator props={props} />;
         } else if (className?.includes('wp-block-spacer')) {
-          className = tailwindAlignClasses(className);
           return <CoreSpacer props={props} className={className} />;
         } else if (className?.includes('wp-block-heading')) {
-          className = tailwindAlignClasses(className);
           return (
             <CoreHeading tag={domNode.name} className={className} props={props}>
               {domToReact(domNode.children as DOMNode[], options)}
             </CoreHeading>
           );
         } else if (hasExactClass(className, 'wp-block-group')) {
-          className = tailwindAlignClasses(className);
           if (hasExactClass(className, 'wp-block-group-is-layout-grid')) {
             return (
               <CoreGroupGrid className={className} props={props}>
@@ -106,9 +102,7 @@ export const ParseBlocks = ({
             );
           } else if (hasExactClass(className, 'is-style-hero-1')) {
             const data = getVarsFromNode(domNode);
-            return (
-              <CoreGroupHero1 data={data} className={className} props={props} />
-            );
+            return <CoreGroupHero1 data={data} className={className} />;
           } else if (hasExactClass(className, 'is-style-card-1')) {
             const data = getVarsFromNode(domNode);
             return (
@@ -127,37 +121,33 @@ export const ParseBlocks = ({
             );
           }
         } else if (className?.includes('wp-block-buttons')) {
-          className = tailwindAlignClasses(className);
           return (
             <CoreButtons className={className}>
               {domToReact(domNode.children as DOMNode[], options)}
             </CoreButtons>
           );
         } else if (className?.includes('wp-block-button__link')) {
-          className = tailwindAlignClasses(className);
           return (
             <CoreButtonLink className={className} props={props}>
               {domToReact(domNode.children as DOMNode[], options)}
             </CoreButtonLink>
           );
         } else if (domNode.name === 'a') {
-          className = tailwindAlignClasses(className);
           return (
             <TagAnchor className={className} props={props}>
               {domToReact(domNode.children as DOMNode[], options)}
             </TagAnchor>
           );
         } else if (className?.includes('wp-block-button')) {
-          className = tailwindAlignClasses(className);
           return (
             <CoreButton options={options} className={className}>
               {domToReact(domNode.children as DOMNode[], options)}
             </CoreButton>
           );
         } else if (className?.includes('wp-block-quote')) {
-          className = tailwindAlignClasses(className);
-          const data = getVarsFromNode(domNode);
-          return <CoreQuote data={data} props={props} className={className} />;
+          const { content } = coreQuote(domNode, options);
+          const { id } = props || {};
+          return <CoreQuote content={content} className={className} id={id} />;
         } else if (className?.includes('wp-block-gallery')) {
           className = tailwindAlignClasses(className);
           const data = getVarsFromNode(domNode);

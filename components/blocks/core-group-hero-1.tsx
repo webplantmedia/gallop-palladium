@@ -5,7 +5,12 @@ import EnvelopeIcon from '@iconify/icons-heroicons/envelope';
 import ArrowInsertIcon from '@iconify/icons-material-symbols/arrow-insert';
 import BuildingOfficeIcon from '@iconify/icons-fluent/building-people-20-filled';
 import classNames from 'classnames';
-import { permalink, getVimeoIframeSrc, getVarsFromNode } from '@utils/tools';
+import {
+  permalink,
+  getVimeoIframeSrc,
+  getVarsFromNode,
+  tailwindAlignClasses,
+} from '@utils/tools';
 import SwiperSliderInit from '@components/scripts/swiper-slider-init';
 import CircleAnimation from '@components/scripts/circle-animation';
 import { useId } from 'react';
@@ -16,7 +21,8 @@ import PlaySolidIcon from '@iconify/icons-heroicons/play-solid';
 import { VideoPopup } from '@widgets/video-popup';
 import { BlockProps } from '@lib/types';
 
-export const CoreGroupHero1 = ({ data, className, props }: BlockProps) => {
+export const CoreGroupHero1 = ({ data, className }: BlockProps) => {
+  className = tailwindAlignClasses(className);
   let swiperId = 'swiper-' + useId(); // Generate a unique ID
   let circleTextId = 'circle-text-' + useId(); // Generate a unique ID
   swiperId = swiperId.replace(/:/g, '-'); // Sanitize the ID

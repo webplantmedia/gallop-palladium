@@ -4,8 +4,9 @@ import { domToReact, DOMNode } from 'html-react-parser';
 import Link from 'next/link';
 import { HTMLAttributeProps } from '@lib/types';
 import { castToHTMLAttributeProps } from '@utils/tools';
+import { BlockProps } from '@lib/types';
 
-export const TagAnchor = ({ children, className, props }) => {
+export const TagAnchor = ({ children, className, props }: BlockProps) => {
   className = className ? className : '';
   let href = '#';
   if (props?.href) {

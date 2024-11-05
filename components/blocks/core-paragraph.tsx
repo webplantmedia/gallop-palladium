@@ -1,7 +1,10 @@
 import classNames from 'classnames';
 import { BlockProps } from '@lib/types';
+import { tailwindAlignClasses } from '@utils/tools';
 
 export const CoreParagraph = ({ className = '', children }: BlockProps) => {
+  className = tailwindAlignClasses(className);
+
   if (className) {
     className = className.replace(
       'has-x-large-font-size',

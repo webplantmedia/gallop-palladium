@@ -1,14 +1,74 @@
-import { domToReact, DOMNode } from 'html-react-parser';
 import Iconify from '../../components/iconify';
 import QuoteIcon from '@iconify/icons-icon-park-outline/quote';
 import { CoreParagraph } from './core-paragraph';
 import { Fragment } from 'react';
 import classNames from 'classnames';
 import { HTMLAttributeProps } from '@lib/types';
-import { castToHTMLAttributeProps } from '@utils/tools';
 import { BlockProps } from '@lib/types';
+import {
+  tailwindGetAlignClasses,
+  hasExactClass,
+  castToHTMLAttributeProps,
+} from '@utils/tools';
+import {
+  HTMLReactParserOptions,
+  domToReact,
+  DOMNode,
+  Element,
+} from 'html-react-parser';
 
-export const CoreQuote = ({ props, className, data }: BlockProps) => {
+export const coreQuote = (
+  domNode: Element,
+  options: HTMLReactParserOptions
+) => {
+  // let content: Array<React.ReactElement> = [];
+  var index = 0;
+
+  const op: HTMLReactParserOptions = {
+    replace(domNode) {
+      if (domNode instanceof Element && domNode.attribs) {
+        const props: HTMLAttributeProps = castToHTMLAttributeProps(
+          domNode.attribs
+        );
+        let { className } = props;
+        index++;
+
+        if (domNode.name === 'p') {
+          return (
+            <CoreParagraph
+              key={'blockquote-p' + index}
+              className="font-accent italic text-xl md:text-[1.6rem] md:leading-[1.4] leading-normal text-base-contrast2 mb-7"
+            >
+              <>{domToReact(domNode.children as DOMNode[], op)}</>
+            </CoreParagraph>
+          );
+        } else if (domNode.name === 'cite') {
+          return (
+            <cite
+              key={'blockquote-cite' + index}
+              className="block font-accent italic text-xl md:text-[1.6rem] md:leading-[1.4] leading-normal text-base-contrast2 mb-7 w-full text-right"
+            >
+              <>{domToReact(domNode?.children as DOMNode[], op)}</>
+            </cite>
+          );
+        }
+      }
+    },
+  };
+
+  const content = domToReact(domNode?.children as DOMNode[], op);
+
+  return { content: content };
+};
+export const CoreQuote = ({
+  content,
+  className,
+  id,
+}: {
+  content: any;
+  className: string;
+  id: string;
+}) => {
   /*if (className?.includes('is-style-plain')) {
     return (
       <blockquote
@@ -44,15 +104,13 @@ export const CoreQuote = ({ props, className, data }: BlockProps) => {
     );
 	}*/
 
-  const paragraphs = Array.isArray(data?.p) ? data.p : [data.p];
-
   return (
     <blockquote
       className={classNames(
         'relative mt-16 mb-14 flex flex-wrap gap-2 pl-[30px] sm:pl-[90px] pr-[20px] sm:pr-[40px]',
         className
       )}
-      id={props?.id ? props.id : undefined}
+      id={id ? id : undefined}
     >
       <div className="relative">
         <div
@@ -61,28 +119,7 @@ export const CoreQuote = ({ props, className, data }: BlockProps) => {
         >
           <Iconify className="w-16 h-16 sm:w-20 sm:h-20" icon={QuoteIcon} />
         </div>
-        {paragraphs.map((block: any, index: number) => {
-          return (
-            <Fragment key={'blockquote-' + index}>
-              {!('cite' in block) && (
-                <CoreParagraph
-                  key={'blockquote-p' + index}
-                  className="font-accent italic text-xl md:text-[1.6rem] md:leading-[1.4] leading-normal text-base-contrast2 mb-7"
-                >
-                  {block.jsx}
-                </CoreParagraph>
-              )}
-              {'cite' in block && (
-                <cite
-                  key={'blockquote-cite' + index}
-                  className="block font-accent italic text-xl md:text-[1.6rem] md:leading-[1.4] leading-normal text-base-contrast2 mb-7 w-full text-right"
-                >
-                  {block.cite.jsx}
-                </cite>
-              )}
-            </Fragment>
-          );
-        })}
+        {content}
       </div>
     </blockquote>
   );

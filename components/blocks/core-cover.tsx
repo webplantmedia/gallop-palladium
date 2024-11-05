@@ -28,9 +28,9 @@ export const coreCover = (
         const props: HTMLAttributeProps = castToHTMLAttributeProps(
           domNode.attribs
         );
-        let { className: classes } = props;
+        let { className } = props;
 
-        if (hasExactClass(classes, 'wp-block-cover__image-background')) {
+        if (hasExactClass(className, 'wp-block-cover__image-background')) {
           if (props?.style?.backgroundImage) {
             img = (
               <div
@@ -61,7 +61,7 @@ export const coreCover = (
           }
           return <></>;
         } else if (
-          hasExactClass(classes, 'wp-block-cover__inner-container') &&
+          hasExactClass(className, 'wp-block-cover__inner-container') &&
           !content
         ) {
           content = <>{domToReact(domNode.children as DOMNode[], options)}</>;
