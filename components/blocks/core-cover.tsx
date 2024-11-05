@@ -15,9 +15,10 @@ import {
   Element,
 } from 'html-react-parser';
 
-export const CoreCover = ({ node, className, options }: BlockProps) => {
-  className = tailwindGetAlignClasses(className);
-
+export const coreCover = (
+  domNode: Element,
+  options: HTMLReactParserOptions
+) => {
   let content: React.ReactElement | null = null;
   let img: React.ReactElement | null = null;
 
@@ -58,6 +59,7 @@ export const CoreCover = ({ node, className, options }: BlockProps) => {
               />
             );
           }
+          return <></>;
         } else if (
           hasExactClass(classes, 'wp-block-cover__inner-container') &&
           !content
@@ -65,11 +67,26 @@ export const CoreCover = ({ node, className, options }: BlockProps) => {
           content = <>{domToReact(domNode.children as DOMNode[], options)}</>;
           return <></>; //this prevents recursion
         }
+        return <></>;
       }
     },
   };
 
-  domToReact(node?.children as DOMNode[], op);
+  domToReact(domNode?.children as DOMNode[], op);
+
+  return { img: img, content: content };
+};
+
+export const CoreCover = ({
+  img,
+  content,
+  className,
+}: {
+  img: any;
+  content: any;
+  className: string;
+}) => {
+  className = tailwindGetAlignClasses(className);
 
   return (
     <div

@@ -28,6 +28,7 @@ import {
   CoreAudio,
   CoreEmbed,
   CoreCover,
+  coreCover,
   // GallopAlbumCover,
   // GallopSinglePost,
   GallopExcerptPost,
@@ -168,14 +169,10 @@ export const ParseBlocks = ({
         } else if (className?.includes('wp-block-audio')) {
           className = tailwindAlignClasses(className);
           return <CoreAudio props={props} className={className} />;
-        } /*else if (className?.includes('wp-block-cover')) {
+        } else if (className?.includes('wp-block-cover')) {
+          const { img, content } = coreCover(domNode, options);
           return (
-            <CoreCover
-              className={className}
-              props={props}
-              node={domNode}
-              options={options}
-            />
+            <CoreCover className={className} img={img} content={content} />
           );
         } /*else if (className?.includes('wp-block-embed')) {
           className = tailwindAlignClasses(className);
