@@ -1,4 +1,5 @@
 import React, { ReactNode, ReactElement } from 'react';
+import serializer from 'dom-serializer';
 
 import {
   domToReact,
@@ -41,6 +42,8 @@ function getImportantClassName(classList: string) {
 }
 
 export function getVarsFromNode(node: any): Record<string, any> {
+  // console.log('\nNODE', serializer(node));
+
   let data: Record<string, any> = {};
 
   const saveNestedObject = (parts: Array<string>, value: any) => {

@@ -1,6 +1,6 @@
 import { BlockProps } from '@lib/types';
 import { GallopMapClient } from './gallop-map-client';
-import { tailwindGetAlignClasses } from '@utils/tools';
+import { tailwindGetAlignClasses, styleStringToObject } from '@utils/tools';
 import classNames from 'classnames';
 import { ReactElement } from 'react';
 
@@ -19,14 +19,14 @@ export const GallopMap = ({ data, className }: BlockProps) => {
           '!mb-0 !max-w-full aspect-4/3 object-cover object-center'
         )}
         loading="lazy"
-        src={data.wpBlockImage.src}
-        style={data.wpBlockImage.style}
-        width={parseInt(data.wpBlockImage.width)}
-        height={parseInt(data.wpBlockImage.height)}
-        srcSet={data.wpBlockImage.srcSet}
-        sizes={data.wpBlockImage.sizes}
-        alt={data.wpBlockImage.alt}
-        title={data.wpBlockImage.title}
+        src={data.wpBlockImage.img.src}
+        style={styleStringToObject(data.wpBlockImage.img.style)}
+        width={parseInt(data.wpBlockImage.img.width)}
+        height={parseInt(data.wpBlockImage.img.height)}
+        srcSet={data.wpBlockImage.img.srcSet}
+        sizes={data.wpBlockImage.img.sizes}
+        alt={data.wpBlockImage.img.alt}
+        title={data.wpBlockImage.img.title}
       />
     );
   }
@@ -42,7 +42,7 @@ export const GallopMap = ({ data, className }: BlockProps) => {
   }
 
   if (data.h3) {
-    heading = <>{data.h3.jsx}</>;
+    address = data.h3.text;
   }
 
   return (
