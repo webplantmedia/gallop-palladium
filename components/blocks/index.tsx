@@ -9,7 +9,7 @@ export { CoreButtonLink } from './core-button-link';
 export { CoreHeading } from './core-heading';
 export { CoreButtons } from './core-buttons';
 export { CoreImage } from './core-image';
-export { CoreGallery } from './core-gallery';
+export { CoreGallery, coreGallery } from './core-gallery';
 export { CoreParagraph } from './core-paragraph';
 export { CoreAudio } from './core-audio';
 export { CoreQuote, coreQuote } from './core-quote';

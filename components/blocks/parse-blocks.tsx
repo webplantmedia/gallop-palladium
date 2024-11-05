@@ -15,6 +15,7 @@ import {
   CoreParagraph,
   CoreHeading,
   CoreGallery,
+  coreGallery,
   CoreSeparator,
   CoreSpacer,
   CoreButtons,
@@ -149,9 +150,18 @@ export const ParseBlocks = ({
           const { id } = props || {};
           return <CoreQuote content={content} className={className} id={id} />;
         } else if (className?.includes('wp-block-gallery')) {
-          className = tailwindAlignClasses(className);
-          const data = getVarsFromNode(domNode);
-          return <CoreGallery data={data} className={className} />;
+          const { figure, figureProps, columns, figcaption, hasCaption } =
+            coreGallery(domNode, options, className);
+          return (
+            <CoreGallery
+              figure={figure}
+              figureProps={figureProps}
+              columns={columns}
+              figcaption={figcaption}
+              hasCaption={hasCaption}
+              className={className}
+            />
+          );
         } else if (className?.includes('wp-block-image')) {
           className = tailwindAlignClasses(className);
           const data = getVarsFromNode(domNode);

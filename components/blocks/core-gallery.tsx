@@ -9,7 +9,11 @@ import {
   Element,
 } from 'html-react-parser';
 import { HTMLAttributeProps } from '@lib/types';
-import { replaceWordPressUrl, castToHTMLAttributeProps } from '@utils/tools';
+import {
+  replaceWordPressUrl,
+  castToHTMLAttributeProps,
+  tailwindAlignClasses,
+} from '@utils/tools';
 
 interface GalleryVars {
   figure: any;
@@ -62,140 +66,172 @@ const getGridGalleryClass = (node: any) => {
   };
 };
 
-export const CoreGallery = ({ className, data }: BlockProps) => {
+export const coreGallery = (
+  domNode: Element,
+  options: HTMLReactParserOptions,
+  className: string
+) => {
   let match = className?.match(/columns-(\d)/);
   let columns = 3;
   if (match && match[1]) {
     columns = Number(match[1]);
   }
-
   let figure: Array<React.ReactElement> = [];
   let figureProps: Array<Object> = [];
   let figcaption: React.ReactElement | null = null;
+  let index = 0;
+  let hasCaption = false;
 
-  const wpBlockImages = Array.isArray(data?.wpBlockImage)
-    ? data.wpBlockImage
-    : [data.wpBlockImage];
+  const op: HTMLReactParserOptions = {
+    replace(domNode) {
+      if (domNode instanceof Element && domNode.attribs) {
+        const props: HTMLAttributeProps = castToHTMLAttributeProps(
+          domNode.attribs
+        );
+        let { className } = props;
+        index++;
 
-  wpBlockImages?.map((block: any, index: number) => {
-    var className = block.className;
-    className = className.replace(
-      'alignleft',
-      'alignleft md:float-left md:w-[300px] xl:w-auto md:!mr-5 mt-1.5 md:!pr-0'
-    );
-    className = className.replace(
-      'alignright',
-      'alignright md:float-right md:w-[300px] xl:w-auto md:!ml-5 mt-1.5 md:!pl-0'
-    );
-    var href2 = '';
-    var hasImageSrcLink = false;
+        if (className?.includes('wp-block-image')) {
+          className = className.replace(
+            'alignleft',
+            'alignleft md:float-left md:w-[300px] xl:w-auto md:!mr-5 mt-1.5 md:!pr-0'
+          );
+          className = className.replace(
+            'alignright',
+            'alignright md:float-right md:w-[300px] xl:w-auto md:!ml-5 mt-1.5 md:!pl-0'
+          );
 
-    if (block.a) {
-      hasImageSrcLink =
-        block.a.href && block.a.href.match(/\.jpe?g$|\.png$/) ? true : false;
-
-      if (hasImageSrcLink) {
-        href2 = block.a.href;
-      }
-
-      if (!hasImageSrcLink && block.a.href) {
-        href2 = replaceWordPressUrl(block.a.href);
-      }
-    }
-
-    if (block.a?.img) {
-      figureProps.push({
-        width: block.a.img.width,
-        height: block.a.img.height,
-      });
-    }
-
-    if (block.img) {
-      figureProps.push({
-        width: block.img.width,
-        height: block.img.height,
-      });
-    }
-
-    figure.push(
-      <figure
-        key={`figure-${index}`}
-        className={classNames(
-          'flex flex-col box-border',
-          className,
-          'break-inside-avoid',
-          block.figcaption ? '[&_img]:rounded-t-sm' : '[&_img]:rounded-sm'
-        )}
-      >
-        {block.img && (
-          <img
-            className={classNames(block.img.className, 'max-w-full box-border')}
-            loading="lazy"
-            src={block.img.src}
-            style={block.img.style}
-            width={parseInt(block.img.width)}
-            height={parseInt(block.img.height)}
-            srcSet={block.img.srcSet}
-            sizes={block.img.sizes}
-            alt={block.img.alt}
-            title={block.img.title}
-          />
-        )}
-        {block.a?.img && (
-          <Link
-            href={href2}
-            prefetch={false}
-            {...(block.a.target ? { target: block.a.target } : {})}
-            className={classNames(
-              'block',
-              '[&_img]:!h-auto',
-              hasImageSrcLink ? 'lightbox-content' : ''
-            )}
-          >
-            <img
+          figure.push(
+            <figure
+              key={`figure-${index}`}
               className={classNames(
-                block.a.img.className,
-                'max-w-full box-border'
+                'flex flex-col box-border',
+                className,
+                'break-inside-avoid',
+                hasCaption ? '[&_img]:rounded-t-sm' : '[&_img]:rounded-sm'
               )}
-              loading="lazy"
-              src={block.a.img.src}
-              style={block.a.img.style}
-              width={parseInt(block.a.img.width)}
-              height={parseInt(block.a.img.height)}
-              srcSet={block.a.img.srcSet}
-              sizes={block.a.img.sizes}
-              alt={block.a.img.alt}
-              title={block.a.img.title}
-            />
-          </Link>
-        )}
-        {block.figcaption && (
-          <figcaption
-            className={classNames(
-              block.figcaption.className,
-              'text-left text-sm italic px-3 py-3 bg-base-card rounded-b-md w-auto'
-            )}
-          >
-            {block.figcaption.jsx}
-          </figcaption>
-        )}
-      </figure>
-    );
-  });
+            >
+              {domToReact(domNode.children as DOMNode[], op)}
+            </figure>
+          );
+          return <></>;
+        } else if (domNode.name === 'figcaption') {
+          if (className?.includes('blocks-gallery-caption')) {
+            figcaption = (
+              <figcaption
+                className={classNames(
+                  props.className,
+                  'text-left text-sm italic px-3 py-3 bg-base-card rounded-b-md w-auto'
+                )}
+              >
+                {domToReact(domNode.children as DOMNode[], op)}
+              </figcaption>
+            );
+            return <></>;
+          }
+          return (
+            <figcaption
+              className={classNames(
+                props.className,
+                'text-left text-sm italic px-3 py-3 bg-base-card rounded-b-md w-auto'
+              )}
+            >
+              {domToReact(domNode.children as DOMNode[], op)}
+            </figcaption>
+          );
+        } else if (domNode.name === 'img') {
+          let { width, height, style, src } = props;
 
-  if (data.figcaption) {
-    figcaption = (
-      <figcaption
-        className={classNames(
-          data.figcaption.className,
-          'text-left text-sm italic px-3 py-3 bg-base-card rounded-b-md w-auto'
-        )}
-      >
-        {data.figcaption.jsx}
-      </figcaption>
-    );
-  }
+          if (width && height) {
+            figureProps.push({ width: width, height: height });
 
+            return (
+              <img
+                className={classNames(props.className, 'max-w-full box-border')}
+                loading="lazy"
+                src={props.src}
+                style={props.style}
+                width={parseInt(props.width)}
+                height={parseInt(props.height)}
+                srcSet={props.srcSet}
+                sizes={props.sizes}
+                alt={props.alt}
+                title={props.title}
+              />
+            );
+          }
+          return <></>;
+        } else if (domNode.name === 'figcaption') {
+          hasCaption = true;
+
+          return (
+            <figcaption
+              className={classNames(
+                props.className,
+                'text-left text-sm italic px-3 py-3 bg-base-card rounded-b-md w-auto'
+              )}
+            >
+              {domToReact(domNode.children as DOMNode[], op)}
+            </figcaption>
+          );
+        } else if (domNode.name === 'a') {
+          const { href, target } = props;
+          let href2 = href;
+
+          let hasImageSrcLink =
+            href && href.match(/\.jpe?g$|\.png$/) ? true : false;
+
+          if (!hasImageSrcLink && href) {
+            href2 = replaceWordPressUrl(href);
+          }
+
+          return (
+            <Link
+              href={href2}
+              prefetch={false}
+              {...(target ? { target } : {})}
+              className={classNames(
+                'block',
+                '[&_img]:!h-auto',
+                hasImageSrcLink ? 'lightbox-content' : ''
+              )}
+            >
+              {domToReact(domNode.children as DOMNode[], op)}
+            </Link>
+          );
+        }
+      }
+    },
+  };
+
+  domToReact(domNode?.children as DOMNode[], op);
+
+  return {
+    figure: figure,
+    columns: columns,
+    figureProps: figureProps,
+    figcaption: figcaption,
+    hasCaption: hasCaption,
+  };
+};
+
+export const CoreGallery = ({
+  figure,
+  figureProps,
+  columns,
+  figcaption,
+  hasCaption,
+  className,
+}: {
+  figure: any;
+  figureProps: any;
+  columns: any;
+  figcaption: any;
+  hasCaption: any;
+  className: any;
+}) => {
+  className = tailwindAlignClasses(className);
+  let gallerySize = figure.length;
   // number of images in gallery
   let figureLength = figure.length;
   let a = 0;
@@ -313,7 +349,7 @@ const LeadImageGallery = ({
           imageNumber - firstImageInRow >= maxColumns
         ) {
           const n = figureProps.slice(a, imageNumber);
-          // console.log(n);
+          console.log(n);
           const rowGallery = figure.slice(a, imageNumber);
           a = imageNumber;
           row = row + 1;
