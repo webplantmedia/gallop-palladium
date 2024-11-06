@@ -6,7 +6,6 @@ import parse, {
 } from 'html-react-parser';
 import {
   tailwindAlignClasses,
-  tailwindGetAlignClasses,
   hasExactClass,
   getVarsFromNode,
   replaceWordPressUrlRelative,
@@ -27,6 +26,7 @@ import {
   CoreList,
   coreList,
   CoreImage,
+  coreImage,
   TagAnchor,
   CoreAudio,
   CoreEmbed,
@@ -43,6 +43,7 @@ import {
   CoreGroupHero1,
   // GallopBlogPosts,
   GallopMap,
+  gallopMap,
   // GallopNeighborhood,
   // GallopCard,
   // GallopContactForm,
@@ -163,11 +164,16 @@ export const ParseBlocks = ({
             />
           );
         } else if (className?.includes('wp-block-image')) {
-          className = tailwindAlignClasses(className);
-          const data = getVarsFromNode(domNode);
-          return <CoreImage className={className} data={data} />;
+          const { content, hasCaption, style } = coreImage(domNode, options);
+          return (
+            <CoreImage
+              content={content}
+              hasCaption={hasCaption}
+              style={style}
+              className={className}
+            />
+          );
         } else if (className?.includes('wp-block-audio')) {
-          className = tailwindAlignClasses(className);
           return <CoreAudio props={props} className={className} />;
         } else if (className?.includes('wp-block-cover')) {
           const { img, content } = coreCover(domNode, options);
@@ -185,14 +191,12 @@ export const ParseBlocks = ({
             />
           );
 				}*/ else if (className?.includes('wp-block-gallop-swiper')) {
-          className = tailwindAlignClasses(className);
           return (
             <GallopSwiper className={className}>
               {domToReact(domNode.children as DOMNode[], options)}
             </GallopSwiper>
           );
         } else if (className?.includes('wp-block-gallop-sidebar')) {
-          className = tailwindAlignClasses(className);
           const { header, content } = gallopSidebar(domNode, options);
 
           return (
@@ -204,11 +208,20 @@ export const ParseBlocks = ({
             />
           );
         } else if (className?.includes('wp-block-gallop-map')) {
-          const data = getVarsFromNode(domNode);
-          return <GallopMap data={data} className={className} />;
+          const { address, heading, description, image } = gallopMap(
+            domNode,
+            options
+          );
+          return (
+            <GallopMap
+              address={address}
+              heading={heading}
+              description={description}
+              image={image}
+              className={className}
+            />
+          );
         } else if (className?.includes('wp-block-gallop-excerpt-post')) {
-          className = tailwindAlignClasses(className);
-
           const { id } = props || {};
 
           const { heading, paragraph, figure, href, hasTextLink } =

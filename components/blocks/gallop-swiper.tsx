@@ -6,10 +6,10 @@ import ArrowLongLeftIcon from '@iconify/icons-heroicons/arrow-long-left';
 import { useId } from 'react';
 import React from 'react';
 import { BlockProps } from '@lib/types';
-
-import { domToReact, DOMNode } from 'html-react-parser';
+import { tailwindAlignClasses } from '@utils/tools';
 
 export const GallopSwiper = ({ children, className }: BlockProps) => {
+  className = tailwindAlignClasses(className);
   let swiperId = 'swiper-' + useId(); // Generate a unique ID
   swiperId = swiperId.replace(/:/g, '-'); // Sanitize the ID
 

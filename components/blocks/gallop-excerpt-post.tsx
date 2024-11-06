@@ -5,8 +5,12 @@ import {
   CoreParagraph,
   TagAnchor,
   CoreImage,
+  coreImage,
 } from '@components/blocks';
-import { replaceWordPressUrlRelative, getVarsFromNode } from '@utils/tools';
+import {
+  replaceWordPressUrlRelative,
+  tailwindAlignClasses,
+} from '@utils/tools';
 import { BlockProps } from '@lib/types';
 import { HTMLAttributeProps } from '@lib/types';
 import { castToHTMLAttributeProps } from '@utils/tools';
@@ -44,11 +48,13 @@ export const gallopExcerptPost = (
             href = replaceWordPressUrlRelative(href);
           }
         } else if (className?.includes('wp-block-image')) {
-          const data = getVarsFromNode(domNode);
+          const { content, hasCaption, style } = coreImage(domNode, options);
           figure = (
             <CoreImage
               className={classNames(className, '!mb-0 [&_img]:!rounded-none')}
-              data={data}
+              content={content}
+              hasCaption={hasCaption}
+              style={style}
             />
           );
           return <></>;
@@ -108,6 +114,8 @@ export const GallopExcerptPost = ({
   hasTextLink: boolean;
   id: string;
 }) => {
+  className = tailwindAlignClasses(className);
+
   let content = (
     <Link prefetch={true} id={id} href={href} className="block">
       {heading && heading}

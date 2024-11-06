@@ -89,7 +89,15 @@ export default function FooterColumns({ post }: { post: any }) {
           );
         } else if (hasExactClass(className, 'is-style-icon-text')) {
           const data = getVarsFromNode(domNode);
-          return <GallopIconText data={data} className={className} />;
+          return (
+            <GallopIconText
+              data={data}
+              className={classNames(
+                'text-white mb-3 hover:underline',
+                classNames
+              )}
+            />
+          );
         } else if (hasExactClass(className, 'wp-block-heading')) {
           return (
             <h4

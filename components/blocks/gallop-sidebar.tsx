@@ -1,6 +1,6 @@
 import { HTMLAttributeProps } from '@lib/types';
 import { castToHTMLAttributeProps } from '@utils/tools';
-import { hasExactClass } from '@utils/tools';
+import { hasExactClass, tailwindAlignClasses } from '@utils/tools';
 import {
   HTMLReactParserOptions,
   domToReact,
@@ -59,6 +59,7 @@ export const GallopSidebar = ({
   className: any;
   sidebarHeader: any;
 }) => {
+  className = tailwindAlignClasses(className);
   return (
     <>
       <DynamicSidebar

@@ -1,49 +1,97 @@
 import { BlockProps } from '@lib/types';
 import { GallopMapClient } from './gallop-map-client';
-import { tailwindGetAlignClasses, styleStringToObject } from '@utils/tools';
+import { tailwindGetAlignClasses } from '@utils/tools';
 import classNames from 'classnames';
-import { ReactElement } from 'react';
+import { ReactElement, isValidElement } from 'react';
+import {
+  HTMLReactParserOptions,
+  domToReact,
+  DOMNode,
+  Element,
+} from 'html-react-parser';
+import { tailwindAlignClasses, getDomNodeText } from '@utils/tools';
+import { HTMLAttributeProps } from '@lib/types';
+import { castToHTMLAttributeProps } from '@utils/tools';
 
-export const GallopMap = ({ data, className }: BlockProps) => {
-  className = tailwindGetAlignClasses(className);
+export const gallopMap = (
+  domNode: Element,
+  options: HTMLReactParserOptions
+) => {
   let address: string = '';
   let heading: ReactElement | null = null;
   let description: ReactElement | null = null;
   let image: ReactElement | null = null;
 
-  if (data.wpBlockImage) {
-    image = (
-      <img
-        className={classNames(
-          data.wpBlockImage.className,
-          '!mb-0 !max-w-full aspect-4/3 object-cover object-center'
-        )}
-        loading="lazy"
-        src={data.wpBlockImage.img.src}
-        style={styleStringToObject(data.wpBlockImage.img.style)}
-        width={parseInt(data.wpBlockImage.img.width)}
-        height={parseInt(data.wpBlockImage.img.height)}
-        srcSet={data.wpBlockImage.img.srcSet}
-        sizes={data.wpBlockImage.img.sizes}
-        alt={data.wpBlockImage.img.alt}
-        title={data.wpBlockImage.img.title}
-      />
-    );
-  }
+  const op: HTMLReactParserOptions = {
+    replace(domNode) {
+      if (domNode instanceof Element && domNode.attribs) {
+        const props: HTMLAttributeProps = castToHTMLAttributeProps(
+          domNode.attribs
+        );
+        let { className } = props;
 
-  if (data.p) {
-    description = <p className="text-xs">{data.p.jsx}</p>;
-  }
+        if (domNode.name === 'p') {
+          const content = domToReact(domNode?.children as DOMNode[], options);
+          description = <p className="text-xs">{content}</p>;
+          return <></>;
+        } else if (domNode.name === 'img') {
+          const content = (
+            <img
+              className={classNames(
+                props.className,
+                '!mb-0 !max-w-full aspect-4/3 object-cover object-center'
+              )}
+              loading="lazy"
+              src={props.src}
+              style={props.style}
+              width={parseInt(props.width)}
+              height={parseInt(props.height)}
+              srcSet={props.srcSet}
+              sizes={props.sizes}
+              alt={props.alt}
+              title={props.title}
+            />
+          );
+          if (isValidElement(content)) {
+            image = content;
+          }
+        } else if (domNode.name === 'h2') {
+          const content = domToReact(domNode?.children as DOMNode[], options);
+          heading = (
+            <h3 className="text-base-contrast text-sm font-bold">{content}</h3>
+          );
+          return <></>;
+        } else if (domNode.name === 'h3') {
+          address = getDomNodeText(domNode);
+          return <></>;
+        }
+      }
+    },
+  };
 
-  if (data.h2) {
-    heading = (
-      <h3 className="text-base-contrast text-sm font-bold">{data.h2.jsx}</h3>
-    );
-  }
+  domToReact(domNode?.children as DOMNode[], op);
 
-  if (data.h3) {
-    address = data.h3.text;
-  }
+  return {
+    address: address,
+    heading: heading,
+    description: description,
+    image: image,
+  };
+};
+export const GallopMap = ({
+  address,
+  heading,
+  description,
+  image,
+  className,
+}: {
+  address: any;
+  heading: any;
+  description: any;
+  image: any;
+  className: any;
+}) => {
+  className = tailwindGetAlignClasses(className);
 
   return (
     <div className={classNames('mb-14', className)}>
