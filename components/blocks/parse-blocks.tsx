@@ -238,16 +238,13 @@ export const ParseBlocks = ({
               id={id}
             />
           );
-        } /*else if (className?.includes('wp-block-code')) {
+        } else if (className?.includes('wp-block-code')) {
           return (
-            <CoreCode
-              node={domNode}
-              className={className}
-              props={props}
-              options={options}
-            />
+            <CoreCode className={className} options={options}>
+              {domToReact(domNode?.children as DOMNode[], options)}
+            </CoreCode>
           );
-				}*/
+        }
       }
     },
   };

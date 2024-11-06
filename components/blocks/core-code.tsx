@@ -14,12 +14,8 @@ import { tailwindAlignClasses, getDomNodeText } from '@utils/tools';
 import { HTMLAttributeProps } from '@lib/types';
 import { castToHTMLAttributeProps } from '@utils/tools';
 
-export const CoreCode = ({ node, options, className, props }: BlockProps) => {
+export const CoreCode = ({ children, options, className }: BlockProps) => {
   const alignClass = tailwindGetAlignClasses(className);
-  let address: string = '';
-  let heading: ReactElement | null = null;
-  let description: ReactElement | null = null;
-  let image: ReactElement | null = null;
 
   if (className?.includes('r-panel-profile')) {
     // return <CoreCodeCanvas id="r-panel-profile" />;
@@ -27,7 +23,7 @@ export const CoreCode = ({ node, options, className, props }: BlockProps) => {
 
   return (
     <pre className={classNames('wp-block-code', className, alignClass)}>
-      {domToReact(node?.children as DOMNode[], options)}
+      {children}
     </pre>
   );
 };
