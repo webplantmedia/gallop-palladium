@@ -240,7 +240,7 @@ export const ParseBlocks = ({
           );
         } else if (className?.includes('wp-block-code')) {
           return (
-            <CoreCode className={className} options={options}>
+            <CoreCode className={className}>
               {domToReact(domNode?.children as DOMNode[], options)}
             </CoreCode>
           );

@@ -1,11 +1,11 @@
 'use client';
 
-// import React from 'react';
+import React from 'react';
 import { Canvas } from '@react-three/fiber';
-import { OrbitControls } from '@react-three/drei';
-// import * as THREE from 'three';
+import { Line, OrbitControls } from '@react-three/drei';
+import * as THREE from 'three';
 
-/*const RPanelProfile = () => {
+const RPanelProfile = () => {
   // Define the R-Panel profile points with accurate dimensions
   const profilePoints = [
     new THREE.Vector3(0, 0, 0), // Point 1: Start of profile
@@ -41,28 +41,30 @@ import { OrbitControls } from '@react-three/drei';
       lineWidth={1} // Line width for visual clarity
     />
   );
-};*/
+};
 
-/*const Helpers = () => {
+const Helpers = () => {
   return (
     <>
+      {/* Adds a grid on the xz-plane */}
       <gridHelper args={[40, 20]} />
 
+      {/* Adds axes for the x, y, and z planes */}
       <axesHelper args={[20]} />
     </>
   );
-};*/
+};
 
 export const CoreCodeCanvas = ({ id }: { id: string }) => {
-  // <ambientLight intensity={0.5} />
-  // <pointLight position={[1000, 1000, 1000]} />
-  // <RPanelProfile />
-  // <Helpers />
   return (
     <Canvas
       className="aspect-video"
       camera={{ position: [0, 0, 25], fov: 50, near: 0.1, far: 100 }}
     >
+      <ambientLight intensity={0.5} />
+      <pointLight position={[1000, 1000, 1000]} />
+      <RPanelProfile />
+      <Helpers />
       <OrbitControls enableZoom={true} />
     </Canvas>
   );
