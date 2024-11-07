@@ -2,9 +2,64 @@
 
 import React from 'react';
 import { Canvas } from '@react-three/fiber';
-import { OrbitControls, Environment } from '@react-three/drei';
+import { Html, OrbitControls, Environment, Line } from '@react-three/drei';
 
 import * as THREE from 'three';
+
+interface DimensionProps {
+  start: [number, number, number]; // Start point of the dimension line
+  end: [number, number, number]; // End point of the dimension line
+  text: string; // Text label for the dimension
+}
+
+const Dimension = ({ start, end, text }: DimensionProps) => {
+  const midPoint = new THREE.Vector3()
+    .addVectors(new THREE.Vector3(...start), new THREE.Vector3(...end))
+    .multiplyScalar(0.5); // Calculate midpoint for placing the label
+
+  const offset = 0.3; // Offset for perpendicular lines
+
+  return (
+    <group>
+      {/* Perpendicular Line at Start */}
+      <Line
+        points={[
+          [start[0], start[1] + offset, start[2]],
+          [start[0], start[1] - offset, start[2]],
+        ]}
+        color="black"
+        lineWidth={1}
+      />
+
+      {/* Main Dimension Line */}
+      <Line
+        points={[
+          [start[0], start[1], start[2]],
+          [end[0], end[1], end[2]],
+        ]}
+        color="black"
+        lineWidth={1}
+      />
+
+      {/* Perpendicular Line at End */}
+      <Line
+        points={[
+          [end[0], end[1] + offset, end[2]],
+          [end[0], end[1] - offset, end[2]],
+        ]}
+        color="black"
+        lineWidth={1}
+      />
+
+      {/* Text Label at Midpoint */}
+      <Html position={[midPoint.x, midPoint.y, midPoint.z]} center>
+        <div className="text-base-contrast bg-base-card p-1 rounded-sm text-xs select-none">
+          {text}
+        </div>
+      </Html>
+    </group>
+  );
+};
 
 const RPanelProfile = () => {
   const largePeakHeight = 1.25;
@@ -114,18 +169,18 @@ const RPanelProfile = () => {
 
   return (
     <group>
+      <Dimension start={[-6, 2, 0]} end={[6, 2, 0]} text='12"' />
+      <Dimension start={[-18, 4, 0]} end={[18, 4, 0]} text='36"' />
       <mesh geometry={geometry} material={material} />
       <mesh geometry={geometry} material={material2} />
     </group>
   );
 };
 
-RPanelProfile.displayName = 'RPanelProfile';
-
 export const CoreCodeCanvas = ({ id }: { id: string }) => {
   return (
     <Canvas
-      className="aspect-video bg-base-card"
+      className="aspect-video bg-base-card rounded-sm"
       camera={{ position: [0, 20, 30], fov: 40, near: 0.1, far: 100 }}
       style={{ padding: 0 }}
     >
