@@ -150,7 +150,7 @@ const RPanelProfile = () => {
   );
   geometry.setIndex(indices);
   geometry.computeVertexNormals();
-  geometry.center();
+  geometry.translate(-19, -2, 0.5);
 
   const material = new THREE.MeshStandardMaterial({
     color: 'green',
