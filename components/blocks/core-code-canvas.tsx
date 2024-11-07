@@ -108,6 +108,18 @@ const RPanelProfile = React.forwardRef<THREE.Mesh, {}>((_, ref) => {
 
 RPanelProfile.displayName = 'RPanelProfile';
 
+const Helpers = () => {
+  return (
+    <>
+      {/* Adds a grid on the xz-plane */}
+      <gridHelper args={[40, 40]} />
+
+      {/* Adds axes for the x, y, and z planes */}
+      <axesHelper args={[20]} />
+    </>
+  );
+};
+
 export const CoreCodeCanvas = ({ id }: { id: string }) => {
   const rPanelRef = useRef<THREE.Mesh>(null);
 
@@ -127,7 +139,7 @@ export const CoreCodeCanvas = ({ id }: { id: string }) => {
       />
 
       <RPanelProfile ref={rPanelRef} />
-      <OrbitControls enableZoom={true} />
+      <OrbitControls enableZoom={false} />
     </Canvas>
   );
 };
