@@ -1,24 +1,15 @@
 import { BlockProps } from '@lib/types';
-import { GallopMapClient } from './gallop-map-client';
 import { tailwindGetAlignClasses } from '@utils/tools';
 import classNames from 'classnames';
-import { ReactElement, isValidElement } from 'react';
-import {
-  HTMLReactParserOptions,
-  domToReact,
-  DOMNode,
-  Element,
-} from 'html-react-parser';
-import { tailwindAlignClasses, getDomNodeText } from '@utils/tools';
-import { CoreCodeCanvas } from '@components/blocks';
-import { HTMLAttributeProps } from '@lib/types';
-import { castToHTMLAttributeProps } from '@utils/tools';
+import { RPanel, UPanel } from '@components/three';
 
 export const CoreCode = ({ children, className }: BlockProps) => {
   const alignClass = tailwindGetAlignClasses(className);
 
   if (className?.includes('r-panel-profile')) {
-    return <CoreCodeCanvas id="r-panel-profile" />;
+    return <RPanel />;
+  } else if (className?.includes('u-panel-profile')) {
+    return <UPanel />;
   }
 
   return (

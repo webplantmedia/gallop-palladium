@@ -1,3 +1,5 @@
+'use client';
+
 import { Html, Line } from '@react-three/drei';
 import * as THREE from 'three';
 import classNames from 'classnames';

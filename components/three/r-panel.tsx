@@ -7,10 +7,10 @@ import classNames from 'classnames';
 import * as THREE from 'three';
 import { Dimension, Label } from '@components/three';
 
-export const CoreCodeCanvas = ({ id }: { id: string }) => {
+export const RPanel = () => {
   const [shape, setShape] = useState<'r-panel' | 'pbr-panel'>('r-panel');
 
-  const RPanelProfile = () => {
+  const Profile = () => {
     const largePeakHeight = 1.25;
     const largePeakHalfLength = 0.5;
     const largeSlopeLength = 1.15625;
@@ -149,7 +149,7 @@ export const CoreCodeCanvas = ({ id }: { id: string }) => {
         camera={{ position: [0, 20, 30], fov: 40, near: 0.1, far: 100 }}
         style={{ padding: 0 }}
       >
-        <RPanelProfile />
+        <Profile />
         <OrbitControls
           enableZoom={false}
           enableDamping={true}
