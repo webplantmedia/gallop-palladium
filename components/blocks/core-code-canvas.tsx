@@ -102,10 +102,22 @@ const RPanelProfile = () => {
     metalness: 0.1,
     roughness: 20,
     flatShading: true,
-    side: THREE.DoubleSide,
+    side: THREE.BackSide,
+  });
+  const material2 = new THREE.MeshStandardMaterial({
+    color: 'white',
+    metalness: 0.1,
+    roughness: 20,
+    flatShading: true,
+    side: THREE.FrontSide,
   });
 
-  return <mesh geometry={geometry} material={material} />;
+  return (
+    <group>
+      <mesh geometry={geometry} material={material} />
+      <mesh geometry={geometry} material={material2} />
+    </group>
+  );
 };
 
 RPanelProfile.displayName = 'RPanelProfile';
@@ -113,12 +125,16 @@ RPanelProfile.displayName = 'RPanelProfile';
 export const CoreCodeCanvas = ({ id }: { id: string }) => {
   return (
     <Canvas
-      className="aspect-video"
+      className="aspect-video bg-base-card"
       camera={{ position: [0, 20, 30], fov: 40, near: 0.1, far: 100 }}
       style={{ padding: 0 }}
     >
       <RPanelProfile />
-      <OrbitControls enableZoom={false} />
+      <OrbitControls
+        enableZoom={false}
+        enableDamping={true}
+        dampingFactor={0.3}
+      />
       <Environment
         preset="studio"
         environmentIntensity={0.3}
