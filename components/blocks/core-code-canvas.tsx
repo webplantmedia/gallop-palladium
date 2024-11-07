@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Canvas } from '@react-three/fiber';
-import { OrbitControls } from '@react-three/drei';
+import { OrbitControls, Environment } from '@react-three/drei';
 
 import * as THREE from 'three';
 
@@ -71,15 +71,13 @@ const RPanelProfile = () => {
   const coords = buildCoords(points);
 
   const totalWidth = coords[coords.length - 1].x - coords[0].x;
-  const centerOffsetX = -(totalWidth / 2);
 
   const profilePoints = coords.map(
-    (coord) => new THREE.Vector3(coord.x + centerOffsetX, coord.y + 1, 0)
+    (coord) => new THREE.Vector3(coord.x, coord.y + 1, 0)
   );
 
   const vertices: number[] = [];
   const indices: number[] = [];
-  const normals: number[] = [];
 
   profilePoints.forEach((point, i) => {
     vertices.push(point.x, point.y, 0); // Top
@@ -90,123 +88,42 @@ const RPanelProfile = () => {
     }
   });
 
-  // Function to calculate normals
-  function calculateNormals(vertices: number[], indices: number[]): number[] {
-    const normals = new Array(vertices.length).fill(0);
-
-    for (let i = 0; i < indices.length; i += 3) {
-      const i0 = indices[i] * 3;
-      const i1 = indices[i + 1] * 3;
-      const i2 = indices[i + 2] * 3;
-
-      const v0 = new THREE.Vector3(
-        vertices[i0],
-        vertices[i0 + 1],
-        vertices[i0 + 2]
-      );
-      const v1 = new THREE.Vector3(
-        vertices[i1],
-        vertices[i1 + 1],
-        vertices[i1 + 2]
-      );
-      const v2 = new THREE.Vector3(
-        vertices[i2],
-        vertices[i2 + 1],
-        vertices[i2 + 2]
-      );
-
-      const edge1 = new THREE.Vector3().subVectors(v1, v0);
-      const edge2 = new THREE.Vector3().subVectors(v2, v0);
-
-      const normal = new THREE.Vector3().crossVectors(edge1, edge2).normalize();
-
-      normals[i0] += normal.x;
-      normals[i0 + 1] += normal.y;
-      normals[i0 + 2] += normal.z;
-
-      normals[i1] += normal.x;
-      normals[i1 + 1] += normal.y;
-      normals[i1 + 2] += normal.z;
-
-      normals[i2] += normal.x;
-      normals[i2 + 1] += normal.y;
-      normals[i2 + 2] += normal.z;
-    }
-
-    for (let i = 0; i < normals.length; i += 3) {
-      const normal = new THREE.Vector3(
-        normals[i],
-        normals[i + 1],
-        normals[i + 2]
-      ).normalize();
-      normals[i] = normal.x;
-      normals[i + 1] = normal.y;
-      normals[i + 2] = normal.z;
-    }
-
-    return normals;
-  }
-
-  const computedNormals = calculateNormals(vertices, indices);
-
-  return (
-    <mesh>
-      <bufferGeometry>
-        <bufferAttribute
-          attach="attributes-position"
-          array={new Float32Array(vertices)}
-          count={vertices.length / 3}
-          itemSize={3}
-        />
-        <bufferAttribute
-          attach="index"
-          array={new Uint16Array(indices)}
-          itemSize={1}
-          count={indices.length}
-        />
-        <bufferAttribute
-          attach="attributes-normal"
-          array={new Float32Array(computedNormals)}
-          itemSize={3}
-          count={computedNormals.length / 3}
-        />
-      </bufferGeometry>
-      <meshStandardMaterial
-        color="green"
-        metalness={0.3}
-        roughness={0.6}
-        side={THREE.DoubleSide}
-      />
-    </mesh>
+  const geometry = new THREE.BufferGeometry();
+  geometry.setAttribute(
+    'position',
+    new THREE.Float32BufferAttribute(vertices, 3)
   );
+  geometry.setIndex(indices);
+  geometry.computeVertexNormals();
+  geometry.center();
+
+  const material = new THREE.MeshStandardMaterial({
+    color: 'green',
+    metalness: 0.1,
+    roughness: 20,
+    flatShading: true,
+    side: THREE.DoubleSide,
+  });
+
+  return <mesh geometry={geometry} material={material} />;
 };
 
 RPanelProfile.displayName = 'RPanelProfile';
-
-const Helpers = () => {
-  return (
-    <>
-      {/* Adds a grid on the xz-plane */}
-      <gridHelper args={[40, 40]} />
-
-      {/* Adds axes for the x, y, and z planes */}
-      <axesHelper args={[20]} />
-    </>
-  );
-};
 
 export const CoreCodeCanvas = ({ id }: { id: string }) => {
   return (
     <Canvas
       className="aspect-video"
       camera={{ position: [0, 20, 30], fov: 40, near: 0.1, far: 100 }}
-      style={{ background: 'white', padding: 0 }}
+      style={{ padding: 0 }}
     >
       <RPanelProfile />
-      <ambientLight intensity={0.5} color="white" />
-      <directionalLight position={[10, 30, 0]} intensity={4} color="white" />
-      <directionalLight position={[-10, -30, 0]} intensity={4} color="white" />
-      <OrbitControls position={[0, 0, 0]} enableZoom={false} />
+      <OrbitControls enableZoom={false} />
+      <Environment
+        preset="studio"
+        environmentIntensity={0.3}
+        background={false}
+      />
     </Canvas>
   );
 };
