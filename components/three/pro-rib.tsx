@@ -158,6 +158,21 @@ export const ProRib = () => {
           background={false}
         />
       </Canvas>
+      <div className="absolute top-2 right-2 flex gap-2">
+        <span
+          className={classNames(
+            'bg-base-card block rounded-md overflow-hidden'
+          )}
+        >
+          <span
+            className={classNames(
+              'block text-base-contrast font-bold text-xs bg-white/30 px-3 py-1'
+            )}
+          >
+            Pro-Rib
+          </span>
+        </span>
+      </div>
     </div>
   );
 };
