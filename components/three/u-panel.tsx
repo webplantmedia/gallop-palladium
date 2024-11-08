@@ -8,57 +8,53 @@ import * as THREE from 'three';
 import { Dimension, Label } from '@components/three';
 
 export const UPanel = () => {
-  const [shape, setShape] = useState<'r-panel' | 'pbr-panel'>('r-panel');
+  const [shape, setShape] = useState<'u-panel' | 'pbu-panel'>('u-panel');
 
   const Profile = () => {
-    const largePeakHeight = 1.25;
-    const largePeakHalfLength = 0.5;
-    const largeSlopeLength = 1.15625;
+    const peakHeight = 0.75;
+    const peakHalfLength = 0.5;
+    const slopeLength = 0.6;
+    const valleyLength = 3.8;
 
-    const smallPeakHeight = 0.25;
-    const smallPeakLength = 0.75;
-    const smallSlopeLength = 0.34375;
+    // const largePeakHeight = 1.25;
+    // const largePeakHalfLength = 0.5;
+    // const largeSlopeLength = 1.15625;
 
-    const valleyLength = 1.625;
-    const valleyMiddleLength = 2.5625;
+    // const smallPeakHeight = 0.25;
+    // const smallPeakLength = 0.75;
+    // const smallSlopeLength = 0.34375;
 
-    const startLength = largeSlopeLength * 0.4;
-    const startHeight =
-      largePeakHeight - (largePeakHeight * startLength) / largeSlopeLength;
+    // const valleyLength = 1.625;
+    const valleyMiddleLength = 5;
+
+    const startLength = slopeLength * 0.4;
+    const startHeight = peakHeight - (peakHeight * startLength) / slopeLength;
 
     let points: { x: number; y: number }[] = [];
 
     const beginning = [
       { x: 0, y: startHeight },
-      { x: startLength, y: largePeakHeight },
-      { x: largePeakHalfLength, y: largePeakHeight },
+      { x: startLength, y: peakHeight },
+      { x: peakHalfLength, y: peakHeight },
     ];
 
     const middle = [
-      { x: largePeakHalfLength, y: largePeakHeight },
-      { x: largeSlopeLength, y: 0 },
+      { x: peakHalfLength, y: peakHeight },
+      { x: slopeLength, y: 0 },
       { x: valleyLength, y: 0 },
-      { x: smallSlopeLength, y: smallPeakHeight },
-      { x: smallPeakLength, y: smallPeakHeight },
-      { x: smallSlopeLength, y: 0 },
-      { x: valleyMiddleLength, y: 0 },
-      { x: smallSlopeLength, y: smallPeakHeight },
-      { x: smallPeakLength, y: smallPeakHeight },
-      { x: smallSlopeLength, y: 0 },
-      { x: valleyLength, y: 0 },
-      { x: largeSlopeLength, y: largePeakHeight },
-      { x: largePeakHalfLength, y: largePeakHeight },
+      { x: slopeLength, y: peakHeight },
+      { x: peakHalfLength, y: peakHeight },
     ];
 
     let end = [
-      { x: largePeakHalfLength, y: largePeakHeight },
+      { x: peakHalfLength, y: peakHeight },
       { x: startLength, y: startHeight },
     ];
 
-    if (shape === 'pbr-panel') {
+    if (shape === 'pbu-panel') {
       end = [
-        { x: largePeakHalfLength, y: largePeakHeight },
-        { x: largeSlopeLength, y: 0 },
+        { x: peakHalfLength, y: peakHeight },
+        { x: slopeLength, y: 0 },
         { x: startLength, y: 0 },
       ];
     }
@@ -75,7 +71,7 @@ export const UPanel = () => {
     }
 
     points = points.concat(beginning);
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < 6; i++) {
       points = points.concat(middle);
     }
     points = points.concat(end);
@@ -126,11 +122,11 @@ export const UPanel = () => {
 
     return (
       <group>
-        <Dimension start={[-6, 2, 0]} end={[6, 2, 0]} text='12"' />
+        <Dimension start={[5.75, 2, 0]} end={[11.75, 2, 0]} text='6"' />
         <Dimension start={[-18, 4, 0]} end={[18, 4, 0]} text='36"' />
-        {shape === 'pbr-panel' && (
+        {shape === 'pbu-panel' && (
           <Label
-            start={[20, -1, 0]}
+            start={[19, -1, 0]}
             end={[18, -5, 0]}
             text="Purlin Bearing Leg"
             space={1}
@@ -165,32 +161,32 @@ export const UPanel = () => {
         <button
           className={classNames(
             'text-xs px-3 py-1 rounded-md',
-            shape === 'r-panel'
+            shape === 'u-panel'
               ? 'bg-primary-main text-primary-contrast'
               : 'bg-primary-contrast text-primary-main hover:bg-gray-50'
           )}
           onClick={() =>
             setShape((prevValue) =>
-              prevValue === 'r-panel' ? 'pbr-panel' : 'r-panel'
+              prevValue === 'u-panel' ? 'pbu-panel' : 'u-panel'
             )
           }
         >
-          R-Panel
+          U-Panel
         </button>
         <button
           className={classNames(
             'text-xs px-3 py-1 rounded-md',
-            shape === 'r-panel'
+            shape === 'u-panel'
               ? 'bg-primary-contrast text-primary-main hover:bg-gray-50'
               : 'bg-primary-main text-primary-contrast'
           )}
           onClick={() =>
             setShape((prevValue) =>
-              prevValue === 'r-panel' ? 'pbr-panel' : 'r-panel'
+              prevValue === 'u-panel' ? 'pbu-panel' : 'u-panel'
             )
           }
         >
-          PBR-Panel
+          PBU-Panel
         </button>
       </div>
     </div>
