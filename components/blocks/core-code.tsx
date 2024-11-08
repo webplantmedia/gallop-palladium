@@ -7,6 +7,7 @@ import {
   ProRib,
   AGPanel,
   StandingSeamSSQ100,
+  StandingSeamSSQ450,
 } from '@components/three';
 
 export const CoreCode = ({ children, className }: BlockProps) => {
@@ -20,6 +21,8 @@ export const CoreCode = ({ children, className }: BlockProps) => {
     return <ProRib />;
   } else if (className?.includes('ag-panel')) {
     return <AGPanel />;
+  } else if (className?.includes('standing-seam-ssq450')) {
+    return <StandingSeamSSQ450 />;
   } else if (className?.includes('standing-seam-ssq100')) {
     return <StandingSeamSSQ100 />;
   }

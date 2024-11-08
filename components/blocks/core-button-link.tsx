@@ -13,6 +13,14 @@ export const CoreButtonLink = ({ children, className, props }: BlockProps) => {
     className += ' text-base py-3 px-5';
   }
 
+  if (!href || href === '#') {
+    return (
+      <div className={classNames(className, 'w-full cursor-pointer')}>
+        {children}
+      </div>
+    );
+  }
+
   return (
     <Link
       prefetch={false}

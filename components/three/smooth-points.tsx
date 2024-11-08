@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+
 export const smoothPoints = (coords: { x: number; y: number }[]) => {
   const roundedCornerPoints: THREE.Vector3[] = [];
 
@@ -10,12 +11,30 @@ export const smoothPoints = (coords: { x: number; y: number }[]) => {
     const next = new THREE.Vector3(coords[i + 1].x, coords[i + 1].y, 0);
 
     // Calculate direction vectors
-    const dirToPrev = current.clone().sub(prev).normalize();
-    const dirToNext = current.clone().sub(next).normalize();
+    const dirToPrev = prev.clone().sub(current).normalize();
+    const dirToNext = next.clone().sub(current).normalize();
+
+    // Angle between the incoming and outgoing segments
+    const angle = dirToPrev.angleTo(dirToNext);
+
+    // Skip rounding if the angle is too small (almost straight line)
+    if (angle < Math.PI * 0.1) {
+      roundedCornerPoints.push(current);
+      continue;
+    }
+
+    // Adjust radius if it exceeds half the segment length
+    const maxRadius =
+      Math.min(prev.distanceTo(current), next.distanceTo(current)) / 2;
+    const adjustedRadius = Math.min(radius, maxRadius);
 
     // Compute corner start and end points
-    const cornerStart = current.clone().sub(dirToPrev.multiplyScalar(radius));
-    const cornerEnd = current.clone().sub(dirToNext.multiplyScalar(radius));
+    const cornerStart = current
+      .clone()
+      .add(dirToPrev.multiplyScalar(adjustedRadius));
+    const cornerEnd = current
+      .clone()
+      .add(dirToNext.multiplyScalar(adjustedRadius));
 
     roundedCornerPoints.push(cornerStart);
 
