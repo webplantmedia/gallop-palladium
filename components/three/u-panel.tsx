@@ -147,7 +147,7 @@ export const UPanel = () => {
     );
   };
   return (
-    <div className="aspect-video relative !p-0">
+    <div className="aspect-video relative !p-0 z-0">
       <Canvas
         className="w-full h-full bg-base-card rounded-sm"
         camera={{ position: [0, 20, 30], fov: 40, near: 0.1, far: 100 }}
