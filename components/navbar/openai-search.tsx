@@ -8,21 +8,23 @@ import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 import Iconify from '@components/iconify';
 import AIIcon from '@iconify/icons-eos-icons/ai';
 import classNames from 'classnames';
+import { parse } from 'marked';
+import { compressContent } from '@utils/tools';
 
-function cleanCitation(text) {
+function cleanCitation(text: string) {
   const citationPattern = /\【[^】]*\】/g;
-  if (text.length > 0) {
-    return text.replace(citationPattern, '');
+  if (text && text.length > 0) {
+    return String(text.replace(citationPattern, ''));
   } else {
-    return;
+    return '';
   }
 }
 
-function ChatComponent({ activeIndex, messages, status }) {
+function ChatComponent({ activeIndex, messages, status }: any) {
   var elements;
 
   if (activeIndex in messages) {
-    elements = messages.map((message, index) => {
+    elements = messages.map((message: any, index: number) => {
       if (message?.role == 'user') {
         return (
           <p className="font-bold" key={index}>
@@ -35,30 +37,50 @@ function ChatComponent({ activeIndex, messages, status }) {
     });
   }
 
-  const userMessages = messages.filter((item) => item.role == 'user');
+  const userMessages = messages.filter((item: any) => item.role == 'user');
   const userContent = userMessages[userMessages.length - 1]?.content;
 
-  const aiMessages = messages.filter((item) => item.role == 'assistant');
-  const aiContent = aiMessages[aiMessages.length - 1]?.content;
+  const aiMessages = messages.filter((item: any) => item.role == 'assistant');
+  const aiContent = String(aiMessages[aiMessages.length - 1]?.content);
+  let aiHtml = String(parse(cleanCitation(aiContent))); // returns string prommise. So needed to force string to run other functions on it.
+  aiHtml = compressContent(aiHtml);
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-2 text-base-contrast">
       {activeIndex % 2 != 0 && activeIndex != 0 ? (
         <>
-          <p className="font-bold">{userContent}</p>
-          <p>{cleanCitation(aiContent)}</p>
+          <p className="font-bold text-primary-main dmh:text-primary-main text-xl">
+            {userContent}
+          </p>
+          <div
+            className={classNames(
+              '[&>*]:mb-7',
+              '[&_a]:underline [&_a]:text-secondary-main [&_a]:dmh:text-modern-primary-main',
+              '[&>h2]:font-bold [&>h2]:mt-7 [&>h2]:text-3xl',
+              '[&>h3]:font-bold [&>h3]:mt-7 [&>h3]:text-2xl',
+              '[&>h4]:font-bold [&>h4]:mt-7 [&>h4]:text-xl',
+              '[&>ul]:ml-9 [&>ul]:list-disc',
+              '[&>ol]:ml-9 [&>ol]:list-decimal',
+              '[&>*:last-child]:mb-0'
+            )}
+            dangerouslySetInnerHTML={{
+              __html: aiHtml,
+            }}
+          />
         </>
       ) : (
         <>
-          <p className="font-bold">{userContent}</p>
-          <p>...</p>
+          <p className="font-bold text-primary-main dmh:text-primary-main text-xl">
+            {userContent}
+          </p>
+          <p className="relative after:content-['...'] h-[30px] after:absolute after:top-0 after:left-0 after:animate-dots"></p>
         </>
       )}
     </div>
   );
 }
 
-export default function Search({ isScrolling }) {
+export default function Search({ isScrolling }: any) {
   const [isLoading, setIsLoading] = useState(false);
   const searchRef = useRef<HTMLInputElement | null>(null);
 
