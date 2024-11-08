@@ -1,6 +1,11 @@
 import classNames from 'classnames';
 // import Image from 'next/image';
-import { CoreImage, CoreGallery } from '@components/blocks';
+import {
+  CoreImage,
+  CoreGallery,
+  coreImage,
+  coreGallery,
+} from '@components/blocks';
 import { GallopAlbumCoverToggle } from './gallop-album-cover-toggle';
 import { HTMLAttributeProps } from '@lib/types';
 import { castToHTMLAttributeProps } from '@utils/tools';
@@ -21,12 +26,13 @@ export const GallopAlbumCover = ({ node, className, options, props }) => {
     let { className: blockClassName } = props;
 
     if (block.attribs?.class?.includes('wp-block-image')) {
+      const { content, hasCaption, style } = coreImage(block, options);
       albumImage = (
         <CoreImage
-          node={block}
-          options={options}
-          className={blockClassName}
-          marginClass="mb-0"
+          content={content}
+          hasCaption={hasCaption}
+          style={style}
+          className={classNames(className, '!mb-0 [&_img]:!rounded-none')}
         />
       );
     } else if (block.attribs?.class?.includes('wp-block-heading')) {
@@ -34,12 +40,16 @@ export const GallopAlbumCover = ({ node, className, options, props }) => {
       albumHeadingClass = blockClassName;
     } else if (block.attribs?.class?.includes('wp-block-gallery')) {
       albumSize = block.children.length;
+      const { figure, figureProps, columns, figcaption, hasCaption } =
+        coreGallery(block, options, className);
       albumGallery = (
         <CoreGallery
-          tag={block.name}
-          className={blockClassName}
-          node={block.children}
-          options={options}
+          figure={figure}
+          figureProps={figureProps}
+          columns={columns}
+          figcaption={figcaption}
+          hasCaption={hasCaption}
+          className={className}
         />
       );
     }

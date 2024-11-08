@@ -1,4 +1,3 @@
-import { _profile } from '../../_data/_sidebar';
 import SidebarContent from './content';
 import classNames from 'classnames';
 

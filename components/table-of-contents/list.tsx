@@ -1,6 +1,5 @@
 'use client';
 
-import { _cta, _profile, _follow } from '../../_data/_sidebar';
 import Link from 'next/link';
 import { permalink } from '@utils/tools';
 import dotMarkIcon from '@iconify/icons-carbon/dot-mark';

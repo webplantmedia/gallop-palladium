@@ -45,10 +45,11 @@ export default function MobileMenuLinks({ menu, closeModal }) {
             </Link>
           );
         } else if (hasExactClass(className, 'is-style-icon-text')) {
+          const data = getVarsFromNode(domNode);
           return (
             <GallopIconText
               className="border-2 border-primary-main rounded-md px-4 py-3 text-base font-normal bg-primary-main text-primary-contrast shadow-sm hover:bg-primary-light focus:outline-none whitespace-nowrap"
-              node={domNode}
+              data={data}
             />
           );
         } else if (hasExactClass(className, 'wp-block-group')) {

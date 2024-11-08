@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import { toBase64, shimmerDark, shimmerGlow, shimmer } from '@utils/shimmer';
 import {
   isImageFitCover,
   isImageSlide,
