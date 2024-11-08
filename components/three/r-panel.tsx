@@ -25,6 +25,7 @@ export const RPanel = () => {
     const startLength = largeSlopeLength * 0.4;
     const startHeight =
       largePeakHeight - (largePeakHeight * startLength) / largeSlopeLength;
+    const xAxisOffset = startLength + largePeakHalfLength;
 
     let points: { x: number; y: number }[] = [];
 
@@ -107,7 +108,7 @@ export const RPanel = () => {
     );
     geometry.setIndex(indices);
     geometry.computeVertexNormals();
-    geometry.translate(-19, -2, 0.5);
+    geometry.translate(-18 - xAxisOffset, -2, 0.5);
 
     const material = new THREE.MeshStandardMaterial({
       color: '#873F39',

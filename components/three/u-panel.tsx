@@ -12,9 +12,9 @@ export const UPanel = () => {
 
   const Profile = () => {
     const peakHeight = 0.75;
-    const peakHalfLength = 0.5;
-    const slopeLength = 0.6;
-    const valleyLength = 3.8;
+    const peakHalfLength = 0.515625;
+    const slopeLength = 0.71875;
+    const valleyLength = 3.53125;
 
     // const largePeakHeight = 1.25;
     // const largePeakHalfLength = 0.5;
@@ -25,10 +25,11 @@ export const UPanel = () => {
     // const smallSlopeLength = 0.34375;
 
     // const valleyLength = 1.625;
-    const valleyMiddleLength = 5;
+    // const valleyMiddleLength = 5;
 
     const startLength = slopeLength * 0.4;
     const startHeight = peakHeight - (peakHeight * startLength) / slopeLength;
+    const xAxisOffset = startLength + peakHalfLength;
 
     let points: { x: number; y: number }[] = [];
 
@@ -103,7 +104,7 @@ export const UPanel = () => {
     );
     geometry.setIndex(indices);
     geometry.computeVertexNormals();
-    geometry.translate(-19, -2, 0.5);
+    geometry.translate(-18 - xAxisOffset, -2, 0.5);
 
     const material = new THREE.MeshStandardMaterial({
       color: '#873F39',
@@ -122,11 +123,11 @@ export const UPanel = () => {
 
     return (
       <group>
-        <Dimension start={[5.75, 2, 0]} end={[11.75, 2, 0]} text='6"' />
+        <Dimension start={[6, 2, 0]} end={[12, 2, 0]} text='6"' />
         <Dimension start={[-18, 4, 0]} end={[18, 4, 0]} text='36"' />
         {shape === 'pbu-panel' && (
           <Label
-            start={[19, -1, 0]}
+            start={[19.3, -1, 0]}
             end={[18, -5, 0]}
             text="Purlin Bearing Leg"
             space={1}
