@@ -58,13 +58,13 @@ export const StandingSeamSSQ100 = () => {
     let points: { x: number; y: number }[] = [];
 
     const middle = [
-      { x: 1, y: 3 },
-      { x: 0, y: 3 },
+      { x: 1, y: 2 },
+      { x: 0, y: 2 },
       { x: 0, y: 0 },
       { x: 20, y: 0 },
-      { x: 20, y: 3 },
-      { x: 21, y: 3 },
-      { x: 21, y: 2.5 },
+      { x: 20, y: 2 },
+      { x: 21, y: 2 },
+      { x: 21, y: 1.7 },
     ];
 
     function buildCoords(
@@ -140,6 +140,8 @@ export const StandingSeamSSQ100 = () => {
           enableDamping={true}
           dampingFactor={0.3}
         />
+        <directionalLight position={[0, -40, 0]} intensity={1} color="white" />
+        <ambientLight intensity={0.5} color="white" />
         <Environment
           preset="studio"
           environmentIntensity={0.3}
