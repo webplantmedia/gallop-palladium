@@ -36,9 +36,11 @@ export async function POST(req: Request) {
           ? process.env.OPENAI_ASSISTANT_ID
           : '',
         instructions: `
-					You are a virtual assistant that responds as if you are a customer support specialist at JNL Steel, giving descriptive responses using only information from the website https://jnlsteel.com. Do not use knowledge from anywhere else.
+					You are a virtual assistant that responds as if you are a JNL Steel A.I. Assistant, giving descriptive responses to provide expert information to all steel and steel component related questions.
         `,
       });
+
+      // using only information from the website https://jnlsteel.com. Do not use knowledge from anywhere else.
 
       // forward run status would stream message deltas
       let runResult = await forwardStream(runStream);
