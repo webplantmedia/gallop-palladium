@@ -36,10 +36,10 @@ import { ChevronRightIcon } from '@heroicons/react/20/solid';
 import React from 'react';
 
 export const getGallopAccordionHeader = (node: Element) => {
-  let icon = <></>;
-  let heading = <></>;
-  let paragraph = <></>;
-  let link = '';
+  let icon: any = <></>;
+  let heading: any = <></>;
+  let paragraph: any = <></>;
+  let link: any = '';
   const options: HTMLReactParserOptions = {
     replace(domNode) {
       if (domNode instanceof Element && domNode.attribs) {
@@ -103,9 +103,9 @@ export const getGallopAccordionHeader = (node: Element) => {
             }
           }
         } else if (hasExactClass(className, 'wp-block-heading')) {
-          heading = <>{domToReact(domNode.children as DOMNode[])}</>;
+          heading = domToReact(domNode.children as DOMNode[]);
         } else if (domNode.name === 'p') {
-          paragraph = <>{domToReact(domNode.children as DOMNode[])}</>;
+          paragraph = domToReact(domNode.children as DOMNode[]);
         } else if (domNode.name === 'a') {
           const { href } = props;
           link = href;
@@ -120,8 +120,8 @@ export const getGallopAccordionHeader = (node: Element) => {
 
 export const GallopAccordionContent = ({ node, props }) => {
   let icon = <></>;
-  let heading = <></>;
-  let paragraph = <></>;
+  let heading = '';
+  let paragraph = '';
   let link = '';
 
   const options: HTMLReactParserOptions = {
@@ -169,8 +169,8 @@ export const GallopAccordionContent = ({ node, props }) => {
 export const GallopAccordion = ({ node, props }) => {
   let content: React.ReactElement | null = null;
   let icon = <></>;
-  let heading = <></>;
-  let paragraph = <></>;
+  let heading = '';
+  let paragraph = '';
 
   const options: HTMLReactParserOptions = {
     replace(domNode) {
