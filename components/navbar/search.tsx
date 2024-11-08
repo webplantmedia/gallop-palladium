@@ -34,7 +34,7 @@ export default function Search({ isScrolling }) {
             leaveFrom="transform opacity-100 scale-100"
             leaveTo="transform opacity-0 scale-95"
           >
-            <Popover.Panel className="absolute left-0 right-0 max-w-full top-full">
+            <Popover.Panel className="absolute left-4 right-4 sm:left-8 sm:right-8 max-w-[750px] mx-auto top-full">
               <div className="isolate overflow-hidden rounded-b-md shadow-2xl">
                 <div
                   className={classNames(
