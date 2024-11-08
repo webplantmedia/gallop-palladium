@@ -7,36 +7,43 @@ import classNames from 'classnames';
 import * as THREE from 'three';
 import { Dimension, Label } from '@components/three';
 
-export const RPanel = () => {
-  const [shape, setShape] = useState<'r-panel' | 'pbr-panel'>('r-panel');
-
+export const AGPanel = () => {
   const Profile = () => {
-    const largePeakHeight = 1.25;
-    const largePeakHalfLength = 0.5;
-    const largeSlopeLength = 1.15625;
+    const largePeakHeight = 0.75;
+    const largePeakHalfLength = 0.25;
+    const largeSlopeLength = 0.6;
+
+    const largeRidgeHeight = 0.6;
+    const largeRidgeHalfLength = 0.25;
+    const largeRidgeSlopeLength = 0;
 
     const smallPeakHeight = 0.25;
     const smallPeakLength = 0.75;
-    const smallSlopeLength = 0.34375;
+    const smallSlopeLength = 0.3;
 
-    const valleyLength = 1.625;
-    const valleyMiddleLength = 2.5625;
+    const valleyLength = 1.3;
+    const valleyMiddleLength = 1.5;
 
-    const startLength = largeSlopeLength * 0.4;
+    const startLength = largeSlopeLength * 0.9;
     const startHeight =
       largePeakHeight - (largePeakHeight * startLength) / largeSlopeLength;
-    const xAxisOffset = startLength + largePeakHalfLength;
+    const xAxisOffset =
+      startLength + largePeakHalfLength + largeRidgeHalfLength;
 
     let points: { x: number; y: number }[] = [];
 
     const beginning = [
       { x: 0, y: startHeight },
-      { x: startLength, y: largePeakHeight },
+      { x: startLength, y: largeRidgeHeight },
+      { x: largeRidgeHalfLength, y: largeRidgeHeight },
+      { x: largeRidgeSlopeLength, y: largePeakHeight },
       { x: largePeakHalfLength, y: largePeakHeight },
     ];
 
     const middle = [
       { x: largePeakHalfLength, y: largePeakHeight },
+      { x: largeRidgeSlopeLength, y: largeRidgeHeight },
+      { x: largeRidgeHalfLength, y: largeRidgeHeight },
       { x: largeSlopeLength, y: 0 },
       { x: valleyLength, y: 0 },
       { x: smallSlopeLength, y: smallPeakHeight },
@@ -47,22 +54,19 @@ export const RPanel = () => {
       { x: smallPeakLength, y: smallPeakHeight },
       { x: smallSlopeLength, y: 0 },
       { x: valleyLength, y: 0 },
-      { x: largeSlopeLength, y: largePeakHeight },
+      { x: largeSlopeLength, y: largeRidgeHeight },
+      { x: largeRidgeHalfLength, y: largeRidgeHeight },
+      { x: largeRidgeSlopeLength, y: largePeakHeight },
       { x: largePeakHalfLength, y: largePeakHeight },
     ];
 
     let end = [
       { x: largePeakHalfLength, y: largePeakHeight },
-      { x: startLength, y: startHeight },
+      { x: largeRidgeSlopeLength, y: largeRidgeHeight },
+      { x: largeRidgeHalfLength, y: largeRidgeHeight },
+      { x: largeSlopeLength, y: 0 },
+      { x: startLength, y: 0 },
     ];
-
-    if (shape === 'pbr-panel') {
-      end = [
-        { x: largePeakHalfLength, y: largePeakHeight },
-        { x: largeSlopeLength, y: 0 },
-        { x: startLength, y: 0 },
-      ];
-    }
 
     function buildCoords(
       coords: Array<{ x: number; y: number }>
@@ -76,7 +80,7 @@ export const RPanel = () => {
     }
 
     points = points.concat(beginning);
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < 4; i++) {
       points = points.concat(middle);
     }
     points = points.concat(end);
@@ -127,24 +131,22 @@ export const RPanel = () => {
 
     return (
       <group>
-        <Dimension start={[-6, 2, 0]} end={[6, 2, 0]} text='12"' />
+        <Dimension start={[0, 2, 0]} end={[9, 2, 0]} text='9"' />
         <Dimension start={[-18, 4, 0]} end={[18, 4, 0]} text='36"' />
         <Dimension
           start={[-20, -1, 0]}
-          end={[-20, 0.25, 0]}
-          text='1¼"'
+          end={[-20, -0.25, 0]}
+          text='¾"'
           direction="vertical"
           textPosition="below"
         />
-        {shape === 'pbr-panel' && (
-          <Label
-            start={[20, -1, 0]}
-            end={[18, -5, 0]}
-            text="Purlin Bearing Leg"
-            space={1}
-            align="left"
-          />
-        )}
+        <Label
+          start={[19.5, -1, 0]}
+          end={[18, -5, 0]}
+          text="Purlin Bearing Leg"
+          space={1}
+          align="left"
+        />
         <mesh geometry={geometry} material={material} />
         <mesh geometry={geometry} material={material2} />
       </group>
@@ -169,38 +171,6 @@ export const RPanel = () => {
           background={false}
         />
       </Canvas>
-      <div className="absolute top-2 right-2 flex gap-2">
-        <button
-          className={classNames(
-            'text-xs px-3 py-1 rounded-md',
-            shape === 'r-panel'
-              ? 'bg-primary-main text-primary-contrast'
-              : 'bg-primary-contrast text-primary-main hover:bg-gray-50'
-          )}
-          onClick={() =>
-            setShape((prevValue) =>
-              prevValue === 'r-panel' ? 'pbr-panel' : 'r-panel'
-            )
-          }
-        >
-          R-Panel
-        </button>
-        <button
-          className={classNames(
-            'text-xs px-3 py-1 rounded-md',
-            shape === 'r-panel'
-              ? 'bg-primary-contrast text-primary-main hover:bg-gray-50'
-              : 'bg-primary-main text-primary-contrast'
-          )}
-          onClick={() =>
-            setShape((prevValue) =>
-              prevValue === 'r-panel' ? 'pbr-panel' : 'r-panel'
-            )
-          }
-        >
-          PBR-Panel
-        </button>
-      </div>
     </div>
   );
 };
