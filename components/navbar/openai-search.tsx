@@ -155,7 +155,7 @@ export default function Search({ isScrolling }: any) {
                           onChange={handleInputChange}
                           onFocus={(e) => e.target.select()}
                           type="search"
-                          placeholder="Start chatting with ChatGPT 4.0..."
+                          placeholder="Ask JNL Steel A.I."
                           className="appearance-none shadow-inner hide-clear bg-white text-base-contrast font-body block w-full pr-16 pl-6 h-14 border-0 box-border border-white focus:border-white focus:ring-0 placeholder:text-base-contrast/50 truncate text-base outline-none"
                         />
                         <button className="">
