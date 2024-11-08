@@ -93,7 +93,7 @@ export const Dimension = ({
             'rounded-sm text-xs select-none',
             textPosition === 'in-line'
               ? 'text-base-contrast bg-base-card p-1'
-              : 'text-base-contrast bg-base-card p-1'
+              : 'text-base-contrast bg-transparent p-0'
           )}
         >
           {text}

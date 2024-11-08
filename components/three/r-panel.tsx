@@ -127,7 +127,7 @@ export const RPanel = () => {
 
     return (
       <group>
-        <Dimension start={[-6, 2, 0]} end={[6, 2, 0]} text='12"' />
+        <Dimension start={[6, 2, 0]} end={[18, 2, 0]} text='12"' />
         <Dimension start={[-18, 4, 0]} end={[18, 4, 0]} text='36"' />
         <Dimension
           start={[-20, -1, 0]}
