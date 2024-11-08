@@ -61,10 +61,10 @@ export const StandingSeamSSQ100 = () => {
       { x: 1, y: 2 },
       { x: 0, y: 2 },
       { x: 0, y: 0 },
-      { x: 20, y: 0 },
-      { x: 20, y: 2 },
-      { x: 21, y: 2 },
-      { x: 21, y: 1.7 },
+      { x: 17, y: 0 },
+      { x: 17, y: 2 },
+      { x: 18, y: 2 },
+      { x: 18, y: 1.7 },
     ];
 
     function buildCoords(
@@ -103,7 +103,7 @@ export const StandingSeamSSQ100 = () => {
     );
     geometry.setIndex(indices);
     geometry.computeVertexNormals();
-    geometry.translate(-10.5, -1, 10);
+    geometry.translate(-9, -1, 10);
 
     const material = new THREE.MeshStandardMaterial({
       color: '#873F39',
