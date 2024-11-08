@@ -1,7 +1,13 @@
 import { BlockProps } from '@lib/types';
 import { tailwindGetAlignClasses } from '@utils/tools';
 import classNames from 'classnames';
-import { RPanel, UPanel, ProRib, AGPanel } from '@components/three';
+import {
+  RPanel,
+  UPanel,
+  ProRib,
+  AGPanel,
+  StandingSeamSSQ100,
+} from '@components/three';
 
 export const CoreCode = ({ children, className }: BlockProps) => {
   const alignClass = tailwindGetAlignClasses(className);
@@ -14,6 +20,8 @@ export const CoreCode = ({ children, className }: BlockProps) => {
     return <ProRib />;
   } else if (className?.includes('ag-panel')) {
     return <AGPanel />;
+  } else if (className?.includes('standing-seam-ssq100')) {
+    return <StandingSeamSSQ100 />;
   }
 
   return (
