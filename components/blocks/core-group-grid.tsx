@@ -18,7 +18,7 @@ export const CoreGroupGrid = ({ className, props, children }: BlockProps) => {
   );
   className = className?.replace(
     'is-style-columns-2',
-    'grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-10'
+    'grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-10'
   );
   className = className?.replace(
     'is-style-masonry-3',

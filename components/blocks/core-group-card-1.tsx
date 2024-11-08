@@ -60,6 +60,31 @@ export const CoreGroupCard1 = ({ data, className, props }: BlockProps) => {
   // delete img.srcset;
   // console.log(img);
 
+  let buttonHtml = (
+    <a
+      className="text-base py-3 px-5 w-full flex justify-center items-center gap-2"
+      href={button?.href}
+    >
+      {button?.jsx}
+      <Iconify
+        icon={ArrowInsertIcon}
+        className="flex-shrink-0 h-auto w-6 rotate-90 inline"
+      />
+    </a>
+  );
+
+  if (!button?.href || button.href === '#') {
+    buttonHtml = (
+      <div className="text-base py-3 px-5 w-full flex justify-center items-center gap-2 cursor-pointer">
+        {button?.jsx}
+        <Iconify
+          icon={ArrowInsertIcon}
+          className="flex-shrink-0 h-auto w-6 rotate-90 inline"
+        />
+      </div>
+    );
+  }
+
   return (
     <div className="flex flex-col gap-0 rounded-md overflow-clip shadow-lg">
       {image}
@@ -70,16 +95,7 @@ export const CoreGroupCard1 = ({ data, className, props }: BlockProps) => {
         <CoreParagraph className="">{data.p?.jsx}</CoreParagraph>
         {button && (
           <div className="text-center rounded-md shadow-sm flex items-center justify-center mt-auto bg-primary-main text-primary-contrast hover:bg-primary-light">
-            <a
-              className="text-base py-3 px-5 w-full flex justify-center items-center gap-2"
-              href={button?.href}
-            >
-              {button?.jsx}
-              <Iconify
-                icon={ArrowInsertIcon}
-                className="flex-shrink-0 h-auto w-6 rotate-90 inline"
-              />
-            </a>
+            {buttonHtml}
           </div>
         )}
       </div>

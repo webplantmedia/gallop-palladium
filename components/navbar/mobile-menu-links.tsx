@@ -13,7 +13,13 @@ import { replaceWordPressUrlRelative } from '@utils/tools';
 import MobileMenuLinkDropdown from './mobile-menu-link-dropdown';
 import { GallopIconText } from '@components/blocks';
 
-export default function MobileMenuLinks({ menu, closeModal }) {
+export default function MobileMenuLinks({
+  menu,
+  closeModal,
+}: {
+  menu: any;
+  closeModal: any;
+}) {
   const options: HTMLReactParserOptions = {
     replace(domNode) {
       if (domNode instanceof Element && domNode.attribs) {

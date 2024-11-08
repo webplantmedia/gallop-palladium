@@ -7,18 +7,17 @@ import classNames from 'classnames';
 import * as THREE from 'three';
 import { smoothPoints } from '@components/three';
 
-export const StandingSeamSSQ100 = () => {
+export const StandingSeamSSQ450 = () => {
   const Profile = () => {
     let points: { x: number; y: number }[] = [];
 
     const middle = [
-      { x: 1, y: 2 },
       { x: 0, y: 2 },
       { x: 0, y: 0 },
       { x: 17, y: 0 },
-      { x: 17, y: 2 },
-      { x: 18, y: 2 },
-      { x: 18, y: 1.7 },
+      { x: 17.2, y: 2.2 },
+      { x: 17.4, y: 2.2 },
+      { x: 17.6, y: 0.1 },
     ];
 
     function buildCoords(
@@ -119,7 +118,7 @@ export const StandingSeamSSQ100 = () => {
               'block text-base-contrast font-bold text-xs bg-white/30 px-3 py-1'
             )}
           >
-            SSQ100
+            SSQ450
           </span>
         </span>
       </div>
