@@ -31,11 +31,17 @@ module.exports = {
           '0%': { transform: 'rotate(0deg)' },
           '100%': { transform: 'rotate(-360deg)' },
         },
+        dots: {
+          '0%, 100%': { content: '"."' },
+          '33%': { content: '".."' },
+          '66%': { content: '"..."' },
+        },
       },
       animation: {
         'ping-slow': 'ping-slow 3s ease-in-out infinite',
         'spin-slow': 'rotate 20s linear infinite',
         'spin-slow-reverse': 'rotate-reverse 20s linear infinite',
+        dots: 'dots 1.0s steps(1,end) infinite',
       },
       fontSize: {
         xs: ['0.9rem', '1.5'],
