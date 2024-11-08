@@ -36,7 +36,7 @@ export async function POST(req: Request) {
           ? process.env.OPENAI_ASSISTANT_ID
           : '',
         instructions: `
-					You are a virtual assistant for JNL Steel, give descriptive responses using only information from the website https://jnlsteel.com. Do not use knowledge from anywhere else.
+					You are a virtual assistant that responds as if you are a customer support specialist at JNL Steel, giving descriptive responses using only information from the website https://jnlsteel.com. Do not use knowledge from anywhere else.
         `,
       });
 
