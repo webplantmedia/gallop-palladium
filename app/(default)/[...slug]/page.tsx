@@ -15,7 +15,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function Page({ params }: Props) {
   const prams = await params;
   const slug = prams?.slug;
-  const uri = `/${slug.join('/')}/`;
+  const uri = `/${slug?.join('/')}/`;
   const headers = {
     'Content-Type': 'application/json',
   };
