@@ -19,15 +19,16 @@ export default async function Page({ params }: Props) {
   };
 
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_WORDPRESS_URL}/wp-json/gallop/v1/post/`,
-    {
-      headers,
-      method: 'POST',
-      body: JSON.stringify({
-        uri: uri,
-      }),
-      next: { tags: [uri] },
-    }
+    `${process.env.NEXT_PUBLIC_WORDPRESS_URL}/wp-json/gallop/v1/post/?uri=` +
+      uri
+    // {
+    //   headers,
+    //   method: 'POST',
+    //   body: JSON.stringify({
+    //     uri: uri,
+    //   }),
+    //   next: { tags: [uri] },
+    // }
   );
 
   if (response.ok) {
