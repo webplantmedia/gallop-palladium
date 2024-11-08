@@ -13,7 +13,13 @@ import { replaceWordPressUrlRelative } from '@utils/tools';
 import MobileMenuLinkDropdown from './mobile-menu-link-dropdown';
 import { GallopIconText } from '@components/blocks';
 
-export default function MobileMenuLinks({ menu, closeModal }) {
+export default function MobileMenuLinks({
+  menu,
+  closeModal,
+}: {
+  menu: any;
+  closeModal: any;
+}) {
   const options: HTMLReactParserOptions = {
     replace(domNode) {
       if (domNode instanceof Element && domNode.attribs) {
@@ -45,10 +51,11 @@ export default function MobileMenuLinks({ menu, closeModal }) {
             </Link>
           );
         } else if (hasExactClass(className, 'is-style-icon-text')) {
+          const data = getVarsFromNode(domNode);
           return (
             <GallopIconText
               className="border-2 border-primary-main rounded-md px-4 py-3 text-base font-normal bg-primary-main text-primary-contrast shadow-sm hover:bg-primary-light focus:outline-none whitespace-nowrap"
-              node={domNode}
+              data={data}
             />
           );
         } else if (hasExactClass(className, 'wp-block-group')) {
