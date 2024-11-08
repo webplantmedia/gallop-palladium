@@ -9,7 +9,29 @@ type Props = {
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  return {};
+  const uri = `/${params.slug.join('/')}/`;
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_WORDPRESS_URL}/wp-json/gallop/v1/post/`,
+    {
+      headers: { 'Content-Type': 'application/json' },
+      method: 'POST',
+      body: JSON.stringify({ uri }),
+    }
+  );
+
+  if (response.ok) {
+    const { seo } = await response.json();
+    return {
+      title: seo?.title || 'Default Title',
+      description: seo?.description || 'Default Description',
+      openGraph: {
+        title: seo?.ogTitle || 'OpenGraph Title',
+        description: seo?.ogDescription || 'OpenGraph Description',
+      },
+    };
+  }
+
+  return { title: 'Fallback Title' };
 }
 
 export default async function Page({ params }: Props) {
