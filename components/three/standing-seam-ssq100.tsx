@@ -58,13 +58,13 @@ export const StandingSeamSSQ100 = () => {
     let points: { x: number; y: number }[] = [];
 
     const middle = [
-      { x: 1, y: 4 },
-      { x: 0, y: 4 },
+      { x: 1, y: 2 },
+      { x: 0, y: 2 },
       { x: 0, y: 0 },
-      { x: 20, y: 0 },
-      { x: 20, y: 4 },
-      { x: 21, y: 4 },
-      { x: 21, y: 3 },
+      { x: 17, y: 0 },
+      { x: 17, y: 2 },
+      { x: 18, y: 2 },
+      { x: 18, y: 1.7 },
     ];
 
     function buildCoords(
@@ -89,7 +89,7 @@ export const StandingSeamSSQ100 = () => {
 
     profilePoints.forEach((point, i) => {
       vertices.push(point.x, point.y, 0); // Top
-      vertices.push(point.x, point.y, -10); // Bottom
+      vertices.push(point.x, point.y, -20); // Bottom
       if (i < profilePoints.length - 1) {
         const j = i * 2;
         indices.push(j, j + 1, j + 2, j + 1, j + 3, j + 2);
@@ -103,7 +103,7 @@ export const StandingSeamSSQ100 = () => {
     );
     geometry.setIndex(indices);
     geometry.computeVertexNormals();
-    geometry.translate(-10.5, -1, 0.5);
+    geometry.translate(-9, -1, 10);
 
     const material = new THREE.MeshStandardMaterial({
       color: '#873F39',
@@ -131,7 +131,7 @@ export const StandingSeamSSQ100 = () => {
     <div className="aspect-video relative !p-0 z-0">
       <Canvas
         className="w-full h-full bg-base-card rounded-sm"
-        camera={{ position: [0, 20, 30], fov: 40, near: 0.1, far: 100 }}
+        camera={{ position: [0, 8, 30], fov: 40, near: 0.1, far: 100 }}
         style={{ padding: 0 }}
       >
         <Profile />
@@ -140,12 +140,42 @@ export const StandingSeamSSQ100 = () => {
           enableDamping={true}
           dampingFactor={0.3}
         />
+        <directionalLight position={[0, -40, 0]} intensity={1} color="white" />
+        <ambientLight intensity={0.5} color="white" />
         <Environment
           preset="studio"
           environmentIntensity={0.3}
           background={false}
         />
       </Canvas>
+      <div className="absolute top-2 right-2 flex gap-2">
+        <span
+          className={classNames(
+            'bg-base-card block rounded-md overflow-hidden'
+          )}
+        >
+          <span
+            className={classNames(
+              'block text-base-contrast font-normal text-xs bg-white/30 px-3 py-1'
+            )}
+          >
+            Standing Seam Profile
+          </span>
+        </span>
+        <span
+          className={classNames(
+            'bg-base-card block rounded-md overflow-hidden'
+          )}
+        >
+          <span
+            className={classNames(
+              'block text-base-contrast font-bold text-xs bg-white/30 px-3 py-1'
+            )}
+          >
+            SSQ100
+          </span>
+        </span>
+      </div>
     </div>
   );
 };
