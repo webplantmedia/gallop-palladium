@@ -9,29 +9,7 @@ type Props = {
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const uri = `/${params.slug.join('/')}/`;
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_WORDPRESS_URL}/wp-json/gallop/v1/post/`,
-    {
-      headers: { 'Content-Type': 'application/json' },
-      method: 'POST',
-      body: JSON.stringify({ uri }),
-    }
-  );
-
-  if (response.ok) {
-    const { seo } = await response.json();
-    return {
-      title: seo?.title || 'Default Title',
-      description: seo?.description || 'Default Description',
-      openGraph: {
-        title: seo?.ogTitle || 'OpenGraph Title',
-        description: seo?.ogDescription || 'OpenGraph Description',
-      },
-    };
-  }
-
-  return { title: 'Fallback Title' };
+  return {};
 }
 
 export default async function Page({ params }: Props) {
@@ -65,5 +43,7 @@ export default async function Page({ params }: Props) {
 
       return <Content post={post} meta={meta} />;
     }
+  } else {
+    return <p>Not found</p>;
   }
 }

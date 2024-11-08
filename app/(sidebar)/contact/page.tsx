@@ -44,5 +44,7 @@ export default async function Page({ params }: Props) {
 
       return <Content post={post} meta={meta} />;
     }
+  } else {
+    return <p>Not found</p>;
   }
 }
