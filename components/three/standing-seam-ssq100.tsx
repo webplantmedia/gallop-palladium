@@ -112,13 +112,6 @@ export const StandingSeamSSQ100 = () => {
       flatShading: true,
       side: THREE.DoubleSide,
     });
-    /*const material2 = new THREE.MeshStandardMaterial({
-      color: 'white',
-      metalness: 0.1,
-      roughness: 20,
-      flatShading: true,
-      side: THREE.FrontSide,
-		});*/
 
     // <mesh geometry={geometry} material={material2} />
     return (
