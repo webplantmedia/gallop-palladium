@@ -11,7 +11,7 @@ export const GallopAlbumCoverToggle = ({
   albumHeading,
   albumSize,
   albumGallery,
-}) => {
+}: any) => {
   return (
     <Disclosure defaultOpen={albumOpen}>
       {({ open }) => (

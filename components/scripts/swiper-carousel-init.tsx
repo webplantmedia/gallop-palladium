@@ -7,7 +7,7 @@ import 'swiper/css';
 import 'swiper/css/autoplay';
 // import 'swiper/css/navigation';
 
-const SwiperCarouselInit = ({ swiperId }) => {
+const SwiperCarouselInit = ({ swiperId }: any) => {
   const initializedRef = useRef(false);
   const swiperInstanceRef = useRef<Swiper | null>(null);
   const observerRef = useRef<IntersectionObserver | null>(null);

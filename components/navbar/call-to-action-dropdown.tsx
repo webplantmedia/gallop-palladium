@@ -6,7 +6,7 @@ import classNames from 'classnames';
 import { Menu, MenuButton, MenuItems, Transition } from '@headlessui/react';
 import { DataIconText } from '@components/blocks';
 
-export default function CallToActionDropdown({ data }) {
+export default function CallToActionDropdown({ data }: any) {
   // const menuLabel = data?.p?.text ? data.p.text : 'Menu Label';
 
   let obj: Array<any> = [];

@@ -1,7 +1,7 @@
 import Sidebar from '@components/sidebar';
 import classNames from 'classnames';
 
-export default function Grid({ children, className = '' }) {
+export default function Grid({ children, className = '' }: any) {
   return (
     <>
       <div className="2xl:container mx-auto px-4 sm:px-8 relative">

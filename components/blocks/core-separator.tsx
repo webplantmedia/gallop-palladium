@@ -1,4 +1,4 @@
-export const CoreSeparator = ({ props }) => {
+export const CoreSeparator = ({ props }: any) => {
   const { id } = props;
   return (
     <hr

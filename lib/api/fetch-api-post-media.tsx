@@ -4,7 +4,7 @@ export async function fetchAPIPOSTMedia(
   query = '',
   { variables, token }: Record<string, any> = {}
 ) {
-  const headers = {
+  const headers: any = {
     'Content-Type': 'application/json',
   };
 

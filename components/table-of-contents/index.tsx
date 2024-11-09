@@ -13,7 +13,7 @@ import { state } from '@state';
 import TableOfContentsList from '@components/table-of-contents/list';
 import DisableScroll from '../global/disable-scroll';
 
-export default function TableOfContents({ toc, meta }) {
+export default function TableOfContents({ toc, meta }: any) {
   // let [isOpen, setIsOpen] = useState(false);
 
   // const closeModal = () => {

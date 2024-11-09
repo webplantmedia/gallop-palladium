@@ -127,7 +127,7 @@ const SetMapNeighborhoods = ({
                   content: priceTag,
                 });
 
-                mark.addListener('click', ({ domEvent, latLng }) => {
+                mark.addListener('click', ({ domEvent, latLng }: any) => {
                   state.dynamicSidebar = {
                     type: 'neighborhood',
                     id: databaseId,
@@ -384,7 +384,7 @@ const SetMapMLSHomes = ({
                       content: priceTag,
                     });
 
-                    mark.addListener('click', ({ domEvent, latLng }) => {
+                    mark.addListener('click', ({ domEvent, latLng }: any) => {
                       state.dynamicSidebar = {
                         type: 'neighborhood',
                         id: databaseId,
@@ -468,7 +468,7 @@ const SetMapMLSHomes = ({
                 content: priceTag,
               });
 
-              mark.addListener('click', ({ domEvent, latLng }) => {
+              mark.addListener('click', ({ domEvent, latLng }: any) => {
                 state.dynamicSidebar = {
                   type: 'mls',
                   id: listing_key_numeric,
@@ -519,7 +519,7 @@ const Map = ({
   neighborhoodBottomTier,
   neighborhoodMapStyle,
   setNeighborhoodMapStyle,
-}) => {
+}: any) => {
   const mapRef = useRef<any>(null);
   const [map, setMap] = useState<google.maps.Map>();
   const [reset, setReset] = useState<boolean>(false);
@@ -694,7 +694,7 @@ export default function GoogleMap({
   displayBoundaries,
   neighborhoodChildren,
   neighborhoodBottomTier,
-}) {
+}: any) {
   const [neighborhoodMapStyle, setNeighborhoodMapStyle] = useState(2);
   const path = usePathname();
 

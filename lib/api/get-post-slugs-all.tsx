@@ -1,7 +1,7 @@
 import { fetchAPI } from './fetch-api';
 
 export async function getPostSlugsAll() {
-  let items = [];
+  let items: any = [];
   let hasNextPage = true;
   let afterCursor = null;
 

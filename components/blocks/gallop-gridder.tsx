@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { domToReact, DOMNode } from 'html-react-parser';
 
-export const GallopGridder = ({ children, className, id }) => {
+export const GallopGridder = ({ children, className, id }: any) => {
   const masonry = className.includes('is-style-masonry') ? true : false;
   className = className.replace('columns-1', 'grid grid-cols-1 gap-10');
   className = className.replace(

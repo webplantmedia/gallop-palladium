@@ -118,7 +118,7 @@ export const getGallopAccordionHeader = (node: Element) => {
   return { icon, heading, paragraph, link };
 };
 
-export const GallopAccordionContent = ({ node, props }) => {
+export const GallopAccordionContent = ({ node, props }: any) => {
   let icon = <></>;
   let heading = '';
   let paragraph = '';
@@ -166,7 +166,7 @@ export const GallopAccordionContent = ({ node, props }) => {
   return <>{domToReact(node.children as DOMNode[], options)}</>;
 };
 
-export const GallopAccordion = ({ node, props }) => {
+export const GallopAccordion = ({ node, props }: any) => {
   let content: React.ReactElement | null = null;
   let icon = <></>;
   let heading = '';

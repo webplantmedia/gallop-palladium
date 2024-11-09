@@ -6,7 +6,7 @@ import DisableScroll from '../global/disable-scroll';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 import classNames from 'classnames';
 
-export default function Search({ isScrolling }) {
+export default function Search({ isScrolling }: any) {
   return (
     <Popover className="flex items-center">
       {({ open }) => (

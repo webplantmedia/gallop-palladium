@@ -14,7 +14,7 @@ import { getDomNodeText } from '@utils/tools';
 import { Fragment } from 'react';
 import React from 'react';
 
-export const GallopSeeMore = ({ node, props }) => {
+export const GallopSeeMore = ({ node, props }: any) => {
   const [isOpen, setOpen] = useState(false);
   const handleOpen = () => {
     setOpen(!isOpen);

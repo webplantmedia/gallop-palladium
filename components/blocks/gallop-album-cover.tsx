@@ -10,7 +10,7 @@ import { GallopAlbumCoverToggle } from './gallop-album-cover-toggle';
 import { HTMLAttributeProps } from '@lib/types';
 import { castToHTMLAttributeProps } from '@utils/tools';
 
-export const GallopAlbumCover = ({ node, className, options, props }) => {
+export const GallopAlbumCover = ({ node, className, options, props }: any) => {
   let albumImage = <></>;
   let albumHeading = '';
   let albumHeadingClass = '';

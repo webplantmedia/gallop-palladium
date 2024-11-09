@@ -1,6 +1,6 @@
 import { permalink } from '@utils/tools';
 
-export default function H1({ meta }) {
+export default function H1({ meta }: any) {
   const { title } = meta;
 
   return (

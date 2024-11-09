@@ -11,7 +11,7 @@ import { usePathname } from 'next/navigation';
 // import { clearCache } from '@components/actions/clear-cache';
 import { state, useSnapshot } from '@state';
 
-export default function EditLink({ meta }) {
+export default function EditLink({ meta }: any) {
   const router = useRouter();
   const pathname = usePathname();
   const [isDialogOpen, setIsDialogOpen] = useState(false);

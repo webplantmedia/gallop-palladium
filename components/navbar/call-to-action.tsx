@@ -6,7 +6,7 @@ import parse, { HTMLReactParserOptions, Element } from 'html-react-parser';
 import { getVarsFromNode } from '@utils/tools';
 import CallToActionDropdown from './call-to-action-dropdown';
 
-export default function CallToAction({ menu }) {
+export default function CallToAction({ menu }: any) {
   const options: HTMLReactParserOptions = {
     replace(domNode) {
       if (domNode instanceof Element && domNode.attribs) {

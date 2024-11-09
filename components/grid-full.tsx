@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 
-export default function GridFull({ children, className = '' }) {
+export default function GridFull({ children, className = '' }: any) {
   return (
     <>
       <div className="mx-auto relative">

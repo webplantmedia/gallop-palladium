@@ -6,7 +6,7 @@ export async function fetchAPI(
   tag: string = 'query'
 ) {
   try {
-    const headers = {
+    const headers: any = {
       'Content-Type': 'application/json',
     };
 

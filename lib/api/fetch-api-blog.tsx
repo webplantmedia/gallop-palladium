@@ -5,7 +5,7 @@ export async function fetchAPIBlog(
   { variables }: Record<string, any> = {},
   tag: string = 'query'
 ) {
-  const headers = {
+  const headers: any = {
     'Content-Type': 'application/json',
   };
 

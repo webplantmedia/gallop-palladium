@@ -8,7 +8,7 @@ export async function getBlogData({
   after,
   before,
   paged,
-}) {
+}: any) {
   const data = await getBlog(
     params?.slug,
     params?.categoryName,

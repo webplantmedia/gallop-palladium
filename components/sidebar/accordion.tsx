@@ -5,7 +5,7 @@ import { ChevronRightIcon } from '@heroicons/react/20/solid';
 import classNames from 'classnames';
 import Link from 'next/link';
 
-const AccordionItem = ({ item, open, isChild, level = 1 }) => {
+const AccordionItem = ({ item, open, isChild, level = 1 }: any) => {
   return (
     <>
       <div
@@ -29,7 +29,7 @@ const AccordionItem = ({ item, open, isChild, level = 1 }) => {
   );
 };
 
-export default function SidebarAccordion({ item }) {
+export default function SidebarAccordion({ item }: any) {
   return (
     <Disclosure as="div" className="w-full">
       {({ open }) => (

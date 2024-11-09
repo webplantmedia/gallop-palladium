@@ -10,7 +10,7 @@ export default function TableOfContentsList({
   closeDialog = () => {},
   toc,
   meta,
-}) {
+}: any) {
   // useEffect(() => {
   // var links = document.querySelectorAll('#table-of-contents ul li a');
   // links.forEach(function (link, index, arr) {

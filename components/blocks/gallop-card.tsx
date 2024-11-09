@@ -10,7 +10,7 @@ import {
   castToHTMLAttributeProps,
 } from '@utils/tools';
 
-export const GallopCard = ({ node, className, props, options }) => {
+export const GallopCard = ({ node, className, props, options }: any) => {
   let { href } = props;
   let heading: any = '';
   let paragraph: any = [];

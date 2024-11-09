@@ -4,7 +4,7 @@ export async function fetchAPIPOST(
   query = '',
   { variables }: Record<string, any> = {}
 ) {
-  const headers = {
+  const headers: any = {
     'Content-Type': 'application/json',
   };
 

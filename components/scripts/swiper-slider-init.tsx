@@ -7,7 +7,7 @@ import 'swiper/css';
 import 'swiper/css/autoplay';
 import 'swiper/css/effect-fade';
 
-const SwiperSliderInit = ({ swiperId }) => {
+const SwiperSliderInit = ({ swiperId }: any) => {
   const initializedRef = useRef(false);
   const swiperInstanceRef = useRef<Swiper | null>(null);
   const observerRef = useRef<IntersectionObserver | null>(null);

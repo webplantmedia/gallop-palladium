@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 
-const CircleAnimation = ({ id }) => {
+const CircleAnimation = ({ id }: any) => {
   const initializedRef = useRef(false);
   const observerRef = useRef<IntersectionObserver | null>(null);
 

@@ -13,7 +13,7 @@ function isNextJsImage(slide: any) {
   );
 }
 
-export function NextJsThumbnail({ slide, rect }) {
+export function NextJsThumbnail({ slide, rect }: any) {
   const { imageFit } = useLightboxProps().carousel;
   const cover = isImageSlide(slide) && isImageFitCover(slide, imageFit);
 
@@ -48,7 +48,7 @@ export function NextJsThumbnail({ slide, rect }) {
     </div>
   );
 }
-export function NextJsImage({ slide, rect }) {
+export function NextJsImage({ slide, rect }: any) {
   const { imageFit } = useLightboxProps().carousel;
   const cover = isImageSlide(slide) && isImageFitCover(slide, imageFit);
 

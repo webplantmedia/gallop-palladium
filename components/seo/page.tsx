@@ -63,7 +63,7 @@ export function PageSeo(seo: SEO, link: string = '', site: any) {
   return data;
 }
 
-export function PageStructuredData({ seo, site }) {
+export function PageStructuredData({ seo, site }: any) {
   // let breadcrumbList = GetBreadcrumbList(seo, meta);
 
   let schema = {

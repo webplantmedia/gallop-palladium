@@ -9,7 +9,7 @@ import {
 import Link from 'next/link';
 import { replaceWordPressUrlRelative } from '@utils/tools';
 
-const SubMenu = ({ items, onClick }) => {
+const SubMenu = ({ items, onClick }: any) => {
   return items.map((item: any, index: number) => {
     const href = item?.p?.a?.href
       ? replaceWordPressUrlRelative(item.p.a.href)
@@ -57,7 +57,7 @@ const SubMenu = ({ items, onClick }) => {
     );
   });
 };
-export default function MobileMenuLinkDropdown({ data, closeModal }) {
+export default function MobileMenuLinkDropdown({ data, closeModal }: any) {
   const dropdownText = data?.p?.text ? data.p.text : 'Dropdown';
   const dropdownItems = data?.wpBlockGroup?.wpBlockGroup
     ? data.wpBlockGroup.wpBlockGroup

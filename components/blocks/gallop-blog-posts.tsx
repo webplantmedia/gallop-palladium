@@ -3,7 +3,7 @@ import { formatAMPM, grabMatch } from '../../lib/utils/tools';
 import { ArrowSmallRightIcon } from '@heroicons/react/20/solid';
 import { replaceWordPressUrl } from '@lib/utils/tools';
 
-export const GallopBlogPosts = ({ className, meta }) => {
+export const GallopBlogPosts = ({ className, meta }: any) => {
   if (!meta?.blog) {
     return <p>No Blog</p>;
   }
