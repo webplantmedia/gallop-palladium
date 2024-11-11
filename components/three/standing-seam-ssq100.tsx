@@ -186,12 +186,11 @@ export const StandingSeamSSQ100 = () => {
       >
         {shape === 'unattached' ? <Profile /> : <ProfileAttached />}
         <OrbitControls
-          enableZoom={true}
+          enableZoom={false}
           enableDamping={true}
           dampingFactor={0.3}
         />
         <directionalLight position={[0, -40, 0]} intensity={1} color="white" />
-        <ambientLight intensity={0.5} color="white" />
         <Environment
           preset="studio"
           environmentIntensity={0.3}
