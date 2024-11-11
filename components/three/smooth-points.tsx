@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 
-export const smoothPoints = (coords, radius = 0.3) => {
+export const smoothPoints = (coords: any, radius: number = 0.3) => {
   const roundedCornerPoints = [];
 
   for (let i = 1; i < coords.length - 1; i++) {

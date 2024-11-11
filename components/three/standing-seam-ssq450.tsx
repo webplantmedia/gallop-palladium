@@ -31,7 +31,7 @@ export const StandingSeamSSQ450 = () => {
     });
 
     const front = new THREE.MeshStandardMaterial({
-      color: '#ffffff',
+      color: '#9e5d58',
       metalness: 0.1,
       roughness: 20,
       flatShading: true,
@@ -58,13 +58,10 @@ export const StandingSeamSSQ450 = () => {
           enableDamping={true}
           dampingFactor={0.3}
         />
-        <directionalLight position={[0, -40, 0]} intensity={1} color="white" />
-        <ambientLight intensity={0.5} color="white" />
-        <Environment
-          preset="studio"
-          environmentIntensity={0.3}
-          background={false}
-        />
+        <directionalLight position={[20, 10, 0]} intensity={1} color="white" />
+        <directionalLight position={[-20, 40, 0]} intensity={3} color="white" />
+        <directionalLight position={[20, 10, 0]} intensity={1} color="white" />
+        <directionalLight position={[0, -40, 0]} intensity={3} color="white" />
       </Canvas>
       <div className="absolute top-2 right-2 flex gap-2">
         <span

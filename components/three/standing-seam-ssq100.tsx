@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { Html, OrbitControls, Environment, Line } from '@react-three/drei';
 import classNames from 'classnames';
@@ -9,6 +9,20 @@ import { shapeGeometry, smoothPoints } from '@components/three';
 
 export const StandingSeamSSQ100 = () => {
   const [shape, setShape] = useState<'unattached' | 'attached'>('unattached');
+  const cameraRef = useRef<THREE.PerspectiveCamera>();
+
+  useEffect(() => {
+    if (cameraRef.current) {
+      if (shape === 'unattached') {
+        cameraRef.current.position.set(0, 8, 30); // Position for 'unattached'
+      } else {
+        cameraRef.current.position.set(-5, 2, 20); // Position for 'attached'
+      }
+
+      // Optional: Smooth transition
+      cameraRef.current.lookAt(0, 0, 0); // Ensure camera looks at the center
+    }
+  }, [shape]);
 
   const ProfileAttached = () => {
     const right = [
@@ -76,17 +90,26 @@ export const StandingSeamSSQ100 = () => {
 
     geometry.translate(-9, -1, 0);
 
-    const material = new THREE.MeshStandardMaterial({
+    const back = new THREE.MeshStandardMaterial({
       color: '#873F39',
       metalness: 0.1,
       roughness: 20,
       flatShading: true,
-      side: THREE.DoubleSide,
+      side: THREE.BackSide,
+    });
+
+    const front = new THREE.MeshStandardMaterial({
+      color: '#954f4a',
+      metalness: 0.1,
+      roughness: 20,
+      flatShading: true,
+      side: THREE.FrontSide,
     });
 
     return (
       <group>
-        <mesh geometry={geometry} material={material} />
+        <mesh geometry={geometry} material={front} />
+        <mesh geometry={geometry} material={back} />
       </group>
     );
   };
@@ -96,6 +119,9 @@ export const StandingSeamSSQ100 = () => {
         className="w-full h-full bg-base-card rounded-sm"
         camera={{ position: [0, 8, 30], fov: 40, near: 0.1, far: 100 }}
         style={{ padding: 0 }}
+        onCreated={({ camera }) => {
+          cameraRef.current = camera as THREE.PerspectiveCamera; // Explicit type cast
+        }}
       >
         {shape === 'unattached' ? <Profile /> : <ProfileAttached />}
         <OrbitControls
