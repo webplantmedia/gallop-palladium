@@ -2,15 +2,13 @@
 
 import React, { useState } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { Html, OrbitControls, Environment, Line } from '@react-three/drei';
+import { Html, OrbitControls, Environment } from '@react-three/drei';
 import classNames from 'classnames';
 import * as THREE from 'three';
-import { smoothPoints } from '@components/three';
+import { shapeGeometry, smoothPoints } from '@components/three';
 
 export const StandingSeamSSQ450 = () => {
   const Profile = () => {
-    let points: { x: number; y: number }[] = [];
-
     const coords = [
       { x: 0, y: 2 },
       { x: 0, y: 0 },
@@ -20,50 +18,30 @@ export const StandingSeamSSQ450 = () => {
       { x: 17.6, y: 0.1 },
     ];
 
-    function buildCoords(
-      coords: Array<{ x: number; y: number }>
-    ): { x: number; y: number }[] {
-      return coords.map((coord) => {
-        const point = { x: coord.x, y: coord.y };
-        return point;
-      });
-    }
+    let points = smoothPoints(coords);
+    let geometry = shapeGeometry(points, 20);
+    geometry.translate(-9, -1, 0);
 
-    let profilePoints = smoothPoints(coords);
-
-    const vertices: number[] = [];
-    const indices: number[] = [];
-
-    profilePoints.forEach((point, i) => {
-      vertices.push(point.x, point.y, 0); // Top
-      vertices.push(point.x, point.y, -20); // Bottom
-      if (i < profilePoints.length - 1) {
-        const j = i * 2;
-        indices.push(j, j + 1, j + 2, j + 1, j + 3, j + 2);
-      }
-    });
-
-    const geometry = new THREE.BufferGeometry();
-    geometry.setAttribute(
-      'position',
-      new THREE.Float32BufferAttribute(vertices, 3)
-    );
-    geometry.setIndex(indices);
-    geometry.computeVertexNormals();
-    geometry.translate(-9, -1, 10);
-
-    const material = new THREE.MeshStandardMaterial({
+    const back = new THREE.MeshStandardMaterial({
       color: '#873F39',
       metalness: 0.1,
       roughness: 20,
       flatShading: true,
-      side: THREE.DoubleSide,
+      side: THREE.BackSide,
     });
 
-    // <mesh geometry={geometry} material={material2} />
+    const front = new THREE.MeshStandardMaterial({
+      color: '#ffffff',
+      metalness: 0.1,
+      roughness: 20,
+      flatShading: true,
+      side: THREE.FrontSide,
+    });
+
     return (
       <group>
-        <mesh geometry={geometry} material={material} />
+        <mesh geometry={geometry} material={front} />
+        <mesh geometry={geometry} material={back} />
       </group>
     );
   };

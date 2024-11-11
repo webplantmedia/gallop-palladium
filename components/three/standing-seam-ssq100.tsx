@@ -5,19 +5,10 @@ import { Canvas } from '@react-three/fiber';
 import { Html, OrbitControls, Environment, Line } from '@react-three/drei';
 import classNames from 'classnames';
 import * as THREE from 'three';
-import { smoothPoints } from '@components/three';
+import { shapeGeometry, smoothPoints } from '@components/three';
 
 export const StandingSeamSSQ100 = () => {
   const [shape, setShape] = useState<'unattached' | 'attached'>('unattached');
-
-  function buildCoords(
-    coords: Array<{ x: number; y: number }>
-  ): { x: number; y: number }[] {
-    return coords.map((coord) => {
-      const point = { x: coord.x, y: coord.y };
-      return point;
-    });
-  }
 
   const ProfileAttached = () => {
     const right = [
@@ -38,32 +29,11 @@ export const StandingSeamSSQ100 = () => {
       { x: 0.1, y: 1.8 },
     ];
 
-    const coords = buildCoords(right);
+    let leftPoints = smoothPoints(left);
+    let leftGeometry = shapeGeometry(leftPoints, 20);
+    leftGeometry.translate(0, -1, 0);
 
-    let profilePoints = smoothPoints(coords);
-
-    const vertices: number[] = [];
-    const indices: number[] = [];
-
-    profilePoints.forEach((point, i) => {
-      vertices.push(point.x, point.y, 0); // Top
-      vertices.push(point.x, point.y, -20); // Bottom
-      if (i < profilePoints.length - 1) {
-        const j = i * 2;
-        indices.push(j, j + 1, j + 2, j + 1, j + 3, j + 2);
-      }
-    });
-
-    const geometry = new THREE.BufferGeometry();
-    geometry.setAttribute(
-      'position',
-      new THREE.Float32BufferAttribute(vertices, 3)
-    );
-    geometry.setIndex(indices);
-    geometry.computeVertexNormals();
-    geometry.translate(0, 4, 20);
-
-    const material = new THREE.MeshStandardMaterial({
+    const leftMaterial = new THREE.MeshStandardMaterial({
       color: '#873F39',
       metalness: 0.1,
       roughness: 20,
@@ -71,33 +41,12 @@ export const StandingSeamSSQ100 = () => {
       side: THREE.DoubleSide,
     });
 
-    const coords2 = buildCoords(left);
+    let rightPoints = smoothPoints(right);
+    let rightGeometry = shapeGeometry(rightPoints, 20);
+    rightGeometry.translate(0, -1, 0);
 
-    let profilePoints2 = smoothPoints(coords2);
-
-    const vertices2: number[] = [];
-    const indices2: number[] = [];
-
-    profilePoints2.forEach((point, i) => {
-      vertices2.push(point.x, point.y, 0); // Top
-      vertices2.push(point.x, point.y, -20); // Bottom
-      if (i < profilePoints2.length - 1) {
-        const j = i * 2;
-        indices2.push(j, j + 1, j + 2, j + 1, j + 3, j + 2);
-      }
-    });
-
-    const geometry2 = new THREE.BufferGeometry();
-    geometry2.setAttribute(
-      'position',
-      new THREE.Float32BufferAttribute(vertices2, 3)
-    );
-    geometry2.setIndex(indices2);
-    geometry2.computeVertexNormals();
-    geometry2.translate(0, 4, 20);
-
-    const material2 = new THREE.MeshStandardMaterial({
-      color: '#873F39',
+    const rightMaterial = new THREE.MeshStandardMaterial({
+      color: '#a26762',
       metalness: 0.1,
       roughness: 20,
       flatShading: true,
@@ -106,15 +55,13 @@ export const StandingSeamSSQ100 = () => {
 
     return (
       <group>
-        <mesh geometry={geometry} material={material} />
-        <mesh geometry={geometry2} material={material2} />
+        <mesh geometry={leftGeometry} material={leftMaterial} />
+        <mesh geometry={rightGeometry} material={rightMaterial} />
       </group>
     );
   };
   const Profile = () => {
-    let points: { x: number; y: number }[] = [];
-
-    const middle = [
+    const coords = [
       { x: 1, y: 2 },
       { x: 0, y: 2 },
       { x: 0, y: 0 },
@@ -124,43 +71,10 @@ export const StandingSeamSSQ100 = () => {
       { x: 18, y: 1.7 },
     ];
 
-    function buildCoords(
-      coords: Array<{ x: number; y: number }>
-    ): { x: number; y: number }[] {
-      return coords.map((coord) => {
-        const point = { x: coord.x, y: coord.y };
-        return point;
-      });
-    }
+    let points = smoothPoints(coords);
+    let geometry = shapeGeometry(points, 20);
 
-    for (let i = 0; i < 1; i++) {
-      points = points.concat(middle);
-    }
-
-    const coords = buildCoords(points);
-
-    let profilePoints = smoothPoints(coords);
-
-    const vertices: number[] = [];
-    const indices: number[] = [];
-
-    profilePoints.forEach((point, i) => {
-      vertices.push(point.x, point.y, 0); // Top
-      vertices.push(point.x, point.y, -20); // Bottom
-      if (i < profilePoints.length - 1) {
-        const j = i * 2;
-        indices.push(j, j + 1, j + 2, j + 1, j + 3, j + 2);
-      }
-    });
-
-    const geometry = new THREE.BufferGeometry();
-    geometry.setAttribute(
-      'position',
-      new THREE.Float32BufferAttribute(vertices, 3)
-    );
-    geometry.setIndex(indices);
-    geometry.computeVertexNormals();
-    geometry.translate(-9, -1, 10);
+    geometry.translate(-9, -1, 0);
 
     const material = new THREE.MeshStandardMaterial({
       color: '#873F39',
@@ -170,7 +84,6 @@ export const StandingSeamSSQ100 = () => {
       side: THREE.DoubleSide,
     });
 
-    // <mesh geometry={geometry} material={material2} />
     return (
       <group>
         <mesh geometry={geometry} material={material} />
@@ -190,12 +103,10 @@ export const StandingSeamSSQ100 = () => {
           enableDamping={true}
           dampingFactor={0.3}
         />
-        <directionalLight position={[0, -40, 0]} intensity={1} color="white" />
-        <Environment
-          preset="studio"
-          environmentIntensity={0.3}
-          background={false}
-        />
+        <directionalLight position={[20, 10, 0]} intensity={1} color="white" />
+        <directionalLight position={[-20, 40, 0]} intensity={3} color="white" />
+        <directionalLight position={[20, 10, 0]} intensity={1} color="white" />
+        <directionalLight position={[0, -40, 0]} intensity={3} color="white" />
       </Canvas>
       <div className="absolute top-2 right-2 flex gap-2">
         <button
