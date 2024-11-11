@@ -2,10 +2,15 @@
 
 import React, { useState } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { Html, OrbitControls, Environment, Line } from '@react-three/drei';
+import { OrbitControls } from '@react-three/drei';
 import classNames from 'classnames';
 import * as THREE from 'three';
-import { Dimension, Label } from '@components/three';
+import {
+  Dimension,
+  Label,
+  shapeGeometry,
+  connectPoints,
+} from '@components/three';
 
 export const UPanel = () => {
   const [shape, setShape] = useState<'u-panel' | 'pbu-panel'>('u-panel');
@@ -16,22 +21,12 @@ export const UPanel = () => {
     const slopeLength = 0.71875;
     const valleyLength = 3.53125;
 
-    // const largePeakHeight = 1.25;
-    // const largePeakHalfLength = 0.5;
-    // const largeSlopeLength = 1.15625;
-
-    // const smallPeakHeight = 0.25;
-    // const smallPeakLength = 0.75;
-    // const smallSlopeLength = 0.34375;
-
-    // const valleyLength = 1.625;
-    // const valleyMiddleLength = 5;
-
     const startLength = slopeLength * 0.4;
     const startHeight = peakHeight - (peakHeight * startLength) / slopeLength;
     const xAxisOffset = startLength + peakHalfLength;
+    const panelDepth = 20;
 
-    let points: { x: number; y: number }[] = [];
+    let coords: { x: number; y: number }[] = [];
 
     const beginning = [
       { x: 0, y: startHeight },
@@ -60,51 +55,16 @@ export const UPanel = () => {
       ];
     }
 
-    function buildCoords(
-      coords: Array<{ x: number; y: number }>
-    ): { x: number; y: number }[] {
-      let cumulativeX = 0;
-      return coords.map((coord) => {
-        const point = { x: cumulativeX + coord.x, y: coord.y };
-        cumulativeX += coord.x;
-        return point;
-      });
-    }
-
-    points = points.concat(beginning);
+    coords = coords.concat(beginning);
     for (let i = 0; i < 6; i++) {
-      points = points.concat(middle);
+      coords = coords.concat(middle);
     }
-    points = points.concat(end);
+    coords = coords.concat(end);
 
-    const coords = buildCoords(points);
+    const points = connectPoints(coords);
+    let geometry = shapeGeometry(points, panelDepth);
 
-    const totalWidth = coords[coords.length - 1].x - coords[0].x;
-
-    const profilePoints = coords.map(
-      (coord) => new THREE.Vector3(coord.x, coord.y + 1, 0)
-    );
-
-    const vertices: number[] = [];
-    const indices: number[] = [];
-
-    profilePoints.forEach((point, i) => {
-      vertices.push(point.x, point.y, 0); // Top
-      vertices.push(point.x, point.y, -1); // Bottom
-      if (i < profilePoints.length - 1) {
-        const j = i * 2;
-        indices.push(j, j + 1, j + 2, j + 1, j + 3, j + 2);
-      }
-    });
-
-    const geometry = new THREE.BufferGeometry();
-    geometry.setAttribute(
-      'position',
-      new THREE.Float32BufferAttribute(vertices, 3)
-    );
-    geometry.setIndex(indices);
-    geometry.computeVertexNormals();
-    geometry.translate(-18 - xAxisOffset, -2, 0.5);
+    geometry.translate(-18 - xAxisOffset, -1, 0);
 
     const material = new THREE.MeshStandardMaterial({
       color: '#873F39',
@@ -123,19 +83,27 @@ export const UPanel = () => {
 
     return (
       <group>
-        <Dimension start={[6, 2, 0]} end={[12, 2, 0]} text='6"' />
-        <Dimension start={[-18, 4, 0]} end={[18, 4, 0]} text='36"' />
         <Dimension
-          start={[-20, -1, 0]}
-          end={[-20, -0.25, 0]}
+          start={[6, 2, panelDepth / 2]}
+          end={[12, 2, panelDepth / 2]}
+          text='6"'
+        />
+        <Dimension
+          start={[-18, 4, panelDepth / 2]}
+          end={[18, 4, panelDepth / 2]}
+          text='36"'
+        />
+        <Dimension
+          start={[-20, -1, panelDepth / 2]}
+          end={[-20, -0.25, panelDepth / 2]}
           text='¾"'
           direction="vertical"
           textPosition="below"
         />
         {shape === 'pbu-panel' && (
           <Label
-            start={[19.3, -1, 0]}
-            end={[18, -5, 0]}
+            start={[19.3, -1, panelDepth / 2]}
+            end={[18, -5, panelDepth / 2]}
             text="Purlin Bearing Leg"
             space={1}
             align="left"
@@ -150,7 +118,7 @@ export const UPanel = () => {
     <div className="aspect-video relative !p-0 z-0">
       <Canvas
         className="w-full h-full bg-base-card rounded-sm"
-        camera={{ position: [0, 20, 30], fov: 40, near: 0.1, far: 100 }}
+        camera={{ position: [0, 5, 45], fov: 40, near: 0.1, far: 100 }}
         style={{ padding: 0 }}
       >
         <Profile />
@@ -159,11 +127,15 @@ export const UPanel = () => {
           enableDamping={true}
           dampingFactor={0.3}
         />
-        <Environment
-          preset="studio"
-          environmentIntensity={0.3}
-          background={false}
+        <directionalLight position={[20, 10, 0]} intensity={1} color="white" />
+        <directionalLight position={[-20, 40, 0]} intensity={3} color="white" />
+        <directionalLight position={[20, 10, 0]} intensity={1} color="white" />
+        <directionalLight
+          position={[-20, -40, 0]}
+          intensity={1}
+          color="white"
         />
+        <directionalLight position={[30, -40, 0]} intensity={1} color="white" />
       </Canvas>
       <div className="absolute top-2 right-2 flex gap-2">
         <button
