@@ -11,7 +11,7 @@ export const StandingSeamSSQ450 = () => {
   const Profile = () => {
     let points: { x: number; y: number }[] = [];
 
-    const middle = [
+    const coords = [
       { x: 0, y: 2 },
       { x: 0, y: 0 },
       { x: 17, y: 0 },
@@ -28,12 +28,6 @@ export const StandingSeamSSQ450 = () => {
         return point;
       });
     }
-
-    for (let i = 0; i < 1; i++) {
-      points = points.concat(middle);
-    }
-
-    const coords = buildCoords(points);
 
     let profilePoints = smoothPoints(coords);
 
