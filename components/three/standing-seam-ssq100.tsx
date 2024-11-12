@@ -2,13 +2,14 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { Html, OrbitControls, Environment, Line } from '@react-three/drei';
+import { OrbitControls } from '@react-three/drei';
 import classNames from 'classnames';
 import * as THREE from 'three';
 import { shapeGeometry, smoothPoints } from '@components/three';
 
 export const StandingSeamSSQ100 = () => {
   const [shape, setShape] = useState<'unattached' | 'attached'>('unattached');
+  const [draw, setDraw] = useState<'wire' | 'detail'>('detail');
   const cameraRef = useRef<THREE.PerspectiveCamera>();
 
   useEffect(() => {
@@ -47,30 +48,45 @@ export const StandingSeamSSQ100 = () => {
     let leftGeometry = shapeGeometry(leftPoints, 20);
     leftGeometry.translate(0, -1, 0);
 
-    const leftMaterial = new THREE.MeshStandardMaterial({
-      color: '#873F39',
-      metalness: 0.1,
-      roughness: 20,
-      flatShading: true,
-      side: THREE.DoubleSide,
-    });
-
     let rightPoints = smoothPoints(right);
     let rightGeometry = shapeGeometry(rightPoints, 20);
     rightGeometry.translate(0, -1, 0);
 
-    const rightMaterial = new THREE.MeshStandardMaterial({
-      color: '#a26762',
-      metalness: 0.1,
-      roughness: 20,
-      flatShading: true,
-      side: THREE.DoubleSide,
+    if (draw === 'detail') {
+      const leftMaterial = new THREE.MeshStandardMaterial({
+        color: '#873F39',
+        metalness: 0.1,
+        roughness: 20,
+        flatShading: true,
+        side: THREE.DoubleSide,
+      });
+
+      const rightMaterial = new THREE.MeshStandardMaterial({
+        color: '#a26762',
+        metalness: 0.1,
+        roughness: 20,
+        flatShading: true,
+        side: THREE.DoubleSide,
+      });
+
+      return (
+        <group>
+          <mesh geometry={leftGeometry} material={leftMaterial} />
+          <mesh geometry={rightGeometry} material={rightMaterial} />
+        </group>
+      );
+    }
+
+    const wireMaterial = new THREE.MeshBasicMaterial({
+      color: '#000000',
+      wireframe: true, // keeps wire look, but focus on geometry smoothness
+      wireframeLinewidth: 20, // emphasize cleaner lines
     });
 
     return (
       <group>
-        <mesh geometry={leftGeometry} material={leftMaterial} />
-        <mesh geometry={rightGeometry} material={rightMaterial} />
+        <mesh geometry={leftGeometry} material={wireMaterial} />
+        <mesh geometry={rightGeometry} material={wireMaterial} />
       </group>
     );
   };
@@ -90,26 +106,41 @@ export const StandingSeamSSQ100 = () => {
 
     geometry.translate(-9, -1, 0);
 
-    const back = new THREE.MeshStandardMaterial({
-      color: '#873F39',
-      metalness: 0.1,
-      roughness: 20,
-      flatShading: true,
-      side: THREE.BackSide,
-    });
+    if (draw === 'detail') {
+      const back = new THREE.MeshStandardMaterial({
+        color: '#873F39',
+        metalness: 0.1,
+        roughness: 20,
+        flatShading: true,
+        side: THREE.BackSide,
+      });
 
-    const front = new THREE.MeshStandardMaterial({
-      color: '#954f4a',
-      metalness: 0.1,
-      roughness: 20,
-      flatShading: true,
-      side: THREE.FrontSide,
+      const front = new THREE.MeshStandardMaterial({
+        color: '#954f4a',
+        metalness: 0.1,
+        roughness: 20,
+        flatShading: true,
+        side: THREE.FrontSide,
+      });
+
+      return (
+        <group>
+          <mesh geometry={geometry} material={front} />
+          <mesh geometry={geometry} material={back} />
+        </group>
+      );
+    }
+
+    const wireMaterial = new THREE.MeshBasicMaterial({
+      color: '#000000',
+      wireframe: true, // keeps wire look, but focus on geometry smoothness
+      wireframeLinewidth: 20, // emphasize cleaner lines
     });
 
     return (
       <group>
-        <mesh geometry={geometry} material={front} />
-        <mesh geometry={geometry} material={back} />
+        <mesh geometry={geometry} material={wireMaterial} />
+        <mesh geometry={geometry} material={wireMaterial} />
       </group>
     );
   };
@@ -134,6 +165,21 @@ export const StandingSeamSSQ100 = () => {
         <directionalLight position={[20, 10, 0]} intensity={1} color="white" />
         <directionalLight position={[0, -40, 0]} intensity={3} color="white" />
       </Canvas>
+      <div className="absolute top-2 left-2 flex gap-2">
+        <button
+          className={classNames(
+            'text-xs px-3 py-1 rounded-md border-2',
+            draw === 'wire'
+              ? 'bg-base-card text-primary-main border-primary-main hover:bg-white/30'
+              : 'bg-primary-contrast text-primary-main hover:bg-gray-50 border-transparent'
+          )}
+          onClick={() =>
+            setDraw((value) => (value === 'detail' ? 'wire' : 'detail'))
+          }
+        >
+          Wire
+        </button>
+      </div>
       <div className="absolute top-2 right-2 flex gap-2">
         <button
           className={classNames(
@@ -152,7 +198,7 @@ export const StandingSeamSSQ100 = () => {
         </button>
         <button
           className={classNames(
-            'text-xs px-3 py-1 rounded-md',
+            'text-xs px-3 py-1 rounded-md border-2 border-transparent',
             shape === 'attached'
               ? 'bg-primary-contrast text-primary-main hover:bg-gray-50'
               : 'bg-primary-main text-primary-contrast'
@@ -172,7 +218,7 @@ export const StandingSeamSSQ100 = () => {
         >
           <span
             className={classNames(
-              'block text-base-contrast font-normal text-xs bg-white/30 px-3 py-1'
+              'block text-base-contrast font-normal text-xs bg-white/30 px-3 py-1 border-2 border-transparent'
             )}
           >
             Standing Seam Profile
@@ -185,7 +231,7 @@ export const StandingSeamSSQ100 = () => {
         >
           <span
             className={classNames(
-              'block text-base-contrast font-bold text-xs bg-white/30 px-3 py-1'
+              'block text-base-contrast font-bold text-xs bg-white/30 px-3 py-1 border-2 border-transparent'
             )}
           >
             SSQ100
