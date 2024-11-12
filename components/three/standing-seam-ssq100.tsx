@@ -138,17 +138,32 @@ export const StandingSeamSSQ100 = () => {
         <button
           className={classNames(
             'text-xs px-3 py-1 rounded-md',
-            shape === 'unattached'
+            shape === 'attached'
+              ? 'bg-primary-main text-primary-contrast'
+              : 'bg-primary-contrast text-primary-main hover:bg-gray-50'
+          )}
+          onClick={() =>
+            setShape((prevValue) =>
+              prevValue === 'attached' ? 'unattached' : 'attached'
+            )
+          }
+        >
+          Attached
+        </button>
+        <button
+          className={classNames(
+            'text-xs px-3 py-1 rounded-md',
+            shape === 'attached'
               ? 'bg-primary-contrast text-primary-main hover:bg-gray-50'
               : 'bg-primary-main text-primary-contrast'
           )}
           onClick={() =>
             setShape((prevValue) =>
-              prevValue === 'unattached' ? 'attached' : 'unattached'
+              prevValue === 'attached' ? 'unattached' : 'attached'
             )
           }
         >
-          {shape === 'unattached' ? 'Attached' : 'Unattached'}
+          Unattached
         </button>
         <span
           className={classNames(
