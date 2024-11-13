@@ -5,10 +5,11 @@ import { Canvas } from '@react-three/fiber';
 import { Html, OrbitControls, Environment } from '@react-three/drei';
 import classNames from 'classnames';
 import * as THREE from 'three';
-import { shapeGeometry, smoothPoints } from '@components/three';
+import { shapeGeometry, smoothPoints, borderGeometry } from '@components/three';
 
 export const StandingSeamSSQ450 = () => {
   const [shape, setShape] = useState<'unattached' | 'attached'>('unattached');
+  const [draw, setDraw] = useState<'wire' | 'detail'>('detail');
   const cameraRef = useRef<THREE.PerspectiveCamera>();
 
   useEffect(() => {
@@ -45,30 +46,42 @@ export const StandingSeamSSQ450 = () => {
     let leftGeometry = shapeGeometry(leftPoints, 20);
     leftGeometry.translate(0, -1, 0);
 
-    const leftMaterial = new THREE.MeshStandardMaterial({
-      color: '#873F39',
-      metalness: 0.1,
-      roughness: 20,
-      flatShading: true,
-      side: THREE.DoubleSide,
-    });
-
     let rightPoints = smoothPoints(right);
     let rightGeometry = shapeGeometry(rightPoints, 20);
     rightGeometry.translate(0, -1, 0);
 
-    const rightMaterial = new THREE.MeshStandardMaterial({
-      color: '#a26762',
-      metalness: 0.1,
-      roughness: 20,
-      flatShading: true,
-      side: THREE.DoubleSide,
-    });
+    if (draw === 'detail') {
+      const leftMaterial = new THREE.MeshStandardMaterial({
+        color: '#873F39',
+        metalness: 0.1,
+        roughness: 20,
+        flatShading: true,
+        side: THREE.DoubleSide,
+      });
+
+      const rightMaterial = new THREE.MeshStandardMaterial({
+        color: '#a26762',
+        metalness: 0.1,
+        roughness: 20,
+        flatShading: true,
+        side: THREE.DoubleSide,
+      });
+
+      return (
+        <group>
+          <mesh geometry={leftGeometry} material={leftMaterial} />
+          <mesh geometry={rightGeometry} material={rightMaterial} />
+        </group>
+      );
+    }
+
+    const wireMaterialLeft = borderGeometry(leftGeometry);
+    const wireMaterialRight = borderGeometry(rightGeometry);
 
     return (
       <group>
-        <mesh geometry={leftGeometry} material={leftMaterial} />
-        <mesh geometry={rightGeometry} material={rightMaterial} />
+        <primitive object={wireMaterialLeft} />
+        <primitive object={wireMaterialRight} />
       </group>
     );
   };
@@ -84,28 +97,39 @@ export const StandingSeamSSQ450 = () => {
 
     let points = smoothPoints(coords);
     let geometry = shapeGeometry(points, 20);
+
     geometry.translate(-9, -1, 0);
 
-    const back = new THREE.MeshStandardMaterial({
-      color: '#873F39',
-      metalness: 0.1,
-      roughness: 20,
-      flatShading: true,
-      side: THREE.BackSide,
-    });
+    if (draw === 'detail') {
+      const back = new THREE.MeshStandardMaterial({
+        color: '#873F39',
+        metalness: 0.1,
+        roughness: 20,
+        flatShading: true,
+        side: THREE.BackSide,
+      });
 
-    const front = new THREE.MeshStandardMaterial({
-      color: '#9e5d58',
-      metalness: 0.1,
-      roughness: 20,
-      flatShading: true,
-      side: THREE.FrontSide,
-    });
+      const front = new THREE.MeshStandardMaterial({
+        color: '#9e5d58',
+        metalness: 0.1,
+        roughness: 20,
+        flatShading: true,
+        side: THREE.FrontSide,
+      });
+
+      return (
+        <group>
+          <mesh geometry={geometry} material={front} />
+          <mesh geometry={geometry} material={back} />
+        </group>
+      );
+    }
+
+    const wireMaterial = borderGeometry(geometry);
 
     return (
       <group>
-        <mesh geometry={geometry} material={front} />
-        <mesh geometry={geometry} material={back} />
+        <primitive object={wireMaterial} />
       </group>
     );
   };
@@ -130,6 +154,21 @@ export const StandingSeamSSQ450 = () => {
         <directionalLight position={[20, 10, 0]} intensity={1} color="white" />
         <directionalLight position={[0, -40, 0]} intensity={3} color="white" />
       </Canvas>
+      <div className="absolute top-2 left-2 flex gap-2">
+        <button
+          className={classNames(
+            'text-xs px-3 py-1 rounded-md border-2',
+            draw === 'wire'
+              ? 'bg-base-card text-primary-main border-primary-main hover:bg-white/30'
+              : 'bg-primary-contrast text-primary-main hover:bg-gray-50 border-transparent'
+          )}
+          onClick={() =>
+            setDraw((value) => (value === 'detail' ? 'wire' : 'detail'))
+          }
+        >
+          Wire
+        </button>
+      </div>
       <div className="absolute top-2 right-2 flex gap-2">
         <button
           className={classNames(

@@ -10,10 +10,12 @@ import {
   Label,
   shapeGeometry,
   connectPoints,
+  borderGeometry,
 } from '@components/three';
 
 export const UPanel = () => {
   const [shape, setShape] = useState<'u-panel' | 'pbu-panel'>('u-panel');
+  const [draw, setDraw] = useState<'wire' | 'detail'>('detail');
 
   const Profile = () => {
     const peakHeight = 0.75;
@@ -66,20 +68,34 @@ export const UPanel = () => {
 
     geometry.translate(-18 - xAxisOffset, -1, 0);
 
-    const material = new THREE.MeshStandardMaterial({
-      color: '#873F39',
-      metalness: 0.1,
-      roughness: 20,
-      flatShading: true,
-      side: THREE.BackSide,
-    });
-    const material2 = new THREE.MeshStandardMaterial({
-      color: 'white',
-      metalness: 0.1,
-      roughness: 20,
-      flatShading: true,
-      side: THREE.FrontSide,
-    });
+    const DrawProfile = () => {
+      if (draw === 'detail') {
+        const material = new THREE.MeshStandardMaterial({
+          color: '#873F39',
+          metalness: 0.1,
+          roughness: 20,
+          flatShading: true,
+          side: THREE.BackSide,
+        });
+        const material2 = new THREE.MeshStandardMaterial({
+          color: 'white',
+          metalness: 0.1,
+          roughness: 20,
+          flatShading: true,
+          side: THREE.FrontSide,
+        });
+        return (
+          <group>
+            <mesh geometry={geometry} material={material} />
+            <mesh geometry={geometry} material={material2} />
+          </group>
+        );
+      }
+
+      const wireMaterial = borderGeometry(geometry);
+
+      return <primitive object={wireMaterial} />;
+    };
 
     return (
       <group>
@@ -109,8 +125,7 @@ export const UPanel = () => {
             align="left"
           />
         )}
-        <mesh geometry={geometry} material={material} />
-        <mesh geometry={geometry} material={material2} />
+        <DrawProfile />
       </group>
     );
   };
@@ -137,10 +152,25 @@ export const UPanel = () => {
         />
         <directionalLight position={[30, -40, 0]} intensity={1} color="white" />
       </Canvas>
+      <div className="absolute top-2 left-2 flex gap-2">
+        <button
+          className={classNames(
+            'text-xs px-3 py-1 rounded-md border-2',
+            draw === 'wire'
+              ? 'bg-base-card text-primary-main border-primary-main hover:bg-white/30'
+              : 'bg-primary-contrast text-primary-main hover:bg-gray-50 border-transparent'
+          )}
+          onClick={() =>
+            setDraw((value) => (value === 'detail' ? 'wire' : 'detail'))
+          }
+        >
+          Wire
+        </button>
+      </div>
       <div className="absolute top-2 right-2 flex gap-2">
         <button
           className={classNames(
-            'text-xs px-3 py-1 rounded-md',
+            'text-xs px-3 py-1 rounded-md border-2 border-transparent',
             shape === 'u-panel'
               ? 'bg-primary-main text-primary-contrast'
               : 'bg-primary-contrast text-primary-main hover:bg-gray-50'
@@ -155,7 +185,7 @@ export const UPanel = () => {
         </button>
         <button
           className={classNames(
-            'text-xs px-3 py-1 rounded-md',
+            'text-xs px-3 py-1 rounded-md border-2 border-transparent',
             shape === 'u-panel'
               ? 'bg-primary-contrast text-primary-main hover:bg-gray-50'
               : 'bg-primary-main text-primary-contrast'
