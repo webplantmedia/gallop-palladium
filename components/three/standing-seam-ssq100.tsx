@@ -5,7 +5,7 @@ import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import classNames from 'classnames';
 import * as THREE from 'three';
-import { shapeGeometry, smoothPoints } from '@components/three';
+import { shapeGeometry, smoothPoints, borderGeometry } from '@components/three';
 
 export const StandingSeamSSQ100 = () => {
   const [shape, setShape] = useState<'unattached' | 'attached'>('unattached');
@@ -77,16 +77,13 @@ export const StandingSeamSSQ100 = () => {
       );
     }
 
-    const wireMaterial = new THREE.MeshBasicMaterial({
-      color: '#000000',
-      wireframe: true, // keeps wire look, but focus on geometry smoothness
-      wireframeLinewidth: 20, // emphasize cleaner lines
-    });
+    const wireMaterialLeft = borderGeometry(leftGeometry);
+    const wireMaterialRight = borderGeometry(rightGeometry);
 
     return (
       <group>
-        <mesh geometry={leftGeometry} material={wireMaterial} />
-        <mesh geometry={rightGeometry} material={wireMaterial} />
+        <primitive object={wireMaterialLeft} />
+        <primitive object={wireMaterialRight} />
       </group>
     );
   };
@@ -131,16 +128,11 @@ export const StandingSeamSSQ100 = () => {
       );
     }
 
-    const wireMaterial = new THREE.MeshBasicMaterial({
-      color: '#000000',
-      wireframe: true, // keeps wire look, but focus on geometry smoothness
-      wireframeLinewidth: 20, // emphasize cleaner lines
-    });
+    const wireMaterial = borderGeometry(geometry);
 
     return (
       <group>
-        <mesh geometry={geometry} material={wireMaterial} />
-        <mesh geometry={geometry} material={wireMaterial} />
+        <primitive object={wireMaterial} />
       </group>
     );
   };
