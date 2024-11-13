@@ -1,4 +1,4 @@
-export { CoreEmbed } from './core-embed';
+export { CoreEmbed, coreEmbed } from './core-embed';
 export { CoreSeparator } from './core-separator';
 export { CoreSpacer } from './core-spacer';
 export { CoreGroupGrid } from './core-group-grid';

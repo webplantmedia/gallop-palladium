@@ -1,12 +1,78 @@
-import { domToReact, DOMNode } from 'html-react-parser';
 import classNames from 'classnames';
 import { Fragment } from 'react';
-import { HTMLAttributeProps } from '@lib/types';
-import { castToHTMLAttributeProps } from '@utils/tools';
 import VimeoHandler from '@components/vimeo-handler';
 import { BlockProps } from '@lib/types';
+import {
+  HTMLReactParserOptions,
+  domToReact,
+  DOMNode,
+  Element,
+} from 'html-react-parser';
+import { HTMLAttributeProps } from '@lib/types';
+import {
+  castToHTMLAttributeProps,
+  hasExactClass,
+  tailwindAlignClasses,
+} from '@utils/tools';
 
-export const CoreEmbed = ({ node, tag, className, options }: BlockProps) => {
+const appendVimeoParams = (url: string) => {
+  const urlObj = new URL(url);
+  urlObj.searchParams.set('muted', '1');
+  urlObj.searchParams.set('title', '0');
+  urlObj.searchParams.set('byline', '0');
+  urlObj.searchParams.set('portrait', '0');
+  urlObj.searchParams.set('background', '1');
+  return urlObj.toString();
+};
+
+export const coreEmbed = (
+  domNode: Element,
+  options: HTMLReactParserOptions
+) => {
+  let videoProps: any = null;
+  let figcaption: React.ReactElement | null = null;
+  let content: React.ReactElement | null = null;
+  let wrapper: React.ReactElement | null = null;
+
+  const op: HTMLReactParserOptions = {
+    replace(domNode) {
+      if (domNode instanceof Element && domNode.attribs) {
+        const props: HTMLAttributeProps = castToHTMLAttributeProps(
+          domNode.attribs
+        );
+        let { className } = props;
+
+        if (domNode.name === 'iframe') {
+          videoProps = props;
+          let { src } = props;
+          props.src = appendVimeoParams(src);
+        } else if (
+          hasExactClass(className, 'wp-block-embed__wrapper') &&
+          !wrapper
+        ) {
+          wrapper = <>{domToReact(domNode.children as DOMNode[], op)}</>;
+          return <></>;
+        }
+        if (domNode.name === 'figcaption' && !figcaption) {
+          figcaption = <>{domToReact(domNode.children as DOMNode[], op)}</>;
+          return <></>;
+        }
+      }
+    },
+  };
+
+  domToReact(domNode?.children as DOMNode[], op);
+
+  return { videoProps: videoProps, figcaption: figcaption, wrapper: wrapper };
+};
+
+export const CoreEmbed = ({
+  videoProps,
+  wrapper,
+  figcaption,
+  className,
+}: any) => {
+  className = tailwindAlignClasses(className);
   className = className?.replace(
     'wp-block-embed',
     'wp-block-embed [&_iframe]:w-full [&_iframe]:h-auto'
@@ -20,53 +86,20 @@ export const CoreEmbed = ({ node, tag, className, options }: BlockProps) => {
     '[&_iframe]:aspect-4/3'
   );
 
-  const appendVimeoParams = (url: string) => {
-    const urlObj = new URL(url);
-    urlObj.searchParams.set('muted', '1');
-    urlObj.searchParams.set('title', '0');
-    urlObj.searchParams.set('byline', '0');
-    urlObj.searchParams.set('portrait', '0');
-    urlObj.searchParams.set('background', '1');
-    return urlObj.toString();
-  };
-
   return (
     <Fragment>
       <figure className={classNames(className, 'mb-7')}>
-        {node?.children?.map((block: any, index: number) => {
-          const props: HTMLAttributeProps = castToHTMLAttributeProps(
-            block.attribs
-          );
-          if (
-            block.children[0].name === 'iframe' &&
-            block.children[0].attribs.src.includes('vimeo.com')
-          ) {
-            block.children[0].attribs.src = appendVimeoParams(
-              block.children[0].attribs.src
-            );
-          }
-          return (
-            <Fragment key={'core-figure-' + index}>
-              {props?.className?.includes('wp-block-embed__wrapper') && (
-                <div className={classNames(props.className)}>
-                  {domToReact(block?.children as DOMNode[], options)}
-                </div>
-              )}
-              {block.name === 'figcaption' && (
-                <figcaption
-                  className={classNames(
-                    props.className,
-                    'text-left text-sm italic px-3 py-3 bg-white/20 rounded-b-md'
-                  )}
-                >
-                  {domToReact(block?.children as DOMNode[], options)}
-                </figcaption>
-              )}
-            </Fragment>
-          );
-        })}
+        {wrapper && <div className={classNames()}>{wrapper}</div>}
+        {figcaption && (
+          <figcaption
+            className={classNames(
+              'text-left text-sm italic px-3 py-3 bg-base-card rounded-b-md'
+            )}
+          >
+            {figcaption}
+          </figcaption>
+        )}
       </figure>
-      <VimeoHandler /> {/* Add the Vimeo handler here */}
     </Fragment>
   );
 };

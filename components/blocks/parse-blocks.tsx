@@ -50,6 +50,7 @@ import {
   GallopSidebar,
   gallopSidebar,
   GallopSwiper,
+  coreEmbed,
 } from '@components/blocks';
 import { HTMLAttributeProps } from '@lib/types';
 import { castToHTMLAttributeProps } from '@utils/tools';
@@ -180,17 +181,20 @@ export const ParseBlocks = ({
           return (
             <CoreCover className={className} img={img} content={content} />
           );
-        } /*else if (className?.includes('wp-block-embed')) {
-          className = tailwindAlignClasses(className);
+        } else if (className?.includes('wp-block-embed')) {
+          const { videoProps, wrapper, figcaption } = coreEmbed(
+            domNode,
+            options
+          );
           return (
             <CoreEmbed
-              tag={domNode.name}
+              videoProps={videoProps}
+              figcaption={figcaption}
+              wrapper={wrapper}
               className={className}
-              node={domNode}
-              options={options}
             />
           );
-				}*/ else if (className?.includes('wp-block-gallop-swiper')) {
+        } else if (className?.includes('wp-block-gallop-swiper')) {
           return (
             <GallopSwiper className={className}>
               {domToReact(domNode.children as DOMNode[], options)}

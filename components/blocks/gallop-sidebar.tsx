@@ -1,14 +1,14 @@
-import { HTMLAttributeProps } from '@lib/types';
-import { castToHTMLAttributeProps } from '@utils/tools';
 import { hasExactClass, tailwindAlignClasses } from '@utils/tools';
+import React from 'react';
+import DynamicSidebar from '@components/sidebar/dynamic';
 import {
   HTMLReactParserOptions,
   domToReact,
   DOMNode,
   Element,
 } from 'html-react-parser';
-import React from 'react';
-import DynamicSidebar from '@components/sidebar/dynamic';
+import { HTMLAttributeProps } from '@lib/types';
+import { castToHTMLAttributeProps } from '@utils/tools';
 
 export const gallopSidebar = (
   domNode: Element,
