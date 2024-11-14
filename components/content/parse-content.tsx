@@ -3,17 +3,19 @@ import { compressContent } from '@utils/tools';
 
 export function parseContent(content: string) {
   let hasH1 = false;
+  let toc: any = {};
+  let data: any = {};
+  let captureId = false;
+  let domNode: any = [];
+
   if (content) {
     content = compressContent(content);
     if (content.match(/<h1.*>/g)) {
       hasH1 = true;
     }
+  } else {
+    return { content, toc, hasH1 };
   }
-
-  let toc: any = {};
-  let data: any = {};
-  let captureId = false;
-  let domNode: any = [];
 
   let matches = content && content.match(/<h[1-4][^>]*?>.*?<\/h[1-4]>/g);
 

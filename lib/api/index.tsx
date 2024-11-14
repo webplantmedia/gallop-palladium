@@ -12,4 +12,5 @@ export { getPostSeo } from './get-post-seo';
 export { getPost } from './get-post';
 export { getBlogData } from './get-blog-data';
 export { fetchPost } from './fetch-post';
+export { fetchSiteElements } from './fetch-site-elements';
 export { fetchAPIBlog } from './fetch-api-blog';

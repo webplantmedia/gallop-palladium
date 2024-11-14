@@ -15,7 +15,7 @@ export function captureMediaElements(content: string) {
   // console.log(test);
 
   let imgs: any = [];
-  if (content === null) {
+  if (!content) {
     return { slides: imgs };
   }
 

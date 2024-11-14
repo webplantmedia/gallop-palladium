@@ -61,7 +61,7 @@ export const ParseBlocks = ({
   meta,
   sidebarHeader,
 }: {
-  content: any;
+  content: string;
   meta: any;
   sidebarHeader: any;
 }) => {
@@ -177,10 +177,8 @@ export const ParseBlocks = ({
         } else if (className?.includes('wp-block-audio')) {
           return <CoreAudio props={props} className={className} />;
         } else if (className?.includes('wp-block-cover')) {
-          const { img, content } = coreCover(domNode, options);
-          return (
-            <CoreCover className={className} img={img} content={content} />
-          );
+          const data = coreCover(domNode, options);
+          return <CoreCover data={data} className={className} />;
         } else if (className?.includes('wp-block-embed')) {
           const { videoProps, wrapper, figcaption } = coreEmbed(
             domNode,

@@ -2,8 +2,7 @@ import type { Metadata } from 'next';
 import Content from '@components/content';
 import { PageSeo } from '@components/seo/page';
 import { replaceWordPressUrl } from '@utils/tools';
-import { fetchSiteElements } from '@api/fetch-site-elements';
-import { fetchPost } from '@api';
+import { fetchPost, fetchSiteElements } from '@api';
 
 export const revalidate = 3600;
 

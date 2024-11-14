@@ -1,6 +1,9 @@
 import type { Metadata } from 'next';
 import Content from '@components/content';
 import Grid from '@components/grid';
+import { fetchPost, fetchSiteElements } from '@api';
+import { replaceWordPressUrl } from '@utils/tools';
+import { PageSeo } from '@components/seo/page';
 
 export const revalidate = 3600;
 
@@ -9,42 +12,22 @@ type Props = {
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const uri = `/${params.slug.join('/')}/`;
+
+  const { meta, site } = await fetchPost(uri);
+
+  if (meta && site) {
+    site.permalink = replaceWordPressUrl(site.permalink);
+    return PageSeo(meta, site.permalink, site);
+  }
+
   return {};
 }
 
 export default async function Page({ params }: Props) {
   const uri = `/${params.slug.join('/')}/`;
-  const headers = {
-    'Content-Type': 'application/json',
-  };
+  const { post, meta } = await fetchPost(uri);
+  const { sidebarHeader } = await fetchSiteElements();
 
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_WORDPRESS_URL}/wp-json/gallop/v1/post/?uri=` +
-      uri
-    // {
-    //   headers,
-    //   method: 'POST',
-    //   body: JSON.stringify({
-    //     uri: uri,
-    //   }),
-    //   next: { tags: [uri] },
-    // }
-  );
-
-  if (response.ok) {
-    const { post, seo } = await response.json();
-
-    if (post) {
-      const meta = {
-        title: post?.post_title,
-        postType: post?.post_type,
-        databaseId: post?.ID,
-        ...seo,
-      };
-
-      return <Content post={post} meta={meta} />;
-    }
-  } else {
-    return <p>Not found</p>;
-  }
+  return <Content post={post} meta={meta} sidebarHeader={sidebarHeader} />;
 }
