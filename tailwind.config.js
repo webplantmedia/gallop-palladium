@@ -21,7 +21,8 @@ module.exports = {
     extend: {
       keyframes: {
         'ping-slow': {
-          '50%': { transform: 'scale(1.4)' },
+          '0%': { transform: 'scale(1)', opacity: '1' },
+          '75%, 100%': { transform: 'scale(1.5)', opacity: '0' },
         },
         rotate: {
           '0%': { transform: 'rotate(0deg)' },
@@ -38,7 +39,7 @@ module.exports = {
         },
       },
       animation: {
-        'ping-slow': 'ping-slow 3s ease-in-out infinite',
+        'ping-slow': 'ping-slow 3s cubic-bezier(0, 0, 0.2, 1) infinite',
         'spin-slow': 'rotate 20s linear infinite',
         'spin-slow-reverse': 'rotate-reverse 20s linear infinite',
         dots: 'dots 1.0s steps(1,end) infinite',

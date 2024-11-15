@@ -116,7 +116,7 @@ export const coreCover = (
 export const CoreCoverHero = ({ data, className }: any) => {
   const videoUrl =
     data?.wpBlockCoverInnerContainer?.wpBlockButtons?.wpBlockButton?.a?.href ||
-    '';
+    null;
   const backgroundStyle = data?.wpBlockCoverImageBackground?.style
     ? styleStringToObject(data.wpBlockCoverImageBackground.style)
     : {};
@@ -125,16 +125,18 @@ export const CoreCoverHero = ({ data, className }: any) => {
     : '';
   const imgProps = data?.wpBlockCoverImageBackground || {};
   const src = getVimeoIframeSrc(videoUrl);
-  const accent = data?.wpBlockCoverInnerContainer?.h1?.text || '';
-  const h1 = data?.wpBlockCoverInnerContainer?.h1?.jsx || <></>;
-  const p = data?.wpBlockCoverInnerContainer?.p?.jsx || <></>;
+  const h1 = data?.wpBlockCoverInnerContainer?.h1?.jsx || null;
+  const h1Bold = data?.wpBlockCoverInnerContainer?.h1?.strong?.text || null;
+  const h1Accent = data?.wpBlockCoverInnerContainer?.h1?.em?.text || null;
+  const p = data?.wpBlockCoverInnerContainer?.p?.jsx || null;
+  const p_2 = data?.wpBlockCoverInnerContainer?.p_2?.jsx || null;
 
   className = tailwindGetAlignClasses(className);
 
   return (
     <div
       className={classNames(
-        'wp-block-cover relative flex items-center justify-center',
+        'relative overflow-hidden wp-block-cover min-h-[600px] flex items-center justify-center',
         className
       )}
     >
@@ -171,32 +173,44 @@ export const CoreCoverHero = ({ data, className }: any) => {
       )}
       <div
         className={classNames(
-          'box-border px-4 sm:px-8 relative z-10 py-32 lg:py-44 [&>*:last-child]:mb-0 [&>*:first-child]:mt-0 w-full',
+          'box-border px-4 sm:px-8 z-10 py-32 lg:py-44 [&>*:last-child]:mb-0 [&>*:first-child]:mt-0 w-full',
           videoUrl ? 'max-w-screen-3xl' : 'max-w-[980px]'
         )}
       >
-        <div className="flex flex-col xl:flex-row gap-20 items-center">
-          <div className="xl:w-2/3 [&>*:first-child]:!mt-0 [&>*:last-child]:!mb-0 [&>.wp-block-heading+p]:xl:!mt-7 [&>.wp-block-heading]:xl:!text-left [&>p]:max-w-[750px]">
-            {h1 && (
-              <h1 className="mb-7 leading-tight text-5xl md:text-6xl lg:text-7xl font-bold text-white">
+        <div className="flex flex-col xl:flex-row gap-20 justify-center items-center">
+          <div className="xl:w-2/3">
+            {h1 && !h1Bold && !h1Accent && (
+              <h1 className="mb-7 leading-tight text-center xl:text-left text-6xl md:text-6xl lg:text-7xl font-bold text-white">
+                {h1}
+              </h1>
+            )}
+            {h1Bold && h1Accent && (
+              <h1 className="mb-7 leading-tight text-center xl:text-left text-6xl md:text-6xl lg:text-7xl font-bold text-white [&>em]:text-stroke [&>em]:text-stroke-white [&>em]:font-bold [&>*]:not-italic [&>*]:font-bold">
                 {h1}
               </h1>
             )}
             {p && (
-              <p className="has-large-font-size text-xl sm:text-2xl lg:text-2xl leading-relaxed text-white">
+              <p className="has-large-font-size text-center xl:text-left text-xl sm:text-2xl lg:text-2xl leading-relaxed text-white font-bold">
                 {p}
+              </p>
+            )}
+            {p_2 && (
+              <p className="has-large-font-size text-xl sm:text-2xl lg:text-2xl leading-relaxed text-white">
+                {p_2}
               </p>
             )}
           </div>
           {videoUrl && (
             <div className="xl:w-1/3 flex justify-center items-center">
               <VideoPopup
-                className="relative p-2 bg-white hover:bg-white rounded-full border-2 border-white transition-colors duration-300 ease-in-out w-20 h-20 flex items-center justify-center"
+                className="relative bg-transparent rounded-full transition-colors duration-300 ease-in-out w-24 h-24 border-2 border-white flex items-center justify-center group"
                 src={src}
               >
+                <span className="inline-flex bg-white backdrop-blur-lg absolute rounded-full -z-10 w-20 h-20 "></span>
+                <span className="animate-ping-slow inline-flex bg-white/50 hover:bg-white absolute rounded-full -z-10 w-20 h-20 "></span>
                 <Iconify
                   icon={PlaySolidIcon}
-                  className="flex-shrink-0 h-auto w-10 text-primary-main -mr-1"
+                  className="flex-shrink-0 h-auto w-10 text-primary-main -mr-1 group-hover:text-primary-light"
                 />
               </VideoPopup>
             </div>
