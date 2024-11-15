@@ -134,12 +134,12 @@ const CoreCoverHero = ({ data, className }: any) => {
           videoUrl ? 'max-w-screen-3xl' : 'max-w-[980px]'
         )}
       >
-        <div className="flex flex-row gap-20 items-center">
-          <div className="flex items-center [&>*:first-child]:mt-0 [&>*:last-child]:mb-0 [&>.wp-block-heading]:text-left [&>*]:!text-white">
+        <div className="flex flex-col xl:flex-row gap-20 items-center">
+          <div className="xl:w-2/3 flex flex-col items-start justify-center [&>*:first-child]:!mt-0 [&>*:last-child]:!mb-0 [&>p]:mt-0 [&>.wp-block-heading]:xl:text-left [&>*]:!text-white">
             {content}
           </div>
           {videoUrl && (
-            <div className="w-1/2 flex justify-center items-center">
+            <div className="xl:w-1/3 flex justify-center items-center">
               <VideoPopup
                 className="relative p-2 bg-white hover:bg-white rounded-full border-2 border-white transition-colors duration-300 ease-in-out w-20 h-20 flex items-center justify-center"
                 src={src}
