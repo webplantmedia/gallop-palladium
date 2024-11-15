@@ -6,6 +6,7 @@ import {
   getVarsFromNode,
   getVimeoIframeSrc,
   getDomNodeText,
+  styleStringToObject,
 } from '@utils/tools';
 import { HTMLAttributeProps } from '@lib/types';
 import React, { Fragment } from 'react';
@@ -26,10 +27,10 @@ export const coreCover = (
   options: HTMLReactParserOptions
 ) => {
   let content: Array<React.ReactElement> = [];
-  let accentText: string = '';
   let imgProps: object | null = null;
   let backgroundImage: string | null = null;
   let videoUrl: string | null = null;
+
   let index = 0;
 
   const op2: HTMLReactParserOptions = {
@@ -46,8 +47,6 @@ export const coreCover = (
           videoUrl = el?.wpBlockButton?.a?.href;
           return <></>;
         } else if (className?.includes('wp-block-heading')) {
-          const heading = domToReact(domNode.children as DOMNode[], options);
-          accentText = getDomNodeText(domNode);
           content.push(
             <CoreHeading
               key={`heading-${index}`}
@@ -55,7 +54,7 @@ export const coreCover = (
               className={classNames('text-white', className)}
               props={props}
             >
-              {heading}
+              {domToReact(domNode.children as DOMNode[], options)}
             </CoreHeading>
           );
           return <></>;
@@ -95,13 +94,16 @@ export const coreCover = (
           } else if (props?.src) {
             imgProps = props;
           }
-          return <></>;
+        } else if (hasExactClass(className, 'is-style-play-video')) {
+          const el = getVarsFromNode(domNode);
+          videoUrl = el?.wpBlockButton?.a?.href;
         } else if (
           hasExactClass(className, 'wp-block-cover__inner-container')
         ) {
           domToReact(domNode.children as DOMNode[], op2);
-          return <></>;
         }
+
+        return <></>;
       }
     },
   };
@@ -111,9 +113,21 @@ export const coreCover = (
   return { imgProps, content, backgroundImage, videoUrl };
 };
 
-const CoreCoverHero = ({ data, className }: any) => {
-  const { imgProps, content, backgroundImage, videoUrl } = data;
+export const CoreCoverHero = ({ data, className }: any) => {
+  const videoUrl =
+    data?.wpBlockCoverInnerContainer?.wpBlockButtons?.wpBlockButton?.a?.href ||
+    '';
+  const backgroundStyle = data?.wpBlockCoverImageBackground?.style
+    ? styleStringToObject(data.wpBlockCoverImageBackground.style)
+    : {};
+  const backgroundImage = backgroundStyle?.backgroundImage
+    ? backgroundStyle.backgroundImage
+    : '';
+  const imgProps = data?.wpBlockCoverImageBackground || {};
   const src = getVimeoIframeSrc(videoUrl);
+  const accent = data?.wpBlockCoverInnerContainer?.h1?.text || '';
+  const h1 = data?.wpBlockCoverInnerContainer?.h1?.jsx || <></>;
+  const p = data?.wpBlockCoverInnerContainer?.p?.jsx || <></>;
 
   className = tailwindGetAlignClasses(className);
 
@@ -124,7 +138,7 @@ const CoreCoverHero = ({ data, className }: any) => {
         className
       )}
     >
-      {imgProps && (
+      {imgProps && imgProps.width && (
         <>
           <img
             className={classNames(
@@ -147,7 +161,7 @@ const CoreCoverHero = ({ data, className }: any) => {
       {backgroundImage && (
         <>
           <div
-            className="absolute inset-0 bg-cover bg-no-repeat bg-center bg-fixed grayscale"
+            className="absolute inset-0 bg-cover bg-no-repeat bg-center bg-fixed"
             style={{
               backgroundImage: backgroundImage,
             }}
@@ -163,7 +177,16 @@ const CoreCoverHero = ({ data, className }: any) => {
       >
         <div className="flex flex-col xl:flex-row gap-20 items-center">
           <div className="xl:w-2/3 [&>*:first-child]:!mt-0 [&>*:last-child]:!mb-0 [&>.wp-block-heading+p]:xl:!mt-7 [&>.wp-block-heading]:xl:!text-left [&>p]:max-w-[750px]">
-            {content}
+            {h1 && (
+              <h1 className="mb-7 leading-tight text-5xl md:text-6xl lg:text-7xl font-bold text-white">
+                {h1}
+              </h1>
+            )}
+            {p && (
+              <p className="has-large-font-size text-xl sm:text-2xl lg:text-2xl leading-relaxed text-white">
+                {p}
+              </p>
+            )}
           </div>
           {videoUrl && (
             <div className="xl:w-1/3 flex justify-center items-center">
@@ -184,7 +207,7 @@ const CoreCoverHero = ({ data, className }: any) => {
   );
 };
 
-export const CoreCoverDefault = ({ data, className }: any) => {
+export const CoreCover = ({ data, className }: any) => {
   const { imgProps, content, backgroundImage } = data;
 
   className = tailwindGetAlignClasses(className);
@@ -232,12 +255,4 @@ export const CoreCoverDefault = ({ data, className }: any) => {
       </div>
     </div>
   );
-};
-
-export const CoreCover = ({ data, className }: any) => {
-  if (className?.includes('is-style-hero')) {
-    return <CoreCoverHero data={data} className={className} />;
-  }
-
-  return <CoreCoverDefault data={data} className={className} />;
 };

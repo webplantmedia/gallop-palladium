@@ -32,6 +32,7 @@ import {
   CoreAudio,
   CoreEmbed,
   CoreCover,
+  CoreCoverHero,
   coreCover,
   // GallopAlbumCover,
   // GallopSinglePost,
@@ -178,8 +179,10 @@ export const ParseBlocks = ({
         } else if (className?.includes('wp-block-audio')) {
           return <CoreAudio props={props} className={className} />;
         } else if (className?.includes('wp-block-cover')) {
-          const test = getVarsFromNode2(domNode);
-          console.log(test);
+          if (className?.includes('is-style-hero')) {
+            const data = getVarsFromNode2(domNode);
+            return <CoreCoverHero data={data} className={className} />;
+          }
           const data = coreCover(domNode, options);
           return <CoreCover data={data} className={className} />;
         } else if (className?.includes('wp-block-embed')) {
