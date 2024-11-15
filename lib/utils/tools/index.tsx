@@ -41,6 +41,7 @@ export { castToHTMLAttributeProps } from './cast-html-attribute-props';
 export { blockFontImports } from './block-font-imports';
 export { getHoursInserted } from './get-hours-inserted';
 export { getVarsFromNode } from './get-vars-from-node';
+export { getVarsFromNode2 } from './get-vars-from-node-2';
 export { hasExactClass } from './has-exact-class';
 export { printObject } from './print-object';
 export { getVimeoIframeSrc } from './get-vimeo-iframe-src';

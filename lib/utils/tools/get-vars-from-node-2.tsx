@@ -40,7 +40,7 @@ function getImportantClassName(classList: string) {
   return `${prefix}${formattedClass}`;
 }
 
-export function getVarsFromNode(node: any): Record<string, any> {
+export function getVarsFromNode2(node: any): Record<string, any> {
   // console.log('\nNODE', serializer(node));
 
   let data: Record<string, any> = {};
@@ -145,6 +145,8 @@ export function getVarsFromNode(node: any): Record<string, any> {
           }
         }
         path.push(key);
+        console.log(data);
+        console.log(path);
         saveNestedObject(path, value);
         if (domNode.name) {
           if (

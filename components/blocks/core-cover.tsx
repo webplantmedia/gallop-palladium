@@ -5,12 +5,14 @@ import {
   castToHTMLAttributeProps,
   getVarsFromNode,
   getVimeoIframeSrc,
+  getDomNodeText,
 } from '@utils/tools';
 import { HTMLAttributeProps } from '@lib/types';
 import React, { Fragment } from 'react';
 import classNames from 'classnames';
 import { VideoPopup } from '@components/widgets/video-popup';
 import PlaySolidIcon from '@iconify/icons-heroicons/play-solid';
+import { CoreHeading, CoreParagraph } from '@components/blocks';
 
 import {
   HTMLReactParserOptions,
@@ -24,6 +26,7 @@ export const coreCover = (
   options: HTMLReactParserOptions
 ) => {
   let content: Array<React.ReactElement> = [];
+  let accentText: string = '';
   let imgProps: object | null = null;
   let backgroundImage: string | null = null;
   let videoUrl: string | null = null;
@@ -41,6 +44,30 @@ export const coreCover = (
         if (hasExactClass(className, 'is-style-play-video')) {
           const el = getVarsFromNode(domNode);
           videoUrl = el?.wpBlockButton?.a?.href;
+          return <></>;
+        } else if (className?.includes('wp-block-heading')) {
+          const heading = domToReact(domNode.children as DOMNode[], options);
+          accentText = getDomNodeText(domNode);
+          content.push(
+            <CoreHeading
+              key={`heading-${index}`}
+              tag={domNode.name}
+              className={classNames('text-white', className)}
+              props={props}
+            >
+              {heading}
+            </CoreHeading>
+          );
+          return <></>;
+        } else if (domNode.name === 'p') {
+          content.push(
+            <CoreParagraph
+              key={`paragraph-${index}`}
+              className={classNames('text-white', className)}
+            >
+              {domToReact(domNode.children as DOMNode[], options)}
+            </CoreParagraph>
+          );
           return <></>;
         }
 
@@ -135,7 +162,7 @@ const CoreCoverHero = ({ data, className }: any) => {
         )}
       >
         <div className="flex flex-col xl:flex-row gap-20 items-center">
-          <div className="xl:w-2/3 flex flex-col items-start justify-center [&>*:first-child]:!mt-0 [&>*:last-child]:!mb-0 [&>p]:mt-0 [&>.wp-block-heading]:xl:text-left [&>*]:!text-white">
+          <div className="xl:w-2/3 [&>*:first-child]:!mt-0 [&>*:last-child]:!mb-0 [&>.wp-block-heading+p]:xl:!mt-7 [&>.wp-block-heading]:xl:!text-left [&>p]:max-w-[750px]">
             {content}
           </div>
           {videoUrl && (
@@ -200,7 +227,7 @@ export const CoreCoverDefault = ({ data, className }: any) => {
           <span className="absolute inset-0 h-full bg-primary-main/80"></span>
         </>
       )}
-      <div className="box-content px-4 sm:px-8 relative z-10 py-32 lg:py-44 max-w-[980px] [&>*:last-child]:mb-0 [&>*:first-child]:mt-0 [&>*]:!text-white w-full">
+      <div className="box-content px-4 sm:px-8 relative z-10 py-32 lg:py-44 max-w-[980px] [&>*:last-child]:!mb-0 [&>*:first-child]:!mt-0 w-full">
         {content}
       </div>
     </div>

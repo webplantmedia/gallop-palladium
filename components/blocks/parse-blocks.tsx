@@ -8,6 +8,7 @@ import {
   tailwindAlignClasses,
   hasExactClass,
   getVarsFromNode,
+  getVarsFromNode2,
   replaceWordPressUrlRelative,
 } from '@utils/tools';
 import {
@@ -177,6 +178,8 @@ export const ParseBlocks = ({
         } else if (className?.includes('wp-block-audio')) {
           return <CoreAudio props={props} className={className} />;
         } else if (className?.includes('wp-block-cover')) {
+          const test = getVarsFromNode2(domNode);
+          // console.log(test);
           const data = coreCover(domNode, options);
           return <CoreCover data={data} className={className} />;
         } else if (className?.includes('wp-block-embed')) {
