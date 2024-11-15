@@ -53,18 +53,9 @@ export function getVarsFromNode2(node: any): Record<string, any> {
 
       if (current[part]) {
         if (i === parts.length - 1) {
-          // If the final part already exists, handle it as an array
-          if (!Array.isArray(current[part])) {
-            current[part] = [current[part]]; // Convert to array if it's not already one
-          }
           current[part].push(value); // Append the new value to the array
         } else {
-          // At each level, check if the current part is an array
-          if (Array.isArray(current[part])) {
-            current = current[part][current[part].length - 1]; // Get the last object in the array
-          } else {
-            current = current[part];
-          }
+          current = current[part];
         }
       } else {
         if (i === parts.length - 1) {
@@ -120,10 +111,6 @@ export function getVarsFromNode2(node: any): Record<string, any> {
     path = path.slice(0, index);
 
     if (domNode instanceof Element && domNode.attribs) {
-      // const props: HTMLAttributeProps = castToHTMLAttributeProps(
-      // domNode.attribs
-      // );
-      // let { className } = props;
       let value: any = { ...domNode.attribs };
       if (value?.class) {
         value.className = value.class;
@@ -144,10 +131,22 @@ export function getVarsFromNode2(node: any): Record<string, any> {
             key = classKey;
           }
         }
+
+        // Ensure unique key by appending an incremental value if necessary
+        let originalKey = key;
+        let suffix = 2;
+        let current = data;
+        for (let part of path) {
+          current = current[part] || {};
+        }
+        while (current[key]) {
+          key = `${originalKey}_${suffix}`;
+          suffix++;
+        }
+
         path.push(key);
-        console.log(data);
-        console.log(path);
         saveNestedObject(path, value);
+
         if (domNode.name) {
           if (
             [
@@ -174,18 +173,15 @@ export function getVarsFromNode2(node: any): Record<string, any> {
             saveJSX(path, domNode);
           }
         }
-      }
 
-      // console.log(index, className, name);
-      // printObject(data);
-      domToReact(domNode.children as DOMNode[], {
-        replace: (child) => handleNode(child, index + 1, path),
-      });
-    } /*else if (domNode.type === 'text') {
-      path.push('text');
-      const value = domNode.data;
-      saveNestedObject(path, value);
-		}*/
+        domToReact(domNode.children as DOMNode[], {
+          replace: (child) => handleNode(child, index + 1, path),
+        });
+
+        // Reset the path after handling this node
+        path.pop();
+      }
+    }
 
     return <></>;
   }
