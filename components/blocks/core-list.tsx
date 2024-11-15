@@ -45,7 +45,9 @@ export const coreList = (domNode: Element, options: HTMLReactParserOptions) => {
     },
   };
 
-  return { content: domToReact(domNode.children as DOMNode[], op) };
+  const content = domToReact(domNode.children as DOMNode[], op);
+
+  return { content };
 };
 
 export const CoreList = ({

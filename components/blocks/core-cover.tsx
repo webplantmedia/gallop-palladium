@@ -1,12 +1,16 @@
+import Iconify from '@components/iconify';
 import {
   tailwindGetAlignClasses,
   hasExactClass,
   castToHTMLAttributeProps,
+  getVarsFromNode,
+  getVimeoIframeSrc,
 } from '@utils/tools';
 import { HTMLAttributeProps } from '@lib/types';
-import React from 'react';
-import { BlockProps } from '@lib/types';
+import React, { Fragment } from 'react';
 import classNames from 'classnames';
+import { VideoPopup } from '@components/widgets/video-popup';
+import PlaySolidIcon from '@iconify/icons-heroicons/play-solid';
 
 import {
   HTMLReactParserOptions,
@@ -19,9 +23,36 @@ export const coreCover = (
   domNode: Element,
   options: HTMLReactParserOptions
 ) => {
-  let content: React.ReactElement | null = null;
+  let content: Array<React.ReactElement> = [];
   let imgProps: object | null = null;
   let backgroundImage: string | null = null;
+  let videoUrl: string | null = null;
+  let index = 0;
+
+  const op2: HTMLReactParserOptions = {
+    replace(domNode) {
+      if (domNode instanceof Element && domNode.attribs) {
+        const props: HTMLAttributeProps = castToHTMLAttributeProps(
+          domNode.attribs
+        );
+        let { className } = props;
+        index++;
+
+        if (hasExactClass(className, 'is-style-play-video')) {
+          const el = getVarsFromNode(domNode);
+          videoUrl = el?.wpBlockButton?.a?.href;
+          return <></>;
+        }
+
+        content.push(
+          <Fragment key={`content-${index}`}>
+            {domToReact([domNode] as DOMNode[], options)}
+          </Fragment>
+        );
+        return <></>;
+      }
+    },
+  };
 
   const op: HTMLReactParserOptions = {
     replace(domNode) {
@@ -38,13 +69,11 @@ export const coreCover = (
             imgProps = props;
           }
           return <></>;
-        } else if (hasExactClass(className, 'has-play-video')) {
         } else if (
-          hasExactClass(className, 'wp-block-cover__inner-container') &&
-          !content
+          hasExactClass(className, 'wp-block-cover__inner-container')
         ) {
-          content = <>{domToReact(domNode.children as DOMNode[], options)}</>;
-          return <></>; //this prevents recursion
+          domToReact(domNode.children as DOMNode[], op2);
+          return <></>;
         }
       }
     },
@@ -52,11 +81,12 @@ export const coreCover = (
 
   domToReact(domNode?.children as DOMNode[], op);
 
-  return { imgProps, content, backgroundImage };
+  return { imgProps, content, backgroundImage, videoUrl };
 };
 
 const CoreCoverHero = ({ data, className }: any) => {
-  const { imgProps, content, backgroundImage } = data;
+  const { imgProps, content, backgroundImage, videoUrl } = data;
+  const src = getVimeoIframeSrc(videoUrl);
 
   className = tailwindGetAlignClasses(className);
 
@@ -98,8 +128,30 @@ const CoreCoverHero = ({ data, className }: any) => {
           <span className="absolute inset-0 h-full bg-black/70"></span>
         </>
       )}
-      <div className="box-content px-4 sm:px-8 relative z-10 py-32 lg:py-44 max-w-[980px] [&>*:last-child]:mb-0 [&>*:first-child]:mt-0 [&>*]:!text-white w-full">
-        {content}
+      <div
+        className={classNames(
+          'box-border px-4 sm:px-8 relative z-10 py-32 lg:py-44 [&>*:last-child]:mb-0 [&>*:first-child]:mt-0 w-full',
+          videoUrl ? 'max-w-screen-3xl' : 'max-w-[980px]'
+        )}
+      >
+        <div className="flex flex-row gap-20 items-center">
+          <div className="flex items-center [&>*:first-child]:mt-0 [&>*:last-child]:mb-0 [&>.wp-block-heading]:text-left [&>*]:!text-white">
+            {content}
+          </div>
+          {videoUrl && (
+            <div className="w-1/2 flex justify-center items-center">
+              <VideoPopup
+                className="relative p-2 bg-white hover:bg-white rounded-full border-2 border-white transition-colors duration-300 ease-in-out w-20 h-20 flex items-center justify-center"
+                src={src}
+              >
+                <Iconify
+                  icon={PlaySolidIcon}
+                  className="flex-shrink-0 h-auto w-10 text-primary-main -mr-1"
+                />
+              </VideoPopup>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
