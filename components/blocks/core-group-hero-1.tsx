@@ -220,10 +220,10 @@ export const CoreGroupHero1 = ({ data, className }: BlockProps) => {
           </div>
           <div className="w-full xl:w-8/12 flex flex-col xl:flex-row gap-4 sm:gap-10 xl:gap-0 mb-4 sm:mb-10 xl:mb-0">
             {info2 &&
-              Object.entries(info2).map(
+              Object.entries(info2).flatMap(
                 ([key, item]: [string, any], index: number) => {
                   if (!key.startsWith('wpBlockGroup')) {
-                    return null;
+                    return []; //null doesn't skip
                   }
 
                   return (
