@@ -17,7 +17,7 @@ export const CoreGroup = ({ className, props, children }: BlockProps) => {
       id={id}
       className={classNames(
         className,
-        'mb-10 [&>*]:mt-0 [&>*]:mb-0 [&>*>*:first-child]:mt-0 [&>*>*:last-child]:mb-0'
+        'mb-10 [&>*:first-child]:mt-0 [&>*:last-child]:mb-0 [&>*>*:first-child]:mt-0 [&>*>*:last-child]:mb-0'
       )}
     >
       {children}

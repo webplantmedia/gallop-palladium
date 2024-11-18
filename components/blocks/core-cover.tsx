@@ -128,7 +128,7 @@ export const CoreCoverHero = ({ data, className }: any) => {
   return (
     <div
       className={classNames(
-        'relative overflow-hidden wp-block-cover min-h-[600px] flex items-center justify-center',
+        'relative wp-block-cover min-h-[600px] flex items-center justify-center mb-32 before:w-[4px] before:h-[80px] before:absolute before:-bottom-[40px] before:left-1/2 before:-ml-[2px] before:bg-primary-main before:z-20',
         className
       )}
     >
@@ -182,12 +182,12 @@ export const CoreCoverHero = ({ data, className }: any) => {
               </h1>
             )}
             {p && (
-              <p className="has-large-font-size text-left xl:text-left text-xl sm:text-2xl lg:text-2xl leading-relaxed text-white font-bold">
+              <p className="has-large-font-size text-left xl:text-left text-xl sm:text-2xl lg:text-2xl leading-relaxed text-white font-bold max-w-[750px]">
                 {p}
               </p>
             )}
             {p_2 && (
-              <p className="has-large-font-size text-left xl:text-left text-xl sm:text-2xl lg:text-2xl leading-relaxed text-white">
+              <p className="has-large-font-size text-left xl:text-left text-xl sm:text-2xl lg:text-2xl leading-relaxed text-white max-w-[750px]">
                 {p_2}
               </p>
             )}

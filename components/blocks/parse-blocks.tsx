@@ -41,6 +41,7 @@ import {
   CoreGroup,
   CoreGroupGrid,
   CoreGroupCard1,
+  CoreGroupSection1,
   CoreGroupCard2,
   CoreGroupHero1,
   // GallopBlogPosts,
@@ -105,6 +106,9 @@ export const ParseBlocks = ({
                 {domToReact(domNode.children as DOMNode[], options)}
               </CoreGroupGrid>
             );
+          } else if (hasExactClass(className, 'is-style-section-1')) {
+            const data = getVarsFromNode2(domNode);
+            return <CoreGroupSection1 data={data} className={className} />;
           } else if (hasExactClass(className, 'is-style-hero-1')) {
             const data = getVarsFromNode2(domNode);
             return <CoreGroupHero1 data={data} className={className} />;

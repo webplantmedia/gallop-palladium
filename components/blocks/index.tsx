@@ -20,6 +20,7 @@ export { CoreCover, CoreCoverHero, coreCover } from './core-cover';
 export { GallopGridder } from './gallop-gridder';
 export { GallopCard } from './gallop-card';
 export { CoreGroupCard1 } from './core-group-card-1';
+export { CoreGroupSection1 } from './core-group-section-1';
 export { CoreGroupCard2 } from './core-group-card-2';
 export { CoreGroupHero1 } from './core-group-hero-1';
 export { ParseBlocks } from './parse-blocks';
