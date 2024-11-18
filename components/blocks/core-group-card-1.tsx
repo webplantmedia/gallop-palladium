@@ -3,7 +3,7 @@ import ArrowInsertIcon from '@iconify/icons-material-symbols/arrow-insert';
 import PlayIcon from '@iconify/icons-heroicons/play';
 // import BuildingOfficeIcon from '@iconify/icons-heroicons/building-office';
 import classNames from 'classnames';
-import { getVimeoIframeSrc } from '@utils/tools';
+import { getVimeoIframeSrc, replaceWordPressUrlRelative } from '@utils/tools';
 import { VideoPopup } from '@widgets/video-popup';
 import { CoreParagraph, CoreHeading } from '@components/blocks';
 import { BlockProps } from '@lib/types';
@@ -65,7 +65,7 @@ export const CoreGroupCard1 = ({ data, className, props }: BlockProps) => {
   let buttonHtml = (
     <a
       className="text-base py-3 px-5 w-full flex justify-center items-center gap-2"
-      href={button?.href}
+      href={replaceWordPressUrlRelative(button?.href)}
     >
       {button?.jsx}
       <Iconify
