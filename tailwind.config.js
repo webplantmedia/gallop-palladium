@@ -22,7 +22,7 @@ module.exports = {
       keyframes: {
         'ping-slow': {
           '0%': { transform: 'scale(1)', opacity: '1' },
-          '75%, 100%': { transform: 'scale(1.5)', opacity: '0' },
+          '75%, 100%': { transform: 'scale(1.8)', opacity: '0' },
         },
         rotate: {
           '0%': { transform: 'rotate(0deg)' },

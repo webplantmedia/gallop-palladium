@@ -51,3 +51,4 @@ export { getDomNodeText } from './get-dom-node-text';
 export { getDomNodeData } from './get-dom-node-data';
 export { tailwindAlignClasses } from './tailwind-align-classes';
 export { tailwindGetAlignClasses } from './tailwind-get-align-classes';
+export { getAspectRatio, getAspectRatioPadding } from './get-aspect-ratio';

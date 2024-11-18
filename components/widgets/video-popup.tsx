@@ -12,26 +12,25 @@ import {
   TransitionChild,
 } from '@headlessui/react';
 import { useVimeoPlayerScript } from '@hooks';
+import { getAspectRatioPadding } from '@utils/tools';
 
 export function VideoPopup({
   children,
-  src = '',
-  url = '',
+  url = null,
   className,
+  embed = null,
 }: {
   children: React.ReactNode;
-  src: string;
-  url?: string;
+  url?: string | null;
   className: string;
+  embed: any;
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const [isIframeLoaded, setIsIframeLoaded] = useState(false);
   const iframeRef = useRef<HTMLIFrameElement>(null);
-
   const isVimeoPlayerLoaded = useVimeoPlayerScript();
-  // const srcUrl = new URL(iframeVideoSrc);
-  // srcUrl.searchParams.set('muted', '1');
-  // iframeVideoSrc = srcUrl.toString();
+  const iframe = embed?.wpBlockEmbedWrapper?.iframe || null;
+  const aspectRatio = getAspectRatioPadding(embed?.className);
 
   useEffect(() => {
     if (!isVimeoPlayerLoaded) return;
@@ -50,7 +49,11 @@ export function VideoPopup({
     }
   }, [isOpen, isVimeoPlayerLoaded, isIframeLoaded]);
 
-  if (!src) {
+  if (!embed) {
+    if (!url) {
+      return <span className={classNames(className)}>{children}</span>;
+    }
+
     return (
       <a href={url} className={classNames(className)}>
         {children}
@@ -83,21 +86,40 @@ export function VideoPopup({
           >
             <DialogPanel
               className={classNames(
-                'fixed inset-0 items-center justify-center p-4 flex'
+                'fixed inset-0 items-center justify-center flex'
                 // isOpen ? 'flex' : 'hidden'
               )}
             >
               <div
                 onClick={() => setIsOpen(false)}
-                className="bg-black/90 transition-opacity opacity-100 fixed inset-0 shadow-lg w-full max-w-full z-10 aspect-16/9 flex items-center justify-center"
+                className="bg-base-body/90 transition-opacity opacity-100 fixed inset-0 shadow-lg w-full max-w-full z-10 flex items-center justify-center px-4 sm:px-14"
               >
-                <iframe
-                  ref={iframeRef}
-                  src={src}
-                  onLoad={() => setIsIframeLoaded(true)}
-                  className="w-[90vw] h-[90vh] max-w-screen-4xl rounded-md"
-                  allow="autoplay; fullscreen; picture-in-picture"
-                />
+                {embed && (
+                  <div
+                    className={classNames('max-w-screen-2xl w-full')}
+                    onClick={() => setIsOpen(false)}
+                  >
+                    <div
+                      className={classNames(
+                        'relative',
+                        aspectRatio && 'before:block',
+                        aspectRatio === '56.25%' && 'before:pt-[56.25%]'
+                      )}
+                    >
+                      <iframe
+                        ref={iframeRef}
+                        src={iframe.src}
+                        width={iframe.width}
+                        height={iframe.height}
+                        title={iframe.title}
+                        frameBorder={0}
+                        onLoad={() => setIsIframeLoaded(true)}
+                        className="rounded-md absolute inset-0 w-full h-full"
+                        allow={iframe.allow}
+                      />
+                    </div>
+                  </div>
+                )}
               </div>
               <button
                 type="button"
@@ -105,7 +127,10 @@ export function VideoPopup({
                 onClick={() => setIsOpen(false)}
               >
                 <span className="sr-only">Close panel</span>
-                <Iconify icon={XMarkIcon} className="h-10 w-10 text-white" />
+                <Iconify
+                  icon={XMarkIcon}
+                  className="h-10 w-10 text-base-contrast"
+                />
               </button>
             </DialogPanel>
           </TransitionChild>

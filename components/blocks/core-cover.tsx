@@ -130,6 +130,9 @@ export const CoreCoverHero = ({ data, className }: any) => {
   const h1Accent = data?.wpBlockCoverInnerContainer?.h1?.em?.text || null;
   const p = data?.wpBlockCoverInnerContainer?.p?.jsx || null;
   const p_2 = data?.wpBlockCoverInnerContainer?.p_2?.jsx || null;
+  const embedVideo = data?.wpBlockCoverInnerContainer?.wpBlockEmbed || null;
+  // console.log(data.wpBlockCoverInnerContainer.wpBlockEmbed.wpBlockEmbedWrapper);
+  // console.log(data.wpBlockCoverInnerContainer.wpBlockEmbed);
 
   className = tailwindGetAlignClasses(className);
 
@@ -180,22 +183,22 @@ export const CoreCoverHero = ({ data, className }: any) => {
         <div className="flex flex-col xl:flex-row gap-20 justify-center items-center">
           <div className="xl:w-2/3">
             {h1 && !h1Bold && !h1Accent && (
-              <h1 className="mb-7 leading-tight text-center xl:text-left text-6xl md:text-6xl lg:text-7xl font-bold text-white">
+              <h1 className="mb-7 leading-tight text-left xl:text-left text-5xl md:text-6xl lg:text-7xl font-bold text-white">
                 {h1}
               </h1>
             )}
             {h1Bold && h1Accent && (
-              <h1 className="mb-7 leading-tight text-center xl:text-left text-6xl md:text-6xl lg:text-7xl font-bold text-white [&>em]:text-stroke [&>em]:text-stroke-white [&>em]:font-bold [&>*]:not-italic [&>*]:font-bold">
+              <h1 className="mb-7 leading-tight text-left xl:text-left text-6xl md:text-6xl lg:text-7xl font-bold text-white [&>em]:text-stroke [&>em]:text-stroke-white [&>em]:font-bold [&>*]:not-italic [&>*]:font-bold">
                 {h1}
               </h1>
             )}
             {p && (
-              <p className="has-large-font-size text-center xl:text-left text-xl sm:text-2xl lg:text-2xl leading-relaxed text-white font-bold">
+              <p className="has-large-font-size text-left xl:text-left text-xl sm:text-2xl lg:text-2xl leading-relaxed text-white font-bold">
                 {p}
               </p>
             )}
             {p_2 && (
-              <p className="has-large-font-size text-xl sm:text-2xl lg:text-2xl leading-relaxed text-white">
+              <p className="has-large-font-size text-left xl:text-left text-xl sm:text-2xl lg:text-2xl leading-relaxed text-white">
                 {p_2}
               </p>
             )}
@@ -205,6 +208,7 @@ export const CoreCoverHero = ({ data, className }: any) => {
               <VideoPopup
                 className="relative bg-transparent rounded-full transition-colors duration-300 ease-in-out w-24 h-24 border-2 border-white flex items-center justify-center group"
                 src={src}
+                embed={embedVideo}
               >
                 <span className="inline-flex bg-white backdrop-blur-lg absolute rounded-full -z-10 w-20 h-20 "></span>
                 <span className="animate-ping-slow inline-flex bg-white/50 hover:bg-white absolute rounded-full -z-10 w-20 h-20 "></span>
