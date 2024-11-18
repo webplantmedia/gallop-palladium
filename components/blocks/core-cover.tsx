@@ -29,7 +29,7 @@ export const coreCover = (
   let content: Array<React.ReactElement> = [];
   let imgProps: object | null = null;
   let backgroundImage: string | null = null;
-  let videoUrl: string | null = null;
+  // let videoUrl: string | null = null;
 
   let index = 0;
 
@@ -42,11 +42,7 @@ export const coreCover = (
         let { className } = props;
         index++;
 
-        if (hasExactClass(className, 'is-style-play-video')) {
-          const el = getVarsFromNode(domNode);
-          videoUrl = el?.wpBlockButton?.a?.href;
-          return <></>;
-        } else if (className?.includes('wp-block-heading')) {
+        if (className?.includes('wp-block-heading')) {
           content.push(
             <CoreHeading
               key={`heading-${index}`}
@@ -94,9 +90,6 @@ export const coreCover = (
           } else if (props?.src) {
             imgProps = props;
           }
-        } else if (hasExactClass(className, 'is-style-play-video')) {
-          const el = getVarsFromNode(domNode);
-          videoUrl = el?.wpBlockButton?.a?.href;
         } else if (
           hasExactClass(className, 'wp-block-cover__inner-container')
         ) {
@@ -110,13 +103,10 @@ export const coreCover = (
 
   domToReact(domNode?.children as DOMNode[], op);
 
-  return { imgProps, content, backgroundImage, videoUrl };
+  return { imgProps, content, backgroundImage };
 };
 
 export const CoreCoverHero = ({ data, className }: any) => {
-  const videoUrl =
-    data?.wpBlockCoverInnerContainer?.wpBlockButtons?.wpBlockButton?.a?.href ||
-    null;
   const backgroundStyle = data?.wpBlockCoverImageBackground?.style
     ? styleStringToObject(data.wpBlockCoverImageBackground.style)
     : {};
@@ -124,7 +114,6 @@ export const CoreCoverHero = ({ data, className }: any) => {
     ? backgroundStyle.backgroundImage
     : '';
   const imgProps = data?.wpBlockCoverImageBackground || {};
-  const src = getVimeoIframeSrc(videoUrl);
   const h1 = data?.wpBlockCoverInnerContainer?.h1?.jsx || null;
   const h1Bold = data?.wpBlockCoverInnerContainer?.h1?.strong?.text || null;
   const h1Accent = data?.wpBlockCoverInnerContainer?.h1?.em?.text || null;
@@ -177,7 +166,7 @@ export const CoreCoverHero = ({ data, className }: any) => {
       <div
         className={classNames(
           'box-border px-4 sm:px-8 z-10 py-32 lg:py-44 [&>*:last-child]:mb-0 [&>*:first-child]:mt-0 w-full',
-          videoUrl ? 'max-w-screen-3xl' : 'max-w-[980px]'
+          embedVideo ? 'max-w-screen-3xl' : 'max-w-[980px]'
         )}
       >
         <div className="flex flex-col xl:flex-row gap-20 justify-center items-center">
@@ -203,11 +192,10 @@ export const CoreCoverHero = ({ data, className }: any) => {
               </p>
             )}
           </div>
-          {videoUrl && (
+          {embedVideo && (
             <div className="xl:w-1/3 flex justify-center items-center">
               <VideoPopup
                 className="relative bg-transparent rounded-full transition-colors duration-300 ease-in-out w-24 h-24 border-2 border-white flex items-center justify-center group"
-                src={src}
                 embed={embedVideo}
               >
                 <span className="inline-flex bg-white backdrop-blur-lg absolute rounded-full -z-10 w-20 h-20 "></span>
