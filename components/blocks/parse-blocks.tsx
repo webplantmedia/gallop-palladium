@@ -106,15 +106,10 @@ export const ParseBlocks = ({
               </CoreGroupGrid>
             );
           } else if (hasExactClass(className, 'is-style-hero-1')) {
-            // const data = getVarsFromNode(domNode);
             const data = getVarsFromNode2(domNode);
-            // console.log(
-            // test.wpBlockGroup.gallopOpeningTimes.wpBlockCoverInnerContainer
-            // .wpBlockTable.table.tbody
-            // );
             return <CoreGroupHero1 data={data} className={className} />;
           } else if (hasExactClass(className, 'is-style-card-1')) {
-            const data = getVarsFromNode(domNode);
+            const data = getVarsFromNode2(domNode);
             return (
               <CoreGroupCard1 data={data} className={className} props={props} />
             );

@@ -19,6 +19,7 @@ export const CoreGroupCard1 = ({ data, className, props }: BlockProps) => {
   } else {
     img = { ...blockImage.img };
   }
+  const embed = data?.wpBlockEmbed || null;
 
   const src = getVimeoIframeSrc(href);
 
@@ -33,7 +34,7 @@ export const CoreGroupCard1 = ({ data, className, props }: BlockProps) => {
         height={img.height}
         width={img.width}
       />
-      {src && (
+      {embed && (
         <div className="absolute inset-0 z-10 flex items-center justify-center">
           <span className="w-16 h-16 flex justify-center items-center rounded-full border-2 border-white/50 bg-white/20 group-hover:border-white/70 group-hover:bg-white/30">
             <Iconify
@@ -46,9 +47,10 @@ export const CoreGroupCard1 = ({ data, className, props }: BlockProps) => {
     </>
   );
 
-  if (href) {
+  if (embed || href) {
+    console.log(embed);
     image = (
-      <VideoPopup className="relative group" url={href} embed={null}>
+      <VideoPopup className="relative group" url={href} embed={embed}>
         {image}
       </VideoPopup>
     );
