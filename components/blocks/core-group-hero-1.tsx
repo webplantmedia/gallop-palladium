@@ -35,6 +35,8 @@ export const CoreGroupHero1 = ({ data, className }: BlockProps) => {
     data?.wpBlockCover?.wpBlockCoverInnerContainer?.wpBlockButtons
       ?.wpBlockButton?.a?.href;
   let videoSrc = data?.wpBlockCover?.wpBlockCoverVideoBackground?.src;
+  let slideItems2 =
+    data?.wpBlockCover?.wpBlockCoverInnerContainer?.gallopSlides;
   let slideItems =
     data?.wpBlockCover?.wpBlockCoverInnerContainer?.gallopSlides?.gallopSlide;
   let times =
@@ -75,53 +77,57 @@ export const CoreGroupHero1 = ({ data, className }: BlockProps) => {
           <div className="w-full xl:w-7/12 flex justify-center">
             <div id={swiperId} className="swiper max-w-[950px] xl:max-w-none">
               <div className="swiper-wrapper items-start flex mb-20">
-                {slideItems &&
-                  slideItems.length &&
-                  slideItems.map((slide: any, index: number) => {
-                    return (
-                      <div
-                        key={`hero-1-slide-${index}`}
-                        className="swiper-slide"
-                      >
-                        <div className="flex flex-col gap-10">
-                          {slide?.h4?.jsx && (
-                            <strong className="mb-0 font-accent !leading-tight text-2xl text-white tracking-[0.3em] uppercase font-normal flex flex-row gap-[0.5em] items-center">
-                              {slide.h4.jsx}
-                              <Iconify
-                                icon={ArrowLongRightIcon}
-                                className="flex-shrink-0 h-auto w-10"
-                              />
-                            </strong>
-                          )}
-                          {slide?.h1?.strong?.jsx && (
-                            <h1 className="mb-0 !leading-tight text-5xl md:text-6xl lg:text-6xl 3xl:text-7xl text-white font-bold">
-                              {slide.h1.strong.jsx}
-                              {slide.h1?.em?.jsx && (
-                                <span className="text-stroke text-stroke-white block">
-                                  {slide.h1.em.jsx}
-                                </span>
-                              )}
-                            </h1>
-                          )}
-                          {slide?.h2?.strong?.jsx && (
-                            <h2 className="mb-0 !leading-tight text-5xl md:text-6xl lg:text-6xl 3xl:text-7xl text-white font-bold">
-                              {slide.h2.strong.jsx}
-                              {slide.h2?.em?.jsx && (
-                                <span className="text-stroke text-stroke-white block">
-                                  {slide.h2.em.jsx}
-                                </span>
-                              )}
-                            </h2>
-                          )}
-                          {slide?.p?.jsx && (
-                            <p className="mb-0 text-xl font-bold !leading-normal text-white max-w-[700px]">
-                              {slide?.p?.jsx}
-                            </p>
-                          )}
+                {slideItems2 &&
+                  Object.entries(slideItems2).flatMap(
+                    ([key, slide]: [string, any], index: number) => {
+                      if (!key.startsWith('gallopSlide')) {
+                        return []; //null doesn't skip
+                      }
+                      return (
+                        <div
+                          key={`hero-1-slide-${index}`}
+                          className="swiper-slide"
+                        >
+                          <div className="flex flex-col gap-10">
+                            {slide?.h4?.jsx && (
+                              <strong className="mb-0 font-accent !leading-tight text-2xl text-white tracking-[0.3em] uppercase font-normal flex flex-row gap-[0.5em] items-center">
+                                {slide.h4.jsx}
+                                <Iconify
+                                  icon={ArrowLongRightIcon}
+                                  className="flex-shrink-0 h-auto w-10"
+                                />
+                              </strong>
+                            )}
+                            {slide?.h1?.strong?.jsx && (
+                              <h1 className="mb-0 !leading-tight text-5xl md:text-6xl lg:text-6xl 3xl:text-7xl text-white font-bold">
+                                {slide.h1.strong.jsx}
+                                {slide.h1?.em?.jsx && (
+                                  <span className="text-stroke text-stroke-white block">
+                                    {slide.h1.em.jsx}
+                                  </span>
+                                )}
+                              </h1>
+                            )}
+                            {slide?.h2?.strong?.jsx && (
+                              <h2 className="mb-0 !leading-tight text-5xl md:text-6xl lg:text-6xl 3xl:text-7xl text-white font-bold">
+                                {slide.h2.strong.jsx}
+                                {slide.h2?.em?.jsx && (
+                                  <span className="text-stroke text-stroke-white block">
+                                    {slide.h2.em.jsx}
+                                  </span>
+                                )}
+                              </h2>
+                            )}
+                            {slide?.p?.jsx && (
+                              <p className="mb-0 text-xl font-bold !leading-normal text-white max-w-[700px]">
+                                {slide?.p?.jsx}
+                              </p>
+                            )}
+                          </div>
                         </div>
-                      </div>
-                    );
-                  })}
+                      );
+                    }
+                  )}
               </div>
               <div className="z-10 absolute bottom-0 left-0 swiper-pagination flex justify-end [&>.swiper-pagination-bullet]:cursor-pointer [&>.swiper-pagination-bullet:last-child]:after:content-none [&>.swiper-pagination-bullet]:after:px-3 [&>.swiper-pagination-bullet]:after:content-['/'] [&>.swiper-pagination-bullet]:text-white [&>.swiper-pagination-bullet-active]:!text-primary-main text-lg [&>.swiper-pagination-bullet-active>span]:!rounded-sm [&>.swiper-pagination-bullet-active]:!flex [&>.swiper-pagination-bullet-active>span]:!px-2 [&>.swiper-pagination-bullet-active>span]:!block [&>.swiper-pagination-bullet-active>span]:!bg-primary-contrast [&>.swiper-pagination-bullet]:after:font-normal [&>.swiper-pagination-bullet]:after:text-white"></div>
             </div>
@@ -188,8 +194,11 @@ export const CoreGroupHero1 = ({ data, className }: BlockProps) => {
             </h2>
             <div className="min-w-full divide-y divide-white/10">
               {tbody &&
-                Object.entries(tbody).map(
+                Object.entries(tbody).flatMap(
                   ([key, tr]: [string, any], index: number) => {
+                    if (!key.startsWith('tr')) {
+                      return []; //null doesn't skip
+                    }
                     const dayId = permalink(tr?.td?.text);
                     return (
                       <div
