@@ -122,13 +122,13 @@ export const ParseBlocks = ({
             return (
               <CoreGroupCard2 data={data} className={className} props={props} />
             );
-          } else {
-            return (
-              <CoreGroup className={className} props={props}>
-                {domToReact(domNode.children as DOMNode[], options)}
-              </CoreGroup>
-            );
           }
+
+          return (
+            <CoreGroup className={className} props={props}>
+              {domToReact(domNode.children as DOMNode[], options)}
+            </CoreGroup>
+          );
         } else if (className?.includes('wp-block-buttons')) {
           return (
             <CoreButtons className={className}>

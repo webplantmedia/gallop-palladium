@@ -19,40 +19,51 @@ export const CoreGroupSection1 = ({ data, className, props }: BlockProps) => {
   const img2 = data?.wpBlockGallery?.wpBlockImage_2?.img || null;
   const img3 = data?.wpBlockGallery?.wpBlockImage_3?.img || null;
   const img4 = data?.wpBlockGallery?.wpBlockImage_4?.img || null;
+  const h2 = data?.h2 || null;
+  const p = data?.p || null;
+  const h3 = data?.h3 || null;
+  const h3_2 = data?.h3_2 || null;
+  const p_2 = data?.p_2 || null;
+  const p_3 = data?.p_3 || null;
+  const tbody = data?.wpBlockTable?.table?.tbody || null;
+  const tr = tbody?.tr || null;
+  const tr_2 = tbody?.tr_2 || null;
+  const tr_3 = tbody?.tr_3 || null;
+  const tr_4 = tbody?.tr_4 || null;
 
   return (
     <div className={classNames(className, 'overflow-hidden')}>
-      <h2
-        className={classNames(
-          'mb-2 leading-tight text-4xl md:text-5xl lg:text-6xl text-base-contrast mt-14 font-bold'
-        )}
-      >
-        Helping companies generate revenue.
-      </h2>
-      <p className="has-x-large-font-size text-xl sm:text-2xl lg:text-3xl !mb-14 !leading-relaxed max-w-3xl ">
-        We’re on a mission to transform revenue organizations by harnessing vast
-        amounts of illegally acquired customer data.
-      </p>
+      {h2 && (
+        <h2
+          className={classNames(
+            'mb-2 leading-tight text-4xl md:text-5xl lg:text-6xl text-base-contrast font-bold'
+          )}
+        >
+          {h2.jsx}
+        </h2>
+      )}
+      {p && (
+        <p className="has-x-large-font-size text-xl sm:text-2xl lg:text-3xl !mb-14 !leading-relaxed max-w-3xl ">
+          {p.jsx}
+        </p>
+      )}
       <section className="mt-16 grid grid-cols-1 lg:grid-cols-2 lg:gap-12">
         <div className="max-w-lg">
-          <h2 className="mb-1 leading-tight text-2xl md:text-3xl text-primary-main font-medium">
-            Our mission
-          </h2>
-          <p className="mt-6 text-base-contrast mb-7 leading-normal">
-            At RRadiant, we are dedicated to transforming the way revenue
-            organizations source and close deals. Our mission is to provide our
-            customers with an unfair advantage over both their competitors and
-            potential customers through insight and analysis. We’ll stop at
-            nothing to get you the data you need to close a deal.
-          </p>
-          <p className="mt-8 text-base-contrast mb-7 leading-normal">
-            We’re customer-obsessed — putting the time in to build a detailed
-            financial picture of every one of our customers so that we know more
-            about your business than you do. We are in this together, mostly
-            because we are all implicated in large-scale financial crime. In our
-            history as a company, we’ve never lost a customer, because if any
-            one of us talks, we all go down.
-          </p>
+          {h3 && (
+            <h2 className="mb-1 leading-tight text-2xl md:text-3xl text-primary-main font-medium">
+              {h3.jsx}
+            </h2>
+          )}
+          {p_2 && (
+            <p className="mt-6 text-base-contrast mb-7 leading-normal">
+              {p_2.jsx}
+            </p>
+          )}
+          {p_3 && (
+            <p className="mt-8 text-base-contrast mb-7 leading-normal">
+              {p_3.jsx}
+            </p>
+          )}
         </div>
         <div className="pt-20 lg:row-span-2 lg:-mr-16 xl:mr-auto">
           <div className="-mx-8 grid grid-cols-2 gap-4 sm:-mx-16 sm:grid-cols-4 lg:mx-0 lg:grid-cols-2 lg:gap-4 xl:gap-8">
@@ -135,33 +146,75 @@ export const CoreGroupSection1 = ({ data, className, props }: BlockProps) => {
           </div>
         </div>
         <div className="max-lg:mt-16 lg:col-span-1">
-          <h3 className="mb-1 leading-tight text-xl md:text-xl text-primary-main font-medium">
-            The Numbers
-          </h3>
-          <hr className="mt-6 border-t border-gray-200" />
+          {h3_2 && (
+            <h3 className="mb-1 leading-tight text-2xl md:text-3xl text-primary-main font-medium">
+              {h3.jsx}
+            </h3>
+          )}
+          <hr className="mt-6 border-t border-base-contrast" />
           <dl className="mt-6 grid grid-cols-1 gap-x-8 gap-y-4 sm:grid-cols-2">
-            <div className="flex flex-col gap-y-2 border-b border-dotted border-gray-200 pb-4">
-              <dt className="text-sm/6 text-gray-600">Raised</dt>
+            <div className="flex flex-col gap-y-2 border-b border-base-contrast pb-4">
+              <dt className="text-sm/6 text-base-contrast">Raised</dt>
               <dd className="order-first text-6xl font-medium tracking-tight">
-                $<AnimatedNumber start={100} end={150} />M
+                {tr?.td && tr?.td_5 && (
+                  <>
+                    {tr.td.text}
+                    <AnimatedNumber
+                      start={tr.td_2.text}
+                      end={tr.td_3.text}
+                      decimals={tr.td_4 ? tr.td_4.text : 0}
+                    />
+                    {tr.td_5.text}
+                  </>
+                )}
               </dd>
             </div>
-            <div className="flex flex-col gap-y-2 border-b border-dotted border-gray-200 pb-4">
-              <dt className="text-sm/6 text-gray-600">Companies</dt>
+            <div className="flex flex-col gap-y-2 border-b border-base-contrast pb-4">
+              <dt className="text-sm/6 text-base-contrast">Companies</dt>
               <dd className="order-first text-6xl font-medium tracking-tight">
-                <AnimatedNumber start={15} end={30} />K
+                {tr_2?.td && tr_2?.td_5 && (
+                  <>
+                    {tr_2.td.text}
+                    <AnimatedNumber
+                      start={tr_2.td_2.text}
+                      end={tr_2.td_3.text}
+                      decimals={tr_2.td_4 ? tr_2.td_4.text : 0}
+                    />
+                    {tr_2.td_5.text}
+                  </>
+                )}
               </dd>
             </div>
-            <div className="flex flex-col gap-y-2 max-sm:border-b max-sm:border-dotted max-sm:border-gray-200 max-sm:pb-4">
-              <dt className="text-sm/6 text-gray-600">Deals Closed</dt>
+            <div className="flex flex-col gap-y-2 max-sm:border-b max-sm:border-base-contrast max-sm:pb-4">
+              <dt className="text-sm/6 text-base-contrast">Deals Closed</dt>
               <dd className="order-first text-6xl font-medium tracking-tight">
-                <AnimatedNumber start={0.9} end={1.5} decimals={1} />M
+                {tr_3?.td && tr_3?.td_5 && (
+                  <>
+                    {tr_3.td.text}
+                    <AnimatedNumber
+                      start={tr_3.td_2.text}
+                      end={tr_3.td_3.text}
+                      decimals={tr_3.td_4 ? tr_3.td_4.text : 0}
+                    />
+                    {tr_3.td_5.text}
+                  </>
+                )}
               </dd>
             </div>
             <div className="flex flex-col gap-y-2">
-              <dt className="text-sm/6 text-gray-600">Leads Generated</dt>
+              <dt className="text-sm/6 text-base-contrast">Leads Generated</dt>
               <dd className="order-first text-6xl font-medium tracking-tight">
-                <AnimatedNumber start={150} end={200} />M
+                {tr_4?.td && tr_4?.td_5 && (
+                  <>
+                    {tr_4.td.text}
+                    <AnimatedNumber
+                      start={tr_4.td_2.text}
+                      end={tr_4.td_3.text}
+                      decimals={tr_4.td_4 ? tr_4.td_4.text : 0}
+                    />
+                    {tr_4.td_5.text}
+                  </>
+                )}
               </dd>
             </div>
           </dl>
