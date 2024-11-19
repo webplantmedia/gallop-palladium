@@ -64,7 +64,6 @@ export default function FooterColumns({ post }: { post: any }) {
           return img ? (
             <img
               className={classNames(
-                className,
                 'max-w-full w-[300px] mb-7 mx-auto sm:mx-0'
               )}
               alt={img.alt}

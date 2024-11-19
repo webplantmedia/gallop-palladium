@@ -24,26 +24,28 @@ export const CoreGroupSection1 = ({ data, className, props }: BlockProps) => {
     <div className={classNames(className, 'overflow-hidden')}>
       <h2
         className={classNames(
-          'text-pretty text-4xl font-medium tracking-tighter text-gray-950 data-[dark]:text-white sm:text-6xl'
+          'mb-2 leading-tight text-4xl md:text-5xl lg:text-6xl text-base-contrast mt-14 font-bold'
         )}
       >
         Helping companies generate revenue.
       </h2>
-      <p className="mt-6 max-w-3xl text-2xl font-medium text-gray-500">
+      <p className="has-x-large-font-size text-xl sm:text-2xl lg:text-3xl !mb-14 !leading-relaxed max-w-3xl ">
         We’re on a mission to transform revenue organizations by harnessing vast
         amounts of illegally acquired customer data.
       </p>
       <section className="mt-16 grid grid-cols-1 lg:grid-cols-2 lg:gap-12">
         <div className="max-w-lg">
-          <h2 className="text-2xl font-medium tracking-tight">Our mission</h2>
-          <p className="mt-6 text-sm/6 text-gray-600">
+          <h2 className="mb-1 leading-tight text-2xl md:text-3xl text-primary-main font-medium">
+            Our mission
+          </h2>
+          <p className="mt-6 text-base-contrast mb-7 leading-normal">
             At RRadiant, we are dedicated to transforming the way revenue
             organizations source and close deals. Our mission is to provide our
             customers with an unfair advantage over both their competitors and
             potential customers through insight and analysis. We’ll stop at
             nothing to get you the data you need to close a deal.
           </p>
-          <p className="mt-8 text-sm/6 text-gray-600">
+          <p className="mt-8 text-base-contrast mb-7 leading-normal">
             We’re customer-obsessed — putting the time in to build a detailed
             financial picture of every one of our customers so that we know more
             about your business than you do. We are in this together, mostly
@@ -133,7 +135,7 @@ export const CoreGroupSection1 = ({ data, className, props }: BlockProps) => {
           </div>
         </div>
         <div className="max-lg:mt-16 lg:col-span-1">
-          <h3 className="font-mono text-xs/5 font-semibold uppercase tracking-widest text-gray-500 data-[dark]:text-gray-400">
+          <h3 className="mb-1 leading-tight text-xl md:text-xl text-primary-main font-medium">
             The Numbers
           </h3>
           <hr className="mt-6 border-t border-gray-200" />
