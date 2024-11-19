@@ -21,7 +21,7 @@ export const CoreGroupSection1 = ({ data, className, props }: BlockProps) => {
   const img4 = data?.wpBlockGallery?.wpBlockImage_4?.img || null;
 
   return (
-    <div className={className}>
+    <div className={classNames(className, 'overflow-hidden')}>
       <h2
         className={classNames(
           'text-pretty text-4xl font-medium tracking-tighter text-gray-950 data-[dark]:text-white sm:text-6xl'
