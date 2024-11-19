@@ -153,10 +153,10 @@ export const CoreGroupSection1 = ({ data, className, props }: BlockProps) => {
           )}
           <hr className="mt-6 border-t border-base-contrast" />
           <dl className="mt-6 grid grid-cols-1 gap-x-8 gap-y-4 sm:grid-cols-2">
-            <div className="flex flex-col gap-y-2 border-b border-base-contrast pb-4">
-              <dt className="text-sm/6 text-base-contrast">Raised</dt>
-              <dd className="order-first text-6xl font-medium tracking-tight">
-                {tr?.td && tr?.td_5 && (
+            {tr?.td && tr?.td_6 && (
+              <div className="flex flex-col gap-y-2 border-b border-base-contrast pb-4">
+                <dt className="text-sm/6 text-base-contrast">{tr.td_6.text}</dt>
+                <dd className="order-first text-6xl font-medium tracking-tight">
                   <>
                     {tr.td.text}
                     <AnimatedNumber
@@ -166,13 +166,13 @@ export const CoreGroupSection1 = ({ data, className, props }: BlockProps) => {
                     />
                     {tr.td_5.text}
                   </>
-                )}
-              </dd>
-            </div>
-            <div className="flex flex-col gap-y-2 border-b border-base-contrast pb-4">
-              <dt className="text-sm/6 text-base-contrast">Companies</dt>
-              <dd className="order-first text-6xl font-medium tracking-tight">
-                {tr_2?.td && tr_2?.td_5 && (
+                </dd>
+              </div>
+            )}
+            {tr_2?.td && tr_2?.td_6 && (
+              <div className="flex flex-col gap-y-2 border-b border-base-contrast pb-4">
+                <dt className="text-sm/6 text-base-contrast">{tr.td_6.text}</dt>
+                <dd className="order-first text-6xl font-medium tracking-tight">
                   <>
                     {tr_2.td.text}
                     <AnimatedNumber
@@ -182,13 +182,13 @@ export const CoreGroupSection1 = ({ data, className, props }: BlockProps) => {
                     />
                     {tr_2.td_5.text}
                   </>
-                )}
-              </dd>
-            </div>
-            <div className="flex flex-col gap-y-2 max-sm:border-b max-sm:border-base-contrast max-sm:pb-4">
-              <dt className="text-sm/6 text-base-contrast">Deals Closed</dt>
-              <dd className="order-first text-6xl font-medium tracking-tight">
-                {tr_3?.td && tr_3?.td_5 && (
+                </dd>
+              </div>
+            )}
+            {tr_3?.td && tr_3?.td_6 && (
+              <div className="flex flex-col gap-y-2 max-sm:border-b max-sm:border-base-contrast max-sm:pb-4">
+                <dt className="text-sm/6 text-base-contrast">{tr.td_6.text}</dt>
+                <dd className="order-first text-6xl font-medium tracking-tight">
                   <>
                     {tr_3.td.text}
                     <AnimatedNumber
@@ -198,13 +198,13 @@ export const CoreGroupSection1 = ({ data, className, props }: BlockProps) => {
                     />
                     {tr_3.td_5.text}
                   </>
-                )}
-              </dd>
-            </div>
-            <div className="flex flex-col gap-y-2">
-              <dt className="text-sm/6 text-base-contrast">Leads Generated</dt>
-              <dd className="order-first text-6xl font-medium tracking-tight">
-                {tr_4?.td && tr_4?.td_5 && (
+                </dd>
+              </div>
+            )}
+            {tr_4?.td && tr_4?.td_6 && (
+              <div className="flex flex-col gap-y-2">
+                <dt className="text-sm/6 text-base-contrast">{tr.td_6.text}</dt>
+                <dd className="order-first text-6xl font-medium tracking-tight">
                   <>
                     {tr_4.td.text}
                     <AnimatedNumber
@@ -214,9 +214,9 @@ export const CoreGroupSection1 = ({ data, className, props }: BlockProps) => {
                     />
                     {tr_4.td_5.text}
                   </>
-                )}
-              </dd>
-            </div>
+                </dd>
+              </div>
+            )}
           </dl>
         </div>
       </section>
