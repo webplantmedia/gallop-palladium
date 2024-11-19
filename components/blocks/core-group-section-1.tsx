@@ -1,30 +1,104 @@
-import Iconify from '@components/iconify';
-import ArrowInsertIcon from '@iconify/icons-material-symbols/arrow-insert';
-import PlayIcon from '@iconify/icons-heroicons/play';
-// import BuildingOfficeIcon from '@iconify/icons-heroicons/building-office';
 import classNames from 'classnames';
 import {
   getVimeoIframeSrc,
   replaceWordPressUrlRelative,
   tailwindGetAlignClasses,
+  hasClassName,
+  castToHTMLAttributeProps,
 } from '@utils/tools';
 import { VideoPopup } from '@widgets/video-popup';
 import { CoreParagraph, CoreHeading } from '@components/blocks';
 import { BlockProps } from '@lib/types';
 import { AnimatedNumber } from '@components/widgets/animated-number';
+import { HTMLAttributeProps } from '@lib/types';
+import {
+  HTMLReactParserOptions,
+  domToReact,
+  DOMNode,
+  Element,
+} from 'html-react-parser';
+import { Fragment } from 'react';
+
+const getData = (domNode: Element, options: HTMLReactParserOptions) => {
+  let heading: Array<React.ReactElement> = [];
+  let content: Array<React.ReactElement> = [];
+  let gallery: React.ReactElement | null = null;
+
+  let index = 0;
+
+  const op: HTMLReactParserOptions = {
+    replace(domNode) {
+      if (domNode instanceof Element && domNode.attribs) {
+        index++;
+        const props: HTMLAttributeProps = castToHTMLAttributeProps(
+          domNode.attribs
+        );
+        let { className } = props;
+
+        if (domNode.name === 'h2') {
+          heading.push(
+            <Fragment key={`heading=${index}`}>
+              {domToReact([domNode] as DOMNode[], options)}
+            </Fragment>
+          );
+          return <></>;
+        } else if (className?.includes('is-style-lead')) {
+          heading.push(
+            <Fragment key={`heading=${index}`}>
+              {domToReact([domNode] as DOMNode[], options)}
+            </Fragment>
+          );
+          return <></>;
+        } else if (className?.includes('wp-block-gallery')) {
+          gallery = <>{domToReact([domNode] as DOMNode[], options)}</>;
+          return <></>;
+        }
+
+        content.push(
+          <Fragment key={`content=${index}`}>
+            {domToReact([domNode] as DOMNode[], options)}
+          </Fragment>
+        );
+        return <></>;
+      }
+    },
+  };
+
+  domToReact(domNode?.children as DOMNode[], op);
+
+  return { heading, content, gallery };
+};
+
+export const coreGroupSection1 = (
+  domNode: Element,
+  options: HTMLReactParserOptions,
+  className: string
+) => {
+  const data = getData(domNode, options);
+  return <CoreGroupSection1 data={data} className={className} />;
+};
 
 export const CoreGroupSection1 = ({ data, className, props }: BlockProps) => {
   className = tailwindGetAlignClasses(className);
-  const img1 = data?.wpBlockGallery?.wpBlockImage?.img || null;
+  const { heading, gallery, content } = data;
+
+  return (
+    <div className={classNames(className, '')}>
+      {heading}
+      <section className="grid grid-cols-1 lg:grid-cols-2 lg:gap-12">
+        <div className="max-w-lg">{content}</div>
+      </section>
+    </div>
+  );
+
+  /*const img1 = data?.wpBlockGallery?.wpBlockImage?.img || null;
   const img2 = data?.wpBlockGallery?.wpBlockImage_2?.img || null;
   const img3 = data?.wpBlockGallery?.wpBlockImage_3?.img || null;
   const img4 = data?.wpBlockGallery?.wpBlockImage_4?.img || null;
-  const h2 = data?.h2 || null;
-  const p = data?.p || null;
   const h3 = data?.h3 || null;
+  const p = data?.p || null;
   const h3_2 = data?.h3_2 || null;
   const p_2 = data?.p_2 || null;
-  const p_3 = data?.p_3 || null;
   const tbody = data?.wpBlockTable?.table?.tbody || null;
   const tr = tbody?.tr || null;
   const tr_2 = tbody?.tr_2 || null;
@@ -32,36 +106,22 @@ export const CoreGroupSection1 = ({ data, className, props }: BlockProps) => {
   const tr_4 = tbody?.tr_4 || null;
 
   return (
-    <div className={classNames(className, 'overflow-hidden')}>
-      {h2 && (
-        <h2
-          className={classNames(
-            'mb-2 leading-tight text-4xl md:text-5xl lg:text-6xl text-base-contrast font-bold'
-          )}
-        >
-          {h2.jsx}
-        </h2>
-      )}
-      {p && (
-        <p className="has-x-large-font-size text-xl sm:text-2xl lg:text-3xl !mb-14 !leading-relaxed max-w-3xl ">
-          {p.jsx}
-        </p>
-      )}
-      <section className="mt-16 grid grid-cols-1 lg:grid-cols-2 lg:gap-12">
+    <div className={classNames(className, '')}>
+      <section className="grid grid-cols-1 lg:grid-cols-2 lg:gap-12">
         <div className="max-w-lg">
           {h3 && (
             <h2 className="mb-1 leading-tight text-2xl md:text-3xl text-primary-main font-medium">
               {h3.jsx}
             </h2>
           )}
-          {p_2 && (
+          {p && (
             <p className="mt-6 text-base-contrast mb-7 leading-normal">
-              {p_2.jsx}
+              {p.jsx}
             </p>
           )}
-          {p_3 && (
+          {p_2 && (
             <p className="mt-8 text-base-contrast mb-7 leading-normal">
-              {p_3.jsx}
+              {p_2.jsx}
             </p>
           )}
         </div>
@@ -171,7 +231,9 @@ export const CoreGroupSection1 = ({ data, className, props }: BlockProps) => {
             )}
             {tr_2?.td && tr_2?.td_6 && (
               <div className="flex flex-col gap-y-2 border-b border-base-contrast pb-4">
-                <dt className="text-sm/6 text-base-contrast">{tr.td_6.text}</dt>
+                <dt className="text-sm/6 text-base-contrast">
+                  {tr_2.td_6.text}
+                </dt>
                 <dd className="order-first text-6xl font-medium tracking-tight">
                   <>
                     {tr_2.td.text}
@@ -187,7 +249,9 @@ export const CoreGroupSection1 = ({ data, className, props }: BlockProps) => {
             )}
             {tr_3?.td && tr_3?.td_6 && (
               <div className="flex flex-col gap-y-2 max-sm:border-b max-sm:border-base-contrast max-sm:pb-4">
-                <dt className="text-sm/6 text-base-contrast">{tr.td_6.text}</dt>
+                <dt className="text-sm/6 text-base-contrast">
+                  {tr_3.td_6.text}
+                </dt>
                 <dd className="order-first text-6xl font-medium tracking-tight">
                   <>
                     {tr_3.td.text}
@@ -203,7 +267,9 @@ export const CoreGroupSection1 = ({ data, className, props }: BlockProps) => {
             )}
             {tr_4?.td && tr_4?.td_6 && (
               <div className="flex flex-col gap-y-2">
-                <dt className="text-sm/6 text-base-contrast">{tr.td_6.text}</dt>
+                <dt className="text-sm/6 text-base-contrast">
+                  {tr_4.td_6.text}
+                </dt>
                 <dd className="order-first text-6xl font-medium tracking-tight">
                   <>
                     {tr_4.td.text}
@@ -221,5 +287,5 @@ export const CoreGroupSection1 = ({ data, className, props }: BlockProps) => {
         </div>
       </section>
     </div>
-  );
+	);*/
 };

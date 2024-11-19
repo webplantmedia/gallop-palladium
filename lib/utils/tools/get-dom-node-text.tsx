@@ -1,7 +1,7 @@
 import { Element } from 'html-react-parser';
 
-export function getDomNodeText(node: Element) {
-  const text = node.children
+export function getDomNodeText(domNode: Element) {
+  const text = domNode.children
     .map((child: any) => {
       if (child instanceof Element) {
         return child.children

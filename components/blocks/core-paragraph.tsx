@@ -5,6 +5,19 @@ import { tailwindAlignClasses } from '@utils/tools';
 export const CoreParagraph = ({ className = '', children }: BlockProps) => {
   className = tailwindAlignClasses(className);
 
+  if (className.includes('is-style-lead')) {
+    return (
+      <p
+        className={classNames(
+          className,
+          'has-x-large-font-size text-xl sm:text-2xl lg:text-3xl mb-14 !leading-relaxed'
+        )}
+      >
+        <span className="max-w-3xl block">{children}</span>
+      </p>
+    );
+  }
+
   if (className) {
     className = className.replace(
       'has-x-large-font-size',

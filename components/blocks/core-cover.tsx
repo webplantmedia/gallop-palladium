@@ -8,13 +8,13 @@ import {
   getDomNodeText,
   styleStringToObject,
 } from '@utils/tools';
-import { HTMLAttributeProps } from '@lib/types';
 import React, { Fragment } from 'react';
 import classNames from 'classnames';
 import { VideoPopup } from '@components/widgets/video-popup';
 import PlaySolidIcon from '@iconify/icons-heroicons/play-solid';
 import { CoreHeading, CoreParagraph } from '@components/blocks';
 
+import { HTMLAttributeProps } from '@lib/types';
 import {
   HTMLReactParserOptions,
   domToReact,

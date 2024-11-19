@@ -12,6 +12,7 @@ import {
   replaceWordPressUrlRelative,
 } from '@utils/tools';
 import {
+  gallopMilestone,
   CoreParagraph,
   CoreHeading,
   CoreGallery,
@@ -42,6 +43,7 @@ import {
   CoreGroupGrid,
   CoreGroupCard1,
   CoreGroupSection1,
+  coreGroupSection1,
   CoreGroupCard2,
   CoreGroupHero1,
   // GallopBlogPosts,
@@ -93,6 +95,8 @@ export const ParseBlocks = ({
           return <CoreSeparator props={props} />;
         } else if (className?.includes('wp-block-spacer')) {
           return <CoreSpacer props={props} className={className} />;
+        } else if (className?.includes('is-style-milestone')) {
+          return gallopMilestone(domNode, options, className);
         } else if (className?.includes('wp-block-heading')) {
           return (
             <CoreHeading tag={domNode.name} className={className} props={props}>
@@ -107,8 +111,7 @@ export const ParseBlocks = ({
               </CoreGroupGrid>
             );
           } else if (hasExactClass(className, 'is-style-section-1')) {
-            const data = getVarsFromNode2(domNode);
-            return <CoreGroupSection1 data={data} className={className} />;
+            return coreGroupSection1(domNode, options, className);
           } else if (hasExactClass(className, 'is-style-hero-1')) {
             const data = getVarsFromNode2(domNode);
             return <CoreGroupHero1 data={data} className={className} />;
