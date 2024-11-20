@@ -43,7 +43,6 @@ export default function Navbar({
 }: NavbarProps) {
   const snap = useSnapshot(state);
   const isScrolling = snap.isScrolling;
-  console.log(websiteSearch);
 
   return (
     <>
