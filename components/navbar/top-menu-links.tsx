@@ -8,6 +8,10 @@ import { getVarsFromNode } from '@utils/tools';
 import { replaceWordPressUrlRelative } from '@utils/tools';
 
 export default function TopMenuLinks({ menu }: { menu: any }) {
+  if (!menu?.postContent) {
+    return <></>;
+  }
+
   const options: HTMLReactParserOptions = {
     replace(domNode) {
       if (domNode instanceof Element && domNode.attribs) {

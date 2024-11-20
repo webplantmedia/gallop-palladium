@@ -81,7 +81,7 @@ export default function Navbar({
             >
               <div className="w-full sm:w-auto flex justify-center">
                 <Link prefetch={false} href="/">
-                  <Logo post={logo} className="block w-[300px]" />
+                  <Logo post={logo} className="block" />
                 </Link>
               </div>
             </div>

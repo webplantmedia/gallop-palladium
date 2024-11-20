@@ -7,6 +7,7 @@ import {
   getVimeoIframeSrc,
   getDomNodeText,
   styleStringToObject,
+  getVarsFromNode2,
 } from '@utils/tools';
 import React, { Fragment } from 'react';
 import classNames from 'classnames';
@@ -22,10 +23,7 @@ import {
   Element,
 } from 'html-react-parser';
 
-export const coreCover = (
-  domNode: Element,
-  options: HTMLReactParserOptions
-) => {
+const getData = (domNode: Element, options: HTMLReactParserOptions) => {
   let content: Array<React.ReactElement> = [];
   let imgProps: object | null = null;
   let backgroundImage: string | null = null;
@@ -261,4 +259,17 @@ export const CoreCover = ({ data, className }: any) => {
       </div>
     </div>
   );
+};
+
+export const coreCover = (
+  domNode: Element,
+  options: HTMLReactParserOptions,
+  className: string
+) => {
+  if (className?.includes('is-style-hero')) {
+    const data = getVarsFromNode2(domNode);
+    return <CoreCoverHero data={data} className={className} />;
+  }
+  const data = getData(domNode, options);
+  return <CoreCover data={data} className={className} />;
 };

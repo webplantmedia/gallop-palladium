@@ -26,7 +26,6 @@ export async function POST(req: Request) {
     role: 'user',
     content: input.message,
   });
-  console.log('instruction', input.instruction);
 
   return AssistantResponse(
     { threadId, messageId: createdMessage.id },

@@ -20,7 +20,7 @@ export default function MenuLinkDropdown({
   data: any;
   isScrolling: any;
 }) {
-  const dropdownText = data.p?.jsx ? data.p.jsx : 'Dropdown';
+  const dropdownText = data.p?.text ? data.p.text : 'Dropdown';
   const dropdownItems = Array.isArray(data?.wpBlockGroup?.wpBlockGroup)
     ? data.wpBlockGroup.wpBlockGroup
     : [];

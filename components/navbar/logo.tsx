@@ -5,6 +5,8 @@ import parse, { HTMLReactParserOptions, Element } from 'html-react-parser';
 import { getVarsFromNode } from '@utils/tools';
 
 export default function Logo({ post, className }: any) {
+  let img: React.ReactElement | null = null;
+
   const options: HTMLReactParserOptions = {
     replace(domNode) {
       if (domNode instanceof Element && domNode.attribs) {
@@ -13,34 +15,35 @@ export default function Logo({ post, className }: any) {
         );
         let { className: classes } = props;
 
-        if (hasExactClass(classes, 'wp-block-image')) {
-          const data = getVarsFromNode(domNode);
+        if (domNode.name === 'img') {
+          let { width, height } = props;
 
-          var img: any = {};
-          if (data?.img) {
-            img = { ...data?.img };
+          if (width && height) {
+            img = (
+              <img
+                className={classNames(
+                  props.className,
+                  'block size-full object-cover'
+                )}
+                loading="lazy"
+                src={props.src}
+                style={props.style}
+                width={parseInt(props.width)}
+                height={parseInt(props.height)}
+                srcSet={props.srcSet}
+                sizes={props.sizes}
+                alt={props.alt}
+                title={props.title}
+              />
+            );
           }
-
-          return img ? (
-            <img
-              className={classNames(classes, className)}
-              alt={img.alt}
-              src={img.src}
-              srcSet={img.srcset}
-              sizes={img.sizes}
-              width={img.width}
-              height={img.height}
-            />
-          ) : (
-            <p>No Image</p>
-          );
+          return <p>No Image</p>;
         }
-
-        return <p>Need Image</p>;
       }
     },
   };
-  const html = parse(post.postContent, options);
 
-  return <>{html}</>;
+  parse(post.postContent, options);
+
+  return <>{img}</>;
 }

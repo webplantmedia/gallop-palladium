@@ -2,7 +2,7 @@ export { CoreEmbed, coreEmbed } from './core-embed';
 export { CoreSeparator } from './core-separator';
 export { CoreSpacer } from './core-spacer';
 export { CoreGroupGrid } from './core-group-grid';
-export { CoreGroup } from './core-group';
+export { CoreGroup, coreGroup } from './core-group';
 export { TagAnchor } from './tag-anchor';
 export { CoreButton } from './core-button';
 export { CoreButtonLink } from './core-button-link';

@@ -40,13 +40,7 @@ import {
   // GallopSinglePost,
   GallopExcerptPost,
   gallopExcerptPost,
-  CoreGroup,
-  CoreGroupGrid,
-  CoreGroupCard1,
-  CoreGroupSection1,
-  coreGroupSection1,
-  CoreGroupCard2,
-  CoreGroupHero1,
+  coreGroup,
   // GallopBlogPosts,
   GallopMap,
   gallopMap,
@@ -107,34 +101,7 @@ export const ParseBlocks = ({
             </CoreHeading>
           );
         } else if (hasExactClass(className, 'wp-block-group')) {
-          if (hasExactClass(className, 'wp-block-group-is-layout-grid')) {
-            return (
-              <CoreGroupGrid className={className} props={props}>
-                {domToReact(domNode.children as DOMNode[], options)}
-              </CoreGroupGrid>
-            );
-          } else if (hasExactClass(className, 'is-style-section-1')) {
-            return coreGroupSection1(domNode, options, className);
-          } else if (hasExactClass(className, 'is-style-hero-1')) {
-            const data = getVarsFromNode2(domNode);
-            return <CoreGroupHero1 data={data} className={className} />;
-          } else if (hasExactClass(className, 'is-style-card-1')) {
-            const data = getVarsFromNode2(domNode);
-            return (
-              <CoreGroupCard1 data={data} className={className} props={props} />
-            );
-          } else if (hasExactClass(className, 'is-style-card-2')) {
-            const data = getVarsFromNode(domNode);
-            return (
-              <CoreGroupCard2 data={data} className={className} props={props} />
-            );
-          }
-
-          return (
-            <CoreGroup className={className} props={props}>
-              {domToReact(domNode.children as DOMNode[], options)}
-            </CoreGroup>
-          );
+          return coreGroup(domNode, options, className, props);
         } else if (className?.includes('wp-block-buttons')) {
           return (
             <CoreButtons className={className}>
@@ -189,12 +156,7 @@ export const ParseBlocks = ({
         } else if (className?.includes('wp-block-audio')) {
           return <CoreAudio props={props} className={className} />;
         } else if (className?.includes('wp-block-cover')) {
-          if (className?.includes('is-style-hero')) {
-            const data = getVarsFromNode2(domNode);
-            return <CoreCoverHero data={data} className={className} />;
-          }
-          const data = coreCover(domNode, options);
-          return <CoreCover data={data} className={className} />;
+          return coreCover(domNode, options, className);
         } else if (className?.includes('wp-block-embed')) {
           const { videoProps, wrapper, figcaption } = coreEmbed(
             domNode,
