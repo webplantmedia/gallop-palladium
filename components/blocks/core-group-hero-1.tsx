@@ -119,7 +119,7 @@ export const CoreGroupHero1 = ({ data, className }: BlockProps) => {
                               </h2>
                             )}
                             {slide?.p?.jsx && (
-                              <p className="mb-0 text-xl font-bold !leading-normal text-white max-w-[700px]">
+                              <p className="mb-0 text-xl font-bold !leading-relaxed text-white max-w-[700px]">
                                 {slide?.p?.jsx}
                               </p>
                             )}

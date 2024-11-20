@@ -61,36 +61,75 @@ module.exports = {
         body: ['var(--font-body)'],
         accent: ['var(--font-accent)'],
       },
-      colors: {
-        primary: {
-          lighter: '#77565d',
-          light: '#634249',
-          main: '#58353b',
-          dark: '#44272d',
-          darker: '#2d171c',
-          contrast: '#ffffff',
-        },
-        secondary: {
-          lighter: '#555555',
-          light: '#444444',
-          main: '#333333',
-          dark: '#222222',
-          darker: '#111111',
-          contrast: '#ffffff',
-        },
-        base: {
-          paper: '#ffffff',
-          darker: '#6b5c4c',
-          dark: '#eed093',
-          body: '#fff1dc',
-          light: '#ffe7bd',
-          card: '#f4e3c9',
-          contrast: '#000000',
-          contrast2: '#603813',
-          disabled: '#936f4d',
-        },
-        success: '#0070f3',
-      },
+      colors: (() => {
+        const gallopTheme = process.env.GALLOP_THEME
+          ? process.env.GALLOP_THEME
+          : 'default';
+
+        if (gallopTheme === 'theme1') {
+          return {
+            primary: {
+              lighter: '#77565d',
+              light: '#634249',
+              main: '#58353b',
+              dark: '#44272d',
+              darker: '#2d171c',
+              contrast: '#ffffff',
+            },
+            secondary: {
+              lighter: '#555555',
+              light: '#444444',
+              main: '#333333',
+              dark: '#222222',
+              darker: '#111111',
+              contrast: '#ffffff',
+            },
+            base: {
+              paper: '#f7f7f7',
+              darker: '#6b5c4c',
+              dark: '#eed093',
+              body: '#ffffff',
+              light: '#ffe7bd',
+              card: '#cccccc',
+              contrast: '#000000',
+              contrast2: '#603813',
+              disabled: '#936f4d',
+            },
+            success: '#0070f3',
+          };
+        }
+
+        return {
+          primary: {
+            lighter: '#77565d',
+            light: '#634249',
+            main: '#58353b',
+            dark: '#44272d',
+            darker: '#2d171c',
+            contrast: '#ffffff',
+          },
+          secondary: {
+            lighter: '#555555',
+            light: '#444444',
+            main: '#333333',
+            dark: '#222222',
+            darker: '#111111',
+            contrast: '#ffffff',
+          },
+          base: {
+            paper: '#ffffff',
+            darker: '#6b5c4c',
+            dark: '#eed093',
+            body: '#fff1dc',
+            light: '#ffe7bd',
+            card: '#f4e3c9',
+            contrast: '#000000',
+            contrast2: '#603813',
+            disabled: '#936f4d',
+          },
+          success: '#0070f3',
+        };
+      })(),
       spacing: {
         28: '7rem',
         68: '17rem',

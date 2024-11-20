@@ -182,12 +182,12 @@ export const CoreCoverHero = ({ data, className }: any) => {
               </h1>
             )}
             {p && (
-              <p className="has-large-font-size text-left xl:text-left text-xl sm:text-2xl lg:text-2xl leading-relaxed text-white font-bold max-w-[750px]">
+              <p className="has-large-font-size text-left xl:text-left text-xl sm:text-2xl lg:text-2xl !leading-relaxed text-white font-bold max-w-[750px]">
                 {p}
               </p>
             )}
             {p_2 && (
-              <p className="has-large-font-size text-left xl:text-left text-xl sm:text-2xl lg:text-2xl leading-relaxed text-white max-w-[750px]">
+              <p className="has-large-font-size text-left xl:text-left text-xl sm:text-2xl lg:text-2xl !leading-relaxed text-white max-w-[750px]">
                 {p_2}
               </p>
             )}
