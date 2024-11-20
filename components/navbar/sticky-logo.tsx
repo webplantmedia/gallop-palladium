@@ -5,6 +5,10 @@ import parse, { HTMLReactParserOptions, Element } from 'html-react-parser';
 import { getVarsFromNode } from '@utils/tools';
 
 export default function StickyLogo({ post, className }: any) {
+  if (!post) {
+    return <></>;
+  }
+
   const options: HTMLReactParserOptions = {
     replace(domNode) {
       if (domNode instanceof Element && domNode.attribs) {

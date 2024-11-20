@@ -16,6 +16,10 @@ import {
 } from '@components/blocks';
 
 export default function ProfileMenuSidebar({ sidebar, closeModal }: any) {
+  if (!sidebar) {
+    return <></>;
+  }
+
   const options: HTMLReactParserOptions = {
     replace(domNode) {
       if (domNode instanceof Element && domNode.attribs) {

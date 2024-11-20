@@ -15,6 +15,7 @@ export async function POST(req: Request) {
   const input: {
     threadId: string | null;
     message: string;
+    instruction: string;
   } = await req.json();
 
   // Create a thread if needed
@@ -25,6 +26,7 @@ export async function POST(req: Request) {
     role: 'user',
     content: input.message,
   });
+  console.log('instruction', input.instruction);
 
   return AssistantResponse(
     { threadId, messageId: createdMessage.id },
@@ -35,9 +37,7 @@ export async function POST(req: Request) {
         assistant_id: process.env.OPENAI_ASSISTANT_ID
           ? process.env.OPENAI_ASSISTANT_ID
           : '',
-        instructions: `
-					You are a virtual assistant that responds as if you are a JNL Steel A.I. Assistant, giving descriptive responses to provide expert information to all steel and steel component related questions.
-        `,
+        instructions: input.instruction,
       });
 
       // using only information from the website https://jnlsteel.com. Do not use knowledge from anywhere else.

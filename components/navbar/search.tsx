@@ -5,8 +5,38 @@ import { Fragment, useState } from 'react';
 import DisableScroll from '../global/disable-scroll';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 import classNames from 'classnames';
+import { castToHTMLAttributeProps, getDomNodeText } from '@utils/tools';
+import { HTMLAttributeProps } from '@lib/types';
+import parse, {
+  HTMLReactParserOptions,
+  domToReact,
+  DOMNode,
+  Element,
+} from 'html-react-parser';
 
-export default function Search({ isScrolling }: any) {
+export default function Search({ isScrolling, post }: any) {
+  let heading: string = 'Search';
+  var index = -1;
+
+  const options: HTMLReactParserOptions = {
+    replace(domNode) {
+      if (domNode instanceof Element && domNode.attribs) {
+        index++;
+        const props: HTMLAttributeProps = castToHTMLAttributeProps(
+          domNode.attribs
+        );
+        let { className } = props;
+
+        if (domNode.name === 'h2') {
+          heading = getDomNodeText(domNode);
+          return <></>;
+        }
+      }
+    },
+  };
+
+  parse(post.postContent, options);
+
   return (
     <Popover className="flex items-center">
       {({ open }) => (
@@ -50,7 +80,7 @@ export default function Search({ isScrolling }: any) {
                         <input
                           className="shadow-inner hide-clear bg-white text-base-contrast font-body block w-full border-white pr-16 pl-6 h-14 border-0 box-border border-white focus:border-white focus:ring-0 placeholder:text-base-contrast/50 truncate text-base"
                           autoFocus={true}
-                          placeholder="Search Website"
+                          placeholder={heading}
                         />
                       </div>
                     </div>

@@ -10,7 +10,9 @@ export async function fetchSiteElements() {
     stickyLogo: any = null,
     sidebar: any = null,
     sidebarHeader: any = null,
-    site: any = null;
+    site: any = null,
+    aiChat: any = null,
+    websiteSearch: any = null;
 
   const headers = {
     'Content-Type': 'application/json',
@@ -23,7 +25,6 @@ export async function fetchSiteElements() {
     method: 'POST',
     next: { revalidate: 60, tags: ['site-element'] },
   });
-  // console.log(response.headers);
 
   if (response.ok) {
     const jsonResponse = await response.json();
@@ -38,6 +39,8 @@ export async function fetchSiteElements() {
       'mobile-menu': mobileMenu,
       'sticky-logo': stickyLogo,
       'sidebar-header': sidebarHeader,
+      'a-i-chat': aiChat,
+      'website-search': websiteSearch,
     } = jsonResponse);
 
     if (menu && 'postContent' in menu) {
@@ -67,6 +70,12 @@ export async function fetchSiteElements() {
 
     if (sidebarHeader?.postContent)
       sidebarHeader.postContent = compressContent(sidebarHeader.postContent);
+
+    if (aiChat?.postContent)
+      aiChat.postContent = compressContent(aiChat.postContent);
+
+    if (websiteSearch?.postContent)
+      websiteSearch.postContent = compressContent(websiteSearch.postContent);
   }
 
   return {
@@ -80,5 +89,7 @@ export async function fetchSiteElements() {
     sidebar,
     sidebarHeader,
     site,
+    aiChat,
+    websiteSearch,
   };
 }

@@ -24,6 +24,8 @@ interface NavbarProps {
   sidebar: any;
   sidebarHeader: any;
   site: any;
+  aiChat: any;
+  websiteSearch: any;
 }
 
 export default function Navbar({
@@ -36,9 +38,12 @@ export default function Navbar({
   sidebar,
   sidebarHeader,
   site,
+  aiChat,
+  websiteSearch,
 }: NavbarProps) {
   const snap = useSnapshot(state);
   const isScrolling = snap.isScrolling;
+  console.log(websiteSearch);
 
   return (
     <>
@@ -105,10 +110,19 @@ export default function Navbar({
                   >
                     <MenuLinks isScrolling={isScrolling} menu={menu} />
                   </div>
-                  <div className="flex gap-0 2xl:gap-1 flex-row h-full">
-                    <OpenAISearch isScrolling={isScrolling} />
-                    <Search isScrolling={isScrolling} />
-                  </div>
+                  {(aiChat || websiteSearch) && (
+                    <div className="flex gap-0 2xl:gap-1 flex-row h-full">
+                      {aiChat && (
+                        <OpenAISearch isScrolling={isScrolling} post={aiChat} />
+                      )}
+                      {websiteSearch && (
+                        <Search
+                          isScrolling={isScrolling}
+                          post={websiteSearch}
+                        />
+                      )}
+                    </div>
+                  )}
                 </div>
               </div>
               <div className="flex items-center gap-2 xl:gap-2 2xl:gap-3">

@@ -8,8 +8,20 @@ import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 import Iconify from '@components/iconify';
 import AIIcon from '@iconify/icons-eos-icons/ai';
 import classNames from 'classnames';
-import { parse } from 'marked';
-import { compressContent } from '@utils/tools';
+import { parse as markedParse } from 'marked';
+import {
+  castToHTMLAttributeProps,
+  compressContent,
+  getDomNodeText,
+} from '@utils/tools';
+import {} from '@utils/tools';
+import { HTMLAttributeProps } from '@lib/types';
+import parse, {
+  HTMLReactParserOptions,
+  domToReact,
+  DOMNode,
+  Element,
+} from 'html-react-parser';
 
 function cleanCitation(text: string) {
   const citationPattern = /\【[^】]*\】/g;
@@ -42,7 +54,7 @@ function ChatComponent({ activeIndex, messages, status }: any) {
 
   const aiMessages = messages.filter((item: any) => item.role == 'assistant');
   const aiContent = String(aiMessages[aiMessages.length - 1]?.content);
-  let aiHtml = String(parse(cleanCitation(aiContent))); // returns string prommise. So needed to force string to run other functions on it.
+  let aiHtml = String(markedParse(cleanCitation(aiContent))); // returns string prommise. So needed to force string to run other functions on it.
   aiHtml = compressContent(aiHtml);
 
   return (
@@ -80,13 +92,65 @@ function ChatComponent({ activeIndex, messages, status }: any) {
   );
 }
 
-export default function Search({ isScrolling }: any) {
+export default function Search({ isScrolling, post }: any) {
   const [isLoading, setIsLoading] = useState(false);
   const searchRef = useRef<HTMLInputElement | null>(null);
 
+  let heading: string = 'Ask A.I.';
+  let content: Array<React.ReactElement> = [];
+  let instruction: string = 'You are an A.I. assistant';
+  var index = -1;
+
+  const options: HTMLReactParserOptions = {
+    replace(domNode) {
+      if (domNode instanceof Element && domNode.attribs) {
+        index++;
+        const props: HTMLAttributeProps = castToHTMLAttributeProps(
+          domNode.attribs
+        );
+        let { className } = props;
+
+        if (domNode.name === 'h2') {
+          heading = getDomNodeText(domNode);
+          return <></>;
+        } else if (domNode.name === 'p') {
+          content.push(
+            <p
+              className="text-base-contrast mb-7 leading-normal [&>a]:text-primary-main hover:[&>a]:text-primary-light"
+              key={`content=${index}`}
+            >
+              {domToReact(domNode.children as DOMNode[], options)}
+            </p>
+          );
+          return <></>;
+        } else if (domNode.name === 'h3') {
+          content.push(
+            <h3
+              className="mb-1 leading-tight text-2xl md:text-3xl text-primary-main font-medium"
+              key={`content=${index}`}
+            >
+              {domToReact(domNode.children as DOMNode[], options)}
+            </h3>
+          );
+          return <></>;
+        } else if (domNode.name === 'pre') {
+          instruction = getDomNodeText(domNode);
+          return <></>;
+        }
+      }
+    },
+  };
+
+  parse(post.postContent, options);
+
   // UNCOMMENT FOR ASSISTANT
   const { status, messages, input, submitMessage, handleInputChange } =
-    useAssistant({ api: '/api/assistant' });
+    useAssistant({
+      api: '/api/assistant',
+      body: {
+        instruction,
+      },
+    });
 
   // const { messages, input, handleInputChange, handleSubmit } = useChat(); // UNCOMMENT FOR BASIC GPT-4 MODEL
 
@@ -155,7 +219,7 @@ export default function Search({ isScrolling }: any) {
                           onChange={handleInputChange}
                           onFocus={(e) => e.target.select()}
                           type="search"
-                          placeholder="Ask JNL Steel A.I."
+                          placeholder={heading}
                           className="appearance-none shadow-inner hide-clear bg-white text-base-contrast font-body block w-full pr-16 pl-6 h-14 border-0 box-border border-white focus:border-white focus:ring-0 placeholder:text-base-contrast/50 truncate text-base outline-none"
                         />
                         <button className="">
@@ -171,7 +235,7 @@ export default function Search({ isScrolling }: any) {
                         </button>
                       </form>
                     </div>
-                    {isLoading && (
+                    {isLoading ? (
                       <div className="w-full block relative">
                         <ol className="bg-base-body divide-y divide-base-dark dmh:bg-modern-base-card">
                           <li>
@@ -185,6 +249,19 @@ export default function Search({ isScrolling }: any) {
                           </li>
                         </ol>
                       </div>
+                    ) : (
+                      content &&
+                      !input && (
+                        <div className="w-full block relative">
+                          <ol className="bg-base-body divide-y divide-base-dark dmh:bg-modern-base-card">
+                            <li>
+                              <div className="flex flex-col justify-center px-4 py-4 sm:px-6 whitespace-pre-wrap [&>*:last-child]:!mb-0">
+                                {content}
+                              </div>
+                            </li>
+                          </ol>
+                        </div>
+                      )
                     )}
                   </div>
                 </div>

@@ -62,6 +62,8 @@ export default async function RootLayout({ children }: RootLayoutProps) {
     sidebar,
     sidebarHeader,
     site,
+    aiChat,
+    websiteSearch,
   } = await fetchSiteElements();
 
   return (
@@ -80,6 +82,8 @@ export default async function RootLayout({ children }: RootLayoutProps) {
                 sidebar={sidebar}
                 sidebarHeader={sidebarHeader}
                 site={site}
+                aiChat={aiChat}
+                websiteSearch={websiteSearch}
               />
               <GridFull>{children}</GridFull>
             </Container>
