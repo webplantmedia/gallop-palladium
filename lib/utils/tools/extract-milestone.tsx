@@ -21,7 +21,7 @@ export function extractMilestone(input: string): ExtractedMilestone {
   }
 
   const [, prefix, numberStr, unit, suffix] = match;
-  const number = numberStr ? parseFloat(numberStr) : null;
+  const number = numberStr ? parseFloat(numberStr) : 0;
   const decimals =
     numberStr && numberStr.includes('.') ? numberStr.split('.')[1].length : 0;
 

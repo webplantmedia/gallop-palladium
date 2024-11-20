@@ -13,6 +13,7 @@ import {
 } from '@utils/tools';
 import {
   gallopMilestone,
+  gallopMilestones,
   CoreParagraph,
   CoreHeading,
   CoreGallery,
@@ -95,8 +96,10 @@ export const ParseBlocks = ({
           return <CoreSeparator props={props} />;
         } else if (className?.includes('wp-block-spacer')) {
           return <CoreSpacer props={props} className={className} />;
+        } else if (className?.includes('is-style-milestones')) {
+          return gallopMilestones(domNode, className);
         } else if (className?.includes('is-style-milestone')) {
-          return gallopMilestone(domNode, options, className);
+          return gallopMilestone(domNode, className);
         } else if (className?.includes('wp-block-heading')) {
           return (
             <CoreHeading tag={domNode.name} className={className} props={props}>

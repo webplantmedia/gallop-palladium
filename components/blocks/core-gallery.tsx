@@ -349,7 +349,6 @@ const LeadImageGallery = ({
           imageNumber - firstImageInRow >= maxColumns
         ) {
           const n = figureProps.slice(a, imageNumber);
-          console.log(n);
           const rowGallery = figure.slice(a, imageNumber);
           a = imageNumber;
           row = row + 1;

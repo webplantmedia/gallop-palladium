@@ -48,7 +48,6 @@ export const CoreGroupCard1 = ({ data, className, props }: BlockProps) => {
   );
 
   if (embed || href) {
-    console.log(embed);
     image = (
       <VideoPopup className="relative group" url={href} embed={embed}>
         {image}

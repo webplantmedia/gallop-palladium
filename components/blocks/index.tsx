@@ -27,6 +27,7 @@ export { ParseBlocks } from './parse-blocks';
 export { DataIconText } from './data-icon-text';
 export { GallopIconText } from './gallop-icon-text';
 export { gallopMilestone } from './gallop-milestone';
+export { gallopMilestones } from './gallop-milestones';
 export { GallopAccordion } from './gallop-accordion';
 export { GallopContactForm } from './gallop-contact-form';
 export { GallopSeeMore } from './gallop-see-more';
