@@ -69,11 +69,11 @@ module.exports = {
         if (gallopTheme === 'theme1') {
           return {
             primary: {
-              lighter: '#77565d',
-              light: '#634249',
-              main: '#58353b',
-              dark: '#44272d',
-              darker: '#2d171c',
+              lighter: '#6985a2',
+              light: '#4d6c8d',
+              main: '#304f70',
+              dark: '#203d5b',
+              darker: '#16304c',
               contrast: '#ffffff',
             },
             secondary: {
