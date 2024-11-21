@@ -129,7 +129,7 @@ export const CoreGroupSection1 = ({ data, className, props }: BlockProps) => {
         <div className="[&>p]:max-w-lg">{content}</div>
 
         <div className="pt-20 lg:row-span-2 lg:-mr-16 xl:mr-auto">
-          <div className="-mx-8 grid grid-cols-2 gap-4 sm:-mx-16 sm:grid-cols-4 lg:mx-0 lg:grid-cols-2 lg:gap-4 xl:gap-8">
+          <div className="max-lg:pb-10 -mx-8 grid grid-cols-2 gap-4 sm:-mx-16 sm:grid-cols-4 lg:mx-0 lg:grid-cols-2 lg:gap-4 xl:gap-8">
             {imgs}
           </div>
         </div>

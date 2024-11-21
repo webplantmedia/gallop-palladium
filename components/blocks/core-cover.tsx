@@ -315,7 +315,7 @@ export const CoreCoverSection1 = ({ data, className }: any) => {
                 {p}
               </p>
             )}
-            <div className="mt-10 flex items-center gap-x-6">
+            <div className="mt-10 flex flex-col items-center sm:items-start xl:items-center justify-start xl:flex-row gap-x-6 max-xl:gap-y-6">
               <a
                 href={button1Href}
                 className="border-2 overflow-hidden inline-flex items-center border-accent1 bg-accent1 text-white hover:bg-primary-light rounded-md px-4 py-2 text-base font-normal shadow-sm"
