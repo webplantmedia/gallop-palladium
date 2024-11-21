@@ -59,7 +59,7 @@ const SetPin = ({ center, map, heading, image, description }: MapProps) => {
             const infoRoot = ReactDOM.createRoot(infoContent);
             infoRoot.render(
               <div className="flex flex-row gap-0 items-center">
-                <div className="block grow-0 shrink-0 max-w-[150px]">
+                <div className="block grow-0 shrink-0 max-w-[180px]">
                   {image && <>{image}</>}
                 </div>
                 <div className="block px-4 max-w-[300px]">
@@ -132,7 +132,7 @@ const Map = ({ children, address, heading, image, description }: MapProps) => {
 
       const m = new window.google.maps.Map(mapRef.current, {
         center: center,
-        zoom: 9,
+        zoom: 14,
         gestureHandling: 'cooperative',
         zoomControl: true,
         mapTypeControl: true,

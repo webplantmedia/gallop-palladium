@@ -29,7 +29,7 @@ export const CoreHeading = ({
 
   if (className?.includes('is-style-accent-title')) {
     let accentClass =
-      'leading-tight text-xl uppercase tracking-[0.1em] text-primary-main mb-7 font-accent font-normal flex items-center';
+      'leading-tight text-xl uppercase tracking-[0.1em] text-primary-main mb-7 font-accent font-normal flex items-center [&+h3]:!mt-0';
 
     className = className.replace('text-center', 'justify-center');
     className = className.replace('text-left', 'justify-start');

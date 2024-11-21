@@ -58,7 +58,9 @@ export const gallopMap = (
         } else if (domNode.name === 'h2') {
           const content = domToReact(domNode?.children as DOMNode[], options);
           heading = (
-            <h3 className="text-base-contrast text-sm font-bold">{content}</h3>
+            <h3 className="text-base-contrast text-sm font-bold leading-snug mb-1">
+              {content}
+            </h3>
           );
           return <></>;
         } else if (domNode.name === 'h3') {
@@ -94,7 +96,7 @@ export const GallopMap = ({
   className = tailwindGetAlignClasses(className);
 
   return (
-    <div className={classNames('mb-14', className)}>
+    <div className={classNames('mb-0', className)}>
       <div className="relative rounded-b-none overflow-clip w-full aspect-square lg:aspect-[16/7] h-full">
         <GallopMapClient
           address={address}
