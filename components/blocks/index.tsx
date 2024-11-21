@@ -36,3 +36,4 @@ export { GallopSidebar, gallopSidebar } from './gallop-sidebar';
 export { GallopExcerptPost, gallopExcerptPost } from './gallop-excerpt-post';
 export { GallopMap, gallopMap } from './gallop-map';
 export { GallopMapClient } from './gallop-map-client';
+export { CoreGroupSection3 } from './core-group-section-3';

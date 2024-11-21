@@ -8,6 +8,7 @@ import {
   CoreGroupCard2,
   CoreGroupHero1,
   coreGroupSection1,
+  CoreGroupSection3,
 } from '@components/blocks';
 import {
   castToHTMLAttributeProps,
@@ -212,6 +213,9 @@ export const coreGroup = (
   } else if (className?.includes('is-style-section-2')) {
     const data = getVarsFromNode2(domNode);
     return <CoreGroupSection2 data={data} className={className} />;
+  } else if (className?.includes('is-style-section-3')) {
+    const data = getVarsFromNode2(domNode);
+    return <CoreGroupSection3 data={data} className={className} />;
   } else if (className?.includes('is-style-our-offices')) {
     const data = getVarsFromNode2(domNode);
     return <CoreGroupOurOffices data={data} className={className} />;

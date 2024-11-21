@@ -46,3 +46,6 @@ export function Image() {
     title: null,
   };
 }
+export function Milestone() {
+  return <span className="text-red-500 font-bold">*Missing milestone</span>;
+}
