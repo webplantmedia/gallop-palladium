@@ -217,7 +217,7 @@ export const CoreGroupHero1 = ({ data, className }: BlockProps) => {
         </div>
         <SwiperSliderInit swiperId={swiperId} />
       </div>
-      <div className="!max-w-screen-4xl mx-auto relative z-[1] bg-secondary-main !px-0">
+      <div className="!max-w-screen-4xl mx-auto relative z-[1] bg-accent3 !px-0">
         <div
           className="absolute -z-[1] top-0 right-0 bottom-20 bg-contain bg-no-repeat bg-right-top opacity-[.03] w-2/3 xl:w-full"
           style={
