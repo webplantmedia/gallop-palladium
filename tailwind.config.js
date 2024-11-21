@@ -96,6 +96,7 @@ module.exports = {
         contrast2: '#636363',
         contrast3: '#a4a4a4',
         accent1: '#304f70',
+        'accent1-light': '#4b6989',
         accent2: '#ec2730',
         accent3: '#222222',
         accent4: '#61768a',

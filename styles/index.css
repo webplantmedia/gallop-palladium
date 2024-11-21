@@ -241,6 +241,9 @@ figcaption > a,
 .gallop-p {
   @apply text-base-contrast mb-7 leading-normal;
 }
+.gallop-lead {
+  @apply text-xl sm:text-2xl lg:text-3xl mb-14 !leading-relaxed;
+}
 .gallop-button {
   @apply border-2 overflow-hidden inline-flex items-center border-accent1 bg-accent1 text-white hover:bg-primary-light hover:border-primary-light rounded-md px-4 py-2 text-base font-normal shadow-sm;
 }
