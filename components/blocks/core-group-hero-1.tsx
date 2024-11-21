@@ -11,7 +11,6 @@ import {
   getVarsFromNode,
   tailwindAlignClasses,
   styleStringToObject,
-  tailwindOverlayClasses,
 } from '@utils/tools';
 import SwiperSliderInit from '@components/scripts/swiper-slider-init';
 import CircleAnimation from '@components/scripts/circle-animation';
@@ -39,8 +38,6 @@ export const CoreGroupHero1 = ({ data, className }: BlockProps) => {
   let videoSrc = data?.wpBlockCover?.wpBlockCoverVideoBackground?.src;
   let overlayClasses =
     data?.wpBlockCover?.wpBlockCoverBackground?.className || '';
-  let overlay = tailwindOverlayClasses(overlayClasses);
-  console.log(overlay);
 
   const backgroundStyle = data?.wpBlockCover?.wpBlockCoverImageBackground?.style
     ? styleStringToObject(data.wpBlockCover.wpBlockCoverImageBackground.style)
@@ -113,8 +110,7 @@ export const CoreGroupHero1 = ({ data, className }: BlockProps) => {
         )}
         <div
           className={classNames(
-            'absolute inset-0 h-full w-full !max-w-none',
-            overlay
+            'absolute inset-0 h-full w-full !max-w-none bg-black/60'
           )}
         ></div>
         <div className="relative flex flex-col xl:flex-row !max-w-screen-3xl py-32">
