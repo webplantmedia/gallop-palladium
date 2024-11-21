@@ -10,6 +10,8 @@ import {
   getVimeoIframeSrc,
   getVarsFromNode,
   tailwindAlignClasses,
+  styleStringToObject,
+  getTailwindOverlay,
 } from '@utils/tools';
 import SwiperSliderInit from '@components/scripts/swiper-slider-init';
 import CircleAnimation from '@components/scripts/circle-animation';
@@ -35,6 +37,16 @@ export const CoreGroupHero1 = ({ data, className }: BlockProps) => {
     data?.wpBlockCover?.wpBlockCoverInnerContainer?.wpBlockButtons
       ?.wpBlockButton?.a?.href;
   let videoSrc = data?.wpBlockCover?.wpBlockCoverVideoBackground?.src;
+  let overlayClasses =
+    data?.wpBlockCover?.wpBlockCoverBackground?.className || '';
+
+  const backgroundStyle = data?.wpBlockCover?.wpBlockCoverImageBackground?.style
+    ? styleStringToObject(data.wpBlockCover.wpBlockCoverImageBackground.style)
+    : {};
+  let backgroundImage = backgroundStyle?.backgroundImage
+    ? backgroundStyle.backgroundImage
+    : '';
+  let imgProps = data?.wpBlockCover?.wpBlockCoverImageBackground || {};
   let slideItems2 =
     data?.wpBlockCover?.wpBlockCoverInnerContainer?.gallopSlides;
   let slideItems =
@@ -72,7 +84,36 @@ export const CoreGroupHero1 = ({ data, className }: BlockProps) => {
             data-object-fit="cover"
           ></video>
         )}
-        <div className="absolute inset-0 h-full w-full !max-w-none bg-black/60"></div>
+        {imgProps && imgProps.width && (
+          <img
+            className={classNames(
+              imgProps.className,
+              '!max-w-full !p-0 box-border absolute inset-0 object-cover h-full object-center'
+            )}
+            loading="lazy"
+            src={imgProps.src}
+            style={styleStringToObject(imgProps.style)}
+            width={parseInt(imgProps.width)}
+            height={parseInt(imgProps.height)}
+            srcSet={imgProps.srcSet}
+            sizes={imgProps.sizes}
+            alt={imgProps.alt}
+            title={imgProps.title}
+          />
+        )}
+        {backgroundImage && (
+          <div
+            className="absolute inset-0 bg-cover bg-no-repeat bg-center bg-fixed"
+            style={{
+              backgroundImage: backgroundImage,
+            }}
+          ></div>
+        )}
+        <div
+          className={classNames(
+            'absolute inset-0 h-full w-full !max-w-none bg-black/60'
+          )}
+        ></div>
         <div className="relative flex flex-col xl:flex-row !max-w-screen-3xl py-32">
           <div className="w-full xl:w-7/12 flex justify-center">
             <div id={swiperId} className="swiper max-w-[950px] xl:max-w-none">

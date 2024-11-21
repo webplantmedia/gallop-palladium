@@ -34,7 +34,7 @@ export default function MenuLinkDropdown({
             as="a"
             href="#"
             className={classNames(
-              'inline-flex items-center outline-none border-transparent text-base font-normal text-base-contrast ui-open:border-base-contrast hover:border-base-contrast transition-all h-full'
+              'inline-flex items-center outline-none border-b-2 border-transparent text-base font-normal text-base-contrast ui-open:border-base-contrast hover:border-base-contrast transition-all h-full'
             )}
           >
             {dropdownText}

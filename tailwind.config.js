@@ -61,75 +61,46 @@ module.exports = {
         body: ['var(--font-body)'],
         accent: ['var(--font-accent)'],
       },
-      colors: (() => {
-        const gallopTheme = process.env.GALLOP_THEME
-          ? process.env.GALLOP_THEME
-          : 'default';
-
-        if (gallopTheme === 'theme1') {
-          return {
-            primary: {
-              lighter: '#6985a2',
-              light: '#4d6c8d',
-              main: '#304f70',
-              dark: '#203d5b',
-              darker: '#16304c',
-              contrast: '#ffffff',
-            },
-            secondary: {
-              lighter: '#555555',
-              light: '#444444',
-              main: '#333333',
-              dark: '#222222',
-              darker: '#111111',
-              contrast: '#ffffff',
-            },
-            base: {
-              paper: '#f7f7f7',
-              darker: '#6b5c4c',
-              dark: '#eed093',
-              body: '#ffffff',
-              light: '#ffe7bd',
-              card: '#cccccc',
-              contrast: '#000000',
-              contrast2: '#603813',
-              disabled: '#936f4d',
-            },
-            success: '#0070f3',
-          };
-        }
-
-        return {
-          primary: {
-            lighter: '#77565d',
-            light: '#634249',
-            main: '#58353b',
-            dark: '#44272d',
-            darker: '#2d171c',
-            contrast: '#ffffff',
-          },
-          secondary: {
-            lighter: '#555555',
-            light: '#444444',
-            main: '#333333',
-            dark: '#222222',
-            darker: '#111111',
-            contrast: '#ffffff',
-          },
-          base: {
-            paper: '#ffffff',
-            darker: '#6b5c4c',
-            dark: '#eed093',
-            body: '#fff1dc',
-            light: '#ffe7bd',
-            card: '#f4e3c9',
-            contrast: '#000000',
-            contrast2: '#603813',
-            disabled: '#936f4d',
-          },
-          success: '#0070f3',
-        };
-      })(),
+      colors: {
+        primary: {
+          lighter: '#77565d',
+          light: '#634249',
+          main: '#58353b',
+          dark: '#44272d',
+          darker: '#2d171c',
+          contrast: '#ffffff',
+        },
+        secondary: {
+          lighter: '#555555',
+          light: '#444444',
+          main: '#333333',
+          dark: '#222222',
+          darker: '#111111',
+          contrast: '#ffffff',
+        },
+        base: {
+          paper: '#ffffff',
+          darker: '#6b5c4c',
+          dark: '#eed093',
+          body: '#fff1dc',
+          light: '#ffe7bd',
+          card: '#f4e3c9',
+          contrast: '#000000',
+          contrast2: '#603813',
+          disabled: '#936f4d',
+        },
+        success: '#0070f3',
+        base1: '#ffffff',
+        base2: '#f7f7f7',
+        contrast1: '#000000',
+        contrast2: '#636363',
+        contrast3: '#a4a4a4',
+        accent1: '#304f70',
+        accent2: '#333333',
+        accent3: '#777777',
+        accent4: '#888888',
+        accent5: '#999999',
+      },
       spacing: {
         28: '7rem',
         68: '17rem',
