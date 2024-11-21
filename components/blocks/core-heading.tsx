@@ -17,19 +17,18 @@ export const CoreHeading = ({
   const Tag: ElementType = tag as ElementType;
 
   let headingClass = {
-    h1: 'mb-7 leading-tight text-5xl md:text-6xl lg:text-7xl text-base-contrast font-bold',
-    h2: 'mb-7 leading-tight text-4xl md:text-5xl lg:text-6xl text-base-contrast mt-14 font-bold',
-    h3: 'mb-2 leading-tight text-2xl md:text-3xl text-primary-main font-medium',
-    h4: 'mb-7 leading-tight text-2xl text-base-contrast font-medium text-base',
-    h5: 'mb-7 leading-tight',
-    h6: 'mb-7 leading-tight',
+    h1: 'gallop-h1',
+    h2: 'gallop-h2',
+    h3: 'gallop-h3',
+    h4: 'gallop-h4',
+    h5: 'gallop-h5',
+    h6: 'gallop-h6',
   };
 
   let hClass = '';
 
   if (className?.includes('is-style-accent-title')) {
-    let accentClass =
-      'leading-tight text-xl uppercase tracking-[0.1em] text-primary-main mb-7 font-accent font-normal flex items-center [&+h3]:!mt-0';
+    let accentClass = 'gallop-accent-heading';
 
     className = className.replace('text-center', 'justify-center');
     className = className.replace('text-left', 'justify-start');
