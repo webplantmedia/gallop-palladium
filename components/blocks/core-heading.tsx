@@ -19,7 +19,7 @@ export const CoreHeading = ({
   let headingClass = {
     h1: 'mb-7 leading-tight text-5xl md:text-6xl lg:text-7xl text-base-contrast font-bold',
     h2: 'mb-7 leading-tight text-4xl md:text-5xl lg:text-6xl text-base-contrast mt-14 font-bold',
-    h3: 'mb-1 leading-tight text-2xl md:text-3xl text-primary-main font-medium',
+    h3: 'mb-2 leading-tight text-2xl md:text-3xl text-primary-main font-medium',
     h4: 'mb-7 leading-tight text-2xl text-base-contrast font-medium text-base',
     h5: 'mb-7 leading-tight',
     h6: 'mb-7 leading-tight',

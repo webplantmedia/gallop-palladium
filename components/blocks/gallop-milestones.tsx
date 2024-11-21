@@ -58,7 +58,7 @@ export const gallopMilestones = (
 
   return (
     <>
-      <hr className="mt-6 border-t border-base-contrast" />
+      <hr className="mt-3 border-t border-base-contrast" />
       <dl className="mt-6 grid grid-cols-1 gap-x-8 gap-y-4 sm:grid-cols-2">
         {content}
       </dl>
