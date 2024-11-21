@@ -27,7 +27,10 @@ export const CoreGroupCard2 = ({ data, className, props }: BlockProps) => {
       <img
         sizes={img.sizes}
         srcSet={img.srcset}
-        className={classNames(img.class, 'aspect-video object-cover')}
+        className={classNames(
+          img.class,
+          'aspect-square w-full object-cover object-top'
+        )}
         alt={img.alt}
         src={img.src}
         height={img.height}

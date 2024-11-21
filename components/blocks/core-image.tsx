@@ -119,6 +119,7 @@ export const CoreImage = ({
     'alignright',
     'alignright md:float-right md:w-[300px] xl:w-auto md:!ml-5 mt-1.5 md:!pl-0'
   );
+  className = className.replace('size-full', 'image-size-full');
 
   return (
     <figure

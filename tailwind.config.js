@@ -80,11 +80,11 @@ module.exports = {
         },
         base: {
           paper: '#f7f7f7',
-          darker: '#6b5c4c',
+          darker: '#cccccc',
           dark: '#eed093',
           body: '#ffffff',
           light: '#ffe7bd',
-          card: '#cccccc',
+          card: '#f7f7f7',
           contrast: '#000000',
           contrast2: '#603813',
           disabled: '#936f4d',

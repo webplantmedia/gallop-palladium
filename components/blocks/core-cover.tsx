@@ -171,7 +171,7 @@ export const CoreCoverTestimonials1 = ({ data, className }: any) => {
       )}
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         {h2 && (
-          <h2 className="leading-tight text-xl uppercase tracking-[0.1em] text-primary-main mb-7 font-accent font-normal flex items-center [&+h3]:!mt-0 justify-center">
+          <h2 className="leading-tight text-xl uppercase tracking-[0.1em] text-accent2 mb-7 font-accent font-normal flex items-center [&+h3]:!mt-0 justify-center">
             {h2}
             <Iconify
               icon={ArrowInsertIcon}
@@ -187,7 +187,7 @@ export const CoreCoverTestimonials1 = ({ data, className }: any) => {
         <div className="mx-auto grid max-w-2xl grid-cols-1 lg:mx-0 lg:max-w-none lg:grid-cols-2">
           <div className="flex flex-col pb-10 sm:pb-16 lg:pb-0 lg:pr-8 xl:pr-20">
             <figure className="mt-0 flex flex-auto flex-col justify-between">
-              <blockquote className="text-xl text-gray-900 leading-relaxed">
+              <blockquote className="text-2xl text-gray-900 leading-relaxed">
                 {Object.entries(quote1).flatMap(
                   ([key, item]: [string, any], index: number) => {
                     if (item?.cite?.jsx) {
@@ -219,7 +219,7 @@ export const CoreCoverTestimonials1 = ({ data, className }: any) => {
           </div>
           <div className="flex flex-col border-t border-contrast1/30 pt-10 sm:pt-16 lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0 xl:pl-20">
             <figure className="mt-0 flex flex-auto flex-col justify-between">
-              <blockquote className="text-xl text-gray-900 leading-relaxed">
+              <blockquote className="text-2xl text-gray-900 leading-relaxed">
                 {Object.entries(quote2).flatMap(
                   ([key, item]: [string, any], index: number) => {
                     if (item?.cite?.jsx) {

@@ -82,7 +82,12 @@ export default function DynamicSidebar({
                     </div>
                   </div>
                 </div>
-                <div className="h-full mx-4 md:mx-8 [&>*:first-child]:mt-0 before:content-[''] before:block before:w-full before:h-10 after:content-[''] after:block after:w-full after:h-10 [&_h2]:!text-4xl">
+                <div
+                  className={classNames(
+                    'h-full mx-4 md:mx-8 [&>*:first-child]:mt-0',
+                    "before:content-[''] before:block before:w-full before:h-10 after:content-[''] after:block after:w-full after:h-10 [&_h2]:!text-4xl"
+                  )}
+                >
                   {children}
                 </div>
               </div>
