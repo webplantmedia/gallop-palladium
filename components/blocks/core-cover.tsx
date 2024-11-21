@@ -240,7 +240,7 @@ export const CoreCover = ({ data, className }: any) => {
             alt={imgProps.alt}
             title={imgProps.title}
           />
-          <span className="absolute inset-0 h-full bg-primary-main/80"></span>
+          <span className="absolute inset-0 h-full bg-base1/90"></span>
         </>
       )}
       {backgroundImage && (

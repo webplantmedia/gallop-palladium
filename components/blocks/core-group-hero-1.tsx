@@ -219,7 +219,7 @@ export const CoreGroupHero1 = ({ data, className }: BlockProps) => {
       </div>
       <div className="!max-w-screen-4xl mx-auto relative z-[1] bg-accent3 !px-0">
         <div
-          className="absolute -z-[1] top-0 right-0 bottom-20 bg-contain bg-no-repeat bg-right-top opacity-[.03] w-2/3 xl:w-full"
+          className="absolute -z-[1] left-0 top-0 right-0 bottom-0 bg-cover bg-no-repeat bg-right-top w-full xl:w-full opacity-20"
           style={
             infoImg?.src
               ? { backgroundImage: `url('${infoImg.src}')` }
