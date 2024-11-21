@@ -12,6 +12,7 @@ import {
   castToHTMLAttributeProps,
   replaceWordPressUrlRelative,
   getVarsFromNode,
+  styleStringToObject,
 } from '@utils/tools';
 import { HTMLAttributeProps } from '@lib/types';
 import parse, {
@@ -66,12 +67,15 @@ export default function FooterColumns({ post }: { post: any }) {
               className={classNames(
                 'max-w-full w-[300px] mb-7 mx-auto sm:mx-0'
               )}
-              alt={img.alt}
+              loading="lazy"
+              style={styleStringToObject(img.style)}
               src={img.src}
               srcSet={img.srcset}
               sizes={img.sizes}
               width={img.width}
               height={img.height}
+              alt={img.alt}
+              title={img.title}
             />
           ) : (
             <p>No Image</p>

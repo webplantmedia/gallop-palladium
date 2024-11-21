@@ -103,12 +103,13 @@ export const getGallopAccordionHeader = (node: Element) => {
             }
           }
         } else if (hasExactClass(className, 'wp-block-heading')) {
-          heading = domToReact(domNode.children as DOMNode[]);
+          heading = getDomNodeText(domNode);
         } else if (domNode.name === 'p') {
           paragraph = domToReact(domNode.children as DOMNode[]);
         } else if (domNode.name === 'a') {
           const { href } = props;
           link = href;
+          return <></>;
         }
       }
     },

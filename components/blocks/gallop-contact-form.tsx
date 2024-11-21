@@ -73,35 +73,35 @@ const GallopContactFormInner = () => {
         name="firstname"
         id="firstname"
         placeholder="First Name"
-        className="block text-base w-full rounded-md border-0 py-3 px-5 focus:ring-primary-main text-base-contrast shadow-sm placeholder:text-base-contrast/50 dmh:border-modern-primary-main dmh:focus:outline-none dmh:focus:ring-0 dmh:focus:border-modern-secondary-main dmh:text-modern-base-contrast dmh:placeholder:text-modern-base-contrast/50 dmh:border-2"
+        className="block text-base w-full rounded-md border-2 border-contrast3 py-3 px-5 focus:ring-primary-main text-base-contrast shadow-sm placeholder:text-base-contrast/50 dmh:border-modern-primary-main dmh:focus:outline-none dmh:focus:ring-0 dmh:focus:border-modern-secondary-main dmh:text-modern-base-contrast dmh:placeholder:text-modern-base-contrast/50 dmh:border-2"
       />
       <input
         type="text"
         name="lastname"
         id="lastname"
         placeholder="Last Name"
-        className="block text-base w-full rounded-md border-0 py-3 px-5 focus:ring-primary-main text-base-contrast shadow-sm placeholder:text-base-contrast/50 dmh:border-modern-primary-main dmh:focus:outline-none dmh:focus:ring-0 dmh:focus:border-modern-secondary-main dmh:text-modern-base-contrast dmh:placeholder:text-modern-base-contrast/50 dmh:border-2"
+        className="block text-base w-full rounded-md border-2 border-contrast3 py-3 px-5 focus:ring-primary-main text-base-contrast shadow-sm placeholder:text-base-contrast/50 dmh:border-modern-primary-main dmh:focus:outline-none dmh:focus:ring-0 dmh:focus:border-modern-secondary-main dmh:text-modern-base-contrast dmh:placeholder:text-modern-base-contrast/50 dmh:border-2"
       />
       <input
         type="email"
         name="emailaddress"
         placeholder="Enter your email address"
         id="emailaddress"
-        className="block text-base w-full rounded-md border-0 py-3 px-5 focus:ring-primary-main text-base-contrast shadow-sm placeholder:text-base-contrast/50 dmh:border-modern-primary-main dmh:focus:outline-none dmh:focus:ring-0 dmh:focus:border-modern-secondary-main dmh:text-modern-base-contrast dmh:placeholder:text-modern-base-contrast/50 dmh:border-2"
+        className="block text-base w-full rounded-md border-2 border-contrast3 py-3 px-5 focus:ring-primary-main text-base-contrast shadow-sm placeholder:text-base-contrast/50 dmh:border-modern-primary-main dmh:focus:outline-none dmh:focus:ring-0 dmh:focus:border-modern-secondary-main dmh:text-modern-base-contrast dmh:placeholder:text-modern-base-contrast/50 dmh:border-2"
       />
       <input
         type="tel"
         name="telnumber"
         placeholder="Enter your phone number"
         id="telnumber"
-        className="block text-base w-full rounded-md border-0 py-3 px-5 focus:ring-primary-main text-base-contrast shadow-sm placeholder:text-base-contrast/50 dmh:border-modern-primary-main dmh:focus:outline-none dmh:focus:ring-0 dmh:focus:border-modern-secondary-main dmh:text-modern-base-contrast dmh:placeholder:text-modern-base-contrast/50 dmh:border-2"
+        className="block text-base w-full rounded-md border-2 border-contrast3 py-3 px-5 focus:ring-primary-main text-base-contrast shadow-sm placeholder:text-base-contrast/50 dmh:border-modern-primary-main dmh:focus:outline-none dmh:focus:ring-0 dmh:focus:border-modern-secondary-main dmh:text-modern-base-contrast dmh:placeholder:text-modern-base-contrast/50 dmh:border-2"
       />
       <textarea
         name="message"
         placeholder="Enter your message"
         id="message"
         rows={7}
-        className="block text-base w-full rounded-md border-0 py-3 px-5 focus:ring-primary-main text-base-contrast shadow-sm placeholder:text-base-contrast/50 dmh:border-modern-primary-main dmh:focus:outline-none dmh:focus:ring-0 dmh:focus:border-modern-secondary-main dmh:text-modern-base-contrast dmh:placeholder:text-modern-base-contrast/50 dmh:border-2"
+        className="block text-base w-full rounded-md border-2 border-contrast3 py-3 px-5 focus:ring-primary-main text-base-contrast shadow-sm placeholder:text-base-contrast/50 dmh:border-modern-primary-main dmh:focus:outline-none dmh:focus:ring-0 dmh:focus:border-modern-secondary-main dmh:text-modern-base-contrast dmh:placeholder:text-modern-base-contrast/50 dmh:border-2"
       />
       {status.length > 0 && (
         <p
