@@ -71,7 +71,7 @@ export const CoreGroupOurOffices = ({ data, className }: any) => {
             </h3>
             <address className="border-l-2 border-gray-200 pl-6 pt-2 not-italic text-gray-600">
               <p>{group_p}</p>
-              <p className="[&>a]:!text-accent1 [&>a]:hover:!text-accent1-light [&>a]:!no-underline [&>a]:!font-bold mt-3 flex gap-1 items-center group">
+              <p className="gallop-links [&>a]:!font-bold mt-3 flex gap-1 items-center group">
                 <Iconify
                   icon={PhoneIcon}
                   className="flex-shrink-0 h-6 w-6 text-accent1 relative top-0.5 group-hover:text-accent1-light"
@@ -101,7 +101,7 @@ export const CoreGroupOurOffices = ({ data, className }: any) => {
             </h3>
             <address className="border-l-2 border-gray-200 pl-6 pt-2 not-italic text-gray-600">
               <p>{group3_p}</p>
-              <p className="[&>a]:!text-accent1 [&>a]:hover:!text-accent1-light [&>a]:!no-underline [&>a]:!font-bold mt-3 flex gap-1 items-center group">
+              <p className="gallop-link [&>a]:!font-bold mt-3 flex gap-1 items-center group">
                 <Iconify
                   icon={PhoneIcon}
                   className="flex-shrink-0 h-6 w-6 text-accent1 relative top-0.5 group-hover:text-accent1-light"
@@ -117,7 +117,7 @@ export const CoreGroupOurOffices = ({ data, className }: any) => {
               </h3>
               <address className="border-l-2 border-gray-200 pl-6 pt-2 not-italic text-gray-600">
                 <p>{group4_p}</p>
-                <p className="[&>a]:!text-accent1 [&>a]:hover:!text-accent1-light [&>a]:!no-underline [&>a]:!font-bold mt-3 flex gap-1 items-center group">
+                <p className="gallop-links [&>a]:!font-bold mt-3 flex gap-1 items-center group">
                   <Iconify
                     icon={PhoneIcon}
                     className="flex-shrink-0 h-6 w-6 text-accent1 relative top-0.5 group-hover:text-accent1-light"

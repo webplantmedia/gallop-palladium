@@ -250,3 +250,6 @@ figcaption > a,
 .gallop-button-text {
   @apply text-base font-bold text-primary-main hover:text-primary-light;
 }
+.gallop-links {
+  @apply [&>a]:!text-accent1 [&>a]:hover:!text-accent1-light [&>a]:!no-underline;
+}
