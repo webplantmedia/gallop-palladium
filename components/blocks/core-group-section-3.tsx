@@ -4,7 +4,7 @@ import { AnimatedNumber } from '@components/widgets/animated-number';
 import { extractMilestone } from '@utils/tools';
 import * as Missing from '@components/global/missing';
 
-const gallopMilestone = ({ milestoneStr }: any) => {
+const GallopMilestone = ({ milestoneStr, index }: any) => {
   if (milestoneStr) {
     const milestone = extractMilestone(milestoneStr);
     return (
@@ -12,6 +12,7 @@ const gallopMilestone = ({ milestoneStr }: any) => {
         className={classNames(
           'flex flex-col gap-y-2 text-secondary-contrast items-center'
         )}
+        key={index}
       >
         {milestone?.suffix && (
           <dt className="text-sm/6 text-secondary-contrast">
@@ -54,10 +55,18 @@ export const CoreGroupSection3 = ({ data, className, props }: BlockProps) => {
   let img = data?.wpBlockImage?.img || Missing.Image();
   var milestones, milestone1, milestone2, milestone3, milestone4;
   if (data?.wpBlockGroup?.className?.includes('is-style-milestones')) {
-    milestone1 = gallopMilestone(data?.wpBlockGroup?.h4?.text);
-    milestone2 = gallopMilestone(data?.wpBlockGroup_2?.h4?.text);
-    milestone3 = gallopMilestone(data?.wpBlockGroup_3?.h4?.text);
-    milestone4 = gallopMilestone(data?.wpBlockGroup_4?.h4?.text);
+    milestone1 = (
+      <GallopMilestone milestoneStr={data?.wpBlockGroup?.h4?.text} />
+    );
+    milestone2 = (
+      <GallopMilestone milestoneStr={data?.wpBlockGroup?.h4_2?.text} />
+    );
+    milestone3 = (
+      <GallopMilestone milestoneStr={data?.wpBlockGroup?.h4_3?.text} />
+    );
+    milestone4 = (
+      <GallopMilestone milestoneStr={data?.wpBlockGroup?.h4_4?.text} />
+    );
 
     milestones = [milestone1, milestone2, milestone3, milestone4];
   }
@@ -119,7 +128,7 @@ export const CoreGroupSection3 = ({ data, className, props }: BlockProps) => {
             </a>
           </div>
           <dl className="mt-16 grid grid-cols-1 gap-8 sm:mt-20 sm:grid-cols-2 lg:grid-cols-4">
-            {milestone1}
+            {milestones?.map((item) => item)}
           </dl>
         </div>
       </div>
