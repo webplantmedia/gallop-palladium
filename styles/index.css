@@ -218,19 +218,19 @@ figcaption > a,
   @apply text-center mx-auto justify-center ml-0 mr-0;
 }
 .gallop-h1 {
-  @apply leading-tight text-5xl md:text-6xl lg:text-7xl text-base-contrast font-bold mb-7;
+  @apply leading-tight text-5xl md:text-6xl lg:text-7xl text-contrast font-bold mb-7;
 }
 .gallop-accent-heading {
   @apply leading-tight text-xl uppercase tracking-[0.1em] text-primary-main mb-7 font-accent font-normal flex items-center [&+h3]:!mt-0;
 }
 .gallop-h2 {
-  @apply leading-tight text-4xl md:text-5xl lg:text-6xl text-base-contrast mt-14 font-bold mb-7;
+  @apply leading-tight text-4xl md:text-5xl lg:text-6xl text-contrast mt-14 font-bold mb-7;
 }
 .gallop-h3 {
   @apply leading-tight text-2xl md:text-3xl text-primary-main font-medium mb-2;
 }
 .gallop-h4 {
-  @apply leading-tight text-2xl text-base-contrast font-medium text-base mb-7;
+  @apply leading-tight text-2xl text-contrast font-medium text-base mb-7;
 }
 .gallop-h5 {
   @apply leading-tight mb-7;
@@ -239,17 +239,17 @@ figcaption > a,
   @apply leading-tight mb-7;
 }
 .gallop-p {
-  @apply text-base-contrast mb-7 leading-normal;
+  @apply text-contrast mb-7 leading-normal;
 }
 .gallop-lead {
   @apply text-xl sm:text-2xl lg:text-3xl mb-14 !leading-relaxed;
 }
 .gallop-button {
-  @apply border-2 overflow-hidden inline-flex items-center border-accent1 bg-accent1 text-white hover:bg-primary-light hover:border-primary-light rounded-md px-4 py-2 text-base font-normal shadow-sm;
+  @apply border-2 overflow-hidden inline-flex items-center border-accent bg-accent text-white hover:bg-primary-light hover:border-primary-light rounded-md px-4 py-2 text-base font-normal shadow-sm;
 }
 .gallop-button-text {
   @apply text-base font-bold text-primary-main hover:text-primary-light;
 }
 .gallop-links {
-  @apply [&>a]:!text-accent1 [&>a]:hover:!text-accent1-light [&>a]:!no-underline;
+  @apply [&>a]:!text-accent [&>a]:hover:!text-accent-light [&>a]:!no-underline;
 }

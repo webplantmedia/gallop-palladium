@@ -41,7 +41,6 @@ export const CoreGroup = ({ className, props, children }: BlockProps) => {
 };
 
 export const CoreGroupOurOffices = ({ data, className }: any) => {
-  console.log(data);
   const h2 = data?.h2?.jsx || Missing.H2();
   const p = data?.p?.jsx || Missing.Paragraph();
   const group_h3 = data?.wpBlockGroup?.h3?.jsx || Missing.H3();
@@ -66,7 +65,7 @@ export const CoreGroupOurOffices = ({ data, className }: any) => {
         </div>
         <div className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-8 text-base/7 sm:grid-cols-2 sm:gap-y-16 lg:mx-0 lg:max-w-none lg:grid-cols-4">
           <div>
-            <h3 className="border-l-2 border-accent1 pl-6 gallop-h3 !mb-0">
+            <h3 className="border-l-2 border-accent pl-6 gallop-h3 !mb-0">
               {group_h3}
             </h3>
             <address className="border-l-2 border-gray-200 pl-6 pt-2 not-italic text-gray-600">
@@ -74,29 +73,29 @@ export const CoreGroupOurOffices = ({ data, className }: any) => {
               <p className="gallop-links [&>a]:!font-bold mt-3 flex gap-1 items-center group">
                 <Iconify
                   icon={PhoneIcon}
-                  className="flex-shrink-0 h-6 w-6 text-accent1 relative top-0.5 group-hover:text-accent1-light"
+                  className="flex-shrink-0 h-6 w-6 text-accent relative top-0.5 group-hover:text-accent-light"
                 />
                 {group_p2}
               </p>
             </address>
           </div>
           <div>
-            <h3 className="border-l-2 border-accent1 pl-6 gallop-h3 !mb-0">
+            <h3 className="border-l-2 border-accent pl-6 gallop-h3 !mb-0">
               {group2_h3}
             </h3>
             <address className="border-l-2 border-gray-200 pl-6 pt-2 not-italic text-gray-600">
               <p>{group2_p}</p>
-              <p className="[&>a]:!text-accent1 [&>a]:hover:!text-accent1-light [&>a]:!no-underline [&>a]:!font-bold mt-3 flex gap-1 items-center group">
+              <p className="gallop-links [&>a]:!no-underline [&>a]:!font-bold mt-3 flex gap-1 items-center group">
                 <Iconify
                   icon={PhoneIcon}
-                  className="flex-shrink-0 h-6 w-6 text-accent1 relative top-0.5 group-hover:text-accent1-light"
+                  className="flex-shrink-0 h-6 w-6 text-accent relative top-0.5 group-hover:text-accent-light"
                 />
                 {group2_p2}
               </p>
             </address>
           </div>
           <div>
-            <h3 className="border-l-2 border-accent1 pl-6 gallop-h3 !mb-0">
+            <h3 className="border-l-2 border-accent pl-6 gallop-h3 !mb-0">
               {group3_h3}
             </h3>
             <address className="border-l-2 border-gray-200 pl-6 pt-2 not-italic text-gray-600">
@@ -104,7 +103,7 @@ export const CoreGroupOurOffices = ({ data, className }: any) => {
               <p className="gallop-link [&>a]:!font-bold mt-3 flex gap-1 items-center group">
                 <Iconify
                   icon={PhoneIcon}
-                  className="flex-shrink-0 h-6 w-6 text-accent1 relative top-0.5 group-hover:text-accent1-light"
+                  className="flex-shrink-0 h-6 w-6 text-accent relative top-0.5 group-hover:text-accent-light"
                 />
                 {group3_p2}
               </p>
@@ -112,7 +111,7 @@ export const CoreGroupOurOffices = ({ data, className }: any) => {
           </div>
           {false && (
             <div>
-              <h3 className="border-l-2 border-accent1 pl-6 gallop-h3 !mb-0">
+              <h3 className="border-l-2 border-accent pl-6 gallop-h3 !mb-0">
                 {group4_h3}
               </h3>
               <address className="border-l-2 border-gray-200 pl-6 pt-2 not-italic text-gray-600">
@@ -120,7 +119,7 @@ export const CoreGroupOurOffices = ({ data, className }: any) => {
                 <p className="gallop-links [&>a]:!font-bold mt-3 flex gap-1 items-center group">
                   <Iconify
                     icon={PhoneIcon}
-                    className="flex-shrink-0 h-6 w-6 text-accent1 relative top-0.5 group-hover:text-accent1-light"
+                    className="flex-shrink-0 h-6 w-6 text-accent relative top-0.5 group-hover:text-accent-light"
                   />
                   {group4_p2}
                 </p>
@@ -148,21 +147,21 @@ export const CoreGroupSection2 = ({ data, className }: any) => {
   return (
     <div
       className={classNames(
-        'relative isolate overflow-hidden bg-gradient-to-b from-accent1/10 pt-14',
+        'relative isolate overflow-hidden bg-gradient-to-b from-accent/10 pt-14',
         'alignfull'
       )}
     >
       <div
         aria-hidden="true"
-        className="absolute inset-y-0 right-1/2 -z-10 -mr-96 w-[200%] origin-top-right skew-x-[-30deg] bg-white shadow-xl shadow-accent1/10 ring-1 ring-accent1/10 sm:-mr-80 lg:-mr-96"
+        className="absolute inset-y-0 right-1/2 -z-10 -mr-96 w-[200%] origin-top-right skew-x-[-30deg] bg-white shadow-xl shadow-accent/10 ring-1 ring-accent/10 sm:-mr-80 lg:-mr-96"
       />
       <div className="mx-auto max-w-screen-3xl px-6 py-32 sm:py-40 lg:px-8">
         <div className="mx-auto max-w-2xl lg:mx-0 lg:grid lg:max-w-none lg:grid-cols-2 lg:gap-x-16 lg:gap-y-8 xl:grid-cols-1 xl:grid-rows-1 xl:gap-x-8">
-          <h2 className="max-w-2xl text-balance text-4xl md:text-5xl lg:text-6xl font-bold text-contrast1 lg:col-span-2 xl:col-auto">
+          <h2 className="max-w-2xl text-balance text-4xl md:text-5xl lg:text-6xl font-bold text-contrast lg:col-span-2 xl:col-auto">
             {h2}
           </h2>
           <div className="mt-6 max-w-xl lg:mt-0 xl:col-end-1 xl:row-start-1">
-            <p className="text-contrast1 mb-7 !leading-relaxed text-lg font-normal sm:text-xl/8 [&>strong]:text-accent2">
+            <p className="text-contrast mb-7 !leading-relaxed text-lg font-normal sm:text-xl/8 [&>strong]:text-accent2">
               {p}
             </p>
             <div className="mt-10 flex flex-col items-center sm:items-start xl:items-center justify-start xl:flex-row gap-x-6 max-xl:gap-y-6">

@@ -217,7 +217,7 @@ export const CoreCoverTestimonials1 = ({ data, className }: any) => {
               </blockquote>
             </figure>
           </div>
-          <div className="flex flex-col border-t border-contrast1/30 pt-10 sm:pt-16 lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0 xl:pl-20">
+          <div className="flex flex-col border-t border-contrast/30 pt-10 sm:pt-16 lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0 xl:pl-20">
             <figure className="mt-0 flex flex-auto flex-col justify-between">
               <blockquote className="text-2xl text-gray-900 leading-relaxed">
                 {Object.entries(quote2).flatMap(
@@ -255,7 +255,7 @@ export const CoreCoverTestimonials1 = ({ data, className }: any) => {
           <div className="text-center mt-20">
             <a
               href={button1Href}
-              className="border-2 overflow-hidden inline-flex items-center border-accent1 bg-accent1 text-white hover:bg-primary-light rounded-md px-4 py-2 text-base font-normal shadow-sm"
+              className="border-2 overflow-hidden inline-flex items-center border-accent bg-accent text-white hover:bg-primary-light rounded-md px-4 py-2 text-base font-normal shadow-sm"
             >
               {button1}
             </a>
@@ -294,38 +294,35 @@ export const CoreCoverSection1 = ({ data, className }: any) => {
   return (
     <div
       className={classNames(
-        'relative isolate overflow-hidden bg-gradient-to-b from-accent1/10 pt-14',
+        'relative isolate overflow-hidden bg-gradient-to-b from-accent/10 pt-14',
         className
       )}
     >
       <div
         aria-hidden="true"
-        className="absolute inset-y-0 right-1/2 -z-10 -mr-96 w-[200%] origin-top-right skew-x-[-30deg] bg-white shadow-xl shadow-accent1/10 ring-1 ring-accent1/10 sm:-mr-80 lg:-mr-96"
+        className="absolute inset-y-0 right-1/2 -z-10 -mr-96 w-[200%] origin-top-right skew-x-[-30deg] bg-white shadow-xl shadow-accent/10 ring-1 ring-accent/10 sm:-mr-80 lg:-mr-96"
       />
       <div className="mx-auto max-w-screen-3xl px-6 py-32 sm:py-40 lg:px-8">
         <div className="mx-auto max-w-2xl lg:mx-0 lg:grid lg:max-w-none lg:grid-cols-2 lg:gap-x-16 lg:gap-y-8 xl:grid-cols-1 xl:grid-rows-1 xl:gap-x-8">
           {h2 && (
-            <h2 className="max-w-2xl text-balance text-4xl md:text-5xl lg:text-6xl font-bold text-contrast1 lg:col-span-2 xl:col-auto">
+            <h2 className="max-w-2xl text-balance text-4xl md:text-5xl lg:text-6xl font-bold text-contrast lg:col-span-2 xl:col-auto">
               {h2}
             </h2>
           )}
           <div className="mt-6 max-w-xl lg:mt-0 xl:col-end-1 xl:row-start-1">
             {p && (
-              <p className="text-contrast1 mb-7 !leading-relaxed text-lg font-normal sm:text-xl/8 [&>strong]:text-accent2">
+              <p className="text-contrast mb-7 !leading-relaxed text-lg font-normal sm:text-xl/8 [&>strong]:text-accent2">
                 {p}
               </p>
             )}
             <div className="mt-10 flex flex-col items-center sm:items-start xl:items-center justify-start xl:flex-row gap-x-6 max-xl:gap-y-6">
               <a
                 href={button1Href}
-                className="border-2 overflow-hidden inline-flex items-center border-accent1 bg-accent1 text-white hover:bg-primary-light rounded-md px-4 py-2 text-base font-normal shadow-sm"
+                className="border-2 overflow-hidden inline-flex items-center border-accent bg-accent text-white hover:bg-primary-light rounded-md px-4 py-2 text-base font-normal shadow-sm"
               >
                 {button1}
               </a>
-              <a
-                href={button2Href}
-                className="text-base font-bold text-accent1"
-              >
+              <a href={button2Href} className="text-base font-bold text-accent">
                 {button2} <span aria-hidden="true">→</span>
               </a>
             </div>
@@ -489,7 +486,7 @@ export const CoreCover = ({ data, className }: any) => {
             alt={imgProps.alt}
             title={imgProps.title}
           />
-          <span className="absolute inset-0 h-full bg-base1/90"></span>
+          <span className="absolute inset-0 h-full bg-body/90"></span>
         </>
       )}
       {backgroundImage && (
