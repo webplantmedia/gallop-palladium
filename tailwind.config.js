@@ -63,11 +63,11 @@ module.exports = {
       },
       colors: {
         primary: {
-          lighter: '#77565d',
-          light: '#634249',
-          main: '#58353b',
-          dark: '#44272d',
-          darker: '#2d171c',
+          lighter: '#6985a2',
+          light: '#4d6c8d',
+          main: '#304f70',
+          dark: '#203d5b',
+          darker: '#16304c',
           contrast: '#ffffff',
         },
         secondary: {
@@ -79,12 +79,12 @@ module.exports = {
           contrast: '#ffffff',
         },
         base: {
-          paper: '#ffffff',
+          paper: '#f7f7f7',
           darker: '#6b5c4c',
           dark: '#eed093',
-          body: '#fff1dc',
+          body: '#ffffff',
           light: '#ffe7bd',
-          card: '#f4e3c9',
+          card: '#cccccc',
           contrast: '#000000',
           contrast2: '#603813',
           disabled: '#936f4d',
