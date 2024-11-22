@@ -39,7 +39,7 @@ const GallopMilestone = ({ milestoneStr, index }: any) => {
 
 export const CoreGroupSection3 = ({ data, className, props }: BlockProps) => {
   let h2 = data?.h2?.jsx || Missing.H2();
-  let p = data?.p?.jsx || Missing.Paragraph;
+  let p = data?.p?.jsx || Missing.Paragraph();
   const button1 =
     data?.wpBlockButtons?.wpBlockButton?.a?.text || Missing.Button();
   const button2 =
