@@ -33,8 +33,6 @@ import {
   TagAnchor,
   CoreAudio,
   CoreEmbed,
-  CoreCover,
-  CoreCoverHero,
   coreCover,
   // GallopAlbumCover,
   // GallopSinglePost,
