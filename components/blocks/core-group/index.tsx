@@ -1,10 +1,12 @@
-import { CoreGroupSection1 } from './section-1';
-import { CoreGroupSection2 } from './section-2';
-import { CoreGroupSection3 } from './section-3';
-import { CoreGroupGrid } from './grid';
-import { CoreGroupCard1 } from './card-1';
-import { CoreGroupCard2 } from './card-2';
-import { CoreGroupHero1 } from './hero-1';
+import {
+  CoreGroupSection1,
+  CoreGroupSection2,
+  CoreGroupSection3,
+  CoreGroupCard1,
+  CoreGroupCard2,
+  CoreGroupHero1,
+  CoreGroupGrid,
+} from '@components/blocks';
 import { CoreGroupOurOffices } from './our-offices';
 import { CoreGroup } from './default';
 import { hasExactClass, getVarsFromNode, getVarsFromNode2 } from '@utils/tools';
