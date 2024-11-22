@@ -5,6 +5,7 @@ import { AnimatedNumber } from '@components/widgets/animated-number';
 import { extractMilestone } from '@utils/tools';
 import Iconify from '@components/iconify';
 import ArrowInsertIcon from '@iconify/icons-material-symbols/arrow-insert';
+import { H1, AccentHeading } from '@components/common';
 
 function StatListItem({ label, value }: { label: string; value: string }) {
   const data = extractMilestone(value);
@@ -45,13 +46,13 @@ export const CoreGroupHero2 = ({ data, className }: any) => {
       />
 
       <div className="w-full flex-auto !max-w-screen-3xl mx-auto">
-        <h1 className="gallop-accent-heading">
+        <AccentHeading as="h1" className="">
           {h1}
           <Iconify
             icon={ArrowInsertIcon}
             className="flex-shrink-0 h-auto w-7 rotate-180"
           />
-        </h1>
+        </AccentHeading>
         <h2
           className={classNames(
             'gallop-h1 !mt-6 [text-wrap:balance] max-w-[900px]'
