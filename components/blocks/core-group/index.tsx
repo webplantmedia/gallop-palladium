@@ -7,6 +7,8 @@ import {
   CoreGroupHero1,
   CoreGroupGrid,
   CoreGroupOurOffices1,
+  CoreGroupHeader1,
+  CoreGroupHeader2,
 } from '@components/blocks';
 import { CoreGroup } from './default';
 import { hasExactClass, getVarsFromNode, getVarsFromNode2 } from '@utils/tools';
@@ -50,6 +52,12 @@ export const coreGroup = (
   } else if (hasExactClass(className, 'is-style-card-2')) {
     const data = getVarsFromNode(domNode);
     return <CoreGroupCard2 data={data} className={className} props={props} />;
+  } else if (className?.includes('is-style-header-2')) {
+    const data = getVarsFromNode2(domNode);
+    return <CoreGroupHeader1 data={data} className={className} props={props} />;
+  } else if (className?.includes('is-style-header-1')) {
+    const data = getVarsFromNode2(domNode);
+    return <CoreGroupHeader2 data={data} className={className} props={props} />;
   }
 
   return (

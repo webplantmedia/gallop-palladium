@@ -98,6 +98,7 @@ module.exports = {
         accent: '#304f70',
         'accent-light': '#4b6989',
         'accent-dark': '#1d3a59',
+        'accent-gradient': '#776fff',
         accent2: '#ec2730',
         'accent2-light': '#ec2730',
         'accent2-dark': '#ec2730',

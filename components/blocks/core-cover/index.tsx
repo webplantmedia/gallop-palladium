@@ -5,7 +5,11 @@ import {
 } from '@utils/tools';
 import React, { Fragment } from 'react';
 import classNames from 'classnames';
-import { CoreHeading, CoreParagraph } from '@components/blocks';
+import {
+  CoreCoverHeader1,
+  CoreHeading,
+  CoreParagraph,
+} from '@components/blocks';
 import {
   CoreCoverHero1,
   CoreCoverSection1,
@@ -116,6 +120,9 @@ export const coreCover = (
   } else if (className?.includes('is-style-testimonials-1')) {
     const data = getVarsFromNode2(domNode);
     return <CoreCoverTestimonials1 data={data} className={className} />;
+  } else if (className?.includes('is-style-header-1')) {
+    const data = getVarsFromNode2(domNode);
+    return <CoreCoverHeader1 data={data} className={className} />;
   }
   const data = getData(domNode, options);
   return <CoreCover data={data} className={className} />;
