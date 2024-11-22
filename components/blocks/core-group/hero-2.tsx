@@ -45,23 +45,20 @@ export const CoreGroupHero2 = ({ data, className }: any) => {
       />
 
       <div className="w-full flex-auto !max-w-screen-3xl mx-auto">
-        <h1>
-          <span className="block font-normal font-bold text-2xl text-accent gallop-accent-heading">
-            {h1}
-            <Iconify
-              icon={ArrowInsertIcon}
-              className="flex-shrink-0 h-auto w-7 rotate-180"
-            />
-          </span>
-          <span className="sr-only"> - </span>
-          <span
-            className={classNames(
-              'mt-6 block max-w-5xl font-display text-5xl font-medium tracking-tight text-neutral-950 [text-wrap:balance] sm:text-6xl'
-            )}
-          >
-            {h2}
-          </span>
+        <h1 className="gallop-accent-heading">
+          {h1}
+          <Iconify
+            icon={ArrowInsertIcon}
+            className="flex-shrink-0 h-auto w-7 rotate-180"
+          />
         </h1>
+        <h2
+          className={classNames(
+            'gallop-h1 !mt-6 [text-wrap:balance] max-w-[900px]'
+          )}
+        >
+          {h2}
+        </h2>
         <div className={classNames('mt-6 max-w-3xl text-xl text-neutral-600')}>
           <p>{p1}</p>
           <div className="mt-10 max-w-2xl space-y-6 text-base">
