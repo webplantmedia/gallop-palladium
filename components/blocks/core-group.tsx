@@ -7,7 +7,7 @@ import {
   CoreGroupCard1,
   CoreGroupCard2,
   CoreGroupHero1,
-  coreGroupSection1,
+  CoreGroupSection1,
   CoreGroupSection3,
 } from '@components/blocks';
 import {
@@ -209,7 +209,8 @@ export const coreGroup = (
       </CoreGroupGrid>
     );
   } else if (hasExactClass(className, 'is-style-section-1')) {
-    return coreGroupSection1(domNode, options, className);
+    const data = getVarsFromNode2(domNode);
+    return <CoreGroupSection1 data={data} className={className} />;
   } else if (className?.includes('is-style-section-2')) {
     const data = getVarsFromNode2(domNode);
     return <CoreGroupSection2 data={data} className={className} />;

@@ -46,6 +46,16 @@ export function Image() {
     title: null,
   };
 }
+export function MilestoneData(tag: string = 'h4') {
+  return {
+    prefix: '$',
+    number: 999,
+    decimals: 0,
+    unit: 'M',
+    suffix: `*Missing ${tag}`,
+    error: '*:!text-red-500',
+  };
+}
 export function Milestone() {
   return <span className="text-red-500 font-bold">*Missing milestone</span>;
 }

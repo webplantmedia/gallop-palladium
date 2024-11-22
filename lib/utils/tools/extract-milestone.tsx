@@ -4,6 +4,7 @@ interface ExtractedMilestone {
   decimals: number;
   unit: string | null;
   suffix: string | null;
+  error?: string | null | boolean;
 }
 
 export function extractMilestone(input: string): ExtractedMilestone {
