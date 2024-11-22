@@ -31,6 +31,7 @@ export { CoreGroupSection2 } from './core-group/section-2';
 export { CoreGroupSection3 } from './core-group/section-3';
 export { CoreGroupOurOffices1 } from './core-group/our-offices-1';
 export { CoreGroupHero1 } from './core-group/hero-1';
+export { CoreGroupHero2 } from './core-group/hero-2';
 export { ParseBlocks } from './parse-blocks';
 export { DataIconText } from './data-icon-text';
 export { GallopIconText } from './gallop-icon-text';

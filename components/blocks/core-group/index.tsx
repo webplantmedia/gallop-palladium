@@ -5,6 +5,7 @@ import {
   CoreGroupCard1,
   CoreGroupCard2,
   CoreGroupHero1,
+  CoreGroupHero2,
   CoreGroupGrid,
   CoreGroupOurOffices1,
 } from '@components/blocks';
@@ -44,6 +45,9 @@ export const coreGroup = (
   } else if (hasExactClass(className, 'is-style-hero-1')) {
     const data = getVarsFromNode2(domNode);
     return <CoreGroupHero1 data={data} className={className} />;
+  } else if (hasExactClass(className, 'is-style-hero-2')) {
+    const data = getVarsFromNode2(domNode);
+    return <CoreGroupHero2 data={data} className={className} />;
   } else if (hasExactClass(className, 'is-style-card-1')) {
     const data = getVarsFromNode2(domNode);
     return <CoreGroupCard1 data={data} className={className} props={props} />;

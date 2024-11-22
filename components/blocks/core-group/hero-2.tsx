@@ -1,93 +1,49 @@
 import * as Missing from '@components/global/missing';
-import PhoneIcon from '@iconify/icons-carbon/phone';
-import Iconify from '@components/iconify';
+import classNames from 'classnames';
+import { GridPattern } from '@components/widgets/grid-pattern';
 
-export const CoreGroupOurOffices1 = ({ data, className }: any) => {
-  const h2 = data?.h2?.jsx || Missing.H2();
-  const p = data?.p?.jsx || Missing.Paragraph();
-  const group_h3 = data?.wpBlockGroup?.h3?.jsx || Missing.H3();
-  const group_p = data?.wpBlockGroup?.p?.jsx || Missing.Paragraph();
-  const group_p2 = data?.wpBlockGroup?.p_2?.jsx || Missing.Paragraph();
-  const group2_h3 = data?.wpBlockGroup_2?.h3?.jsx || Missing.H3();
-  const group2_p = data?.wpBlockGroup_2?.p?.jsx || Missing.Paragraph();
-  const group2_p2 = data?.wpBlockGroup_2?.p_2?.jsx || Missing.Paragraph();
-  const group3_h3 = data?.wpBlockGroup_3?.h3?.jsx || Missing.H3();
-  const group3_p = data?.wpBlockGroup_3?.p?.jsx || Missing.Paragraph();
-  const group3_p2 = data?.wpBlockGroup_3?.p_2?.jsx || Missing.Paragraph();
-  const group4_h3 = data?.wpBlockGroup_4?.h3?.jsx || Missing.H3();
-  const group4_p = data?.wpBlockGroup_4?.p?.jsx || Missing.Paragraph();
-  const group4_p2 = data?.wpBlockGroup_4?.p_2?.jsx || Missing.Paragraph();
-
+export const CoreGroupHero2 = ({ data, className }: any) => {
   return (
-    <div className="alignfull bg-white my-24 sm:my-32">
-      <div className="mx-auto max-w-screen-3xl px-6 lg:px-8">
-        <div className="mx-auto max-w-2xl lg:mx-0">
-          <h2 className="gallop-h2 !mb-2 !mt-0">{h2}</h2>
-          <p className="gallop-lead">{p}</p>
-        </div>
-        <div className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-8 text-base/7 sm:grid-cols-2 sm:gap-y-16 lg:mx-0 lg:max-w-none lg:grid-cols-4">
-          <div>
-            <h3 className="border-l-2 border-accent pl-6 gallop-h3 !mb-0">
-              {group_h3}
-            </h3>
-            <address className="border-l-2 border-gray-200 pl-6 pt-2 not-italic text-gray-600">
-              <p>{group_p}</p>
-              <p className="gallop-links [&>a]:!font-bold mt-3 flex gap-1 items-center group">
-                <Iconify
-                  icon={PhoneIcon}
-                  className="flex-shrink-0 h-6 w-6 text-accent relative top-0.5 group-hover:text-accent-light"
-                />
-                {group_p2}
-              </p>
-            </address>
+    <div className="wp-block-group alignfull">
+      <GridPattern
+        className="!max-w-none !px-0 absolute inset-x-0 -top-14 -z-10 h-[1000px] w-full fill-neutral-50 stroke-neutral-950/5 [mask-image:linear-gradient(to_bottom_left,white_40%,transparent_50%)]"
+        yOffset={-96}
+        interactive
+      />
+
+      <div className="w-full flex-auto !max-w-screen-3xl mx-auto">
+        <h1>
+          <span className="block font-display text-base font-semibold text-neutral-950">
+            About us
+          </span>
+          <span className="sr-only"> - </span>
+          <span
+            className={classNames(
+              'mt-6 block max-w-5xl font-display text-5xl font-medium tracking-tight text-neutral-950 [text-wrap:balance] sm:text-6xl'
+            )}
+          >
+            Our strength is collaboration
+          </span>
+        </h1>
+        <div className={classNames('mt-6 max-w-3xl text-xl text-neutral-600')}>
+          <p>
+            We believe that our strength lies in our collaborative approach,
+            which puts our clients at the center of everything we do.
+          </p>
+          <div className="mt-10 max-w-2xl space-y-6 text-base">
+            <p>
+              Studio was started by three friends who noticed that developer
+              studios were charging clients double what an in-house team would
+              cost. Since the beginning, we have been committed to doing things
+              differently by charging triple instead.
+            </p>
+            <p>
+              At Studio, we’re more than just colleagues — we’re a family. This
+              means we pay very little and expect people to work late. We want
+              our employees to bring their whole selves to work. In return, we
+              just ask that they keep themselves there until at least 6:30pm.
+            </p>
           </div>
-          <div>
-            <h3 className="border-l-2 border-accent pl-6 gallop-h3 !mb-0">
-              {group2_h3}
-            </h3>
-            <address className="border-l-2 border-gray-200 pl-6 pt-2 not-italic text-gray-600">
-              <p>{group2_p}</p>
-              <p className="gallop-links [&>a]:!no-underline [&>a]:!font-bold mt-3 flex gap-1 items-center group">
-                <Iconify
-                  icon={PhoneIcon}
-                  className="flex-shrink-0 h-6 w-6 text-accent relative top-0.5 group-hover:text-accent-light"
-                />
-                {group2_p2}
-              </p>
-            </address>
-          </div>
-          <div>
-            <h3 className="border-l-2 border-accent pl-6 gallop-h3 !mb-0">
-              {group3_h3}
-            </h3>
-            <address className="border-l-2 border-gray-200 pl-6 pt-2 not-italic text-gray-600">
-              <p>{group3_p}</p>
-              <p className="gallop-links [&>a]:!font-bold mt-3 flex gap-1 items-center group">
-                <Iconify
-                  icon={PhoneIcon}
-                  className="flex-shrink-0 h-6 w-6 text-accent relative top-0.5 group-hover:text-accent-light"
-                />
-                {group3_p2}
-              </p>
-            </address>
-          </div>
-          {false && (
-            <div>
-              <h3 className="border-l-2 border-accent pl-6 gallop-h3 !mb-0">
-                {group4_h3}
-              </h3>
-              <address className="border-l-2 border-gray-200 pl-6 pt-2 not-italic text-gray-600">
-                <p>{group4_p}</p>
-                <p className="gallop-links [&>a]:!font-bold mt-3 flex gap-1 items-center group">
-                  <Iconify
-                    icon={PhoneIcon}
-                    className="flex-shrink-0 h-6 w-6 text-accent relative top-0.5 group-hover:text-accent-light"
-                  />
-                  {group4_p2}
-                </p>
-              </address>
-            </div>
-          )}
         </div>
       </div>
     </div>
