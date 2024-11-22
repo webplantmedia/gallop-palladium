@@ -17,40 +17,26 @@ export const CoreGroupSection1 = ({ data, className, props }: BlockProps) => {
   const p_3 = data?.p_3 || Missing.Paragraph();
   const milestone1 = data?.h4?.text
     ? extractMilestone(data.h4.text)
-    : Missing.MilestoneData();
+    : Missing.MilestoneData('h4');
   const milestone2 = data?.h4_2?.text
     ? extractMilestone(data.h4_2.text)
-    : Missing.MilestoneData();
+    : Missing.MilestoneData('h4');
   const milestone3 = data?.h4_3?.text
     ? extractMilestone(data.h4_3.text)
-    : Missing.MilestoneData();
+    : Missing.MilestoneData('h4');
   const milestone4 = data?.h4_4?.text
     ? extractMilestone(data.h4_4.text)
-    : Missing.MilestoneData();
+    : Missing.MilestoneData('h4');
 
   return (
     <div className={classNames('alignwide overflow-hidden mt-16 mb-16')}>
-      <h2
-        className={classNames(
-          'mb-2 leading-tight text-4xl md:text-5xl lg:text-6xl text-base-contrast font-bold'
-        )}
-      >
-        {h2.jsx}
-      </h2>
-      <p className="has-x-large-font-size text-xl sm:text-2xl lg:text-3xl !mb-14 !leading-relaxed max-w-3xl ">
-        {p.jsx}
-      </p>
+      <h2 className={classNames('gallop-h2 !mb-2 !mt-0')}>{h2.jsx}</h2>
+      <p className="gallop-lead max-w-3xl ">{p.jsx}</p>
       <section className="mt-16 grid grid-cols-1 lg:grid-cols-2 lg:gap-12">
         <div className="max-w-lg">
-          <h2 className="mb-1 leading-tight text-2xl md:text-3xl text-primary-main font-medium">
-            {h3.jsx}
-          </h2>
-          <p className="mt-6 text-base-contrast mb-7 leading-normal">
-            {p_2.jsx}
-          </p>
-          <p className="mt-8 text-base-contrast mb-7 leading-normal">
-            {p_3.jsx}
-          </p>
+          <h3 className="gallop-h3 !mb-1">{h3.jsx}</h3>
+          <p className="gallop-p mt-6">{p_2.jsx}</p>
+          <p className="gallop-p mt-8">{p_3.jsx}</p>
         </div>
         <div className="pt-20 lg:row-span-2 lg:-mr-16 xl:mr-auto">
           <div className="-mx-8 grid grid-cols-2 gap-4 sm:-mx-16 sm:grid-cols-4 lg:mx-0 lg:grid-cols-2 lg:gap-4 xl:gap-8">
@@ -125,9 +111,7 @@ export const CoreGroupSection1 = ({ data, className, props }: BlockProps) => {
           </div>
         </div>
         <div className="max-lg:mt-16 lg:col-span-1">
-          <h3 className="mb-1 leading-tight text-2xl md:text-3xl text-primary-main font-medium">
-            {h3_2.jsx}
-          </h3>
+          <h3 className="gallop-h3 !mb-1">{h3_2.jsx}</h3>
           <hr className="mt-6 border-t border-base-contrast" />
           <dl className="mt-6 grid grid-cols-1 gap-x-8 gap-y-4 sm:grid-cols-2">
             <div
