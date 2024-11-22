@@ -2,7 +2,7 @@ import * as Missing from '@components/global/missing';
 import PhoneIcon from '@iconify/icons-carbon/phone';
 import Iconify from '@components/iconify';
 
-export const CoreGroupOurOffices = ({ data, className }: any) => {
+export const CoreGroupOurOffices1 = ({ data, className }: any) => {
   const h2 = data?.h2?.jsx || Missing.H2();
   const p = data?.p?.jsx || Missing.Paragraph();
   const group_h3 = data?.wpBlockGroup?.h3?.jsx || Missing.H3();
