@@ -1,15 +1,23 @@
 import * as Missing from '@components/global/missing';
 import classNames from 'classnames';
 import { GridPattern } from '@components/widgets/grid-pattern';
+import { AnimatedNumber } from '@components/widgets/animated-number';
+import { extractMilestone } from '@utils/tools';
+import Iconify from '@components/iconify';
+import ArrowInsertIcon from '@iconify/icons-material-symbols/arrow-insert';
 
 function StatListItem({ label, value }: { label: string; value: string }) {
+  const data = extractMilestone(value);
   return (
     <div className="flex flex-col-reverse">
       <dt className="border-l-2 border-gray-200 pl-8 py-4 mt-0 mb-0 text-base text-neutral-600">
         {label}
       </dt>
-      <dd className="border-l-2 border-accent pl-8 font-display text-3xl font-semibold text-neutral-950 sm:text-4xl">
-        {value}
+      <dd className="border-l-2 border-accent pl-8 font-display text-3xl sm:text-5xl text-6xl font-medium tracking-tight">
+        {data?.prefix && data.prefix}
+        <AnimatedNumber start={0} end={data.number} decimals={data.decimals} />
+        {data.unit}
+        {data.suffix}
       </dd>
     </div>
   );
@@ -21,18 +29,30 @@ export const CoreGroupHero2 = ({ data, className }: any) => {
   let p1 = data?.p?.jsx || Missing.Paragraph();
   let p2 = data?.p_2?.jsx || Missing.Paragraph();
   let p3 = data?.p_3?.jsx || Missing.Paragraph();
+  let itemValue1 = data?.wpBlockGroup?.h4?.jsx || Missing.H4();
+  let itemLabel1 = data?.wpBlockGroup?.p?.jsx || Missing.Paragraph();
+  let itemValue2 = data?.wpBlockGroup_2?.h4?.jsx || Missing.H4();
+  let itemLabel2 = data?.wpBlockGroup_2?.p?.jsx || Missing.Paragraph();
+  let itemValue3 = data?.wpBlockGroup_3?.h4?.jsx || Missing.H4();
+  let itemLabel3 = data?.wpBlockGroup_3?.p?.jsx || Missing.Paragraph();
 
   return (
     <div className="wp-block-group alignfull py-20">
       <GridPattern
-        className="!max-w-none !px-0 absolute inset-x-0 -top-14 -z-10 h-[1000px] w-full fill-accent/40 stroke-accent/10 [mask-image:linear-gradient(to_bottom_left,white_40%,transparent_50%)]"
+        className="!max-w-none !px-0 absolute inset-x-0 -top-14 -z-10 h-[1000px] w-full fill-accent/30 stroke-accent/10 [mask-image:linear-gradient(to_bottom_left,white_40%,transparent_50%)]"
         yOffset={-96}
         interactive
       />
 
       <div className="w-full flex-auto !max-w-screen-3xl mx-auto">
         <h1>
-          <span className="block font-display gallop-h1">{h1}</span>
+          <span className="block font-normal font-bold text-2xl text-accent gallop-accent-heading">
+            {h1}
+            <Iconify
+              icon={ArrowInsertIcon}
+              className="flex-shrink-0 h-auto w-7 rotate-180"
+            />
+          </span>
           <span className="sr-only"> - </span>
           <span
             className={classNames(
@@ -51,9 +71,9 @@ export const CoreGroupHero2 = ({ data, className }: any) => {
         </div>
         <div className="!px-0 max-w-7xl px-6 lg:px-8 mt-16">
           <dl className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:auto-cols-fr lg:grid-flow-col lg:grid-cols-none">
-            <StatListItem value="35" label="Underpaid employees" />
-            <StatListItem value="52" label="Placated clients" />
-            <StatListItem value="$25M" label="Invoices billed" />
+            <StatListItem value={itemValue1} label={itemLabel1} />
+            <StatListItem value={itemValue2} label={itemLabel2} />
+            <StatListItem value={itemValue3} label={itemLabel3} />
           </dl>
         </div>
       </div>
