@@ -7,7 +7,7 @@ import React, { Fragment } from 'react';
 import classNames from 'classnames';
 import { CoreHeading, CoreParagraph } from '@components/blocks';
 import {
-  CoreCoverHero,
+  CoreCoverHero1,
   CoreCoverSection1,
   CoreCoverTestimonials1,
   CoreCover,
@@ -107,9 +107,9 @@ export const coreCover = (
   options: HTMLReactParserOptions,
   className: string
 ) => {
-  if (className?.includes('is-style-hero')) {
+  if (className?.includes('is-style-hero-1')) {
     const data = getVarsFromNode2(domNode);
-    return <CoreCoverHero data={data} className={className} />;
+    return <CoreCoverHero1 data={data} className={className} />;
   } else if (className?.includes('is-style-section-1')) {
     const data = getVarsFromNode2(domNode);
     return <CoreCoverSection1 data={data} className={className} />;

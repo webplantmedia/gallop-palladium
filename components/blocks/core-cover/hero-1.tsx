@@ -4,7 +4,7 @@ import Iconify from '@components/iconify';
 import { VideoPopup } from '@components/widgets/video-popup';
 import PlaySolidIcon from '@iconify/icons-heroicons/play-solid';
 
-export const CoreCoverHero = ({ data, className }: any) => {
+export const CoreCoverHero1 = ({ data, className }: any) => {
   const backgroundStyle = data?.wpBlockCoverImageBackground?.style
     ? styleStringToObject(data.wpBlockCoverImageBackground.style)
     : {};
