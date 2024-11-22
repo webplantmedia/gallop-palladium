@@ -19,10 +19,10 @@ export const CoreGroupOurOffices = ({ data, className }: any) => {
   const group4_p2 = data?.wpBlockGroup_4?.p_2?.jsx || Missing.Paragraph();
 
   return (
-    <div className="alignfull bg-white py-24 sm:py-32">
+    <div className="alignfull bg-white my-24 sm:my-32">
       <div className="mx-auto max-w-screen-3xl px-6 lg:px-8">
         <div className="mx-auto max-w-2xl lg:mx-0">
-          <h2 className="gallop-h2 !mb-2">{h2}</h2>
+          <h2 className="gallop-h2 !mb-2 !mt-0">{h2}</h2>
           <p className="gallop-lead">{p}</p>
         </div>
         <div className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-8 text-base/7 sm:grid-cols-2 sm:gap-y-16 lg:mx-0 lg:max-w-none lg:grid-cols-4">
