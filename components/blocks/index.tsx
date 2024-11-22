@@ -45,3 +45,6 @@ export { GallopSidebar, gallopSidebar } from './gallop-sidebar';
 export { GallopExcerptPost, gallopExcerptPost } from './gallop-excerpt-post';
 export { GallopMap, gallopMap } from './gallop-map';
 export { GallopMapClient } from './gallop-map-client';
+export { CoreGroupHeader1 } from './core-group/header-1';
+export { CoreCoverHeader1 } from './core-cover/header-1';
+export { CoreGroupHeader2 } from './core-group/header-2';

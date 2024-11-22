@@ -253,3 +253,6 @@ figcaption > a,
 .gallop-links {
   @apply [&>a]:!text-accent [&>a]:hover:!text-accent-light [&>a]:!no-underline;
 }
+.gallop-hero-intro {
+  @apply !text-2xl !leading-relaxed max-w-[700px];
+}
