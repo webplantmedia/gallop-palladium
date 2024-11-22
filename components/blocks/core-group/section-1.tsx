@@ -9,12 +9,12 @@ export const CoreGroupSection1 = ({ data, className, props }: BlockProps) => {
   const img2 = data?.wpBlockGallery?.wpBlockImage_2?.img || Missing.Image();
   const img3 = data?.wpBlockGallery?.wpBlockImage_3?.img || Missing.Image();
   const img4 = data?.wpBlockGallery?.wpBlockImage_4?.img || Missing.Image();
-  const h2 = data?.h2 || Missing.H2();
-  const p = data?.p || Missing.Paragraph();
-  const h3 = data?.h3 || Missing.H3();
-  const p_2 = data?.p_2 || Missing.Paragraph();
-  const h3_2 = data?.h3_2 || Missing.H3();
-  const p_3 = data?.p_3 || Missing.Paragraph();
+  const h2 = data?.h2?.jsx || Missing.H2();
+  const p = data?.p?.jsx || Missing.Paragraph();
+  const h3 = data?.h3?.jsx || Missing.H3();
+  const p_2 = data?.p_2?.jsx || Missing.Paragraph();
+  const h3_2 = data?.h3_2?.jsx || Missing.H3();
+  const p_3 = data?.p_3?.jsx || Missing.Paragraph();
   const milestone1 = data?.h4?.text
     ? extractMilestone(data.h4.text)
     : Missing.MilestoneData('h4');
@@ -29,14 +29,14 @@ export const CoreGroupSection1 = ({ data, className, props }: BlockProps) => {
     : Missing.MilestoneData('h4');
 
   return (
-    <div className={classNames('alignwide overflow-hidden mt-16 mb-16')}>
-      <h2 className={classNames('gallop-h2 !mb-2 !mt-0')}>{h2.jsx}</h2>
-      <p className="gallop-lead max-w-3xl ">{p.jsx}</p>
+    <div className={classNames('alignwide overflow-hidden pt-16 pb-16')}>
+      <h2 className={classNames('gallop-h2 !mb-2 !mt-0')}>{h2}</h2>
+      <p className="gallop-lead max-w-3xl ">{p}</p>
       <section className="mt-16 grid grid-cols-1 lg:grid-cols-2 lg:gap-12">
         <div className="max-w-lg">
-          <h3 className="gallop-h3 !mb-1">{h3.jsx}</h3>
-          <p className="gallop-p mt-6">{p_2.jsx}</p>
-          <p className="gallop-p mt-8">{p_3.jsx}</p>
+          <h3 className="gallop-h3 !mb-1">{h3}</h3>
+          <p className="gallop-p mt-6">{p_2}</p>
+          <p className="gallop-p mt-8">{p_3}</p>
         </div>
         <div className="pt-20 lg:row-span-2 lg:-mr-16 xl:mr-auto">
           <div className="-mx-8 grid grid-cols-2 gap-4 sm:-mx-16 sm:grid-cols-4 lg:mx-0 lg:grid-cols-2 lg:gap-4 xl:gap-8">
