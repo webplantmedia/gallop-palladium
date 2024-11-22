@@ -87,7 +87,7 @@ export const CoreGroupHero1 = ({ data, className }: BlockProps) => {
           <img
             className={classNames(
               imgProps.className,
-              '!max-w-full !p-0 box-border absolute inset-0 object-cover h-full object-center'
+              'w-full !max-w-full !p-0 box-border absolute inset-0 object-cover h-full object-center'
             )}
             loading="lazy"
             src={imgProps.src}
@@ -102,7 +102,7 @@ export const CoreGroupHero1 = ({ data, className }: BlockProps) => {
         )}
         {backgroundImage && (
           <div
-            className="absolute inset-0 bg-cover bg-no-repeat bg-center bg-fixed"
+            className="!p-0 !max-w-full absolute inset-0 bg-cover bg-no-repeat bg-center bg-fixed"
             style={{
               backgroundImage: backgroundImage,
             }}
