@@ -19,6 +19,7 @@ import CurrentDate from '@widgets/current-date';
 import PlaySolidIcon from '@iconify/icons-heroicons/play-solid';
 import { VideoPopup } from '@widgets/video-popup';
 import { BlockProps } from '@lib/types';
+import { objectMap } from '@utils/objectMap';
 
 export const CoreGroupHero1 = ({ data, className }: BlockProps) => {
   className = tailwindAlignClasses(className);
@@ -64,6 +65,10 @@ export const CoreGroupHero1 = ({ data, className }: BlockProps) => {
     data?.wpBlockCover?.wpBlockCoverInnerContainer?.wpBlockEmbed || null;
 
   circleText += ' - ' + circleText + ' - ';
+
+  const test = objectMap(slideItems2, (key, slide, index) => {
+    console.log('slide', slide);
+  });
 
   return (
     <>
