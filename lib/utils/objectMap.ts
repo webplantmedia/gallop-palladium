@@ -1,10 +1,13 @@
 export function objectMap<T, U>(
-  obj: Record<string, T> | null | undefined, // Allow null or undefined input
-  callback: (key: string, value: T, index: number) => U | null | undefined
-): U[] | null {
-  // Check if the input is an object
+  obj: T | null | undefined,
+  callback: (
+    key: string, // Force key to always be a string
+    value: T[keyof T],
+    index: number
+  ) => U | null | undefined
+): U[] {
   if (!obj || typeof obj !== 'object' || Array.isArray(obj)) {
-    return null; // Return null if obj is not a valid object
+    return [];
   }
 
   const results: U[] = [];
@@ -12,7 +15,7 @@ export function objectMap<T, U>(
 
   for (const key in obj) {
     if (Object.prototype.hasOwnProperty.call(obj, key)) {
-      const result = callback(key, obj[key], index++);
+      const result = callback(key, obj[key], index++); // Key is now string
       if (result != null) {
         results.push(result);
       }

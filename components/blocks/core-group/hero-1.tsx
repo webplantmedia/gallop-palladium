@@ -23,118 +23,91 @@ import { objectMap } from '@utils/objectMap';
 
 export const CoreGroupHero1 = ({ data, className }: BlockProps) => {
   className = tailwindAlignClasses(className);
+  let wpBlockCover = data?.wpBlockCover;
   let swiperId = 'swiper-' + useId(); // Generate a unique ID
   let circleTextId = 'circle-text-' + useId(); // Generate a unique ID
   swiperId = swiperId.replace(/:/g, '-'); // Sanitize the ID
   circleTextId = circleTextId.replace(/:/g, '-'); // Sanitize the ID
+  let videoUrl =
+    data?.wpBlockCover?.wpBlockCoverInnerContainer?.wpBlockButtons
+      ?.wpBlockButton?.a?.href;
 
   let circleText =
     data?.wpBlockCover?.wpBlockCoverInnerContainer?.wpBlockButtons
       ?.wpBlockButton?.a?.text;
-  let videoUrl =
-    data?.wpBlockCover?.wpBlockCoverInnerContainer?.wpBlockButtons
-      ?.wpBlockButton?.a?.href;
-  let videoSrc = data?.wpBlockCover?.wpBlockCoverVideoBackground?.src;
-  let overlayClasses =
-    data?.wpBlockCover?.wpBlockCoverBackground?.className || '';
-
-  const backgroundStyle = data?.wpBlockCover?.wpBlockCoverImageBackground?.style
-    ? styleStringToObject(data.wpBlockCover.wpBlockCoverImageBackground.style)
-    : {};
-  let backgroundImageCss = backgroundStyle?.backgroundImage
-    ? backgroundStyle.backgroundImage
-    : null;
-  let imgProps = data?.wpBlockCover?.wpBlockCoverImageBackground || {};
-  let slideItems2 =
-    data?.wpBlockCover?.wpBlockCoverInnerContainer?.gallopSlides;
-  let slideItems =
-    data?.wpBlockCover?.wpBlockCoverInnerContainer?.gallopSlides?.gallopSlide;
+  let slideItems = data?.wpBlockCover?.wpBlockCoverInnerContainer?.gallopSlides;
   let times =
     data?.wpBlockGroup?.gallopOpeningTimes?.wpBlockCoverInnerContainer?.h2;
   let tbody =
     data?.wpBlockGroup?.gallopOpeningTimes?.wpBlockCoverInnerContainer
       ?.wpBlockTable?.table?.tbody || null;
-  let info =
-    data?.wpBlockGroup?.gallopInfo?.wpBlockCoverInnerContainer?.wpBlockGroup;
   let infoImg = data?.wpBlockGroup?.gallopInfo?.wpBlockCoverImageBackground;
 
-  let info2 =
-    data?.wpBlockGroup?.gallopInfo?.wpBlockCoverInnerContainer || null;
+  let info = data?.wpBlockGroup?.gallopInfo?.wpBlockCoverInnerContainer || null;
 
   const embed =
     data?.wpBlockCover?.wpBlockCoverInnerContainer?.wpBlockEmbed || null;
 
   circleText += ' - ' + circleText + ' - ';
-
-  const test = objectMap(slideItems2, (key, slide, index) => {
-    console.log('slide', slide);
-  });
+  console.log(slideItems);
 
   return (
     <>
       <Alignment align="full">
         <div className="relative">
-          <BackgroundMedia
-            videoSrc={videoSrc}
-            imgProps={imgProps}
-            backgroundImageCss={backgroundImageCss}
-            opacity="bg-black/60"
-          />
+          <BackgroundMedia wpBlockCover={wpBlockCover} opacity="bg-black/60" />
           <Container className="relative flex flex-col xl:flex-row py-32">
             <div className="w-full xl:w-7/12 flex justify-center">
               <div id={swiperId} className="swiper max-w-[950px] xl:max-w-none">
                 <div className="swiper-wrapper items-start flex mb-20">
-                  {slideItems2 &&
-                    Object.entries(slideItems2).flatMap(
-                      ([key, slide]: [string, any], index: number) => {
-                        if (!key.startsWith('gallopSlide')) {
-                          return []; //null doesn't skip
-                        }
-                        return (
-                          <div
-                            key={`hero-1-slide-${index}`}
-                            className="swiper-slide"
-                          >
-                            <div className="flex flex-col gap-10">
-                              {slide?.h4?.jsx && (
-                                <strong className="mb-0 font-accent !leading-tight text-2xl text-white tracking-[0.3em] uppercase font-normal flex flex-row gap-[0.5em] items-center">
-                                  {slide.h4.jsx}
-                                  <Iconify
-                                    icon={ArrowLongRightIcon}
-                                    className="flex-shrink-0 h-auto w-10"
-                                  />
-                                </strong>
+                  {objectMap(slideItems, (key, slide, index) => {
+                    if (!key.startsWith('gallopSlide')) {
+                      return null;
+                    }
+                    return (
+                      <div
+                        key={`hero-1-slide-${index}`}
+                        className="swiper-slide"
+                      >
+                        <div className="flex flex-col gap-10">
+                          {slide?.h4?.jsx && (
+                            <strong className="mb-0 font-accent !leading-tight text-2xl text-white tracking-[0.3em] uppercase font-normal flex flex-row gap-[0.5em] items-center">
+                              {slide.h4.jsx}
+                              <Iconify
+                                icon={ArrowLongRightIcon}
+                                className="flex-shrink-0 h-auto w-10"
+                              />
+                            </strong>
+                          )}
+                          {slide?.h1?.strong?.jsx && (
+                            <h1 className="mb-0 !leading-tight text-5xl md:text-6xl lg:text-6xl 3xl:text-7xl text-white font-bold">
+                              {slide.h1.strong.jsx}
+                              {slide.h1?.em?.jsx && (
+                                <span className="text-stroke text-stroke-white block">
+                                  {slide.h1.em.jsx}
+                                </span>
                               )}
-                              {slide?.h1?.strong?.jsx && (
-                                <h1 className="mb-0 !leading-tight text-5xl md:text-6xl lg:text-6xl 3xl:text-7xl text-white font-bold">
-                                  {slide.h1.strong.jsx}
-                                  {slide.h1?.em?.jsx && (
-                                    <span className="text-stroke text-stroke-white block">
-                                      {slide.h1.em.jsx}
-                                    </span>
-                                  )}
-                                </h1>
+                            </h1>
+                          )}
+                          {slide?.h2?.strong?.jsx && (
+                            <h2 className="mb-0 !leading-tight text-5xl md:text-6xl lg:text-6xl 3xl:text-7xl text-white font-bold">
+                              {slide.h2.strong.jsx}
+                              {slide.h2?.em?.jsx && (
+                                <span className="text-stroke text-stroke-white block">
+                                  {slide.h2.em.jsx}
+                                </span>
                               )}
-                              {slide?.h2?.strong?.jsx && (
-                                <h2 className="mb-0 !leading-tight text-5xl md:text-6xl lg:text-6xl 3xl:text-7xl text-white font-bold">
-                                  {slide.h2.strong.jsx}
-                                  {slide.h2?.em?.jsx && (
-                                    <span className="text-stroke text-stroke-white block">
-                                      {slide.h2.em.jsx}
-                                    </span>
-                                  )}
-                                </h2>
-                              )}
-                              {slide?.p?.jsx && (
-                                <p className="mb-0 text-xl font-bold !leading-relaxed text-white max-w-[700px]">
-                                  {slide?.p?.jsx}
-                                </p>
-                              )}
-                            </div>
-                          </div>
-                        );
-                      }
-                    )}
+                            </h2>
+                          )}
+                          {slide?.p?.jsx && (
+                            <p className="mb-0 text-xl font-bold !leading-relaxed text-white max-w-[700px]">
+                              {slide?.p?.jsx}
+                            </p>
+                          )}
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
                 <div className="z-10 absolute bottom-0 left-0 swiper-pagination flex justify-end [&>.swiper-pagination-bullet]:cursor-pointer [&>.swiper-pagination-bullet:last-child]:after:content-none [&>.swiper-pagination-bullet]:after:px-3 [&>.swiper-pagination-bullet]:after:content-['/'] [&>.swiper-pagination-bullet]:text-white [&>.swiper-pagination-bullet-active]:!text-primary-main text-lg [&>.swiper-pagination-bullet-active>span]:!rounded-sm [&>.swiper-pagination-bullet-active]:!flex [&>.swiper-pagination-bullet-active>span]:!px-2 [&>.swiper-pagination-bullet-active>span]:!block [&>.swiper-pagination-bullet-active>span]:!bg-primary-contrast [&>.swiper-pagination-bullet]:after:font-normal [&>.swiper-pagination-bullet]:after:text-white"></div>
               </div>
@@ -200,97 +173,89 @@ export const CoreGroupHero1 = ({ data, className }: BlockProps) => {
                 {times?.text}
               </h2>
               <div className="min-w-full divide-y divide-white/10">
-                {tbody &&
-                  Object.entries(tbody).flatMap(
-                    ([key, tr]: [string, any], index: number) => {
-                      if (!key.startsWith('tr')) {
-                        return []; //null doesn't skip
-                      }
-                      const dayId = permalink(tr?.td?.text);
-                      return (
-                        <div
-                          key={`times-tr-${index}`}
-                          className="w-full flex flex-wrap justify-between whitespace-nowrap px-0 py-4 text-base text-white align-top"
-                        >
-                          {tr.td_3?.text && (
-                            <span className="block text-left w-full italic text-white/60 text-base">
-                              {tr.td_3.text}
-                            </span>
-                          )}
-                          <span>
-                            {tr?.td?.text}{' '}
-                            <span className="text-white/60">
-                              <CurrentDate dayString={dayId} />
-                            </span>
-                          </span>
-                          <span>{tr?.td_2?.text}</span>
-                          <CurrentTime
-                            dayOfWeek={dayId}
-                            timeRange={tr?.td_2?.text}
-                          />
-                        </div>
-                      );
-                    }
-                  )}
+                {objectMap(tbody, (key, tr, index) => {
+                  if (!key.startsWith('tr')) {
+                    return []; //null doesn't skip
+                  }
+                  const dayId = permalink(tr?.td?.text);
+                  return (
+                    <div
+                      key={`times-tr-${index}`}
+                      className="w-full flex flex-wrap justify-between whitespace-nowrap px-0 py-4 text-base text-white align-top"
+                    >
+                      {tr.td_3?.text && (
+                        <span className="block text-left w-full italic text-white/60 text-base">
+                          {tr.td_3.text}
+                        </span>
+                      )}
+                      <span>
+                        {tr?.td?.text}{' '}
+                        <span className="text-white/60">
+                          <CurrentDate dayString={dayId} />
+                        </span>
+                      </span>
+                      <span>{tr?.td_2?.text}</span>
+                      <CurrentTime
+                        dayOfWeek={dayId}
+                        timeRange={tr?.td_2?.text}
+                      />
+                    </div>
+                  );
+                })}
               </div>
             </div>
             <div className="w-full xl:w-8/12 flex flex-col xl:flex-row gap-4 sm:gap-10 xl:gap-0 mb-4 sm:mb-10 xl:mb-0">
-              {info2 &&
-                Object.entries(info2).flatMap(
-                  ([key, item]: [string, any], index: number) => {
-                    if (!key.startsWith('wpBlockGroup')) {
-                      return []; //null doesn't skip
-                    }
+              {objectMap(info, (key, item, index) => {
+                if (!key.startsWith('wpBlockGroup')) {
+                  return null;
+                }
 
-                    return (
-                      <a
-                        href={item.p?.a?.href}
-                        key={`info-item-${index}`}
-                        className={classNames(
-                          'py-20 px-12 text-white w-full xl:w-1/3 flex flex-col gap-4 sm:gap-10 shrink-0 hover:!bg-white/10 justify-center items-center xl:items-start rounded-md xl:rounded-none'
-                        )}
-                        style={{
-                          backgroundColor: `rgba(255,255,255,0.0${index + 1})`,
-                        }}
-                      >
-                        {item?.pre?.code?.text === 'icon-phone' && (
-                          <div className="w-20 h-20 flex items-center justify-center bg-primary-main rounded-full">
-                            <Iconify
-                              icon={PhoneIcon}
-                              className="flex-shrink-0 h-auto w-10 text-white"
-                            />
-                          </div>
-                        )}
-                        {item?.pre?.code?.text === 'icon-email' && (
-                          <div className="w-20 h-20 flex items-center justify-center bg-primary-main rounded-full">
-                            <Iconify
-                              icon={EnvelopeIcon}
-                              className="flex-shrink-0 h-auto w-10 text-white"
-                            />
-                          </div>
-                        )}
-                        {item?.pre?.code?.text === 'icon-public' && (
-                          <div className="w-20 h-20 flex items-center justify-center bg-primary-main rounded-full">
-                            <Iconify
-                              icon={BuildingOfficeIcon}
-                              className="flex-shrink-0 h-auto w-10 text-white"
-                            />
-                          </div>
-                        )}
-                        <h3 className="text-2xl flex">
-                          {item.h4?.text}
-                          <Iconify
-                            icon={ArrowInsertIcon}
-                            className="flex-shrink-0 h-auto w-8 text-white rotate-90"
-                          />
-                        </h3>
-                        <p className="text-white/50 text-lg">
-                          {item.p?.a?.text}
-                        </p>
-                      </a>
-                    );
-                  }
-                )}
+                return (
+                  <a
+                    href={item.p?.a?.href}
+                    key={`info-item-${index}`}
+                    className={classNames(
+                      'py-20 px-12 text-white w-full xl:w-1/3 flex flex-col gap-4 sm:gap-10 shrink-0 hover:!bg-white/10 justify-center items-center xl:items-start rounded-md xl:rounded-none'
+                    )}
+                    style={{
+                      backgroundColor: `rgba(255,255,255,0.0${index + 1})`,
+                    }}
+                  >
+                    {item?.pre?.code?.text === 'icon-phone' && (
+                      <div className="w-20 h-20 flex items-center justify-center bg-primary-main rounded-full">
+                        <Iconify
+                          icon={PhoneIcon}
+                          className="flex-shrink-0 h-auto w-10 text-white"
+                        />
+                      </div>
+                    )}
+                    {item?.pre?.code?.text === 'icon-email' && (
+                      <div className="w-20 h-20 flex items-center justify-center bg-primary-main rounded-full">
+                        <Iconify
+                          icon={EnvelopeIcon}
+                          className="flex-shrink-0 h-auto w-10 text-white"
+                        />
+                      </div>
+                    )}
+                    {item?.pre?.code?.text === 'icon-public' && (
+                      <div className="w-20 h-20 flex items-center justify-center bg-primary-main rounded-full">
+                        <Iconify
+                          icon={BuildingOfficeIcon}
+                          className="flex-shrink-0 h-auto w-10 text-white"
+                        />
+                      </div>
+                    )}
+                    <h3 className="text-2xl flex">
+                      {item.h4?.text}
+                      <Iconify
+                        icon={ArrowInsertIcon}
+                        className="flex-shrink-0 h-auto w-8 text-white rotate-90"
+                      />
+                    </h3>
+                    <p className="text-white/50 text-lg">{item.p?.a?.text}</p>
+                  </a>
+                );
+              })}
             </div>
           </Container>
         </div>
