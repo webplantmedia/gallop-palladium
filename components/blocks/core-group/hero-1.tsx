@@ -69,9 +69,6 @@ export const CoreGroupHero1 = ({ data, className }: BlockProps) => {
               <div id={swiperId} className="swiper max-w-[950px] xl:max-w-none">
                 <div className="swiper-wrapper items-start flex mb-20">
                   {objectMap(slideItems, (key, slide, index) => {
-                    if (!key.startsWith('gallopSlide')) {
-                      return null;
-                    }
                     return (
                       <div
                         key={`hero-1-slide-${index}`}
@@ -194,9 +191,6 @@ export const CoreGroupHero1 = ({ data, className }: BlockProps) => {
               </h3>
               <div className="min-w-full divide-y divide-white/10">
                 {objectMap(tbody, (key, tr, index) => {
-                  if (!key.startsWith('tr')) {
-                    return []; //null doesn't skip
-                  }
                   const dayId = permalink(tr?.td?._text);
                   return (
                     <div
@@ -226,10 +220,6 @@ export const CoreGroupHero1 = ({ data, className }: BlockProps) => {
             </div>
             <div className="w-full xl:w-8/12 flex flex-col xl:flex-row gap-4 sm:gap-10 xl:gap-0 mb-4 sm:mb-10 xl:mb-0">
               {objectMap(info, (key, item, index) => {
-                if (!key.startsWith('wpBlockGroup')) {
-                  return null;
-                }
-
                 return (
                   <a
                     href={item.p?.a?.href}
