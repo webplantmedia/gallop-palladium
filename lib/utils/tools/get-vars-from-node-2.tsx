@@ -41,8 +41,6 @@ function getImportantClassName(classList: string) {
 }
 
 export function getVarsFromNode2(node: any): Record<string, any> {
-  // console.log('\nNODE', serializer(node));
-
   let data: Record<string, any> = {};
 
   const saveNestedObject = (parts: Array<string>, value: any) => {
@@ -69,52 +67,46 @@ export function getVarsFromNode2(node: any): Record<string, any> {
   };
 
   function getTextFromJSX(jsx: ReactNode): string {
-    // If it's a string, return it
     if (typeof jsx === 'string') {
       return jsx;
     }
-
-    // If it's a React element, process its children recursively
     if (React.isValidElement(jsx)) {
       const element = jsx as ReactElement;
       return React.Children.toArray(element.props.children)
-        .map(getTextFromJSX) // Recursively get text from children
-        .join(''); // Join the text content
+        .map(getTextFromJSX)
+        .join('');
     }
-
-    // If it's an object (like nested JSX), process it recursively
     if (Array.isArray(jsx)) {
-      return jsx.map(getTextFromJSX).join(''); // Handle arrays of children
+      return jsx.map(getTextFromJSX).join('');
     }
-
-    // Return an empty string for other non-text elements
     return '';
   }
 
   const saveJSX = (path: Array<string>, domNode: any) => {
     const jsx = domToReact(domNode.children as DOMNode[]);
-    path.push('jsx');
+    path.push('_jsx'); // Prepend with dollar sign
     saveNestedObject(path, jsx);
     path.pop();
-    path.push('text');
+    path.push('_text'); // Prepend with dollar sign
     const text = getTextFromJSX(jsx);
     saveNestedObject(path, text);
     path.pop();
-    // if (domNode.name) {
-    // path.push('tag');
-    // saveNestedObject(path, domNode.name);
-    // path.pop();
-    // }
   };
 
   function handleNode(domNode: any, index: number, path: Array<string>) {
     path = path.slice(0, index);
 
     if (domNode instanceof Element && domNode.attribs) {
-      let value: any = { ...domNode.attribs };
-      if (value?.class) {
-        value.className = value.class;
-        delete value.class;
+      let value: any = {};
+
+      // Prefix attributes with an underscore
+      for (const attr in domNode.attribs) {
+        value[`_${attr}`] = domNode.attribs[attr];
+      }
+
+      if (value?._class) {
+        value._className = value._class;
+        delete value._class;
       }
 
       if (domNode?.tagName) {
@@ -125,8 +117,8 @@ export function getVarsFromNode2(node: any): Record<string, any> {
           )
         ) {
           key = domNode.tagName;
-        } else if (value.className) {
-          let classKey = getImportantClassName(value.className);
+        } else if (value._className) {
+          let classKey = getImportantClassName(value._className);
           if (classKey.length) {
             key = classKey;
           }
@@ -186,9 +178,6 @@ export function getVarsFromNode2(node: any): Record<string, any> {
     return <></>;
   }
 
-  // const options: HTMLReactParserOptions = ;
-
-  // Parse the node using html-react-parser
   domToReact(node.children as DOMNode[], {
     replace: (child) => handleNode(child, 0, []),
   });

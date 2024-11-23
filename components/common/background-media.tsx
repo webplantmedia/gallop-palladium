@@ -4,15 +4,15 @@ import React from 'react';
 import { styleStringToObject } from '@utils/tools';
 
 interface ScrollingImage {
-  src: string; // The image source URL
-  width?: string | number; // Width as a string or number
-  height?: string | number; // Height as a string or number
-  className?: string; // Additional classes for styling
-  style?: string; // Inline styles as a string or object
-  srcSet?: string; // For responsive images
-  sizes?: string; // Sizes attribute for responsive images
-  alt?: string; // Alt text for the image
-  title?: string; // Title attribute for the image
+  _src: string; // The image source URL
+  _width?: string | number; // Width as a string or number
+  _height?: string | number; // Height as a string or number
+  _className?: string; // Additional classes for styling
+  _style?: string; // Inline styles as a string or object
+  _srcSet?: string; // For responsive images
+  _sizes?: string; // Sizes attribute for responsive images
+  _alt?: string; // Alt text for the image
+  _title?: string; // Title attribute for the image
 }
 
 export const BackgroundMedia = ({
@@ -25,9 +25,9 @@ export const BackgroundMedia = ({
   opacity?: string | null;
 }) => {
   let videoSrc: string | null =
-    wpBlockCover?.wpBlockCoverVideoBackground?.src || null;
-  const backgroundStyle: any = wpBlockCover?.wpBlockCoverImageBackground?.style
-    ? styleStringToObject(wpBlockCover.wpBlockCoverImageBackground.style)
+    wpBlockCover?.wpBlockCoverVideoBackground?._src || null;
+  const backgroundStyle: any = wpBlockCover?.wpBlockCoverImageBackground?._style
+    ? styleStringToObject(wpBlockCover.wpBlockCoverImageBackground._style)
     : {};
   let fixedImage: string | null = backgroundStyle?.backgroundImage
     ? backgroundStyle.backgroundImage
@@ -51,7 +51,7 @@ export const BackgroundMedia = ({
         data-object-fit="cover"
       ></video>
     );
-  } else if (scrollingImage && scrollingImage.width) {
+  } else if (scrollingImage && scrollingImage?._width) {
     background = (
       <img
         className={classNames(
@@ -59,16 +59,18 @@ export const BackgroundMedia = ({
           className
         )}
         loading="lazy"
-        src={scrollingImage.src}
-        style={styleStringToObject(scrollingImage.style)}
-        width={scrollingImage.width ? Number(scrollingImage.width) : undefined}
-        height={
-          scrollingImage.height ? Number(scrollingImage.height) : undefined
+        src={scrollingImage._src}
+        style={styleStringToObject(scrollingImage._style)}
+        width={
+          scrollingImage._width ? Number(scrollingImage._width) : undefined
         }
-        srcSet={scrollingImage.srcSet}
-        sizes={scrollingImage.sizes}
-        alt={scrollingImage.alt}
-        title={scrollingImage.title}
+        height={
+          scrollingImage._height ? Number(scrollingImage._height) : undefined
+        }
+        srcSet={scrollingImage._srcSet}
+        sizes={scrollingImage._sizes}
+        alt={scrollingImage._alt}
+        title={scrollingImage._title}
       />
     );
   } else if (fixedImage) {

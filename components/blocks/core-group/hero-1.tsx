@@ -34,7 +34,7 @@ export const CoreGroupHero1 = ({ data, className }: BlockProps) => {
 
   let circleText =
     data?.wpBlockCover?.wpBlockCoverInnerContainer?.wpBlockButtons
-      ?.wpBlockButton?.a?.text;
+      ?.wpBlockButton?.a?._text;
   let slideItems = data?.wpBlockCover?.wpBlockCoverInnerContainer?.gallopSlides;
   let times =
     data?.wpBlockGroup?.gallopOpeningTimes?.wpBlockCoverInnerContainer?.h2;
@@ -49,7 +49,6 @@ export const CoreGroupHero1 = ({ data, className }: BlockProps) => {
     data?.wpBlockCover?.wpBlockCoverInnerContainer?.wpBlockEmbed || null;
 
   circleText += ' - ' + circleText + ' - ';
-  console.log(slideItems);
 
   return (
     <>
@@ -70,38 +69,38 @@ export const CoreGroupHero1 = ({ data, className }: BlockProps) => {
                         className="swiper-slide"
                       >
                         <div className="flex flex-col gap-10">
-                          {slide?.h4?.jsx && (
+                          {slide?.h4?._jsx && (
                             <strong className="mb-0 font-accent !leading-tight text-2xl text-white tracking-[0.3em] uppercase font-normal flex flex-row gap-[0.5em] items-center">
-                              {slide.h4.jsx}
+                              {slide.h4._jsx}
                               <Iconify
                                 icon={ArrowLongRightIcon}
                                 className="flex-shrink-0 h-auto w-10"
                               />
                             </strong>
                           )}
-                          {slide?.h1?.strong?.jsx && (
+                          {slide?.h1?.strong?._jsx && (
                             <h1 className="mb-0 !leading-tight text-5xl md:text-6xl lg:text-6xl 3xl:text-7xl text-white font-bold">
-                              {slide.h1.strong.jsx}
-                              {slide.h1?.em?.jsx && (
+                              {slide.h1.strong._jsx}
+                              {slide.h1?.em?._jsx && (
                                 <span className="text-stroke text-stroke-white block">
-                                  {slide.h1.em.jsx}
+                                  {slide.h1.em._jsx}
                                 </span>
                               )}
                             </h1>
                           )}
-                          {slide?.h2?.strong?.jsx && (
+                          {slide?.h2?.strong?._jsx && (
                             <h2 className="mb-0 !leading-tight text-5xl md:text-6xl lg:text-6xl 3xl:text-7xl text-white font-bold">
-                              {slide.h2.strong.jsx}
-                              {slide.h2?.em?.jsx && (
+                              {slide.h2.strong._jsx}
+                              {slide.h2?.em?._jsx && (
                                 <span className="text-stroke text-stroke-white block">
-                                  {slide.h2.em.jsx}
+                                  {slide.h2.em._jsx}
                                 </span>
                               )}
                             </h2>
                           )}
-                          {slide?.p?.jsx && (
+                          {slide?.p?._jsx && (
                             <p className="mb-0 text-xl font-bold !leading-relaxed text-white max-w-[700px]">
-                              {slide?.p?.jsx}
+                              {slide?.p?._jsx}
                             </p>
                           )}
                         </div>
@@ -161,8 +160,8 @@ export const CoreGroupHero1 = ({ data, className }: BlockProps) => {
           <div
             className="absolute -z-[1] left-0 top-0 right-0 bottom-0 bg-cover bg-no-repeat bg-right-top w-full xl:w-full opacity-20"
             style={
-              infoImg?.src
-                ? { backgroundImage: `url('${infoImg.src}')` }
+              infoImg?._src
+                ? { backgroundImage: `url('${infoImg._src}')` }
                 : undefined
             }
           ></div>
@@ -170,34 +169,34 @@ export const CoreGroupHero1 = ({ data, className }: BlockProps) => {
             <div className="pt-14 pb-7 px-8 bg-primary-main text-primary-contrast w-full xl:w-4/12 mb-0 xl:-mb-20 -mt-20 relative z-20 rounded-t-md rounded-b-md xl:rounded-m-none overflow-hidden">
               <div className="-z-10 bg-primary-main/90 absolute inset-0"></div>
               <h2 className="mb-7 leading-tight text-2xl md:text-3xl w-full text-center text-primary-contrast">
-                {times?.text}
+                {times?._text}
               </h2>
               <div className="min-w-full divide-y divide-white/10">
                 {objectMap(tbody, (key, tr, index) => {
                   if (!key.startsWith('tr')) {
                     return []; //null doesn't skip
                   }
-                  const dayId = permalink(tr?.td?.text);
+                  const dayId = permalink(tr?.td?._text);
                   return (
                     <div
                       key={`times-tr-${index}`}
                       className="w-full flex flex-wrap justify-between whitespace-nowrap px-0 py-4 text-base text-white align-top"
                     >
-                      {tr.td_3?.text && (
+                      {tr.td_3?._text && (
                         <span className="block text-left w-full italic text-white/60 text-base">
-                          {tr.td_3.text}
+                          {tr.td_3._text}
                         </span>
                       )}
                       <span>
-                        {tr?.td?.text}{' '}
+                        {tr?.td?._text}{' '}
                         <span className="text-white/60">
                           <CurrentDate dayString={dayId} />
                         </span>
                       </span>
-                      <span>{tr?.td_2?.text}</span>
+                      <span>{tr?.td_2?._text}</span>
                       <CurrentTime
                         dayOfWeek={dayId}
-                        timeRange={tr?.td_2?.text}
+                        timeRange={tr?.td_2?._text}
                       />
                     </div>
                   );
@@ -221,7 +220,7 @@ export const CoreGroupHero1 = ({ data, className }: BlockProps) => {
                       backgroundColor: `rgba(255,255,255,0.0${index + 1})`,
                     }}
                   >
-                    {item?.pre?.code?.text === 'icon-phone' && (
+                    {item?.pre?.code?._text === 'icon-phone' && (
                       <div className="w-20 h-20 flex items-center justify-center bg-primary-main rounded-full">
                         <Iconify
                           icon={PhoneIcon}
@@ -229,7 +228,7 @@ export const CoreGroupHero1 = ({ data, className }: BlockProps) => {
                         />
                       </div>
                     )}
-                    {item?.pre?.code?.text === 'icon-email' && (
+                    {item?.pre?.code?._text === 'icon-email' && (
                       <div className="w-20 h-20 flex items-center justify-center bg-primary-main rounded-full">
                         <Iconify
                           icon={EnvelopeIcon}
@@ -237,7 +236,7 @@ export const CoreGroupHero1 = ({ data, className }: BlockProps) => {
                         />
                       </div>
                     )}
-                    {item?.pre?.code?.text === 'icon-public' && (
+                    {item?.pre?.code?._text === 'icon-public' && (
                       <div className="w-20 h-20 flex items-center justify-center bg-primary-main rounded-full">
                         <Iconify
                           icon={BuildingOfficeIcon}
@@ -246,13 +245,13 @@ export const CoreGroupHero1 = ({ data, className }: BlockProps) => {
                       </div>
                     )}
                     <h3 className="text-2xl flex">
-                      {item.h4?.text}
+                      {item.h4?._text}
                       <Iconify
                         icon={ArrowInsertIcon}
                         className="flex-shrink-0 h-auto w-8 text-white rotate-90"
                       />
                     </h3>
-                    <p className="text-white/50 text-lg">{item.p?.a?.text}</p>
+                    <p className="text-white/50 text-lg">{item.p?.a?._text}</p>
                   </a>
                 );
               })}

@@ -1,45 +1,27 @@
 import * as Missing from '@components/global/missing';
 import classNames from 'classnames';
 import { GridPattern } from '@components/widgets/grid-pattern';
-import { AnimatedNumber } from '@components/widgets/animated-number';
-import { extractMilestone } from '@utils/tools';
 import {
   Heading,
   AccentHeading,
   Paragraph,
   Alignment,
   Container,
+  Milestone,
 } from '@components/common';
 
-function StatListItem({ label, value }: { label: string; value: string }) {
-  const data = extractMilestone(value);
-  return (
-    <div className="flex flex-col-reverse">
-      <dt className="border-l-2 border-gray-200 pl-8 py-4 mt-0 mb-0 text-base text-neutral-600">
-        {label}
-      </dt>
-      <dd className="border-l-2 border-accent pl-8 font-display text-3xl sm:text-5xl text-6xl font-medium tracking-tight">
-        {data?.prefix && data.prefix}
-        <AnimatedNumber start={0} end={data.number} decimals={data.decimals} />
-        {data.unit}
-        {data.suffix}
-      </dd>
-    </div>
-  );
-}
-
 export const CoreGroupHero2 = ({ data, className }: any) => {
-  let h1 = data?.h1?.jsx || Missing.H1();
-  let h2 = data?.h2?.jsx || Missing.H2();
-  let p1 = data?.p?.jsx || Missing.Paragraph();
-  let p2 = data?.p_2?.jsx || Missing.Paragraph();
-  let p3 = data?.p_3?.jsx || Missing.Paragraph();
-  let itemValue1 = data?.wpBlockGroup?.h4?.jsx || Missing.H4();
-  let itemLabel1 = data?.wpBlockGroup?.p?.jsx || Missing.Paragraph();
-  let itemValue2 = data?.wpBlockGroup_2?.h4?.jsx || Missing.H4();
-  let itemLabel2 = data?.wpBlockGroup_2?.p?.jsx || Missing.Paragraph();
-  let itemValue3 = data?.wpBlockGroup_3?.h4?.jsx || Missing.H4();
-  let itemLabel3 = data?.wpBlockGroup_3?.p?.jsx || Missing.Paragraph();
+  let h1 = data?.h1?._jsx || Missing.H1();
+  let h2 = data?.h2?._jsx || Missing.H2();
+  let p1 = data?.p?._jsx || Missing.Paragraph();
+  let p2 = data?.p_2?._jsx || Missing.Paragraph();
+  let p3 = data?.p_3?._jsx || Missing.Paragraph();
+  let itemValue1 = data?.wpBlockGroup?.h4?._jsx || Missing.H4();
+  let itemLabel1 = data?.wpBlockGroup?.p?._jsx || Missing.Paragraph();
+  let itemValue2 = data?.wpBlockGroup_2?.h4?._jsx || Missing.H4();
+  let itemLabel2 = data?.wpBlockGroup_2?.p?._jsx || Missing.Paragraph();
+  let itemValue3 = data?.wpBlockGroup_3?.h4?._jsx || Missing.H4();
+  let itemLabel3 = data?.wpBlockGroup_3?.p?._jsx || Missing.Paragraph();
 
   return (
     <Alignment align="full" className="wp-block-group py-20">
@@ -65,11 +47,11 @@ export const CoreGroupHero2 = ({ data, className }: any) => {
             <Paragraph>{p3}</Paragraph>
           </div>
         </div>
-        <div className="!px-0 max-w-7xl px-6 lg:px-8 mt-16">
+        <div className="max-w-7xl w-full mt-16">
           <dl className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:auto-cols-fr lg:grid-flow-col lg:grid-cols-none">
-            <StatListItem value={itemValue1} label={itemLabel1} />
-            <StatListItem value={itemValue2} label={itemLabel2} />
-            <StatListItem value={itemValue3} label={itemLabel3} />
+            <Milestone value={itemValue1} label={itemLabel1} />
+            <Milestone value={itemValue2} label={itemLabel2} />
+            <Milestone value={itemValue3} label={itemLabel3} />
           </dl>
         </div>
       </Container>

@@ -8,7 +8,7 @@ interface ExtractedMilestone {
 }
 
 export function extractMilestone(input: string): ExtractedMilestone {
-  const regex = /^([^0-9]*)?(\d+(?:\.\d+)?)([a-zA-Z]*)?\s?(.*)?$/;
+  const regex = /^([^0-9]*)?(\d+(?:\.\d+)?)([a-zA-Z+\-]*)?\s?(.*)?$/;
   const match = input.match(regex);
 
   if (!match) {

@@ -19,6 +19,7 @@ export const Paragraph = ({
       case 'small':
         break;
       case 'large':
+        paragraphClass = '!leading-relaxed text-lg font-normal sm:text-xl/8';
         break;
       case 'subtle':
         break;
