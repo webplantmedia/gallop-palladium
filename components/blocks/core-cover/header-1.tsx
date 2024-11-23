@@ -2,7 +2,7 @@ import { styleStringToObject } from '@utils/tools';
 import classNames from 'classnames';
 import { BlockProps } from '@lib/types';
 import * as Missing from '@components/global/missing';
-import { Paragraph, Heading, Alignment } from '@components/common';
+import { Paragraph, Heading, Alignment, Container } from '@components/common';
 
 const BackgroundOverlay = () => {
   return (
@@ -83,16 +83,14 @@ export const CoreCoverHeader1 = ({ data, className, props }: BlockProps) => {
           <BackgroundOverlay />
         </>
       )}
-      <div className="mx-auto px-6 lg:px-8 !max-w-screen-3xl">
-        <div className="mx-auto max-w-5xl lg:mx-0 relative">
-          <Heading as="h1" className="text-white">
-            {h1}
-          </Heading>
-          <Paragraph as="leader" className="mt-8 text-white/50 !mb-0">
-            {p}
-          </Paragraph>
-        </div>
-      </div>
+      <Container>
+        <Heading as="h1" className="text-white max-w-6xl">
+          {h1}
+        </Heading>
+        <Paragraph as="leader" className="mt-8 text-white/50 !mb-0 max-w-5xl">
+          {p}
+        </Paragraph>
+      </Container>
     </Alignment>
   );
 };
