@@ -3,7 +3,13 @@ import classNames from 'classnames';
 import { GridPattern } from '@components/widgets/grid-pattern';
 import { AnimatedNumber } from '@components/widgets/animated-number';
 import { extractMilestone } from '@utils/tools';
-import { Heading, AccentHeading, Paragraph } from '@components/common';
+import {
+  Heading,
+  AccentHeading,
+  Paragraph,
+  Alignment,
+  Container,
+} from '@components/common';
 
 function StatListItem({ label, value }: { label: string; value: string }) {
   const data = extractMilestone(value);
@@ -36,14 +42,14 @@ export const CoreGroupHero2 = ({ data, className }: any) => {
   let itemLabel3 = data?.wpBlockGroup_3?.p?.jsx || Missing.Paragraph();
 
   return (
-    <div className="wp-block-group alignfull py-20">
+    <Alignment align="full" className="wp-block-group py-20">
       <GridPattern
         className="!max-w-none !px-0 absolute inset-x-0 -top-14 -z-10 h-[1000px] w-full fill-accent/30 stroke-accent/10 [mask-image:linear-gradient(to_bottom_left,white_40%,transparent_50%)]"
         yOffset={-96}
         interactive
       />
 
-      <div className="w-full flex-auto !max-w-screen-3xl mx-auto">
+      <Container className="flex-auto">
         <AccentHeading as="h1">{h1}</AccentHeading>
         <Heading
           as="h2"
@@ -66,7 +72,7 @@ export const CoreGroupHero2 = ({ data, className }: any) => {
             <StatListItem value={itemValue3} label={itemLabel3} />
           </dl>
         </div>
-      </div>
-    </div>
+      </Container>
+    </Alignment>
   );
 };

@@ -10,7 +10,7 @@ export const Button = ({
   as?: string;
   children: ReactNode;
   className?: string;
-  href?: string | null;
+  href?: string | undefined;
 }) => {
   let buttonClass: string =
     'border-2 overflow-hidden inline-flex items-center border-accent bg-accent text-white hover:bg-primary-light hover:border-primary-light rounded-md px-4 py-2 text-base font-normal shadow-sm';

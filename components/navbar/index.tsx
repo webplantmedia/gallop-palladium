@@ -12,6 +12,7 @@ import TopMenuLinks from './top-menu-links';
 import { state, useSnapshot } from '@state';
 import Logo from './logo';
 import UseOffSetTopScript from '@components/scripts/use-offset-top';
+import { Container } from '@components/common';
 // import Image from 'next/image';
 
 interface NavbarProps {
@@ -62,10 +63,10 @@ export default function Navbar({
         >
           <TopMenuLinks menu={topMenu} />
         </div>
-        <div
+        <Container
           className={classNames(
             isScrolling ? 'h-20' : 'h-60 xl:h-40',
-            'mx-auto w-full flex flex-col xl:flex-row items-center justify-center xl:justify-between gap-0 xl:gap-10 max-w-screen-3xl px-4 sm:px-8 transition-height ease-out duration-300'
+            'w-full flex flex-col xl:flex-row items-center justify-center xl:justify-between gap-0 xl:gap-10 transition-height ease-out duration-300'
           )}
         >
           <div
@@ -142,7 +143,7 @@ export default function Navbar({
               </div>
             </div>
           </nav>
-        </div>
+        </Container>
       </header>
     </>
   );

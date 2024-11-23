@@ -5,6 +5,7 @@ import EnvelopeIcon from '@iconify/icons-heroicons/envelope';
 import ArrowInsertIcon from '@iconify/icons-material-symbols/arrow-insert';
 import BuildingOfficeIcon from '@iconify/icons-fluent/building-people-20-filled';
 import classNames from 'classnames';
+import { Alignment, Container } from '@components/common';
 import {
   permalink,
   getVimeoIframeSrc,
@@ -69,11 +70,11 @@ export const CoreGroupHero1 = ({ data, className }: BlockProps) => {
 
   return (
     <>
-      <div className={classNames(className, 'relative')}>
+      <Alignment align="full" className={classNames('relative')}>
         {videoSrc && (
           <video
             className={classNames(
-              'w-full object-cover object-center h-full absolute inset-0 !max-w-none !p-0'
+              'w-full object-cover object-center h-full absolute inset-0'
             )}
             autoPlay
             muted
@@ -87,7 +88,7 @@ export const CoreGroupHero1 = ({ data, className }: BlockProps) => {
           <img
             className={classNames(
               imgProps.className,
-              'w-full !max-w-full !p-0 box-border absolute inset-0 object-cover h-full object-center'
+              'w-full box-border absolute inset-0 object-cover h-full object-center'
             )}
             loading="lazy"
             src={imgProps.src}
@@ -102,18 +103,16 @@ export const CoreGroupHero1 = ({ data, className }: BlockProps) => {
         )}
         {backgroundImage && (
           <div
-            className="!p-0 !max-w-full absolute inset-0 bg-cover bg-no-repeat bg-center bg-fixed"
+            className="absolute inset-0 bg-cover bg-no-repeat bg-center bg-fixed"
             style={{
               backgroundImage: backgroundImage,
             }}
           ></div>
         )}
         <div
-          className={classNames(
-            'absolute inset-0 h-full w-full !max-w-none bg-black/60'
-          )}
+          className={classNames('absolute inset-0 h-full w-full bg-black/60')}
         ></div>
-        <div className="relative flex flex-col xl:flex-row !max-w-screen-3xl py-32">
+        <Container className="relative flex flex-col xl:flex-row py-32">
           <div className="w-full xl:w-7/12 flex justify-center">
             <div id={swiperId} className="swiper max-w-[950px] xl:max-w-none">
               <div className="swiper-wrapper items-start flex mb-20">
@@ -214,10 +213,10 @@ export const CoreGroupHero1 = ({ data, className }: BlockProps) => {
               </VideoPopup>
             )}
           </div>
-        </div>
+        </Container>
         <SwiperSliderInit swiperId={swiperId} />
-      </div>
-      <div className="!max-w-screen-4xl mx-auto relative z-[1] bg-accent3 !px-0">
+      </Alignment>
+      <Alignment align="full" className="relative z-[1] bg-accent3">
         <div
           className="absolute -z-[1] left-0 top-0 right-0 bottom-0 bg-cover bg-no-repeat bg-right-top w-full xl:w-full opacity-20"
           style={
@@ -226,7 +225,7 @@ export const CoreGroupHero1 = ({ data, className }: BlockProps) => {
               : undefined
           }
         ></div>
-        <div className="flex flex-col xl:flex-row !max-w-screen-3xl px-4 sm:px-8 mx-auto gap-4 sm:gap-10 xl:gap-0">
+        <Container className="flex flex-col xl:flex-row gap-4 sm:gap-10 xl:gap-0">
           <div className="pt-14 pb-7 px-8 bg-primary-main text-primary-contrast w-full xl:w-4/12 mb-0 xl:-mb-20 -mt-20 relative z-20 rounded-t-md rounded-b-md xl:rounded-m-none overflow-hidden">
             <div className="-z-10 bg-primary-main/90 absolute inset-0"></div>
             <h2 className="mb-7 leading-tight text-2xl md:text-3xl w-full text-center text-primary-contrast">
@@ -323,8 +322,8 @@ export const CoreGroupHero1 = ({ data, className }: BlockProps) => {
                 }
               )}
           </div>
-        </div>
-      </div>
+        </Container>
+      </Alignment>
     </>
   );
 };
