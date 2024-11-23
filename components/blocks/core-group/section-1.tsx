@@ -67,18 +67,18 @@ export const CoreGroupSection1 = ({ data, className, props }: BlockProps) => {
           <hr className="mt-6 border-t border-base-contrast" />
           <dl className="mt-6 grid grid-cols-1 gap-x-8 gap-y-4 sm:grid-cols-2">
             <Milestone2
-              text={milestone1}
+              label={milestone1}
               className="border-b border-base-contrast pb-4"
             />
             <Milestone2
-              text={milestone2}
+              label={milestone2}
               className="border-b border-base-contrast pb-4"
             />
             <Milestone2
-              text={milestone3}
+              label={milestone3}
               className="max-sm:border-b max-sm:border-base-contrast max-sm:pb-4"
             />
-            <Milestone2 text={milestone4} className="" />
+            <Milestone2 label={milestone4} className="" />
           </dl>
         </div>
       </section>

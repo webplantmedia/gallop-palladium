@@ -16,12 +16,9 @@ export const CoreGroupHero2 = ({ data, className }: any) => {
   let p1 = data?.p?._jsx || Missing.Paragraph();
   let p2 = data?.p_2?._jsx || Missing.Paragraph();
   let p3 = data?.p_3?._jsx || Missing.Paragraph();
-  let itemValue1 = data?.wpBlockGroup?.h4?._jsx || Missing.H4();
-  let itemLabel1 = data?.wpBlockGroup?.p?._jsx || Missing.Paragraph();
-  let itemValue2 = data?.wpBlockGroup_2?.h4?._jsx || Missing.H4();
-  let itemLabel2 = data?.wpBlockGroup_2?.p?._jsx || Missing.Paragraph();
-  let itemValue3 = data?.wpBlockGroup_3?.h4?._jsx || Missing.H4();
-  let itemLabel3 = data?.wpBlockGroup_3?.p?._jsx || Missing.Paragraph();
+  let milestone1 = data?.h4?._text;
+  let milestone2 = data?.h4_2?._text;
+  let milestone3 = data?.h4_3?._text;
 
   return (
     <Alignment align="full" className="wp-block-group py-20">
@@ -49,9 +46,9 @@ export const CoreGroupHero2 = ({ data, className }: any) => {
         </div>
         <div className="max-w-7xl w-full mt-16">
           <dl className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:auto-cols-fr lg:grid-flow-col lg:grid-cols-none">
-            <Milestone value={itemValue1} label={itemLabel1} />
-            <Milestone value={itemValue2} label={itemLabel2} />
-            <Milestone value={itemValue3} label={itemLabel3} />
+            <Milestone label={milestone1} />
+            <Milestone label={milestone2} />
+            <Milestone label={milestone3} />
           </dl>
         </div>
       </Container>

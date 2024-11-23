@@ -5,7 +5,12 @@ import EnvelopeIcon from '@iconify/icons-heroicons/envelope';
 import ArrowInsertIcon from '@iconify/icons-material-symbols/arrow-insert';
 import BuildingOfficeIcon from '@iconify/icons-fluent/building-people-20-filled';
 import classNames from 'classnames';
-import { Alignment, Container, BackgroundMedia } from '@components/common';
+import {
+  Alignment,
+  Container,
+  BackgroundMedia,
+  Overlay,
+} from '@components/common';
 import {
   permalink,
   tailwindAlignClasses,
@@ -54,7 +59,8 @@ export const CoreGroupHero1 = ({ data, className }: BlockProps) => {
     <>
       <Alignment align="full">
         <div className="relative">
-          <BackgroundMedia wpBlockCover={wpBlockCover} opacity="bg-black/60" />
+          <BackgroundMedia wpBlockCover={wpBlockCover} />
+          <Overlay className="bg-black/60" />
           <Container className="relative flex flex-col xl:flex-row py-32">
             <div className="w-full xl:w-7/12 flex justify-center">
               <div id={swiperId} className="swiper max-w-[950px] xl:max-w-none">

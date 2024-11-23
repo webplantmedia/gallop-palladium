@@ -3,8 +3,8 @@ import * as Missing from '@components/global/missing';
 import { Paragraph, Heading, Alignment, Container } from '@components/common';
 
 export const CoreGroupHeader1 = ({ data, className, props }: BlockProps) => {
-  let h1 = data?.h1?.jsx || Missing.H1();
-  let p = data?.p?.jsx || Missing.Paragraph();
+  let h1 = data?.h1?._jsx || Missing.H1();
+  let p = data?.p?._jsx || Missing.Paragraph();
 
   return (
     <Alignment align="full" className="bg-accent py-24 sm:py-32">

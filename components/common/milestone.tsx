@@ -4,13 +4,15 @@ import { extractMilestone } from '@utils/tools';
 import classNames from 'classnames';
 
 export function Milestone({
-  text,
+  label,
   className,
 }: {
-  text: string;
+  label: string;
   className?: string;
 }) {
-  const milestone = text ? extractMilestone(text) : Missing.MilestoneData('h4');
+  const milestone = label
+    ? extractMilestone(label)
+    : Missing.MilestoneData('h4');
 
   return (
     <div
@@ -36,13 +38,15 @@ export function Milestone({
   );
 }
 export function Milestone2({
-  text,
+  label,
   className,
 }: {
-  text: string;
+  label: string;
   className?: string;
 }) {
-  const milestone = text ? extractMilestone(text) : Missing.MilestoneData('h4');
+  const milestone = label
+    ? extractMilestone(label)
+    : Missing.MilestoneData('h4');
 
   return (
     <div

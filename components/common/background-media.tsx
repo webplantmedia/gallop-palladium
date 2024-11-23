@@ -18,11 +18,9 @@ interface ScrollingImage {
 export const BackgroundMedia = ({
   className,
   wpBlockCover = {},
-  opacity = 'bg-black/30',
 }: {
   className?: string;
   wpBlockCover: Record<string, any>;
-  opacity?: string | null;
 }) => {
   let videoSrc: string | null =
     wpBlockCover?.wpBlockCoverVideoBackground?._src || null;
@@ -40,7 +38,7 @@ export const BackgroundMedia = ({
     background = (
       <video
         className={classNames(
-          'w-full object-cover object-center h-full absolute inset-0',
+          'w-full object-cover object-center h-full absolute inset-0 -z-20',
           className
         )}
         autoPlay
@@ -55,7 +53,7 @@ export const BackgroundMedia = ({
     background = (
       <img
         className={classNames(
-          'w-full box-border absolute inset-0 object-cover h-full object-center',
+          'w-full box-border absolute inset-0 object-cover h-full object-center -z-20',
           className
         )}
         loading="lazy"
@@ -77,7 +75,7 @@ export const BackgroundMedia = ({
     background = (
       <div
         className={classNames(
-          'absolute inset-0 bg-cover bg-no-repeat bg-center bg-fixed',
+          'absolute inset-0 bg-cover bg-no-repeat bg-center bg-fixed -z-20',
           className
         )}
         style={{
@@ -86,12 +84,5 @@ export const BackgroundMedia = ({
       ></div>
     );
   }
-  return (
-    <>
-      {background}
-      <div
-        className={classNames('absolute inset-0 h-full w-full', opacity)}
-      ></div>
-    </>
-  );
+  return background;
 };
