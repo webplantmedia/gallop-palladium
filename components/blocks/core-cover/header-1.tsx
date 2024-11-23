@@ -2,6 +2,7 @@ import { styleStringToObject } from '@utils/tools';
 import classNames from 'classnames';
 import { BlockProps } from '@lib/types';
 import * as Missing from '@components/global/missing';
+import { Paragraph, Heading } from '@components/common';
 
 const BackgroundOverlay = () => {
   return (
@@ -9,7 +10,7 @@ const BackgroundOverlay = () => {
       <span className="absolute inset-0 h-full bg-accent/90"></span>
       <div
         aria-hidden="true"
-        className="hidden sm:absolute sm:-top-52 sm:right-1/2 sm:-z-10 sm:mr-80 sm:block sm:transform-gpu sm:blur-3xl sm:z-50"
+        className="hidden sm:absolute sm:-top-52 sm:right-1/2 sm:mr-80 sm:block sm:transform-gpu sm:blur-3xl"
       >
         <div
           style={{
@@ -79,14 +80,14 @@ export const CoreCoverHeader1 = ({ data, className, props }: BlockProps) => {
           <BackgroundOverlay />
         </>
       )}
-      <div className="mx-auto max-w-7xl px-6 lg:px-8 !max-w-screen-3xl">
-        <div className="mx-auto max-w-2xl lg:mx-0 relative">
-          <h2 className="text-5xl font-semibold tracking-tight text-gray-900 sm:text-7xl text-white">
+      <div className="mx-auto px-6 lg:px-8 !max-w-screen-3xl">
+        <div className="mx-auto max-w-5xl lg:mx-0 relative">
+          <Heading as="h1" className="text-white">
             {h1}
-          </h2>
-          <p className="mt-8 text-pretty font-medium sm:text-xl/8 gallop-hero-intro text-white/50">
+          </Heading>
+          <Paragraph as="leader" className="mt-8 text-white/50 !mb-0">
             {p}
-          </p>
+          </Paragraph>
         </div>
       </div>
     </div>

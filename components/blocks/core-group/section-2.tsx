@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import * as Missing from '@components/global/missing';
+import { Button } from '@components/common';
 
 export const CoreGroupSection2 = ({ data, className }: any) => {
   const h2 = data?.h2?.jsx || Missing.H2();
@@ -34,12 +35,10 @@ export const CoreGroupSection2 = ({ data, className }: any) => {
               {p}
             </p>
             <div className="mt-10 flex flex-col items-center sm:items-start xl:items-center justify-start xl:flex-row gap-x-6 max-xl:gap-y-6">
-              <a href={button1Href} className="gallop-button">
-                {button1}
-              </a>
-              <a href={button2Href} className="gallop-button-text">
+              <Button href={button1Href}>{button1}</Button>
+              <Button as="text" href={button2Href}>
                 {button2} <span aria-hidden="true">→</span>
-              </a>
+              </Button>
             </div>
           </div>
           <img

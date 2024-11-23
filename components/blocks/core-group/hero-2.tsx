@@ -3,9 +3,7 @@ import classNames from 'classnames';
 import { GridPattern } from '@components/widgets/grid-pattern';
 import { AnimatedNumber } from '@components/widgets/animated-number';
 import { extractMilestone } from '@utils/tools';
-import Iconify from '@components/iconify';
-import ArrowInsertIcon from '@iconify/icons-material-symbols/arrow-insert';
-import { H1, AccentHeading } from '@components/common';
+import { Heading, AccentHeading, Paragraph } from '@components/common';
 
 function StatListItem({ label, value }: { label: string; value: string }) {
   const data = extractMilestone(value);
@@ -46,25 +44,19 @@ export const CoreGroupHero2 = ({ data, className }: any) => {
       />
 
       <div className="w-full flex-auto !max-w-screen-3xl mx-auto">
-        <AccentHeading as="h1" className="">
-          {h1}
-          <Iconify
-            icon={ArrowInsertIcon}
-            className="flex-shrink-0 h-auto w-7 rotate-180"
-          />
-        </AccentHeading>
-        <h2
-          className={classNames(
-            'gallop-h1 !mt-6 [text-wrap:balance] max-w-[900px]'
-          )}
+        <AccentHeading as="h1">{h1}</AccentHeading>
+        <Heading
+          as="h2"
+          inStyle="h1"
+          className={classNames('!mt-6 [text-wrap:balance] max-w-[900px]')}
         >
           {h2}
-        </h2>
-        <div className={classNames('mt-6 max-w-3xl text-xl text-neutral-600')}>
-          <p>{p1}</p>
+        </Heading>
+        <div className={classNames('mt-6 max-w-3xl')}>
+          <Paragraph as="leader">{p1}</Paragraph>
           <div className="mt-10 max-w-2xl space-y-6 text-base">
-            <p>{p2}</p>
-            <p>{p3}</p>
+            <Paragraph>{p2}</Paragraph>
+            <Paragraph>{p3}</Paragraph>
           </div>
         </div>
         <div className="!px-0 max-w-7xl px-6 lg:px-8 mt-16">
