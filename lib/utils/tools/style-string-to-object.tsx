@@ -1,9 +1,12 @@
+import { CSSProperties } from 'react';
+
 export function styleStringToObject(
-  styleString: string
-): Record<string, string> {
+  styleString?: string
+): CSSProperties | undefined {
   if (!styleString) {
-    return {};
+    return undefined; // Return `undefined` for no style
   }
+
   return Object.fromEntries(
     styleString
       .split(';')
@@ -17,5 +20,5 @@ export function styleStringToObject(
           .replace(/-([a-z])/g, (_match, letter) => letter.toUpperCase());
         return [camelCasedProperty, value];
       })
-  );
+  ) as CSSProperties;
 }
