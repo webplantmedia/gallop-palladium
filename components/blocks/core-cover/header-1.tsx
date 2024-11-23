@@ -2,7 +2,7 @@ import { styleStringToObject } from '@utils/tools';
 import classNames from 'classnames';
 import { BlockProps } from '@lib/types';
 import * as Missing from '@components/global/missing';
-import { Paragraph, Heading } from '@components/common';
+import { Paragraph, Heading, Alignment } from '@components/common';
 
 const BackgroundOverlay = () => {
   return (
@@ -48,7 +48,10 @@ export const CoreCoverHeader1 = ({ data, className, props }: BlockProps) => {
   const p = data?.wpBlockCoverInnerContainer?.p?.jsx || Missing.Paragraph();
 
   return (
-    <div className="wp-block-cover bg-white py-24 sm:py-32 !max-w-none clear-both alignfull border border-black relative isolate overflow-hidden">
+    <Alignment
+      align="full"
+      className="wp-block-cover bg-white py-24 sm:py-32 clear-both border border-black relative isolate overflow-hidden"
+    >
       {imgProps && imgProps.width && (
         <>
           <img
@@ -90,6 +93,6 @@ export const CoreCoverHeader1 = ({ data, className, props }: BlockProps) => {
           </Paragraph>
         </div>
       </div>
-    </div>
+    </Alignment>
   );
 };

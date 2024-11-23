@@ -13,6 +13,7 @@ export const Heading = ({
   className?: string;
 }) => {
   let headingClass: string = '';
+
   if (!inStyle) {
     inStyle = String(Component);
   }
