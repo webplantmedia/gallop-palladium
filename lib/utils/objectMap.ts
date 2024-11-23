@@ -14,8 +14,11 @@ export function objectMap<T, U>(
   let index = 0;
 
   for (const key in obj) {
-    if (Object.prototype.hasOwnProperty.call(obj, key)) {
-      const result = callback(key, obj[key], index++); // Key is now string
+    if (
+      Object.prototype.hasOwnProperty.call(obj, key) &&
+      !key.startsWith('_') // Skip keys starting with "_"
+    ) {
+      const result = callback(key, obj[key], index++);
       if (result != null) {
         results.push(result);
       }
