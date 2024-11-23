@@ -1,5 +1,3 @@
-import { styleStringToObject } from '@utils/tools';
-import classNames from 'classnames';
 import { BlockProps } from '@lib/types';
 import * as Missing from '@components/global/missing';
 import {
@@ -11,9 +9,7 @@ import {
   Overlay2,
 } from '@components/common';
 
-const BackgroundOverlay = () => {};
-
-export const CoreCoverHeader1 = ({ data, className, props }: BlockProps) => {
+export const CoreCoverHeader1 = ({ data, className }: BlockProps) => {
   const h1 = data?.wpBlockCoverInnerContainer?.h1?._jsx || Missing.H1();
   const p = data?.wpBlockCoverInnerContainer?.p?._jsx || Missing.Paragraph();
 
