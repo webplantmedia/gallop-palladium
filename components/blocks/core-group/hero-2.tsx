@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import { GridPattern } from '@components/widgets/grid-pattern';
 import {
   Heading,
-  AccentHeading,
+  HeadingAccent,
   Paragraph,
   Alignment,
   Container,
@@ -29,7 +29,7 @@ export const CoreGroupHero2 = ({ data, className }: any) => {
       />
 
       <Container className="flex-auto">
-        <AccentHeading as="h1">{h1}</AccentHeading>
+        <HeadingAccent as="h1">{h1}</HeadingAccent>
         <Heading
           as="h2"
           inStyle="h1"

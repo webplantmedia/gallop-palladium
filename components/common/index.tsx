@@ -1,6 +1,5 @@
-export { Heading } from './heading';
+export { Heading, HeadingAccent } from './heading';
 export { Paragraph } from './paragraph';
-export { AccentHeading } from './accent-heading';
 export { Button } from './button';
 export { Image } from './image';
 export { Milestone, Milestone2 } from './milestone';

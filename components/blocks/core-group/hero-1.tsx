@@ -10,6 +10,9 @@ import {
   Container,
   BackgroundMedia,
   Overlay,
+  Heading,
+  HeadingAccent,
+  Paragraph,
 } from '@components/common';
 import {
   permalink,
@@ -76,38 +79,50 @@ export const CoreGroupHero1 = ({ data, className }: BlockProps) => {
                       >
                         <div className="flex flex-col gap-10">
                           {slide?.h4?._jsx && (
-                            <strong className="mb-0 font-accent !leading-tight text-2xl text-white tracking-[0.3em] uppercase font-normal flex flex-row gap-[0.5em] items-center">
+                            <HeadingAccent
+                              as="strong"
+                              size="large"
+                              icon={false}
+                              className="!mb-0 text-white flex flex-row gap-[0.5em] items-center"
+                            >
                               {slide.h4._jsx}
                               <Iconify
                                 icon={ArrowLongRightIcon}
                                 className="flex-shrink-0 h-auto w-10"
                               />
-                            </strong>
+                            </HeadingAccent>
                           )}
                           {slide?.h1?.strong?._jsx && (
-                            <h1 className="mb-0 !leading-tight text-5xl md:text-6xl lg:text-6xl 3xl:text-7xl text-white font-bold">
+                            <Heading as="h1" className="!mb-0 text-white">
                               {slide.h1.strong._jsx}
                               {slide.h1?.em?._jsx && (
                                 <span className="text-stroke text-stroke-white block">
                                   {slide.h1.em._jsx}
                                 </span>
                               )}
-                            </h1>
+                            </Heading>
                           )}
                           {slide?.h2?.strong?._jsx && (
-                            <h2 className="mb-0 !leading-tight text-5xl md:text-6xl lg:text-6xl 3xl:text-7xl text-white font-bold">
+                            <Heading
+                              as="h2"
+                              inStyle="h1"
+                              className="!mb-0 text-white"
+                            >
                               {slide.h2.strong._jsx}
                               {slide.h2?.em?._jsx && (
                                 <span className="text-stroke text-stroke-white block">
                                   {slide.h2.em._jsx}
                                 </span>
                               )}
-                            </h2>
+                            </Heading>
                           )}
                           {slide?.p?._jsx && (
-                            <p className="mb-0 text-xl font-bold !leading-relaxed text-white max-w-[700px]">
+                            <Paragraph
+                              as="large"
+                              className="!mb-0 text-white max-w-6xl"
+                            >
                               {slide?.p?._jsx}
-                            </p>
+                            </Paragraph>
                           )}
                         </div>
                       </div>
@@ -174,9 +189,9 @@ export const CoreGroupHero1 = ({ data, className }: BlockProps) => {
           <Container className="flex flex-col xl:flex-row gap-4 sm:gap-10 xl:gap-0">
             <div className="pt-14 pb-7 px-8 bg-primary-main text-primary-contrast w-full xl:w-4/12 mb-0 xl:-mb-20 -mt-20 relative z-20 rounded-t-md rounded-b-md xl:rounded-m-none overflow-hidden">
               <div className="-z-10 bg-primary-main/90 absolute inset-0"></div>
-              <h2 className="mb-7 leading-tight text-2xl md:text-3xl w-full text-center text-primary-contrast">
+              <h3 className="mb-7 leading-tight text-2xl md:text-3xl w-full text-center text-primary-contrast">
                 {times?._text}
-              </h2>
+              </h3>
               <div className="min-w-full divide-y divide-white/10">
                 {objectMap(tbody, (key, tr, index) => {
                   if (!key.startsWith('tr')) {

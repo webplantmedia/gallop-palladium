@@ -1,14 +1,18 @@
 import classNames from 'classnames';
 import { ReactNode, ElementType } from 'react';
+import Iconify from '@components/iconify';
+import ArrowInsertIcon from '@iconify/icons-material-symbols/arrow-insert';
 
 export const Heading = ({
   as: Component = 'h2',
   inStyle,
+  outline = false,
   children,
   className,
 }: {
   as?: ElementType;
   inStyle?: string;
+  outline?: boolean;
   children: ReactNode;
   className?: string;
 }) => {
@@ -42,9 +46,50 @@ export const Heading = ({
       headingClass = '!leading-tight mb-7';
       break;
   }
+
+  if (outline) {
+    headingClass += ' text-stroke text-stroke-white';
+  }
+
   return (
     <Component className={classNames(headingClass, className)}>
       {children}
+    </Component>
+  );
+};
+
+export const HeadingAccent = ({
+  as: Component = 'h2',
+  children,
+  size,
+  className,
+  icon = true,
+}: {
+  as?: ElementType;
+  children: ReactNode;
+  size?: string;
+  className?: string;
+  icon?: boolean;
+}) => {
+  let sizeClass = '';
+  if (size === 'large') {
+    sizeClass = 'text-2xl tracking-[0.3em] ';
+  }
+  return (
+    <Component
+      className={classNames(
+        '!leading-tight text-xl uppercase tracking-[0.1em] text-primary-main mb-7 font-accent font-normal flex items-center [&+h3]:!mt-0',
+        className,
+        sizeClass
+      )}
+    >
+      {children}
+      {icon && (
+        <Iconify
+          icon={ArrowInsertIcon}
+          className="flex-shrink-0 h-auto w-7 rotate-180"
+        />
+      )}
     </Component>
   );
 };
