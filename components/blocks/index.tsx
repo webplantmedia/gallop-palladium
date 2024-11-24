@@ -21,6 +21,7 @@ export { coreCover } from './core-cover';
 // export { GallopAlbumCover } from './gallop-album-cover';
 export { GallopGridder } from './gallop-gridder';
 export { GallopCard } from './gallop-card';
+export { coreGroupContent1 } from './core-group/content-1';
 export { coreGroup } from './core-group/index';
 export { CoreGroup } from './core-group/default';
 export { CoreGroupGrid } from './core-group/grid';

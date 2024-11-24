@@ -6,6 +6,7 @@ import {
   CoreGroupCard2,
   CoreGroupHero1,
   CoreGroupHero2,
+  coreGroupContent1,
   CoreGroupGrid,
   CoreGroupOurOffices1,
   CoreGroupHeader1,
@@ -62,6 +63,8 @@ export const coreGroup = (
   } else if (className?.includes('is-style-header-1')) {
     const data = getVarsFromNode2(domNode);
     return <CoreGroupHeader2 data={data} className={className} props={props} />;
+  } else if (className?.includes('is-style-content-1')) {
+    return coreGroupContent1(domNode, options, className, props);
   }
 
   return (
