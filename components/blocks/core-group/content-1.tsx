@@ -75,8 +75,8 @@ export const CoreGroupContent1 = ({ data, className, props }: BlockProps) => {
     <Alignment align="full" className="relative">
       <Container width="wide" className="relative">
         <div className="flex gap-20 justify-start">
-          <div className="w-4/12">{content}</div>
-          <div className="w-3/12">
+          <div className="w-6/12">{content}</div>
+          <div className="w-6/12">
             <div className="sticky top-32 pb-32">{sticky}</div>
           </div>
         </div>
