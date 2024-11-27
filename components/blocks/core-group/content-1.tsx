@@ -61,7 +61,8 @@ const getData = (domNode: Element, options: HTMLReactParserOptions) => {
 export const coreGroupContent1 = (
   domNode: Element,
   options: HTMLReactParserOptions,
-  className: string
+  className: string,
+  props: HTMLAttributeProps
 ) => {
   const data = getData(domNode, options);
   return <CoreGroupContent1 data={data} className={className} />;

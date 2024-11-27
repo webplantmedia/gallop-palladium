@@ -222,7 +222,7 @@ export const CoreGroupHero1 = ({ data, className }: BlockProps) => {
               {objectMap(info, (key, item, index) => {
                 return (
                   <a
-                    href={item.p?.a?.href}
+                    href={item.p?.a?._href}
                     key={`info-item-${index}`}
                     className={classNames(
                       'py-20 px-12 text-white w-full xl:w-1/3 flex flex-col gap-4 sm:gap-10 shrink-0 hover:!bg-white/10 justify-center items-center xl:items-start rounded-md xl:rounded-none'
