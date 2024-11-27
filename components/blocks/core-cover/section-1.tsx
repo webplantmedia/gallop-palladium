@@ -75,7 +75,7 @@ export const CoreCoverSection1 = ({ data, className }: any) => {
               width={parseInt(img.width)}
               height={parseInt(img.height)}
               srcSet={img.srcSet}
-              sizes={img.sizes}
+              // sizes={img.sizes}
               alt={img.alt}
               title={img.title}
             />

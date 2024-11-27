@@ -26,7 +26,7 @@ export const CoreCover = ({ data, className }: any) => {
             width={parseInt(imgProps.width)}
             height={parseInt(imgProps.height)}
             srcSet={imgProps.srcSet}
-            sizes={imgProps.sizes}
+            // sizes={imgProps.sizes}
             alt={imgProps.alt}
             title={imgProps.title}
           />

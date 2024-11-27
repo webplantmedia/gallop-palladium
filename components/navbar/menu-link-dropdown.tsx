@@ -113,7 +113,7 @@ export default function MenuLinkDropdown({
                                 alt={img.alt}
                                 src={img.src}
                                 srcSet={img.srcset}
-                                sizes={img.sizes}
+                                // sizes={img.sizes}
                                 width={img.width}
                                 height={img.height}
                               />

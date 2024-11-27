@@ -65,7 +65,7 @@ export default function ProfileMenuSidebar({ sidebar, closeModal }: any) {
               alt={props.alt}
               src={props.src}
               srcSet={props.srcSet}
-              sizes={props.sizes}
+              // sizes={props.sizes}
               width={props.width}
               height={props.height}
             />

@@ -47,7 +47,7 @@ export const gallopMap = (
               width={parseInt(props.width)}
               height={parseInt(props.height)}
               srcSet={props.srcSet}
-              sizes={props.sizes}
+              // sizes={props.sizes}
               alt={props.alt}
               title={props.title}
             />

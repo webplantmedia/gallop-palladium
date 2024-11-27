@@ -71,7 +71,7 @@ export default function FooterColumns({ post }: { post: any }) {
               style={styleStringToObject(img.style)}
               src={img.src}
               srcSet={img.srcset}
-              sizes={img.sizes}
+              // sizes={img.sizes}
               width={img.width}
               height={img.height}
               alt={img.alt}

@@ -33,7 +33,7 @@ export const Image = ({
       width={attr._width ? Number(attr._width) : undefined}
       height={attr._height ? Number(attr._height) : undefined}
       srcSet={attr._srcSet}
-      sizes={attr._sizes}
+      // sizes={attr._sizes}
       alt={attr._alt}
       title={attr._title}
     />

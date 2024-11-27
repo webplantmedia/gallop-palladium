@@ -66,7 +66,7 @@ export const BackgroundMedia = ({
           scrollingImage._height ? Number(scrollingImage._height) : undefined
         }
         srcSet={scrollingImage._srcSet}
-        sizes={scrollingImage._sizes}
+        // sizes={scrollingImage._sizes}
         alt={scrollingImage._alt}
         title={scrollingImage._title}
       />
