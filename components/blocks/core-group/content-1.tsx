@@ -78,7 +78,7 @@ export const CoreGroupContent1 = ({ data, className, props }: BlockProps) => {
         <div className="flex gap-20 justify-start">
           <div className="w-6/12">{content}</div>
           <div className="w-6/12">
-            <div className="sticky top-32 pb-32">{sticky}</div>
+            <div className="sticky top-32 mb-32">{sticky}</div>
           </div>
         </div>
       </Container>

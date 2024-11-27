@@ -3,7 +3,7 @@ import ArrowInsertIcon from '@iconify/icons-material-symbols/arrow-insert';
 import classNames from 'classnames';
 import { BlockProps } from '@lib/types';
 import { ElementType } from 'react';
-import { getAlign, tailwindAlignClasses } from '@utils/tools';
+import { getAlign } from '@utils/tools';
 import { Heading, HeadingAccent } from '@components/common';
 
 export const CoreHeading = ({
@@ -12,7 +12,6 @@ export const CoreHeading = ({
   className = '',
   props,
 }: BlockProps) => {
-  className = tailwindAlignClasses(className);
   let inStyle = tag;
 
   const { id } = props ?? {};
@@ -53,7 +52,7 @@ export const CoreHeading = ({
     case 'wide':
       alignmentClass = 'max-w-screen-3xl px-4 sm:px-8 mx-auto';
       break;
-    case 'content':
+    case 'none':
       alignmentClass = '';
       break;
   }
