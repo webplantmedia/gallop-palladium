@@ -43,7 +43,6 @@ export const Image = ({
       />
     );
   }
-  console.log(attr);
 
   return (
     <img
