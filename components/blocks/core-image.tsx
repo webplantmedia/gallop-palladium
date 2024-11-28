@@ -4,18 +4,13 @@ import Link from 'next/link';
 import { BlockProps } from '@lib/types';
 import { HTMLAttributeProps } from '@lib/types';
 import { castToHTMLAttributeProps } from '@utils/tools';
+import { Image } from '@components/common';
 import {
   HTMLReactParserOptions,
   domToReact,
   DOMNode,
   Element,
 } from 'html-react-parser';
-
-interface ImageBlockProps extends BlockProps {
-  block?: any;
-  hasCaption?: string;
-  marginClass?: string;
-}
 
 export const coreImage = (
   domNode: Element,
@@ -37,20 +32,7 @@ export const coreImage = (
               style = { width: props.style.width, maxWidth: '100%' };
             }
 
-            return (
-              <img
-                className={classNames(props.className, 'max-w-full box-border')}
-                loading="lazy"
-                src={props.src}
-                style={props.style}
-                width={parseInt(props.width)}
-                height={parseInt(props.height)}
-                srcSet={props.srcSet}
-                // sizes={props.sizes}
-                alt={props.alt}
-                title={props.title}
-              />
-            );
+            return <Image className="max-w-full box-border" attr={props} />;
           }
         } else if (domNode.name === 'figcaption') {
           hasCaption = true;

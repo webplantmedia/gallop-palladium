@@ -17,25 +17,50 @@ interface Image {
 export const Image = ({
   className,
   attr = {},
+  _attr = {},
 }: {
   className?: string;
-  attr: Record<string, any>;
+  attr?: Record<string, any>;
+  _attr?: Record<string, any>;
 }) => {
-  if (!attr) {
+  if (!attr?.src && _attr?.src) {
     attr = Missing.Image();
   }
+
+  if (_attr?.src) {
+    return (
+      <img
+        className={classNames(className)}
+        loading="lazy"
+        src={_attr._src}
+        style={styleStringToObject(_attr._style)}
+        width={_attr._width ? Number(_attr._width) : undefined}
+        height={_attr._height ? Number(_attr._height) : undefined}
+        srcSet={_attr._srcSet}
+        // sizes={_attr._sizes}
+        alt={_attr._alt}
+        title={_attr._title}
+      />
+    );
+  }
+  console.log(attr);
+
   return (
     <img
       className={classNames(className)}
       loading="lazy"
-      src={attr._src}
-      style={styleStringToObject(attr._style)}
-      width={attr._width ? Number(attr._width) : undefined}
-      height={attr._height ? Number(attr._height) : undefined}
-      srcSet={attr._srcSet}
-      // sizes={attr._sizes}
-      alt={attr._alt}
-      title={attr._title}
+      src={attr.src}
+      style={
+        typeof attr.style === 'string'
+          ? styleStringToObject(attr.style)
+          : attr.style
+      }
+      width={attr.width ? Number(attr.width) : undefined}
+      height={attr.height ? Number(attr.height) : undefined}
+      srcSet={attr.srcSet}
+      // sizes={attr.sizes}
+      alt={attr.alt}
+      title={attr.title}
     />
   );
 };
