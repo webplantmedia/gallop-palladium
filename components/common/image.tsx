@@ -20,14 +20,14 @@ export const Image = ({
   _attr = {},
 }: {
   className?: string;
-  attr?: Record<string, any>;
   _attr?: Record<string, any>;
+  attr?: Record<string, any>;
 }) => {
-  if (!attr?.src && _attr?.src) {
+  if (!attr?.src && !_attr?._src) {
     attr = Missing.Image();
   }
 
-  if (_attr?.src) {
+  if (_attr?._src) {
     return (
       <img
         className={classNames(className)}
