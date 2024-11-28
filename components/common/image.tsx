@@ -2,6 +2,16 @@ import classNames from 'classnames';
 import { styleStringToObject } from '@utils/tools';
 import * as Missing from '@components/global/missing';
 
+function removeUnderscoreFromKeys<T extends Record<string, any>>(
+  obj: T
+): Record<string, any> {
+  return Object.keys(obj).reduce((result, key) => {
+    const newKey = key.startsWith('_') ? key.slice(1) : key;
+    result[newKey] = obj[key];
+    return result;
+  }, {} as Record<string, any>);
+}
+
 interface Image {
   _src: string; // The image source URL
   _width?: string | number; // Width as a string or number
@@ -17,33 +27,15 @@ interface Image {
 export const Image = ({
   className,
   attr = {},
-  _attr = {},
 }: {
   className?: string;
-  _attr?: Record<string, any>;
-  attr?: Record<string, any>;
+  attr: Record<string, any>;
 }) => {
-  if (!attr?.src && !_attr?._src) {
+  attr = removeUnderscoreFromKeys(attr);
+  console.log(attr);
+  if (!attr) {
     attr = Missing.Image();
   }
-
-  if (_attr?._src) {
-    return (
-      <img
-        className={classNames(className)}
-        loading="lazy"
-        src={_attr._src}
-        style={styleStringToObject(_attr._style)}
-        width={_attr._width ? Number(_attr._width) : undefined}
-        height={_attr._height ? Number(_attr._height) : undefined}
-        srcSet={_attr._srcSet}
-        // sizes={_attr._sizes}
-        alt={_attr._alt}
-        title={_attr._title}
-      />
-    );
-  }
-
   return (
     <img
       className={classNames(className)}
