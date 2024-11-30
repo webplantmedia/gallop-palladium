@@ -84,8 +84,7 @@ export const ParseBlocks = ({
             </CoreParagraph>
           );
         } else if (domNode.name === 'ul') {
-          const { content } = coreList(domNode, options);
-          return <CoreList content={content} className={className} />;
+          return coreList(domNode, options, className);
         } else if (domNode.name === 'hr') {
           return <CoreSeparator props={props} />;
         } else if (className?.includes('wp-block-spacer')) {
@@ -132,49 +131,17 @@ export const ParseBlocks = ({
             </CoreButton>
           );
         } else if (className?.includes('wp-block-quote')) {
-          const { content } = coreQuote(domNode, options);
-          const { id } = props || {};
-          return <CoreQuote content={content} className={className} id={id} />;
+          return coreQuote(domNode, options, props, className);
         } else if (className?.includes('wp-block-gallery')) {
-          const { figure, figureProps, columns, figcaption, hasCaption } =
-            coreGallery(domNode, options, className);
-          return (
-            <CoreGallery
-              figure={figure}
-              figureProps={figureProps}
-              columns={columns}
-              figcaption={figcaption}
-              hasCaption={hasCaption}
-              className={className}
-            />
-          );
+          return coreGallery(domNode, options, className);
         } else if (className?.includes('wp-block-image')) {
-          const { content, hasCaption, style } = coreImage(domNode, options);
-          return (
-            <CoreImage
-              content={content}
-              hasCaption={hasCaption}
-              style={style}
-              className={className}
-            />
-          );
+          return coreImage(domNode, options, className);
         } else if (className?.includes('wp-block-audio')) {
           return <CoreAudio props={props} className={className} />;
         } else if (className?.includes('wp-block-cover')) {
           return coreCover(domNode, options, className);
         } else if (className?.includes('wp-block-embed')) {
-          const { videoProps, wrapper, figcaption } = coreEmbed(
-            domNode,
-            options
-          );
-          return (
-            <CoreEmbed
-              videoProps={videoProps}
-              figcaption={figcaption}
-              wrapper={wrapper}
-              className={className}
-            />
-          );
+          return coreEmbed(domNode, options, className);
         } else if (className?.includes('wp-block-gallop-swiper')) {
           return (
             <GallopSwiper className={className}>
@@ -182,47 +149,11 @@ export const ParseBlocks = ({
             </GallopSwiper>
           );
         } else if (className?.includes('wp-block-gallop-sidebar')) {
-          const { header, content } = gallopSidebar(domNode, options);
-
-          return (
-            <GallopSidebar
-              className={className}
-              header={header}
-              sidebarHeader={sidebarHeader}
-              content={content}
-            />
-          );
+          return gallopSidebar(domNode, options, className);
         } else if (className?.includes('wp-block-gallop-map')) {
-          const { address, heading, description, image } = gallopMap(
-            domNode,
-            options
-          );
-          return (
-            <GallopMap
-              address={address}
-              heading={heading}
-              description={description}
-              image={image}
-              className={className}
-            />
-          );
+          return gallopMap(domNode, options, className);
         } else if (className?.includes('wp-block-gallop-excerpt-post')) {
-          const { id } = props || {};
-
-          const { heading, paragraph, figure, href, hasTextLink } =
-            gallopExcerptPost(domNode, options);
-
-          return (
-            <GallopExcerptPost
-              className={className}
-              heading={heading}
-              paragraph={paragraph}
-              figure={figure}
-              href={href}
-              hasTextLink={hasTextLink}
-              id={id}
-            />
-          );
+          gallopExcerptPost(domNode, options, props, className);
         } else if (className?.includes('wp-block-code')) {
           return (
             <CoreCode className={className}>

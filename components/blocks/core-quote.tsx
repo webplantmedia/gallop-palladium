@@ -19,10 +19,13 @@ import {
 
 export const coreQuote = (
   domNode: Element,
-  options: HTMLReactParserOptions
+  options: HTMLReactParserOptions,
+  props: HTMLAttributeProps,
+  className: string
 ) => {
   // let content: Array<React.ReactElement> = [];
   var index = 0;
+  const { id } = props || {};
 
   const op: HTMLReactParserOptions = {
     replace(domNode) {
@@ -58,7 +61,7 @@ export const coreQuote = (
 
   const content = domToReact(domNode?.children as DOMNode[], op);
 
-  return { content: content };
+  return <CoreQuote content={content} className={className} id={id} />;
 };
 export const CoreQuote = ({
   content,

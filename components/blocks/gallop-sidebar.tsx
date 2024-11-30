@@ -12,7 +12,8 @@ import { castToHTMLAttributeProps } from '@utils/tools';
 
 export const gallopSidebar = (
   domNode: Element,
-  options: HTMLReactParserOptions
+  options: HTMLReactParserOptions,
+  className: string
 ) => {
   let header: React.ReactElement | null = null;
   let content: React.ReactElement | null = null;
@@ -37,7 +38,14 @@ export const gallopSidebar = (
 
   domToReact(domNode?.children as DOMNode[], op);
 
-  return { header: header, content: content };
+  return (
+    <GallopSidebar
+      className={className}
+      header={header}
+      sidebarHeader={sidebarHeader}
+      content={content}
+    />
+  );
 };
 
 const SEOContent = ({ children }: { children: any }) => {

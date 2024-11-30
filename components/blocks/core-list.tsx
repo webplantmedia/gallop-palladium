@@ -15,7 +15,11 @@ import {
   Element,
 } from 'html-react-parser';
 
-export const coreList = (domNode: Element, options: HTMLReactParserOptions) => {
+export const coreList = (
+  domNode: Element,
+  options: HTMLReactParserOptions,
+  className: string
+) => {
   const op: HTMLReactParserOptions = {
     replace(domNode) {
       if (domNode instanceof Element && domNode.attribs) {
@@ -47,7 +51,7 @@ export const coreList = (domNode: Element, options: HTMLReactParserOptions) => {
 
   const content = domToReact(domNode.children as DOMNode[], op);
 
-  return { content };
+  return <CoreList content={content} className={className} />;
 };
 
 export const CoreList = ({

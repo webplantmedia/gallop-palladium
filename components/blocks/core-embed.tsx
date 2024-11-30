@@ -27,11 +27,11 @@ const appendVimeoParams = (url: string) => {
 
 export const coreEmbed = (
   domNode: Element,
-  options: HTMLReactParserOptions
+  options: HTMLReactParserOptions,
+  className: string
 ) => {
   let videoProps: any = null;
   let figcaption: React.ReactElement | null = null;
-  let content: React.ReactElement | null = null;
   let wrapper: React.ReactElement | null = null;
 
   const op: HTMLReactParserOptions = {
@@ -63,7 +63,14 @@ export const coreEmbed = (
 
   domToReact(domNode?.children as DOMNode[], op);
 
-  return { videoProps: videoProps, figcaption: figcaption, wrapper: wrapper };
+  return (
+    <CoreEmbed
+      videoProps={videoProps}
+      figcaption={figcaption}
+      wrapper={wrapper}
+      className={className}
+    />
+  );
 };
 
 export const CoreEmbed = ({

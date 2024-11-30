@@ -14,7 +14,8 @@ import {
 
 export const coreImage = (
   domNode: Element,
-  options: HTMLReactParserOptions
+  options: HTMLReactParserOptions,
+  className: string
 ) => {
   let hasCaption = false;
   let style = {};
@@ -79,7 +80,14 @@ export const coreImage = (
 
   const content = domToReact(domNode?.children as DOMNode[], op);
 
-  return { content, hasCaption, style };
+  return (
+    <CoreImage
+      content={content}
+      hasCaption={hasCaption}
+      style={style}
+      className={className}
+    />
+  );
 };
 
 export const CoreImage = ({

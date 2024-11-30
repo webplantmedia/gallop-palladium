@@ -206,13 +206,16 @@ export const coreGallery = (
 
   domToReact(domNode?.children as DOMNode[], op);
 
-  return {
-    figure: figure,
-    columns: columns,
-    figureProps: figureProps,
-    figcaption: figcaption,
-    hasCaption: hasCaption,
-  };
+  return (
+    <CoreGallery
+      figure={figure}
+      figureProps={figureProps}
+      columns={columns}
+      figcaption={figcaption}
+      hasCaption={hasCaption}
+      className={className}
+    />
+  );
 };
 
 export const CoreGallery = ({

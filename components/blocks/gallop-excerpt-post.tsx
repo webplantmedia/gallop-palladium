@@ -23,8 +23,11 @@ import {
 
 export const gallopExcerptPost = (
   domNode: Element,
-  options: HTMLReactParserOptions
+  options: HTMLReactParserOptions,
+  props: HTMLAttributeProps,
+  className: string
 ) => {
+  const { id } = props || {};
   let heading: any;
   let paragraph: React.ReactElement | null = null;
   let figure: any;
@@ -88,13 +91,17 @@ export const gallopExcerptPost = (
 
   domToReact(domNode?.children as DOMNode[], op);
 
-  return {
-    heading: heading,
-    paragraph: paragraph,
-    figure: figure,
-    href: href,
-    hasTextLink: hasTextLink,
-  };
+  return (
+    <GallopExcerptPost
+      className={className}
+      heading={heading}
+      paragraph={paragraph}
+      figure={figure}
+      href={href}
+      hasTextLink={hasTextLink}
+      id={id}
+    />
+  );
 };
 
 export const GallopExcerptPost = ({

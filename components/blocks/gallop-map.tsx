@@ -15,7 +15,8 @@ import { castToHTMLAttributeProps } from '@utils/tools';
 
 export const gallopMap = (
   domNode: Element,
-  options: HTMLReactParserOptions
+  options: HTMLReactParserOptions,
+  className: string
 ) => {
   let address: string = '';
   let heading: ReactElement | null = null;
@@ -73,12 +74,15 @@ export const gallopMap = (
 
   domToReact(domNode?.children as DOMNode[], op);
 
-  return {
-    address: address,
-    heading: heading,
-    description: description,
-    image: image,
-  };
+  return (
+    <GallopMap
+      address={address}
+      heading={heading}
+      description={description}
+      image={image}
+      className={className}
+    />
+  );
 };
 export const GallopMap = ({
   address,
