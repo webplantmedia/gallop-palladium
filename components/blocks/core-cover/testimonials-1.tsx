@@ -1,41 +1,45 @@
 import classNames from 'classnames';
-import { styleStringToObject, tailwindGetAlignClasses } from '@utils/tools';
+import {
+  getAlign,
+  styleStringToObject,
+  tailwindGetAlignClasses,
+} from '@utils/tools';
 import ArrowInsertIcon from '@iconify/icons-material-symbols/arrow-insert';
 import Iconify from '@components/iconify';
+import { Alignment } from '@components/common';
 
 export const CoreCoverTestimonials1 = ({ data, className }: any) => {
-  const backgroundStyle = data?.wpBlockCoverImageBackground?.style
-    ? styleStringToObject(data.wpBlockCoverImageBackground.style)
+  // console.log(data);
+  const backgroundStyle = data?.wpBlockCoverImageBackground?._style
+    ? styleStringToObject(data.wpBlockCoverImageBackground._style)
     : {};
   const backgroundImage = backgroundStyle?.backgroundImage
     ? backgroundStyle.backgroundImage
     : '';
   const imgProps = data?.wpBlockCoverImageBackground || {};
-  const h2 = data?.wpBlockCoverInnerContainer?.h2?.jsx || null;
-  const h3 = data?.wpBlockCoverInnerContainer?.h3?.jsx || null;
+  const h2 = data?.wpBlockCoverInnerContainer?.h2?._jsx || null;
+  const h3 = data?.wpBlockCoverInnerContainer?.h3?._jsx || null;
   const quote1 = data?.wpBlockCoverInnerContainer?.wpBlockQuote || null;
   const quote2 = data?.wpBlockCoverInnerContainer?.wpBlockQuote_2 || null;
-  const p = data?.wpBlockCoverInnerContainer?.p?.jsx || null;
+  const p = data?.wpBlockCoverInnerContainer?.p?._jsx || null;
   const button1 =
-    data?.wpBlockCoverInnerContainer?.wpBlockButtons?.wpBlockButton?.a?.text ||
+    data?.wpBlockCoverInnerContainer?.wpBlockButtons?.wpBlockButton?.a?._text ||
     null;
   const button2 =
     data?.wpBlockCoverInnerContainer?.wpBlockButtons?.wpBlockButton_2?.a
-      ?.text || null;
+      ?._text || null;
   const button1Href =
-    data?.wpBlockCoverInnerContainer?.wpBlockButtons?.wpBlockButton?.a?.href ||
+    data?.wpBlockCoverInnerContainer?.wpBlockButtons?.wpBlockButton?.a?._href ||
     null;
   const button2Href =
     data?.wpBlockCoverInnerContainer?.wpBlockButtons?.wpBlockButton_2?.a
-      ?.href || null;
+      ?._href || null;
 
   const img = data?.wpBlockCoverInnerContainer?.wpBlockImage?.img || null;
   className = tailwindGetAlignClasses(className);
 
   return (
-    <div
-      className={classNames('relative overflow-hidden pt-20 pb-20', className)}
-    >
+    <Alignment className={classNames('relative overflow-hidden pt-20 pb-20')}>
       {imgProps && imgProps.width && (
         <>
           <img
@@ -160,6 +164,6 @@ export const CoreCoverTestimonials1 = ({ data, className }: any) => {
           </div>
         )}
       </div>
-    </div>
+    </Alignment>
   );
 };

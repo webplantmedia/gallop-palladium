@@ -1,8 +1,6 @@
 import classNames from 'classnames';
 import * as Missing from '@components/global/missing';
-import { getDomNodeText, extractMilestone } from '@utils/tools';
 import { BlockProps } from '@lib/types';
-import { AnimatedNumber } from '@components/widgets/animated-number';
 import {
   Image,
   Heading,
@@ -32,8 +30,10 @@ export const CoreGroupSection1 = ({ data, className, props }: BlockProps) => {
       align="wide"
       className={classNames('overflow-hidden pt-16 pb-16')}
     >
-      <h2 className={classNames('gallop-h2 !mb-2 !mt-0')}>{h2}</h2>
-      <Paragraph as="leader" className="max-w-3xl">
+      <Heading as="h2" className="!mb-2 !mt-0">
+        {h2}
+      </Heading>
+      <Paragraph as="leader" className="!max-w-3xl">
         {p}
       </Paragraph>
       <section className="mt-16 grid grid-cols-1 lg:grid-cols-2 lg:gap-12">

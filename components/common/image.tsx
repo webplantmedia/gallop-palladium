@@ -12,18 +12,6 @@ function removeUnderscoreFromKeys<T extends Record<string, any>>(
   }, {} as Record<string, any>);
 }
 
-interface Image {
-  _src: string; // The image source URL
-  _width?: string | number; // Width as a string or number
-  _height?: string | number; // Height as a string or number
-  _className?: string; // Additional classes for styling
-  _style?: string; // Inline styles as a string or object
-  _srcSet?: string; // For responsive images
-  _sizes?: string; // Sizes attribute for responsive images
-  _alt?: string; // Alt text for the image
-  _title?: string; // Title attribute for the image
-}
-
 export const Image = ({
   className,
   attr = {},
@@ -32,7 +20,6 @@ export const Image = ({
   attr: Record<string, any>;
 }) => {
   attr = removeUnderscoreFromKeys(attr);
-  console.log(attr);
   if (!attr) {
     attr = Missing.Image();
   }

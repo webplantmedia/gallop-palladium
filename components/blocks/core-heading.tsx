@@ -17,21 +17,17 @@ export const CoreHeading = ({
   const { id } = props ?? {};
   let Tag: ElementType = tag as ElementType;
 
-  const { align, justify } = getAlign(className);
+  const { alignment, justify, textAlign } = getAlign(className);
 
   if (className?.includes('is-style-accent-title')) {
     return (
       <HeadingAccent
+        as={Tag}
         key={id}
         id={id}
-        align={align}
-        className={classNames(className)}
+        className={classNames(className, alignment, justify)}
       >
         {children}
-        <Iconify
-          icon={ArrowInsertIcon}
-          className="flex-shrink-0 h-auto w-7 rotate-180"
-        />
       </HeadingAccent>
     );
   }
@@ -46,24 +42,13 @@ export const CoreHeading = ({
     inStyle = 'h3';
   }
 
-  let alignmentClass = 'max-w-3xl px-4 sm:px-8 mx-auto';
-
-  switch (align) {
-    case 'wide':
-      alignmentClass = 'max-w-screen-3xl px-4 sm:px-8 mx-auto';
-      break;
-    case 'none':
-      alignmentClass = '';
-      break;
-  }
-
   return (
     <Heading
+      as={Tag}
       key={id}
       id={id}
-      align={align}
       inStyle={inStyle}
-      className={classNames(className, alignmentClass)}
+      className={classNames(className, alignment, textAlign)}
     >
       {children}
     </Heading>

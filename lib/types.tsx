@@ -53,6 +53,7 @@ export interface BlockProps {
   className?: string;
   children?: ReactNode;
   tag?: string;
+  parentTag?: string | undefined;
   options?: HTMLReactParserOptions;
   props?: HTMLAttrProps;
 }

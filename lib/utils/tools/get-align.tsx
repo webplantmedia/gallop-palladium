@@ -1,10 +1,12 @@
-export function getAlign(className: string | null | undefined) {
-  if (!className) {
-    return { justify: '', align: '' };
-  }
+export function getAlign(
+  className: string | null | undefined,
+  align: string = 'content'
+) {
+  className = String(className);
 
-  let align = 'none';
   let justify = '';
+  let textAlign = 'text-left';
+  let alignment = '';
 
   if (className?.includes('alignright')) {
     align = 'right';
@@ -18,13 +20,28 @@ export function getAlign(className: string | null | undefined) {
     align = 'full';
   }
 
-  if (className?.includes('text-center')) {
+  if (className?.includes('has-text-align-center')) {
     justify = 'justify-center';
-  } else if (className?.includes('text-left')) {
+    textAlign = 'text-center';
+  } else if (className?.includes('has-text-align-left')) {
     justify = 'justify-start';
-  } else if (className?.includes('text-right')) {
+    textAlign = 'text-left';
+  } else if (className?.includes('has-text-align-right')) {
     justify = 'justify-end';
+    textAlign = 'text-right';
   }
 
-  return { align, justify };
+  switch (align) {
+    case 'full':
+      alignment = 'max-w-screen-4xl px-4 sm:px-8 mx-auto';
+      break;
+    case 'wide':
+      alignment = 'max-w-screen-3xl px-4 sm:px-8 mx-auto';
+      break;
+    case 'content':
+      alignment = 'max-w-3xl px-4 sm:px-8 mx-auto';
+      break;
+  }
+
+  return { align, justify, alignment, textAlign };
 }

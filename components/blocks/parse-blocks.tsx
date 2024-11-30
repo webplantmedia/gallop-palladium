@@ -10,6 +10,7 @@ import {
   getVarsFromNode,
   getVarsFromNode2,
   replaceWordPressUrlRelative,
+  getDomNodeText,
 } from '@utils/tools';
 import {
   gallopMilestone,
@@ -76,8 +77,10 @@ export const ParseBlocks = ({
         let { className } = props;
 
         if (domNode.name === 'p') {
+          const parentTag = (domNode?.parent as Element)?.name;
+          console.log(parentTag);
           return (
-            <CoreParagraph className={className}>
+            <CoreParagraph className={className} parentTag={parentTag}>
               {domToReact(domNode.children as DOMNode[], options)}
             </CoreParagraph>
           );

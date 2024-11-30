@@ -7,7 +7,6 @@ export const Heading = ({
   as: Component = 'h2',
   inStyle,
   outline = false,
-  align,
   children,
   id,
   className,
@@ -15,7 +14,6 @@ export const Heading = ({
   as?: ElementType;
   inStyle?: string;
   outline?: boolean;
-  align?: string;
   children: ReactNode;
   id?: string;
   className?: string;
@@ -67,7 +65,6 @@ export const HeadingAccent = ({
   children,
   size,
   id,
-  align,
   className,
   icon = true,
 }: {
@@ -75,7 +72,6 @@ export const HeadingAccent = ({
   children: ReactNode;
   size?: string;
   id?: string;
-  align?: string;
   className?: string;
   icon?: boolean;
 }) => {
