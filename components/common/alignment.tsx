@@ -33,15 +33,17 @@ export const Container = ({
 export const Alignment = ({
   as: Component = 'div',
   align = 'none',
+  defaultAlign = 'content',
   children,
   className,
 }: {
   as?: ElementType;
   align?: string;
+  defaultAlign?: string;
   children: ReactNode;
   className?: string;
 }) => {
-  const { alignment } = getAlign(`align${align}`, 'content');
+  const { alignment } = getAlign(`align${align}`, defaultAlign);
 
   return (
     <Component className={classNames(alignment, className)}>

@@ -1,6 +1,8 @@
 import classNames from 'classnames';
 import { Fragment } from 'react';
+import { getAlign } from '@utils/tools';
 import { BlockProps } from '@lib/types';
+import { Alignment } from '@components/common';
 import Link from 'next/link';
 import {
   HTMLReactParserOptions,
@@ -17,16 +19,17 @@ import {
 
 interface GalleryVars {
   figure: any;
-  figureLength: any;
-  imageNumber: any;
-  className: any;
-  overflow: any;
+  figureLength?: any;
+  imageNumber?: any;
+  className?: any;
+  overflow?: any;
   columns: any;
-  firstImageInRow: any;
-  figureProps: any;
-  figcaption: any;
-  a: any;
-  row: any;
+  firstImageInRow?: any;
+  figureProps?: any;
+  figcaption?: any;
+  a?: any;
+  row?: any;
+  parentTag?: string | undefined;
 }
 
 const getGridGalleryClass = (node: any) => {
@@ -69,7 +72,8 @@ const getGridGalleryClass = (node: any) => {
 export const coreGallery = (
   domNode: Element,
   options: HTMLReactParserOptions,
-  className: string
+  className: string,
+  parentTag?: string | undefined
 ) => {
   let match = className?.match(/columns-(\d)/);
   let columns = 3;
@@ -206,14 +210,19 @@ export const coreGallery = (
 
   domToReact(domNode?.children as DOMNode[], op);
 
+  const figureLength = figure.length;
+  columns = figureLength < columns ? figureLength : columns;
+
   return (
     <CoreGallery
       figure={figure}
       figureProps={figureProps}
+      figureLength={figureLength}
       columns={columns}
       figcaption={figcaption}
       hasCaption={hasCaption}
       className={className}
+      parentTag={parentTag}
     />
   );
 };
@@ -221,22 +230,24 @@ export const coreGallery = (
 export const CoreGallery = ({
   figure,
   figureProps,
+  figureLength,
   columns,
   figcaption,
   hasCaption,
   className,
+  parentTag,
 }: {
   figure: any;
   figureProps: any;
+  figureLength: any;
   columns: any;
   figcaption: any;
   hasCaption: any;
   className: any;
+  parentTag: string | undefined;
 }) => {
   className = tailwindAlignClasses(className);
-  let gallerySize = figure.length;
-  // number of images in gallery
-  let figureLength = figure.length;
+  let gallerySize = figureLength;
   let a = 0;
   let row = 1;
   let imageNumber = 0;
@@ -252,16 +263,9 @@ export const CoreGallery = ({
     return (
       <GalleryLogos
         figure={figure}
-        figureLength={figureLength}
-        imageNumber={imageNumber}
         className={className}
-        overflow={overflow}
         columns={columns}
-        firstImageInRow={firstImageInRow}
-        figureProps={figureProps}
-        figcaption={figcaption}
-        a={a}
-        row={row}
+        parentTag={parentTag}
       />
     );
   } else if (1 === columns) {
@@ -311,6 +315,7 @@ export const CoreGallery = ({
       figcaption={figcaption}
       a={a}
       row={row}
+      parentTag={parentTag}
     />
   );
 };
@@ -396,25 +401,50 @@ const LeadImageGallery = ({
 
 const GalleryLogos = ({
   figure,
-  figureLength,
-  imageNumber,
   className,
-  overflow,
   columns,
-  firstImageInRow,
-  figureProps,
-  figcaption,
-  a,
-  row,
+  parentTag,
 }: GalleryVars) => {
+  let columnsClass = '';
+  const defaultAlign = parentTag ? 'none' : 'content';
+  const { align } = getAlign(className, defaultAlign);
+
+  if (className?.includes('is-style-logos-2')) {
+    columnsClass = 'flex items-start gap-7';
+  } else {
+    switch (columns) {
+      case 2:
+        columnsClass = 'grid items-center gap-7 grid-cols-2';
+        break;
+      case 3:
+        columnsClass = 'grid items-center gap-7 grid-cols-3';
+        break;
+      case 4:
+        columnsClass = 'grid items-center gap-7 grid-cols-4';
+        break;
+      case 5:
+        columnsClass = 'grid items-center gap-7 grid-cols-5';
+        break;
+      case 6:
+        columnsClass = 'grid items-center gap-7 grid-cols-6';
+        break;
+    }
+  }
+
   return (
-    <div
-      className={classNames('mb-7 grid grid-cols-4 items-center gap-[1.5%]')}
+    <Alignment
+      align={align}
+      defaultAlign={defaultAlign}
+      className={classNames(
+        'mb-14 mt-14 [&_img]:max-h-24 [&_img]:w-full [&_img]:object-contain',
+        columnsClass
+      )}
     >
       {figure}
-    </div>
+    </Alignment>
   );
 };
+
 const DefaultGallery = ({
   figure,
   figureLength,
@@ -427,9 +457,17 @@ const DefaultGallery = ({
   figcaption,
   a,
   row,
+  parentTag,
 }: GalleryVars) => {
+  const defaultAlign = parentTag ? 'none' : 'content';
+  const { align } = getAlign(className, defaultAlign);
+
   return (
-    <div className={classNames(className, 'mb-7 items-start !columns-auto')}>
+    <Alignment
+      align={align}
+      as="div"
+      className={classNames('mb-7 items-start !columns-auto')}
+    >
       {figure.map((block: any, index: number) => {
         imageNumber = index + 1;
 
@@ -472,6 +510,6 @@ const DefaultGallery = ({
         }
       })}
       {figcaption && figcaption}
-    </div>
+    </Alignment>
   );
 };

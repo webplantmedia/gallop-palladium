@@ -117,7 +117,7 @@ export const ParseBlocks = ({
         } else if (className?.includes('wp-block-quote')) {
           return coreQuote(domNode, options, props, className);
         } else if (className?.includes('wp-block-gallery')) {
-          return coreGallery(domNode, options, className);
+          return coreGallery(domNode, options, className, parentTag);
         } else if (className?.includes('wp-block-image')) {
           return coreImage(domNode, options, className);
         } else if (className?.includes('wp-block-audio')) {

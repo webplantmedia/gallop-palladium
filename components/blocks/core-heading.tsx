@@ -18,8 +18,8 @@ export const CoreHeading = ({
   const { id } = props ?? {};
   let Tag: ElementType = tag as ElementType;
 
-  const align = parentTag ? 'none' : 'content';
-  const { alignment, justify, textAlign } = getAlign(className, align);
+  const defaultAlign = parentTag ? 'none' : 'content';
+  const { alignment, justify, textAlign } = getAlign(className, defaultAlign);
 
   if (className?.includes('is-style-accent-title')) {
     return (

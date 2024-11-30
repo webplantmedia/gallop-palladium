@@ -1,9 +1,10 @@
 export function getAlign(
   className: string | null | undefined,
-  align: string = 'content'
+  defaultAlign: string = 'content'
 ) {
   className = String(className);
 
+  let align = defaultAlign;
   let justify = '';
   let textAlign = 'text-left';
   let alignment = '';

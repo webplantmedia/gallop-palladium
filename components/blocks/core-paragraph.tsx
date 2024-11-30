@@ -9,10 +9,10 @@ export const CoreParagraph = ({
   parentTag = undefined,
 }: BlockProps) => {
   let as: string = '';
-  const align = parentTag ? 'none' : 'content';
+  const defaultAlign = parentTag ? 'none' : 'content';
   // if p has not parent, then it is top level item and
   // needs to have x-padding.
-  const { alignment, textAlign } = getAlign(className, align);
+  const { alignment, textAlign } = getAlign(className, defaultAlign);
 
   if (className.includes('is-style-lead')) {
     as = 'leader';
