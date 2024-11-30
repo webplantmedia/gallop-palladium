@@ -149,7 +149,7 @@ export const ParseBlocks = ({
             </GallopSwiper>
           );
         } else if (className?.includes('wp-block-gallop-sidebar')) {
-          return gallopSidebar(domNode, options, className);
+          return gallopSidebar(domNode, options, className, sidebarHeader);
         } else if (className?.includes('wp-block-gallop-map')) {
           return gallopMap(domNode, options, className);
         } else if (className?.includes('wp-block-gallop-excerpt-post')) {

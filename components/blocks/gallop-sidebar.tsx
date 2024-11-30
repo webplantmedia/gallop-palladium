@@ -13,7 +13,8 @@ import { castToHTMLAttributeProps } from '@utils/tools';
 export const gallopSidebar = (
   domNode: Element,
   options: HTMLReactParserOptions,
-  className: string
+  className: string,
+  sidebarHeader: any
 ) => {
   let header: React.ReactElement | null = null;
   let content: React.ReactElement | null = null;
