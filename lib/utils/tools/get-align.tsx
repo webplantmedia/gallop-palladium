@@ -33,10 +33,21 @@ export function getAlign(
 
   switch (align) {
     case 'full':
-      alignment = 'max-w-screen-4xl px-4 sm:px-8 mx-auto';
+      alignment = 'mx-auto max-w-screen-4xl clear-both';
       break;
     case 'wide':
-      alignment = 'max-w-screen-3xl px-4 sm:px-8 mx-auto';
+      alignment = 'mx-auto max-w-screen-3xl clear-both px-4 sm:px-8';
+      break;
+    case 'left':
+      alignment =
+        'text-center md:float-left md:mr-10 md:mb-10 ml-0 mr-0 px-4 sm:px-8';
+      break;
+    case 'right':
+      alignment =
+        'text-center md:float-right md:ml-10 md:mb-10 ml-0 mr-0 px-4 sm:px-8';
+      break;
+    case 'center':
+      alignment = 'text-center mx-auto justify-center ml-0 mr-0 px-4 sm:px-8';
       break;
     case 'content':
       alignment = 'max-w-3xl px-4 sm:px-8 mx-auto';
