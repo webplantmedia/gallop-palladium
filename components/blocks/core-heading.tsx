@@ -11,13 +11,15 @@ export const CoreHeading = ({
   tag = 'h2',
   className = '',
   props,
+  parentTag = undefined,
 }: BlockProps) => {
   let inStyle = tag;
 
   const { id } = props ?? {};
   let Tag: ElementType = tag as ElementType;
 
-  const { alignment, justify, textAlign } = getAlign(className);
+  const align = parentTag ? 'none' : 'content';
+  const { alignment, justify, textAlign } = getAlign(className, align);
 
   if (className?.includes('is-style-accent-title')) {
     return (

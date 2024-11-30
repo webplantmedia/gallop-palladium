@@ -75,10 +75,9 @@ export const ParseBlocks = ({
           domNode.attribs
         );
         let { className } = props;
+        const parentTag = (domNode?.parent as Element)?.name;
 
         if (domNode.name === 'p') {
-          const parentTag = (domNode?.parent as Element)?.name;
-          console.log(parentTag);
           return (
             <CoreParagraph className={className} parentTag={parentTag}>
               {domToReact(domNode.children as DOMNode[], options)}
@@ -97,7 +96,12 @@ export const ParseBlocks = ({
           return gallopMilestone(domNode, className);
         } else if (className?.includes('wp-block-heading')) {
           return (
-            <CoreHeading tag={domNode.name} className={className} props={props}>
+            <CoreHeading
+              tag={domNode.name}
+              className={className}
+              props={props}
+              parentTag={parentTag}
+            >
               {domToReact(domNode.children as DOMNode[], options)}
             </CoreHeading>
           );
