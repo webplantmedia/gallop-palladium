@@ -26,32 +26,13 @@ export const GallopAlbumCover = ({ node, className, options, props }: any) => {
     let { className: blockClassName } = props;
 
     if (block.attribs?.class?.includes('wp-block-image')) {
-      const { content, hasCaption, style } = coreImage(block, options);
-      albumImage = (
-        <CoreImage
-          content={content}
-          hasCaption={hasCaption}
-          style={style}
-          className={classNames(className, '!mb-0 [&_img]:!rounded-none')}
-        />
-      );
+      albumImage = coreImage(block, options, className);
     } else if (block.attribs?.class?.includes('wp-block-heading')) {
       albumHeading = block.children[0]['data'];
       albumHeadingClass = blockClassName;
     } else if (block.attribs?.class?.includes('wp-block-gallery')) {
       albumSize = block.children.length;
-      const { figure, figureProps, columns, figcaption, hasCaption } =
-        coreGallery(block, options, className);
-      albumGallery = (
-        <CoreGallery
-          figure={figure}
-          figureProps={figureProps}
-          columns={columns}
-          figcaption={figcaption}
-          hasCaption={hasCaption}
-          className={className}
-        />
-      );
+      albumGallery = coreGallery(block, options, className);
     }
   });
   return (

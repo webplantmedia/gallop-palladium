@@ -248,7 +248,23 @@ export const CoreGallery = ({
   // Or an exact single row gallery.
   // If so, this algorithm might try to do 3|3|2 instead of 4|4.
 
-  if (1 === columns) {
+  if (className?.includes('is-style-logos')) {
+    return (
+      <GalleryLogos
+        figure={figure}
+        figureLength={figureLength}
+        imageNumber={imageNumber}
+        className={className}
+        overflow={overflow}
+        columns={columns}
+        firstImageInRow={firstImageInRow}
+        figureProps={figureProps}
+        figcaption={figcaption}
+        a={a}
+        row={row}
+      />
+    );
+  } else if (1 === columns) {
     return (
       <div className={classNames(className, 'mb-7 items-start !columns-auto')}>
         <div className="grid grid-cols-1 justify-center gap-7">{figure}</div>
@@ -378,6 +394,27 @@ const LeadImageGallery = ({
   );
 };
 
+const GalleryLogos = ({
+  figure,
+  figureLength,
+  imageNumber,
+  className,
+  overflow,
+  columns,
+  firstImageInRow,
+  figureProps,
+  figcaption,
+  a,
+  row,
+}: GalleryVars) => {
+  return (
+    <div
+      className={classNames('mb-7 grid grid-cols-4 items-center gap-[1.5%]')}
+    >
+      {figure}
+    </div>
+  );
+};
 const DefaultGallery = ({
   figure,
   figureLength,

@@ -6,21 +6,15 @@ import ArrowLongLeftIcon from '@iconify/icons-heroicons/arrow-long-left';
 import { useId } from 'react';
 import React from 'react';
 import { BlockProps } from '@lib/types';
-import { tailwindAlignClasses } from '@utils/tools';
+import { Container } from '@components/common';
 
 export const GallopSwiper = ({ children, className }: BlockProps) => {
-  className = tailwindAlignClasses(className);
   let swiperId = 'swiper-' + useId(); // Generate a unique ID
   swiperId = swiperId.replace(/:/g, '-'); // Sanitize the ID
 
   return (
     <div className="!max-w-none !overflow-hidden">
-      <div
-        className={classNames(
-          'px-0 3xl:px-8 !max-w-screen-3xl w-full flex justify-center mb-14 !h-auto',
-          className
-        )}
-      >
+      <Container className="w-full flex justify-center mb-14 !h-auto">
         <div
           id={swiperId}
           className="swiper w-full !h-auto !hidden !overflow-visible"
@@ -52,7 +46,7 @@ export const GallopSwiper = ({ children, className }: BlockProps) => {
           </div>
         </div>
         <SwiperCarouselInit swiperId={swiperId} />
-      </div>
+      </Container>
     </div>
   );
 };

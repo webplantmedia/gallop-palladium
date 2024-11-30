@@ -4,20 +4,12 @@ import parse, {
   DOMNode,
   Element,
 } from 'html-react-parser';
-import {
-  tailwindAlignClasses,
-  hasExactClass,
-  getVarsFromNode,
-  getVarsFromNode2,
-  replaceWordPressUrlRelative,
-  getDomNodeText,
-} from '@utils/tools';
+import { hasExactClass } from '@utils/tools';
 import {
   gallopMilestone,
   gallopMilestones,
   CoreParagraph,
   CoreHeading,
-  CoreGallery,
   coreGallery,
   CoreSeparator,
   CoreSpacer,
@@ -25,35 +17,27 @@ import {
   CoreButton,
   CoreCode,
   CoreButtonLink,
-  CoreQuote,
   coreQuote,
-  CoreList,
   coreList,
-  CoreImage,
   coreImage,
   TagAnchor,
   CoreAudio,
-  CoreEmbed,
   coreCover,
   // GallopAlbumCover,
   // GallopSinglePost,
-  GallopExcerptPost,
   gallopExcerptPost,
   coreGroup,
   // GallopBlogPosts,
-  GallopMap,
   gallopMap,
   // GallopNeighborhood,
   // GallopCard,
   // GallopContactForm,
-  GallopSidebar,
   gallopSidebar,
   GallopSwiper,
   coreEmbed,
 } from '@components/blocks';
 import { HTMLAttributeProps } from '@lib/types';
 import { castToHTMLAttributeProps } from '@utils/tools';
-import classNames from 'classnames';
 
 export const ParseBlocks = ({
   content,
