@@ -66,7 +66,7 @@ export default function MobileMenuLinkDropdown({ data, closeModal }: any) {
 
   return (
     <Disclosure as="div" className="w-full">
-      {({ open }) => (
+      {({ open }: { open: boolean }) => (
         <>
           <DisclosureButton
             as="a"

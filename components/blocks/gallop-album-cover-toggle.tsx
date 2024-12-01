@@ -14,7 +14,7 @@ export const GallopAlbumCoverToggle = ({
 }: any) => {
   return (
     <Disclosure defaultOpen={albumOpen}>
-      {({ open }) => (
+      {({ open }: { open: boolean }) => (
         <>
           <Disclosure.Button className="flex gap-4 md:gap-10 items-center bg-base-card p-3 sm:p-5 rounded-md overflow-hidden hover:bg-base-card/70 mb-4 w-full">
             <div className="shrink-0 flex [&>figure>img]:w-auto max-md:[&>figure>img]:object-cover max-md:[&>figure>img]:aspect-square [&>figure>img]:max-h-[80px] md:[&>figure>img]:max-h-[80px]">

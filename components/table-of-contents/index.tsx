@@ -29,7 +29,7 @@ export default function TableOfContents({ toc, meta }: any) {
 
   return (
     <Popover>
-      {({ open }) => (
+      {({ open }: { open: boolean }) => (
         <>
           {/* Mobile menu button */}
           <div className="flex items-center">
@@ -44,7 +44,7 @@ export default function TableOfContents({ toc, meta }: any) {
           </div>
           <Transition appear={true} unmount={false} show={open} as={Fragment}>
             <Popover.Panel unmount={false} as="div" className="relative z-40">
-              {({ close }) => (
+              {({ close }: { close: () => void }) => (
                 <>
                   <Transition.Child
                     as={Fragment}

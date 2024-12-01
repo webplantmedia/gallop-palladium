@@ -27,7 +27,7 @@ export default function MenuLinkDropdown({
 
   return (
     <Popover className="flex items-center isolate">
-      {({ open }) => (
+      {({ open }: { open: boolean }) => (
         <>
           {open && <DisableScroll />}
           <PopoverButton
@@ -62,7 +62,7 @@ export default function MenuLinkDropdown({
               modal={false}
               className="absolute left-0 right-0 max-w-screen-3xl top-full"
             >
-              {({ close }) => (
+              {({ close }: { close: () => void }) => (
                 <div className="overflow-hidden rounded-b-md bg-base-body shadow-2xl">
                   <div
                     className={classNames(

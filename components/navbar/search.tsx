@@ -39,7 +39,7 @@ export default function Search({ isScrolling, post }: any) {
 
   return (
     <Popover className="flex items-center">
-      {({ open }) => (
+      {({ open }: { open: boolean }) => (
         <>
           {open && <DisableScroll />}
           <Popover.Button

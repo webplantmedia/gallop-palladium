@@ -32,7 +32,7 @@ const AccordionItem = ({ item, open, isChild, level = 1 }: any) => {
 export default function SidebarAccordion({ item }: any) {
   return (
     <Disclosure as="div" className="w-full">
-      {({ open }) => (
+      {({ open }: { open: boolean }) => (
         <>
           <Disclosure.Button
             className={classNames(
