@@ -1,19 +1,18 @@
 import { BlockProps } from '@lib/types';
 import { tailwindGetAlignClasses } from '@utils/tools';
 import classNames from 'classnames';
-import {
-  RPanel,
-  UPanel,
-  ProRib,
-  AGPanel,
-  StandingSeamSSQ100,
-  StandingSeamSSQ450,
-} from '@components/three';
+// UPanel,
+// ProRib,
+// AGPanel,
+// StandingSeamSSQ100,
+// StandingSeamSSQ450,
+import { RPanel } from '@components/three/r-panel';
 
 export const CoreCode = ({ children, className }: BlockProps) => {
   const alignClass = tailwindGetAlignClasses(className);
 
-  if (className?.includes('r-panel-profile')) {
+  return <RPanel />;
+  /*if (className?.includes('r-panel-profile')) {
     return <RPanel />;
   } else if (className?.includes('u-panel-profile')) {
     return <UPanel />;
@@ -25,7 +24,7 @@ export const CoreCode = ({ children, className }: BlockProps) => {
     return <StandingSeamSSQ450 />;
   } else if (className?.includes('standing-seam-ssq100')) {
     return <StandingSeamSSQ100 />;
-  }
+	}*/
 
   return (
     <pre className={classNames('wp-block-code', className, alignClass)}>

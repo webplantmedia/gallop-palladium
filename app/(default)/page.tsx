@@ -6,11 +6,12 @@ import { fetchPost, fetchSiteElements } from '@api';
 
 export const revalidate = 3600;
 
-type Props = {
-  params: { slug: string };
-};
+type Params = Promise<{ slug: string }>;
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata(props: {
+  params: Params;
+}): Promise<Metadata> {
+  const params = await props.params;
   const uri = '/home/';
 
   const { meta, site } = await fetchPost(uri);
@@ -22,7 +23,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {};
 }
 
-export default async function Page({ params }: Props) {
+export default async function Page(props: { params: Params }) {
+  const params = await props.params;
   const uri = '/home/';
 
   const { post, meta } = await fetchPost(uri);

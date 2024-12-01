@@ -4,15 +4,17 @@ import Grid from '@components/grid';
 
 export const revalidate = 3600;
 
-type Props = {
-  params: { slug: string };
-};
+type Params = Promise<{ slug: string }>;
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata(props: {
+  params: Params;
+}): Promise<Metadata> {
+  const params = await props.params;
   return {};
 }
 
-export default async function Page({ params }: Props) {
+export default async function Page(props: { params: Params }) {
+  const params = await props.params;
   const uri = `/contact/`;
   // const uri = `/${params.slug.join('/')}/`;
   const headers = {

@@ -7,11 +7,12 @@ import { PageSeo } from '@components/seo/page';
 
 export const revalidate = 3600;
 
-type Props = {
-  params: { slug: Array<string> };
-};
+type Params = Promise<{ slug: Array<string> }>;
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata(props: {
+  params: Params;
+}): Promise<Metadata> {
+  const params = await props.params;
   const uri = `/${params.slug.join('/')}/`;
 
   const { meta, site } = await fetchPost(uri);
@@ -24,7 +25,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {};
 }
 
-export default async function Page({ params }: Props) {
+export default async function Page(props: { params: Params }) {
+  const params = await props.params;
   const uri = `/${params.slug.join('/')}/`;
   const { post, meta } = await fetchPost(uri);
   const { sidebarHeader } = await fetchSiteElements();
