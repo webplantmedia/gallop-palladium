@@ -26,6 +26,7 @@ export { CoreGroup } from './core-group/default';
 export { CoreGroupGrid } from './core-group/grid';
 export { CoreGroupCard1 } from './core-group/card-1';
 export { CoreGroupCard2 } from './core-group/card-2';
+export { CoreGroupTeam1 } from './core-group/team-1';
 export { CoreGroupSection1 } from './core-group/section-1';
 export { CoreGroupSection2 } from './core-group/section-2';
 export { CoreGroupSection3 } from './core-group/section-3';

@@ -31,7 +31,7 @@ const getData = (domNode: Element, options: HTMLReactParserOptions) => {
         let { className } = props;
 
         if (className?.includes('is-style-content-sticky')) {
-          sticky = <>{domToReact([domNode] as DOMNode[], options)}</>;
+          sticky = <>{domToReact(domNode.children as DOMNode[], options)}</>;
           content.push(
             <Fragment key={`content=${index}`}>
               <div className="block lg:hidden [&+*]:lg:!mt-0">

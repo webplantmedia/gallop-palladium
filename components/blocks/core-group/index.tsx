@@ -4,6 +4,7 @@ import {
   CoreGroupSection3,
   CoreGroupCard1,
   CoreGroupCard2,
+  CoreGroupTeam1,
   CoreGroupHero1,
   CoreGroupHero2,
   coreGroupContent1,
@@ -58,6 +59,9 @@ export const coreGroup = (
   } else if (hasExactClass(className, 'is-style-card-2')) {
     const data = getVarsFromNode(domNode);
     return <CoreGroupCard2 data={data} className={className} props={props} />;
+  } else if (hasExactClass(className, 'is-style-team-1')) {
+    const data = getVarsFromNode2(domNode);
+    return <CoreGroupTeam1 data={data} className={className} props={props} />;
   } else if (className?.includes('is-style-header-2')) {
     const data = getVarsFromNode2(domNode);
     return <CoreGroupHeader1 data={data} className={className} props={props} />;

@@ -101,6 +101,7 @@ export const CoreImage = ({
   style: any;
   className: any;
 }) => {
+  console.log(className);
   className = className.replace(
     'alignleft',
     'alignleft md:float-left md:w-[300px] xl:w-auto md:!mr-5 mt-1.5 md:!pr-0'
@@ -111,13 +112,30 @@ export const CoreImage = ({
   );
   className = className.replace('size-full', 'image-size-full');
 
+  let imgClass = '';
+
+  if (className.includes('is-style-rounded')) {
+    if (hasCaption) {
+      imgClass = '[&_img]:rounded-t-2xl';
+    } else {
+      imgClass = '[&_img]:rounded-2xl';
+    }
+  } else {
+    if (hasCaption) {
+      imgClass = '[&_img]:rounded-t-sm';
+    } else {
+      imgClass = '[&_img]:rounded-sm';
+    }
+  }
+
   return (
     <figure
       className={classNames(
         'flex flex-col box-border',
         className,
         'break-inside-avoid',
-        hasCaption ? '[&_img]:rounded-t-sm mb-12' : '[&_img]:rounded-sm mb-7'
+        hasCaption ? 'mb-12' : 'mb-7',
+        imgClass
       )}
       style={style}
     >
