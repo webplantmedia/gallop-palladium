@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { ReactNode, ElementType } from 'react';
+import { ReactNode } from 'react';
 import Iconify from '@components/iconify';
 import ArrowInsertIcon from '@iconify/icons-material-symbols/arrow-insert';
 
@@ -11,7 +11,7 @@ export const Heading = ({
   id,
   className,
 }: {
-  as?: ElementType;
+  as?: keyof JSX.IntrinsicElements;
   inStyle?: string;
   outline?: boolean;
   children: ReactNode;
@@ -68,7 +68,7 @@ export const HeadingAccent = ({
   className,
   icon = true,
 }: {
-  as?: ElementType;
+  as?: keyof JSX.IntrinsicElements;
   children: ReactNode;
   size?: string;
   id?: string;

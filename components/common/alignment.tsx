@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { ReactNode, ElementType } from 'react';
+import { ReactNode } from 'react';
 import { getAlign } from '@utils/tools';
 
 export const Container = ({
@@ -8,7 +8,7 @@ export const Container = ({
   children,
   className,
 }: {
-  as?: ElementType;
+  as?: keyof JSX.IntrinsicElements;
   width?: string;
   children: ReactNode;
   className?: string;
@@ -37,7 +37,7 @@ export const Alignment = ({
   children,
   className,
 }: {
-  as?: ElementType;
+  as?: keyof JSX.IntrinsicElements;
   align?: string;
   defaultAlign?: string;
   children: ReactNode;
