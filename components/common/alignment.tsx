@@ -10,7 +10,7 @@ export const Container = ({
 }: {
   as?: ElementType;
   width?: string;
-  children?: ReactNode;
+  children: ReactNode;
   className?: string;
 }) => {
   let containerClass = 'max-w-3xl px-4 sm:px-8 mx-auto';
@@ -34,13 +34,13 @@ export const Alignment = ({
   as: Component = 'div',
   align = 'none',
   defaultAlign = 'content',
-  children = null,
+  children,
   className,
 }: {
   as?: ElementType;
   align?: string;
   defaultAlign?: string;
-  children?: ReactNode;
+  children: ReactNode;
   className?: string;
 }) => {
   const { alignment } = getAlign(`align${align}`, defaultAlign);
