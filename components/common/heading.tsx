@@ -82,7 +82,7 @@ export const HeadingAccent = ({
   return (
     <Component
       className={classNames(
-        '!leading-tight text-xl uppercase tracking-[0.1em] text-primary-main mb-7 font-accent font-normal flex items-center [&+h3]:!mt-0',
+        '!leading-tight text-xl uppercase tracking-[0.1em] text-primary-main mb-7 font-accent font-normal flex items-center [&+h2]:!mt-0 [&+h3]:!mt-0',
         className,
         sizeClass
       )}

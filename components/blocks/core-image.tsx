@@ -101,7 +101,6 @@ export const CoreImage = ({
   style: any;
   className: any;
 }) => {
-  console.log(className);
   className = className.replace(
     'alignleft',
     'alignleft md:float-left md:w-[300px] xl:w-auto md:!mr-5 mt-1.5 md:!pr-0'
