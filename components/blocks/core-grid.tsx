@@ -1,7 +1,9 @@
+import { BlockProps } from '@lib/types';
 import classNames from 'classnames';
-import { domToReact, DOMNode } from 'html-react-parser';
 
-export const GallopGridder = ({ children, className, id }: any) => {
+export const CoreGrid = ({ children, className, props }: BlockProps) => {
+  className = String(className);
+  const { id } = props || {};
   const masonry = className.includes('is-style-masonry') ? true : false;
   className = className.replace('columns-1', 'grid grid-cols-1 gap-10');
   className = className.replace(

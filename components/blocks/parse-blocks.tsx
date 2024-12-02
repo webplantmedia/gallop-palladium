@@ -16,6 +16,7 @@ import {
   CoreButtons,
   CoreButton,
   CoreCode,
+  CoreGrid,
   CoreButtonLink,
   coreQuote,
   coreList,
@@ -136,6 +137,12 @@ export const ParseBlocks = ({
           return gallopSidebar(domNode, options, className, sidebarHeader);
         } else if (className?.includes('wp-block-gallop-map')) {
           return gallopMap(domNode, options, className);
+        } else if (className?.includes('wp-block-core-grid')) {
+          return (
+            <CoreGrid className={className} props={props}>
+              {domToReact(domNode.children as DOMNode[], options)}
+            </CoreGrid>
+          );
         } else if (className?.includes('wp-block-gallop-excerpt-post')) {
           gallopExcerptPost(domNode, options, props, className);
         } else if (className?.includes('wp-block-code')) {
