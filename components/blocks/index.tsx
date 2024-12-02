@@ -19,7 +19,6 @@ export { CoreCoverSection1 } from './core-cover/section-1';
 export { CoreCoverTestimonials1 } from './core-cover/testimonials-1';
 export { coreCover } from './core-cover';
 // export { GallopAlbumCover } from './gallop-album-cover';
-export { CoreGrid } from './core-grid';
 export { GallopCard } from './gallop-card';
 export { coreGroupContent1 } from './core-group/content-1';
 export { coreGroup } from './core-group/index';

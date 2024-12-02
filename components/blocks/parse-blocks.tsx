@@ -90,7 +90,7 @@ export const ParseBlocks = ({
             </CoreHeading>
           );
         } else if (hasExactClass(className, 'wp-block-group')) {
-          return coreGroup(domNode, options, className, props);
+          return coreGroup(domNode, options, className, props, parentTag);
         } else if (className?.includes('wp-block-buttons')) {
           return (
             <CoreButtons className={className}>
@@ -137,12 +137,6 @@ export const ParseBlocks = ({
           return gallopSidebar(domNode, options, className, sidebarHeader);
         } else if (className?.includes('wp-block-gallop-map')) {
           return gallopMap(domNode, options, className);
-        } else if (className?.includes('wp-block-core-grid')) {
-          return (
-            <CoreGrid className={className} props={props}>
-              {domToReact(domNode.children as DOMNode[], options)}
-            </CoreGrid>
-          );
         } else if (className?.includes('wp-block-gallop-excerpt-post')) {
           gallopExcerptPost(domNode, options, props, className);
         } else if (className?.includes('wp-block-code')) {

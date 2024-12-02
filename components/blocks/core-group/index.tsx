@@ -25,11 +25,12 @@ export const coreGroup = (
   domNode: Element,
   options: HTMLReactParserOptions,
   className: string,
-  props: any
+  props: any,
+  parentTag?: string
 ) => {
   if (hasExactClass(className, 'wp-block-group-is-layout-grid')) {
     return (
-      <CoreGroupGrid className={className} props={props}>
+      <CoreGroupGrid className={className} props={props} parentTag={parentTag}>
         {domToReact(domNode.children as DOMNode[], options)}
       </CoreGroupGrid>
     );

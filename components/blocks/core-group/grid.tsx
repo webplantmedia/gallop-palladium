@@ -1,11 +1,14 @@
 import classNames from 'classnames';
-import { domToReact, DOMNode } from 'html-react-parser';
 import { BlockProps } from '@lib/types';
-import { tailwindAlignClasses } from '@utils/tools';
+import { Alignment } from '@components/common';
+import { getAlign } from '@utils/tools';
 
-export const CoreGroupGrid = ({ className, props, children }: BlockProps) => {
-  className = tailwindAlignClasses(className);
-
+export const CoreGroupGrid = ({
+  className,
+  props,
+  children,
+  parentTag,
+}: BlockProps) => {
   const { id } = props || {};
   // const masonry = className.includes('is-style-masonry-2') ? true : false;
   className = className?.replace(
@@ -35,8 +38,12 @@ export const CoreGroupGrid = ({ className, props, children }: BlockProps) => {
     'items-center'
   );
 
+  const defaultAlign = parentTag ? 'none' : 'content';
+  const { align } = getAlign(className, defaultAlign);
+
   return (
-    <div
+    <Alignment
+      align={align}
       id={id}
       className={classNames(
         className,
@@ -44,6 +51,6 @@ export const CoreGroupGrid = ({ className, props, children }: BlockProps) => {
       )}
     >
       {children}
-    </div>
+    </Alignment>
   );
 };

@@ -1,8 +1,5 @@
-import Iconify from '@components/iconify';
-import ArrowInsertIcon from '@iconify/icons-material-symbols/arrow-insert';
 import classNames from 'classnames';
 import { BlockProps } from '@lib/types';
-import { ElementType } from 'react';
 import { getAlign } from '@utils/tools';
 import { Heading, HeadingAccent } from '@components/common';
 
@@ -16,7 +13,7 @@ export const CoreHeading = ({
   let inStyle = tag;
 
   const { id } = props ?? {};
-  let Tag: ElementType = tag as ElementType;
+  let Tag: keyof JSX.IntrinsicElements = tag as keyof JSX.IntrinsicElements;
 
   const defaultAlign = parentTag ? 'none' : 'content';
   const { alignment, justify, textAlign } = getAlign(className, defaultAlign);
