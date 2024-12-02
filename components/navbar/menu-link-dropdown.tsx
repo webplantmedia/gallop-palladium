@@ -2,16 +2,11 @@
 
 import classNames from 'classnames';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
-import { Fragment } from 'react';
 import DisableScroll from '../global/disable-scroll';
-import {
-  Popover,
-  PopoverPanel,
-  PopoverButton,
-  Transition,
-} from '@headlessui/react';
+import { Popover, PopoverPanel, PopoverButton } from '@headlessui/react';
 import Link from 'next/link';
 import { replaceWordPressUrlRelative } from '@utils/tools';
+import { Image } from '@components/common';
 
 export default function MenuLinkDropdown({
   data,
@@ -21,9 +16,7 @@ export default function MenuLinkDropdown({
   isScrolling: any;
 }) {
   const dropdownText = data.p?.text ? data.p.text : 'Dropdown';
-  const dropdownItems = Array.isArray(data?.wpBlockGroup?.wpBlockGroup)
-    ? data.wpBlockGroup.wpBlockGroup
-    : [];
+  const dropdownItems = data?.wpBlockGroup?.wpBlockGroup || [];
 
   return (
     <Popover className="flex items-center isolate">
@@ -47,111 +40,79 @@ export default function MenuLinkDropdown({
             />
           </PopoverButton>
 
-          <Transition
-            as={Fragment}
-            enter="transition ease-out duration-100"
-            enterFrom="transform opacity-0 scale-95"
-            enterTo="transform opacity-100 scale-100"
-            leave="transition ease-in duration-75"
-            leaveFrom="transform opacity-100 scale-100"
-            leaveTo="transform opacity-0 scale-95"
-            unmount={false}
+          <PopoverPanel
+            transition
+            modal={false}
+            className="absolute left-0 right-0 max-w-none top-full transition data-[closed]:opacity-0 data-[enter]:duration-200 data-[leave]:duration-150 data-[enter]:ease-out data-[leave]:ease-in"
           >
-            <PopoverPanel
-              static={true}
-              modal={false}
-              className="absolute left-0 right-0 max-w-screen-3xl top-full"
-            >
-              {({ close }: { close: () => void }) => (
-                <div className="overflow-hidden rounded-b-md bg-base-body shadow-2xl">
-                  <div
-                    className={classNames(
-                      isScrolling
-                        ? 'max-h-[calc(var(--app-height)-theme(space.28))] grid-cols-4'
-                        : 'max-h-[calc(var(--app-height)-theme(space.40))] grid-cols-3',
-                      'px-4 pb-4 pt-4 overflow-hidden overflow-y-auto scrollbar-hide grid gap-0 shadow-inner'
-                    )}
-                  >
-                    {dropdownItems.map((item: any, index: number) => {
-                      const href = item?.p?.a?.href
-                        ? replaceWordPressUrlRelative(item.p.a.href)
-                        : '#';
-                      const text = item?.p?.a?.text
-                        ? item.p.a.text
-                        : 'Menu Item';
+            {({ close }: { close: () => void }) => (
+              <div className="overflow-hidden rounded-b-md bg-base-body shadow-2xl">
+                <div
+                  className={classNames(
+                    isScrolling
+                      ? 'max-h-[calc(var(--app-height)-theme(space.28))] grid-cols-3'
+                      : 'max-h-[calc(var(--app-height)-theme(space.48))] grid-cols-3',
+                    'px-4 pb-4 pt-4 overflow-hidden overflow-y-auto scrollbar-hide grid gap-2 shadow-inner'
+                  )}
+                >
+                  {dropdownItems.map((item: any, index: number) => {
+                    const href = item?.p?.a?.href
+                      ? replaceWordPressUrlRelative(item.p.a.href)
+                      : '#';
+                    const text = item?.p?.a?.text ? item.p.a.text : 'Menu Item';
 
-                      var img: any = {};
-                      if (item?.wpBlockImage?.img) {
-                        img = { ...item.wpBlockImage.img };
-                      }
-                      const description = '';
+                    var img: any = item?.wpBlockImage?.img || {};
+                    const description = '';
 
-                      return (
-                        <Link
-                          prefetch={true}
-                          onClick={() => {
-                            close();
-                          }}
-                          key={`dropdown-item-${index}`}
-                          className={classNames(
-                            false
-                              ? 'col-span-2 row-span-2 flex flex-col justify-center items-center gap-4 px-4 py-4 hover:bg-white/30 border-2 border-base-contrast rounded-md mr-4 mt-4 ml-4 mb-4'
-                              : 'flex flex-col justify-start items-center hover:bg-white/30 p-4 rounded-sm',
-                            'relative'
+                    return (
+                      <Link
+                        prefetch={true}
+                        onClick={() => {
+                          close();
+                        }}
+                        key={`dropdown-item-${index}`}
+                        className={classNames(
+                          'flex justify-start items-center hover:bg-gray-100 p-2 rounded-sm gap-4 relative'
+                        )}
+                        href={href}
+                      >
+                        <div className="flex justify-center w-14 rounded-sm">
+                          {img && (
+                            <Image
+                              attr={img}
+                              className="rounded-sm aspect-square object-cover object-center"
+                            />
                           )}
-                          href={href}
+                        </div>
+                        <div
+                          className={classNames(
+                            'flex flex-col justify-start text-left'
+                          )}
                         >
-                          <div className="w-full flex justify-center">
-                            {img && (
-                              <img
-                                className={classNames(
-                                  false
-                                    ? 'aspect-[4/3] w-8/12'
-                                    : 'aspect-[4/3] w-full',
-                                  'rounded-sm aspect-[4/3] object-cover object-center'
-                                )}
-                                alt={img.alt}
-                                src={img.src}
-                                srcSet={img.srcset}
-                                // sizes={img.sizes}
-                                width={img.width}
-                                height={img.height}
-                              />
-                            )}
-                          </div>
-                          <div
+                          <span
                             className={classNames(
-                              false && 'gap-3 px-1 2xl:px-10',
-                              'flex flex-col justify-center text-center mt-1'
+                              'text-contrast text-base leading-snug'
                             )}
                           >
-                            <span
+                            {text}
+                          </span>
+                          {description && (
+                            <p
                               className={classNames(
-                                false && '2xl:text-xl',
-                                'text-primary-main text-base'
+                                'text-sm text-contrast/50 italic'
                               )}
                             >
-                              {text}
-                            </span>
-                            {description && (
-                              <p
-                                className={classNames(
-                                  false && '2xl:text-base',
-                                  'text-sm text-base-contrast italic'
-                                )}
-                              >
-                                {description}
-                              </p>
-                            )}
-                          </div>
-                        </Link>
-                      );
-                    })}
-                  </div>
+                              {description}
+                            </p>
+                          )}
+                        </div>
+                      </Link>
+                    );
+                  })}
                 </div>
-              )}
-            </PopoverPanel>
-          </Transition>
+              </div>
+            )}
+          </PopoverPanel>
         </>
       )}
     </Popover>
