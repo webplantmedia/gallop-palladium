@@ -38,8 +38,7 @@ export const Heading = ({
         '!leading-tight text-2xl md:text-3xl text-primary-main font-medium mb-2';
       break;
     case 'h4':
-      headingClass =
-        '!leading-tight text-2xl text-contrast font-medium text-base mb-7';
+      headingClass = '!leading-tight text-2xl text-contrast font-medium mb-7';
       break;
     case 'h5':
       headingClass = '!leading-tight mb-7';
