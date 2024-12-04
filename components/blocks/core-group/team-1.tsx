@@ -16,14 +16,16 @@ export const CoreGroupTeam1 = ({ data, className, props }: BlockProps) => {
     : {};
 
   return (
-    <div className="flex flex-col gap-10 pt-12 sm:flex-row">
+    <div className="flex flex-col gap-10 mb-12 sm:flex-row">
       <Image
         attr={img}
         className="aspect-[4/5] w-52 flex-none rounded-2xl object-cover"
       />
       <div className="max-w-xl flex-auto">
         <Heading as="h3">{h3}</Heading>
-        <Heading as="h4">{h4}</Heading>
+        <Heading as="h4" className="!text-lg">
+          {h4}
+        </Heading>
         <Paragraph>{p}</Paragraph>
       </div>
     </div>

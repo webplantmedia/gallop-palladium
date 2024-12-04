@@ -13,7 +13,7 @@ export const CoreGroupGrid = ({
   // const masonry = className.includes('is-style-masonry-2') ? true : false;
   className = className?.replace(
     'is-style-columns-1',
-    'grid grid-cols-1 gap-10'
+    'grid grid-cols-1 gap-20'
   );
   className = className?.replace(
     'is-style-masonry-2',
@@ -21,7 +21,7 @@ export const CoreGroupGrid = ({
   );
   className = className?.replace(
     'is-style-columns-2',
-    'grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-10'
+    'grid grid-cols-1 lg:grid-cols-2 gap-20 md:gap-20'
   );
   className = className?.replace(
     'is-style-masonry-3',
@@ -29,7 +29,7 @@ export const CoreGroupGrid = ({
   );
   className = className?.replace(
     'is-style-columns-3',
-    'grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-10 lg:gap-10'
+    'grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-20 lg:gap-20'
   );
   className = className?.replace('is-vertically-aligned-top', 'items-start');
   className = className?.replace('is-vertically-aligned-bottom', 'items-end');

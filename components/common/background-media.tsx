@@ -1,4 +1,4 @@
-import { ReactNode, ElementType, ReactElement } from 'react';
+import { ReactElement } from 'react';
 import classNames from 'classnames';
 import React from 'react';
 import { styleStringToObject } from '@utils/tools';
@@ -18,9 +18,11 @@ interface ScrollingImage {
 export const BackgroundMedia = ({
   className,
   wpBlockCover = {},
+  attr = {},
 }: {
   className?: string;
-  wpBlockCover: Record<string, any>;
+  wpBlockCover?: Record<string, any>;
+  attr?: Record<string, any>;
 }) => {
   let videoSrc: string | null =
     wpBlockCover?.wpBlockCoverVideoBackground?._src || null;
@@ -82,6 +84,28 @@ export const BackgroundMedia = ({
           backgroundImage: fixedImage,
         }}
       ></div>
+    );
+  } else if (attr) {
+    background = (
+      <img
+        className={classNames(
+          'w-full box-border absolute inset-0 object-cover h-full object-center -z-20',
+          className
+        )}
+        loading="lazy"
+        src={attr.src}
+        style={
+          typeof attr.style === 'string'
+            ? styleStringToObject(attr.style)
+            : attr.style
+        }
+        width={attr.width ? Number(attr.width) : undefined}
+        height={attr.height ? Number(attr.height) : undefined}
+        srcSet={attr.srcSet}
+        // sizes={attr.sizes}
+        alt={attr.alt}
+        title={attr.title}
+      />
     );
   }
   return background;

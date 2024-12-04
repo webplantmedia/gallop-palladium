@@ -17,6 +17,7 @@ export { CoreCover } from './core-cover/default';
 export { CoreCoverHero1 } from './core-cover/hero-1';
 export { CoreCoverSection1 } from './core-cover/section-1';
 export { CoreCoverTestimonials1 } from './core-cover/testimonials-1';
+export { CoreCoverBackground1 } from './core-cover/background-1';
 export { coreCover } from './core-cover';
 // export { GallopAlbumCover } from './gallop-album-cover';
 export { GallopCard } from './gallop-card';
