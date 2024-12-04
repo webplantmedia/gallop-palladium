@@ -51,7 +51,7 @@ export const gallopExcerptPost = (
             href = replaceWordPressUrlRelative(href);
           }
         } else if (className?.includes('wp-block-image')) {
-          figure = coreImage(domNode, options, className);
+          figure = coreImage(domNode, className);
         } else if (className?.includes('wp-block-heading')) {
           heading = (
             <CoreHeading

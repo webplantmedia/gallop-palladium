@@ -132,7 +132,6 @@ export const CoreImage = ({
       imgClass = '[&_img]:rounded-sm';
     }
   }
-  console.log(parentTag);
 
   return (
     <figure
