@@ -1,4 +1,4 @@
-import { replaceWordPressUrl } from '@utils/tools';
+import { replaceWordPressUrl, getAlign } from '@utils/tools';
 import classNames from 'classnames';
 import Link from 'next/link';
 import { BlockProps } from '@lib/types';
@@ -14,8 +14,8 @@ import {
 
 export const coreImage = (
   domNode: Element,
-  options: HTMLReactParserOptions,
-  className: string
+  className: string,
+  parentTag?: string | undefined
 ) => {
   let hasCaption = false;
   let style = {};
@@ -86,6 +86,7 @@ export const coreImage = (
       hasCaption={hasCaption}
       style={style}
       className={className}
+      parentTag={parentTag}
     />
   );
 };
@@ -95,21 +96,26 @@ export const CoreImage = ({
   hasCaption,
   style,
   className,
+  parentTag,
 }: {
   content: any;
   hasCaption: any;
   style: any;
   className: any;
+  parentTag?: string | undefined;
 }) => {
-  className = className.replace(
-    'alignleft',
-    'alignleft md:float-left md:w-[300px] xl:w-auto md:!mr-5 mt-1.5 md:!pr-0'
-  );
-  className = className.replace(
-    'alignright',
-    'alignright md:float-right md:w-[300px] xl:w-auto md:!ml-5 mt-1.5 md:!pl-0'
-  );
-  className = className.replace('size-full', 'image-size-full');
+  const defaultAlign = parentTag ? 'none' : 'content';
+  const { align, alignment } = getAlign(className, defaultAlign);
+
+  // className = className.replace(
+  // 'alignleft',
+  // 'alignleft md:float-left md:w-[300px] xl:w-auto md:!mr-5 mt-1.5 md:!pr-0'
+  // );
+  // className = className.replace(
+  // 'alignright',
+  // 'alignright md:float-right md:w-[300px] xl:w-auto md:!ml-5 mt-1.5 md:!pl-0'
+  // );
+  // className = className.replace('size-full', 'image-size-full');
 
   let imgClass = '';
 
@@ -126,15 +132,17 @@ export const CoreImage = ({
       imgClass = '[&_img]:rounded-sm';
     }
   }
+  console.log(parentTag);
 
   return (
     <figure
       className={classNames(
+        alignment,
         'flex flex-col box-border',
-        className,
         'break-inside-avoid',
         hasCaption ? 'mb-12' : 'mb-7',
-        imgClass
+        imgClass,
+        !parentTag && 'items-center table'
       )}
       style={style}
     >

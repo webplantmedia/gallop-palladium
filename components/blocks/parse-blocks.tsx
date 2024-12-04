@@ -119,7 +119,7 @@ export const ParseBlocks = ({
         } else if (className?.includes('wp-block-gallery')) {
           return coreGallery(domNode, options, className, parentTag);
         } else if (className?.includes('wp-block-image')) {
-          return coreImage(domNode, options, className);
+          return coreImage(domNode, className, parentTag);
         } else if (className?.includes('wp-block-audio')) {
           return <CoreAudio props={props} className={className} />;
         } else if (className?.includes('wp-block-cover')) {
