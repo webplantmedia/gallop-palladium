@@ -32,7 +32,7 @@ export default function Search({ isScrolling, post }: any) {
     setLoading(true);
     const init = async () => {
       if (fetchControllerRef.current) {
-        fetchControllerRef.current.abort('New Fetch Requeset');
+        fetchControllerRef.current.abort('New Fetch Request');
       }
       fetchControllerRef.current = new AbortController();
 
@@ -49,6 +49,7 @@ export default function Search({ isScrolling, post }: any) {
             page: '1',
             search: search,
           }),
+          signal: fetchControllerRef.current.signal,
         }
       );
 
