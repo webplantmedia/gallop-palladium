@@ -1,7 +1,7 @@
 'use client';
 
 import { Popover, Transition } from '@headlessui/react';
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment, useEffect, useRef, useState } from 'react';
 import DisableScroll from '../global/disable-scroll';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 import classNames from 'classnames';
@@ -16,14 +16,23 @@ import parse, {
 import SearchResults from './search-results';
 
 export default function Search({ isScrolling, post }: any) {
-  let [results, setResults] = useState([]);
-  let [search, setSearch] = useState('');
+  const [results, setResults] = useState([]);
+  const [search, setSearch] = useState('');
+  const [totalCount, setTotalCount] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const [loadingMore, setLoadingMore] = useState(false);
+  const [haveMorePosts, setHaveMorePosts] = useState(false);
+  const [endCursor, setEndCursor] = useState('');
+  const fetchControllerRef = useRef<AbortController | null>(null);
 
   let heading: string = 'Search';
   var index = -1;
 
   useEffect(() => {
+    setLoading(true);
     const init = async () => {
+      fetchControllerRef.current = new AbortController(); // Create a new controller for the new request
+
       const headers = {
         'Content-Type': 'application/json',
       };
@@ -39,8 +48,21 @@ export default function Search({ isScrolling, post }: any) {
           }),
         }
       );
-      let json = await response.json();
-      setResults(json.items);
+
+      if (response.ok) {
+        const json = await response.json();
+        setResults(json.items);
+        const more = Boolean(json?.pageInfo?.hasNextPage);
+        const after = json?.pageInfo?.endCursor;
+        const total = json?.pageInfo?.totalRows;
+        setHaveMorePosts(more);
+        setEndCursor(after);
+        setTotalCount(total);
+        setLoading(false);
+      } else {
+        console.log('Aborted async request');
+        setLoading(false);
+      }
     };
     init();
   }, [search]);
@@ -114,11 +136,24 @@ export default function Search({ isScrolling, post }: any) {
                       </div>
                     </div>
                   </div>
+                  {loading && results.length > 0 && (
+                    <div
+                      className={classNames(
+                        'absolute h-full w-full bg-white z-20 opacity-25'
+                      )}
+                    ></div>
+                  )}
                   <div className="w-full block relative">
-                    {results?.map((item, index) => (
-                      <SearchResults result={item} key={index} />
-                    ))}
+                    {search.length > 0 &&
+                      results?.map((item, index) => (
+                        <SearchResults result={item} key={index} />
+                      ))}
                   </div>
+                  {search.length > 0 && results.length == 0 && (
+                    <div className="flex items-center px-4 py-4 sm:px-6 justify-center bg-primary-light text-white">
+                      No results for <q className="ml-1">{search}</q>.
+                    </div>
+                  )}
                 </div>
               </div>
             </Popover.Panel>
