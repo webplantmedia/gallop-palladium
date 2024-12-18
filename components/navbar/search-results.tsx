@@ -41,14 +41,14 @@ export default function SearchResults({ result }: Props) {
     >
       <div className="flex items-center px-4 py-4 sm:px-6">
         <div className="flex min-w-0 flex-1 items-center gap-4">
-          {result.thumbnail && (
+          {result.mediaItemUrl && (
             <div className="flex-shrink-0">
               <img
                 className="h-24 w-24 rounded-sm object-cover object-center"
-                src={result.thumbnail}
+                src={result.mediaItemUrl[0]}
                 alt=""
-                width={result.width}
-                height={result.height}
+                width={result.mediaItemUrl[1]}
+                height={result.mediaItemUrl[2]}
                 // quality={100}
               />
             </div>
@@ -69,10 +69,7 @@ export default function SearchResults({ result }: Props) {
           </div>
         </div>
         <div>
-          <ChevronRightIcon
-            className="h-5 w-5 text-base-contrast"
-            aria-hidden="true"
-          />
+          <ChevronRightIcon className="h-5 w-5 text-white" aria-hidden="true" />
         </div>
       </div>
     </a>

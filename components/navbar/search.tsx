@@ -29,8 +29,7 @@ export default function Search({ isScrolling, post }: any) {
       };
 
       const response = await fetch(
-        process.env.NEXT_PUBLIC_WORDPRESS_URL +
-          '/wp-json/gallop/v1/search-results/',
+        process.env.NEXT_PUBLIC_WORDPRESS_URL + '/wp-json/gallop/v1/search/',
         {
           headers,
           method: 'POST',
