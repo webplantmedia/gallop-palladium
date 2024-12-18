@@ -68,9 +68,7 @@ export default function Search({ isScrolling, post }: any) {
           console.log('Aborted async request');
           setLoading(false);
         }
-      } catch (error) {
-        console.log('Error');
-      }
+      } catch (error) {}
     };
 
     if (search.length > 0) {
