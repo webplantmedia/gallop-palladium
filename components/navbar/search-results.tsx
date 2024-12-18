@@ -14,21 +14,21 @@ interface Props {
 export default function SearchResults({ result }: Props) {
   let chipColorClass = '';
   let target = '_self';
-  if (result.postType == 'neighborhood') {
+  if (result.type == 'neighborhood') {
     chipColorClass = 'text-rose-800 bg-rose-300';
-  } else if (result.postType == 'page') {
+  } else if (result.type == 'page') {
     chipColorClass = 'text-orange-800 bg-orange-300';
-  } else if (result.postType == 'post') {
+  } else if (result.type == 'post') {
     chipColorClass = 'text-amber-800 bg-amber-300';
-  } else if (result.postType == 'architect') {
+  } else if (result.type == 'architect') {
     chipColorClass = 'text-green-800 bg-green-300';
-  } else if (result.postType == 'style') {
+  } else if (result.type == 'style') {
     chipColorClass = 'text-blue-800 bg-blue-300';
-  } else if (result.postType == 'estate') {
+  } else if (result.type == 'estate') {
     chipColorClass = 'text-violet-800 bg-violet-300';
-  } else if (result.postType == 'home') {
+  } else if (result.type == 'home') {
     chipColorClass = 'text-teal-800 bg-teal-300';
-  } else if (result.postType == 'blog') {
+  } else if (result.type == 'blog') {
     chipColorClass = 'text-indigo-800 bg-indigo-300';
     target = '_blank';
   }
@@ -36,7 +36,7 @@ export default function SearchResults({ result }: Props) {
   return (
     <a
       href={replaceProductionUrl(result.url)}
-      className="block hover:bg-white/30"
+      className="block bg-primary-light hover:bg-primary-lighter hover:cursor-pointer"
       target={target}
     >
       <div className="flex items-center px-4 py-4 sm:px-6">
@@ -55,7 +55,7 @@ export default function SearchResults({ result }: Props) {
           )}
           <div className="min-w-0 pt-2 pr-4 pb-2 flex-1">
             <h3
-              className="text-primary-main dmh:text-modern-base-contrast"
+              className="text-primary-main dmh:text-modern-base-contrast text-white"
               dangerouslySetInnerHTML={{ __html: result.title }}
             ></h3>
             <span
@@ -64,7 +64,7 @@ export default function SearchResults({ result }: Props) {
                 'inline px-1.5 rounded-md py-0.5 text-sm'
               )}
             >
-              {result.postType}
+              {result.type}
             </span>
           </div>
         </div>
