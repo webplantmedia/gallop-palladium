@@ -31,7 +31,10 @@ export default function Search({ isScrolling, post }: any) {
   useEffect(() => {
     setLoading(true);
     const init = async () => {
-      fetchControllerRef.current = new AbortController(); // Create a new controller for the new request
+      if (fetchControllerRef.current) {
+        fetchControllerRef.current.abort('New Fetch Requeset');
+      }
+      fetchControllerRef.current = new AbortController();
 
       const headers = {
         'Content-Type': 'application/json',
