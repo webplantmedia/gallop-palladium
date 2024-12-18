@@ -29,46 +29,53 @@ export default function Search({ isScrolling, post }: any) {
   var index = -1;
 
   useEffect(() => {
-    setLoading(true);
     const init = async () => {
+      setLoading(true);
       if (fetchControllerRef.current) {
-        fetchControllerRef.current.abort('New Fetch Request');
+        fetchControllerRef.current.abort('New fetch request');
       }
       fetchControllerRef.current = new AbortController();
 
-      const headers = {
-        'Content-Type': 'application/json',
-      };
+      try {
+        const headers = {
+          'Content-Type': 'application/json',
+        };
 
-      const response = await fetch(
-        process.env.NEXT_PUBLIC_WORDPRESS_URL + '/wp-json/gallop/v1/search/',
-        {
-          headers,
-          method: 'POST',
-          body: JSON.stringify({
-            page: '1',
-            search: search,
-          }),
-          signal: fetchControllerRef.current.signal,
+        const response = await fetch(
+          process.env.NEXT_PUBLIC_WORDPRESS_URL + '/wp-json/gallop/v1/search/',
+          {
+            headers,
+            method: 'POST',
+            body: JSON.stringify({
+              page: '1',
+              search: search,
+            }),
+            signal: fetchControllerRef.current.signal,
+          }
+        );
+
+        if (response.ok) {
+          const json = await response.json();
+          setResults(json.items);
+          const more = Boolean(json?.pageInfo?.hasNextPage);
+          const after = json?.pageInfo?.endCursor;
+          const total = json?.pageInfo?.totalRows;
+          setHaveMorePosts(more);
+          setEndCursor(after);
+          setTotalCount(total);
+          setLoading(false);
+        } else {
+          console.log('Aborted async request');
+          setLoading(false);
         }
-      );
-
-      if (response.ok) {
-        const json = await response.json();
-        setResults(json.items);
-        const more = Boolean(json?.pageInfo?.hasNextPage);
-        const after = json?.pageInfo?.endCursor;
-        const total = json?.pageInfo?.totalRows;
-        setHaveMorePosts(more);
-        setEndCursor(after);
-        setTotalCount(total);
-        setLoading(false);
-      } else {
-        console.log('Aborted async request');
-        setLoading(false);
+      } catch (error) {
+        console.log('Error');
       }
     };
-    init();
+
+    if (search.length > 0) {
+      init();
+    }
   }, [search]);
 
   const options: HTMLReactParserOptions = {
@@ -140,7 +147,7 @@ export default function Search({ isScrolling, post }: any) {
                       </div>
                     </div>
                   </div>
-                  {loading && results.length > 0 && (
+                  {loading && results.length > 0 && search.length > 0 && (
                     <div
                       className={classNames(
                         'absolute h-full w-full bg-white z-20 opacity-25'
@@ -153,7 +160,7 @@ export default function Search({ isScrolling, post }: any) {
                         <SearchResults result={item} key={index} />
                       ))}
                   </div>
-                  {search.length > 0 && results.length == 0 && (
+                  {search.length > 0 && results.length == 0 && !loading && (
                     <div className="flex items-center px-4 py-4 sm:px-6 justify-center bg-primary-light text-white">
                       No results for <q className="ml-1">{search}</q>.
                     </div>
