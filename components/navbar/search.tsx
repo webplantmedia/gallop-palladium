@@ -29,7 +29,8 @@ export default function Search({ isScrolling, post }: any) {
       };
 
       const response = await fetch(
-        'http://dougnewby-dev.local' + '/wp-json/gallop/v1/posts/',
+        process.env.NEXT_PUBLIC_WORDPRESS_URL +
+          '/wp-json/gallop/v1/search-results/',
         {
           headers,
           method: 'POST',
@@ -115,7 +116,7 @@ export default function Search({ isScrolling, post }: any) {
                     </div>
                   </div>
                   <div className="w-full block relative">
-                    {results.map((item, index) => (
+                    {results?.map((item, index) => (
                       <SearchResults result={item} key={index} />
                     ))}
                   </div>
