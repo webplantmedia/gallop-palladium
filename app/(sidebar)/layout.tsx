@@ -5,7 +5,6 @@ import '@styles/index.css';
 import Container from '@components/container';
 import Navbar from '@components/navbar';
 import Footer from '@components/footer';
-import UseWindowHeightScript from '@components/scripts/use-window-height';
 import FooterScripts from '@components/scripts/footer-scripts';
 import { GoogleAnalytics } from '@next/third-parties/google';
 import type { Metadata } from 'next';
@@ -90,7 +89,6 @@ export default async function RootLayout({ children }: RootLayoutProps) {
           </main>
         </div>
         <Footer post={footer} />
-        <UseWindowHeightScript />
       </body>
       {track && (
         <>

@@ -53,7 +53,7 @@ export default function MobileMenu({ menu }: { menu: any }) {
           className="fixed inset-0 bg-base-darker/25 duration-500 ease-out data-[closed]:opacity-0"
         />
 
-        <div className="fixed inset-0 font-body h-[var(--app-height)] text-base max-w-[86%] sm:max-w-[24rem] w-full ">
+        <div className="fixed inset-0 font-body h-screen min-h-screen text-base max-w-[86%] sm:max-w-[24rem] w-full ">
           <div className="flex justify-start h-full">
             <DialogPanel
               transition

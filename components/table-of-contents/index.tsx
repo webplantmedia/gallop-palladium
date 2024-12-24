@@ -74,7 +74,7 @@ export default function TableOfContents({ toc, meta }: any) {
                     leaveTo="translate-x-full"
                     unmount={false}
                   >
-                    <div className="fixed inset-0 font-body h-[var(--app-height)] text-base max-w-[86%] sm:max-w-[24rem] w-full right-0 left-auto">
+                    <div className="fixed inset-0 font-body h-screen min-h-screen text-base max-w-[86%] sm:max-w-[24rem] w-full right-0 left-auto">
                       <div className="flex justify-end h-full">
                         <div className="pointer-events-auto h-full bg-base-body shadow-xl text-left align-middle transition-all overflow-hidden overflow-y-auto scrollbar-hide w-full dmh:bg-modern-base-card">
                           <div className="relative flex items-center justify-start flex-col h-full py-6">

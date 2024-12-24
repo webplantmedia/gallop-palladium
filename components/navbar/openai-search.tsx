@@ -199,8 +199,8 @@ export default function Search({ isScrolling, post }: any) {
                 <div
                   className={classNames(
                     isScrolling
-                      ? 'max-h-[calc(var(--app-height)-theme(space.24))]'
-                      : 'max-h-[calc(var(--app-height)-theme(space.52))]',
+                      ? 'max-h-[calc(100vh-theme(space.36))]'
+                      : 'max-h-[calc(100vh-theme(space.64))]',
                     'overflow-hidden overflow-y-auto scrollbar-hide'
                   )}
                 >
