@@ -29,7 +29,6 @@ export const CoreCoverTestimonials1 = ({ data, className }: any) => {
       ?._href || null;
 
   const img = data?.wpBlockCoverInnerContainer?.wpBlockImage?.img || null;
-  className = tailwindGetAlignClasses(className);
 
   return (
     <Alignment

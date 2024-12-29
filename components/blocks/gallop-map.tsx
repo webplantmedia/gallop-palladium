@@ -1,6 +1,6 @@
 import { BlockProps } from '@lib/types';
-import { GallopMapClient } from './gallop-map-client';
-import { tailwindGetAlignClasses } from '@utils/tools';
+import { GallopMapClient, GallopMapClient2 } from './gallop-map-client';
+import { tailwindGetAlignClasses, getVarsFromNode2 } from '@utils/tools';
 import classNames from 'classnames';
 import { ReactElement, isValidElement } from 'react';
 import {
@@ -12,12 +12,17 @@ import {
 import { tailwindAlignClasses, getDomNodeText } from '@utils/tools';
 import { HTMLAttributeProps } from '@lib/types';
 import { castToHTMLAttributeProps } from '@utils/tools';
+import { Alignment } from '@components/common';
 
 export const gallopMap = (
   domNode: Element,
   options: HTMLReactParserOptions,
   className: string
 ) => {
+  const data = getVarsFromNode2(domNode);
+  console.log(data);
+
+  return <GallopMap2 data={data} className={className} />;
   let address: string = '';
   let heading: ReactElement | null = null;
   let description: ReactElement | null = null;
@@ -84,6 +89,26 @@ export const gallopMap = (
     />
   );
 };
+export const GallopMap2 = ({
+  data,
+  className,
+}: {
+  data: any;
+  className: string;
+}) => {
+  const address = data?.wpBlockGroup?.h3
+    ? data.wpBlockGroup.h3._text
+    : '1611 Avenue L, Lubbock, TX 79413';
+
+  return (
+    <Alignment align="full" className={classNames('mb-0')}>
+      <div className="relative rounded-b-none overflow-clip w-full aspect-square lg:aspect-[16/7] h-full">
+        <GallopMapClient2 data={data} address={address} />
+      </div>
+    </Alignment>
+  );
+};
+
 export const GallopMap = ({
   address,
   heading,
