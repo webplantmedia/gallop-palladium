@@ -128,7 +128,7 @@ export const ParseBlocks = ({
           return coreEmbed(domNode, options, className);
         } else if (className?.includes('wp-block-gallop-swiper')) {
           return (
-            <GallopSwiper className={className}>
+            <GallopSwiper className={className} props={props}>
               {domToReact(domNode.children as DOMNode[], options)}
             </GallopSwiper>
           );

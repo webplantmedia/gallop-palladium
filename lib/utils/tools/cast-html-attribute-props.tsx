@@ -2,8 +2,34 @@ import { attributesToProps } from 'html-react-parser';
 import { HTMLAttributeProps } from '@lib/types';
 import { CSSProperties } from 'react';
 
+// Utility function to convert kebab-case to camelCase
+function toCamelCase(key: string): string {
+  return key.replace(/-([a-z])/g, (_, char) => char.toUpperCase());
+}
+
 export function castToHTMLAttributeProps(props: any): HTMLAttributeProps {
   props = attributesToProps(props);
+
+  const handledKeys = [
+    'src',
+    'id',
+    'style',
+    'srcSet',
+    'sizes',
+    'alt',
+    'title',
+    'width',
+    'height',
+    'href',
+    'className',
+  ];
+
+  const additionalProps = Object.fromEntries(
+    Object.entries(props)
+      .filter(([key]) => !handledKeys.includes(key)) // Exclude handled keys
+      .map(([key, value]) => [toCamelCase(key), value]) // Convert to camelCase
+  );
+
   return {
     src: typeof props.src === 'string' ? props.src : '',
     id: typeof props.id === 'string' ? props.id : '',
@@ -19,6 +45,6 @@ export function castToHTMLAttributeProps(props: any): HTMLAttributeProps {
     height: typeof props.height === 'string' ? props.height : '',
     href: typeof props.href === 'string' ? props.href : '',
     className: typeof props.className === 'string' ? props.className : '',
-    ...props,
+    ...additionalProps,
   } as HTMLAttributeProps;
 }
