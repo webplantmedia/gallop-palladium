@@ -212,7 +212,7 @@ const Map = ({ data, address, children }: MapProps) => {
   );
 };
 
-export const GallopMapClient2 = ({ data, address }: any) => {
+export const GallopMapClient = ({ data, address }: any) => {
   return (
     <Wrapper
       apiKey={`${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}`}
