@@ -51,6 +51,11 @@ const SetPin = ({ center, map, data }: MapProps) => {
           )) as google.maps.MarkerLibrary;
           var areaBound = new google.maps.LatLngBounds();
           const geocodePromises = objectMap(data, async (key, item, index) => {
+            const pinPosition = item?._className?.includes(
+              'is-style-map-pin-left'
+            )
+              ? 'left'
+              : 'right';
             const heading = item?.h2?._jsx || null;
             const address = item?.h3?._text || null;
             const description = item?.p?._jsx || null;
@@ -65,9 +70,17 @@ const SetPin = ({ center, map, data }: MapProps) => {
                 const position = new google.maps.LatLng(lat, lng);
                 const info = document.createElement('div');
                 info.className = classNames(
-                  'relative px-0 py-0 font-body rounded-md bg-white text-base-contrast shadow-lg',
-                  'lg:translate-x-1/2 lg:translate-y-1/2 lg:[clip-path:polygon(20px_0%,100%_0%,100%_100%,20px_100%,0%_50%)] -translate-y-1/2',
-                  'lg:ml-10'
+                  'relative px-0 py-0 font-body rounded-md bg-white text-base-contrast shadow-lg overflow-hidden',
+                  pinPosition === 'right'
+                    ? 'translate-x-1/2 translate-y-1/2'
+                    : '-translate-x-1/2 translate-y-1/2',
+                  imgProps &&
+                    pinPosition === 'right' &&
+                    '[clip-path:polygon(20px_0%,100%_0%,100%_100%,20px_100%,0%_50%)] -translate-y-1/2',
+                  imgProps &&
+                    pinPosition === 'left' &&
+                    '[clip-path:polygon(calc(100%-20px)_0%,0%_0%,0%_100%,calc(100%-20px)_100%,100%_50%)] -translate-y-1/2',
+                  pinPosition === 'right' ? 'ml-10' : 'mr-10 pr-4'
                 );
                 const infoContent = document.createElement('div');
                 const infoRoot = ReactDOM.createRoot(infoContent);
@@ -83,7 +96,12 @@ const SetPin = ({ center, map, data }: MapProps) => {
                     )}
                     <div className="block px-4 max-w-[300px]">
                       {heading && (
-                        <h3 className="text-base-contrast text-sm font-bold leading-snug mb-1">
+                        <h3
+                          className={classNames(
+                            'text-base-contrast text-sm font-bold leading-snug mb-1',
+                            !imgProps && 'mt-1'
+                          )}
+                        >
                           {heading}
                         </h3>
                       )}
@@ -124,7 +142,7 @@ const SetPin = ({ center, map, data }: MapProps) => {
             }
           });
           await Promise.all(geocodePromises);
-          map.fitBounds(areaBound, 0);
+          map.fitBounds(areaBound, 150);
         } catch (error) {
           console.error(
             'Error loading libraries or initializing markers for homes:',
