@@ -31,6 +31,7 @@ export { CoreGroupTeam1 } from './core-group/team-1';
 export { CoreGroupSection1 } from './core-group/section-1';
 export { CoreGroupSection2 } from './core-group/section-2';
 export { CoreGroupSection3 } from './core-group/section-3';
+export { CoreGroupSection4 } from './core-group/section-4';
 export { CoreGroupOurOffices1 } from './core-group/our-offices-1';
 export { CoreGroupHero1 } from './core-group/hero-1';
 export { CoreGroupHero2 } from './core-group/hero-2';
