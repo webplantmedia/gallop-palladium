@@ -3,10 +3,11 @@ import classNames from 'classnames';
 import { AnimatedNumber } from '@components/widgets/animated-number';
 import { extractMilestone } from '@utils/tools';
 import * as Missing from '@components/global/missing';
+import { Alignment } from '@components/common';
 
 export const CoreGroupSection4 = ({ data, className, props }: BlockProps) => {
   return (
-    <div className="relative isolate">
+    <Alignment align="full" className="relative isolate">
       <svg
         aria-hidden="true"
         className="absolute inset-x-0 top-0 -z-10 h-[64rem] w-full stroke-gray-200 [mask-image:radial-gradient(32rem_32rem_at_center,white,transparent)]"
@@ -124,6 +125,6 @@ export const CoreGroupSection4 = ({ data, className, props }: BlockProps) => {
           </div>
         </div>
       </div>
-    </div>
+    </Alignment>
   );
 };
