@@ -12,7 +12,7 @@ import {
   Paragraph,
   Button,
   BackgroundMedia,
-  Overlay2,
+  Overlay,
 } from '@components/common';
 import { objectMap } from '@utils/objectMap';
 import { ReactElement } from 'react';
@@ -53,10 +53,13 @@ export const CoreCoverCard1 = ({ data, className }: any) => {
   const card = (
     <a
       href={buttonHref}
-      className="relative w-full aspect-[3/4] flex flex-col justify-between p-7 rounded-xl group overflow-hidden drop-shadow-2xl transition-transform duration-200 ease-out hover:-translate-y-2"
+      className={classNames(
+        'relative w-full aspect-[3/4] flex flex-col justify-between p-7 rounded-xl group overflow-hidden drop-shadow-2xl transition-transform duration-200 ease-out hover:-translate-y-2',
+        selectedBgClass
+      )}
     >
       <BackgroundMedia wpBlockCover={data} />
-      <Overlay2 className={classNames('transition-all', selectedBgClass)} />
+      <Overlay className={classNames('transition-all', selectedBgClass)} />
       <Heading className="!mt-0 !text-4xl text-white" as="h2">
         {h2}
       </Heading>

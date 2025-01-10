@@ -16,6 +16,7 @@ import {
 } from '@components/common';
 import { objectMap } from '@utils/objectMap';
 import { ReactElement } from 'react';
+import { CoreCoverCard1 } from '@components/blocks';
 
 export const CoreGroupSection4 = ({ data, className, props }: BlockProps) => {
   let h1 = data?.h1?._jsx || Missing.H1();
@@ -27,55 +28,7 @@ export const CoreGroupSection4 = ({ data, className, props }: BlockProps) => {
   let column5: Array<ReactElement> = [];
   data?.wpBlockGroup &&
     objectMap(data.wpBlockGroup, (key, item, index) => {
-      let h2 = item?.wpBlockCoverInnerContainer?.h2?._jsx || Missing.H2();
-      let buttonText =
-        item?.wpBlockCoverInnerContainer?.wpBlockButtons?.wpBlockButton?.a
-          ?._text || Missing.Button();
-      let buttonHref =
-        item?.wpBlockCoverInnerContainer?.wpBlockButtons?.wpBlockButton?.a
-          ?._href || null;
-
-      var bgColorClass = [
-        'bg-accent/90 group-hover:bg-accent/80',
-        'bg-red-700/90 group-hover:bg-red-700/80',
-        'bg-orange-700/90 group-hover:bg-orange-700/80',
-        'bg-amber-700/90 group-hover:bg-amber-700/80',
-        'bg-yellow-700/90 group-hover:bg-yellow-700/80',
-        'bg-lime-700/90 group-hover:bg-lime-700/80',
-        'bg-green-700/90 group-hover:bg-green-700/80',
-        'bg-emerald-700/90 group-hover:bg-emerald-700/80',
-        'bg-teal-700/90 group-hover:bg-teal-700/80',
-        'bg-cyan-700/90 group-hover:bg-cyan-700/80',
-        'bg-sky-700/90 group-hover:bg-sky-700/80',
-        'bg-blue-700/90 group-hover:bg-blue-700/80',
-        'bg-indigo-700/90 group-hover:bg-indigo-700/80',
-        'bg-violet-700/90 group-hover:bg-violet-700/80',
-        'bg-purple-700/90 group-hover:bg-purple-700/80',
-        'bg-fushsia-700/90 group-hover:bg-fushsia-700/80',
-        'bg-pink-700/90 group-hover:bg-pink-700/80',
-        'bg-rose-700/90 group-hover:bg-rose-700/80',
-      ];
-      const selectedBgClass = bgColorClass[index % bgColorClass.length];
-
-      const card = (
-        <a
-          href={buttonHref}
-          className="relative w-full aspect-[3/4] flex flex-col justify-between p-7 rounded-xl group overflow-hidden drop-shadow-2xl transition-transform duration-200 ease-out hover:-translate-y-2"
-        >
-          <BackgroundMedia wpBlockCover={item} />
-          <Overlay2 className={classNames('transition-all', selectedBgClass)} />
-          <Heading className="!mt-0 !text-4xl text-white" as="h2">
-            {h2}
-          </Heading>
-          <span className="text-white opacity-0 translate-y-5 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-200 ease-out flex items-center gap-1">
-            {buttonText}
-            <Iconify
-              icon={ArrowInsertIcon}
-              className="flex-shrink-0 h-auto w-6 text-white rotate-90"
-            />
-          </span>
-        </a>
-      );
+      const card = <CoreCoverCard1 data={item} />;
 
       if (index < 1) {
         column1.push(card);
