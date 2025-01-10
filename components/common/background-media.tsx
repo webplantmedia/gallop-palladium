@@ -19,10 +19,12 @@ export const BackgroundMedia = ({
   className,
   wpBlockCover = {},
   attr = {},
+  grayscale = false,
 }: {
   className?: string;
   wpBlockCover?: Record<string, any>;
   attr?: Record<string, any>;
+  grayscale?: boolean;
 }) => {
   let videoSrc: string | null =
     wpBlockCover?.wpBlockCoverVideoBackground?._src || null;
@@ -56,6 +58,7 @@ export const BackgroundMedia = ({
       <img
         className={classNames(
           'w-full box-border absolute inset-0 object-cover h-full object-center -z-20',
+          grayscale && 'grayscale',
           className
         )}
         loading="lazy"
