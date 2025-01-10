@@ -24,7 +24,6 @@ export const BackgroundMedia = ({
   wpBlockCover?: Record<string, any>;
   attr?: Record<string, any>;
 }) => {
-  console.log(wpBlockCover);
   let videoSrc: string | null =
     wpBlockCover?.wpBlockCoverVideoBackground?._src || null;
   const backgroundStyle: any = wpBlockCover?.wpBlockCoverImageBackground?._style
