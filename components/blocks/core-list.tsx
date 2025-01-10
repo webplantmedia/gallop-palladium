@@ -14,6 +14,7 @@ import {
   DOMNode,
   Element,
 } from 'html-react-parser';
+import { Alignment } from '@components/common';
 
 export const coreList = (
   domNode: Element,
@@ -64,14 +65,14 @@ export const CoreList = ({
   className = tailwindAlignClasses(className);
 
   return (
-    <ul
-      role="list"
+    <Alignment
+      as="ul"
       className={classNames(
         className,
         'leading-normal mb-7 flex flex-col gap-2'
       )}
     >
       {content}
-    </ul>
+    </Alignment>
   );
 };
