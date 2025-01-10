@@ -23,6 +23,8 @@ export const CoreGroupSection4 = ({ data, className, props }: BlockProps) => {
   let column1: Array<ReactElement> = [];
   let column2: Array<ReactElement> = [];
   let column3: Array<ReactElement> = [];
+  let column4: Array<ReactElement> = [];
+  let column5: Array<ReactElement> = [];
   data?.wpBlockGroup &&
     objectMap(data.wpBlockGroup, (key, item, index) => {
       let h2 = item?.wpBlockCoverInnerContainer?.h2?._jsx || Missing.H2();
@@ -58,7 +60,7 @@ export const CoreGroupSection4 = ({ data, className, props }: BlockProps) => {
       const card = (
         <a
           href={buttonHref}
-          className="relative w-full aspect-[3/4] border border-black flex flex-col justify-between p-7 rounded-xl group overflow-hidden drop-shadow-2xl transition-transform duration-200 ease-out hover:-translate-y-2"
+          className="relative w-full aspect-[3/4] flex flex-col justify-between p-7 rounded-xl group overflow-hidden drop-shadow-2xl transition-transform duration-200 ease-out hover:-translate-y-2"
         >
           <BackgroundMedia wpBlockCover={item} />
           <Overlay2 className={classNames('transition-all', selectedBgClass)} />
@@ -75,12 +77,16 @@ export const CoreGroupSection4 = ({ data, className, props }: BlockProps) => {
         </a>
       );
 
-      if (index < 2) {
+      if (index < 1) {
         column1.push(card);
-      } else if (index < 5) {
+      } else if (index < 3) {
         column2.push(card);
-      } else if (index < 7) {
+      } else if (index < 5) {
         column3.push(card);
+      } else if (index < 8) {
+        column4.push(card);
+      } else if (index < 11) {
+        column5.push(card);
       }
     });
 
@@ -129,7 +135,7 @@ export const CoreGroupSection4 = ({ data, className, props }: BlockProps) => {
       </div>
       <Container as="div" width="wide" className="">
         <div className="mx-auto pb-32 pt-36 sm:pt-60 lg:pt-32">
-          <div className="mx-auto max-w-none gap-x-14 lg:mx-0 lg:flex lg:max-w-none lg:items-start justify-between">
+          <div className="mx-auto max-w-none gap-x-14 lg:mx-0 lg:flex lg:max-w-none lg:items-start justify-between flex flex-col">
             <div className="relative w-full lg:max-w-xl lg:shrink-0 xl:max-w-2xl">
               <Heading className="" as="h1">
                 {h1}
@@ -139,14 +145,20 @@ export const CoreGroupSection4 = ({ data, className, props }: BlockProps) => {
               </Paragraph>
             </div>
             <div className="mt-14 flex justify-end gap-8 sm:-mt-44 sm:justify-start sm:pl-20 lg:mt-0 lg:pl-0">
-              <div className="ml-auto w-1/3 flex-none space-y-8 pt-32 sm:ml-0 sm:pt-80 lg:order-last lg:pt-36 xl:order-none xl:pt-80">
+              <div className="ml-auto w-1/5 flex-none space-y-8 pt-32 sm:ml-0 sm:pt-40 lg:order-last lg:pt-36 xl:order-none xl:pt-40">
                 {column1}
               </div>
-              <div className="mr-auto w-1/3 flex-none space-y-8 sm:mr-0 sm:pt-52 lg:pt-36">
+              <div className="mr-auto w-1/5 flex-none space-y-8 sm:mr-0 sm:pt-24 lg:pt-24">
                 {column2}
               </div>
-              <div className="w-1/3 flex-none space-y-8 pt-32 sm:pt-0">
+              <div className="w-1/5 flex-none space-y-8 pt-32 sm:pt-0">
                 {column3}
+              </div>
+              <div className="w-1/5 flex-none space-y-8 pt-32 sm:pt-0 relative -top-80">
+                {column4}
+              </div>
+              <div className="w-1/5 flex-none space-y-8 pt-32 sm:pt-0 relative -top-96">
+                {column5}
               </div>
             </div>
           </div>
