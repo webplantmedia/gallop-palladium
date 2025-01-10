@@ -26,29 +26,36 @@ export const CoreCoverCard1 = ({ data, className }: any) => {
     data?.wpBlockCoverInnerContainer?.wpBlockButtons?.wpBlockButton?.a?._href ||
     null;
 
-  var bgColorClass = [
-    'bg-accent/90 group-hover:bg-accent/80',
-    'bg-red-700/90 group-hover:bg-red-700/80',
-    'bg-orange-700/90 group-hover:bg-orange-700/80',
-    'bg-amber-700/90 group-hover:bg-amber-700/80',
-    'bg-yellow-700/90 group-hover:bg-yellow-700/80',
-    'bg-lime-700/90 group-hover:bg-lime-700/80',
-    'bg-green-700/90 group-hover:bg-green-700/80',
-    'bg-emerald-700/90 group-hover:bg-emerald-700/80',
-    'bg-teal-700/90 group-hover:bg-teal-700/80',
-    'bg-cyan-700/90 group-hover:bg-cyan-700/80',
-    'bg-sky-700/90 group-hover:bg-sky-700/80',
-    'bg-blue-700/90 group-hover:bg-blue-700/80',
-    'bg-indigo-700/90 group-hover:bg-indigo-700/80',
-    'bg-violet-700/90 group-hover:bg-violet-700/80',
-    'bg-purple-700/90 group-hover:bg-purple-700/80',
-    'bg-fushsia-700/90 group-hover:bg-fushsia-700/80',
-    'bg-pink-700/90 group-hover:bg-pink-700/80',
-    'bg-rose-700/90 group-hover:bg-rose-700/80',
-  ];
-  // const selectedBgClass = bgColorClass[index % bgColorClass.length];
+  // Define bgColorClass with explicit type
+  const bgColorClass: { [key: string]: string } = {
+    'is-style-bg-accent': 'bg-accent/90 group-hover:bg-accent/80',
+    'is-style-bg-red': 'bg-red-700/90 group-hover:bg-red-700/80',
+    'is-style-bg-orange': 'bg-orange-700/90 group-hover:bg-orange-700/80',
+    'is-style-bg-amber': 'bg-amber-700/90 group-hover:bg-amber-700/80',
+    'is-style-bg-yellow': 'bg-yellow-700/90 group-hover:bg-yellow-700/80',
+    'is-style-bg-lime': 'bg-lime-700/90 group-hover:bg-lime-700/80',
+    'is-style-bg-green': 'bg-green-700/90 group-hover:bg-green-700/80',
+    'is-style-bg-emerald': 'bg-emerald-700/90 group-hover:bg-emerald/80',
+    'is-style-bg-teal': 'bg-teal-700/90 group-hover:bg-teal-700/80',
+    'is-style-bg-cyan': 'bg-cyan-700/90 group-hover:bg-cyan-700/80',
+    'is-style-bg-sky': 'bg-sky-700/90 group-hover:bg-sky-700/80',
+    'is-style-bg-blue': 'bg-blue-700/90 group-hover:bg-blue-700/80',
+    'is-style-bg-indigo': 'bg-indigo-700/90 group-hover:bg-indigo-700/80',
+    'is-style-bg-violet': 'bg-violet-700/90 group-hover:bg-violet-700/80',
+    'is-style-bg-purple': 'bg-purple-700/90 group-hover:bg-purple-700/80',
+    'is-style-bg-fuchsia': 'bg-fuchsia-700/90 group-hover:bg-fuchsia-700/80',
+    'is-style-bg-pink': 'bg-pink-700/90 group-hover:bg-pink-700/80',
+    'is-style-bg-rose': 'bg-rose-700/90 group-hover:bg-rose-700/80',
+  };
+
+  // Determine the background color class
+  const selectedKey = Object.keys(bgColorClass).find((key) =>
+    className?.includes(key)
+  ) as string | undefined;
+
   const selectedBgClass =
-    bgColorClass[Math.floor(Math.random() * bgColorClass.length)];
+    (selectedKey && bgColorClass[selectedKey]) ||
+    bgColorClass['is-style-bg-accent']; // Fallback if no match
 
   const card = (
     <a
