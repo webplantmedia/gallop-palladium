@@ -3,10 +3,12 @@ import { ReactNode, ElementType } from 'react';
 
 export const Paragraph = ({
   as,
+  width,
   children,
   className,
 }: {
   as?: string;
+  width?: string;
   children: ReactNode;
   className?: string;
 }) => {
@@ -29,6 +31,15 @@ export const Paragraph = ({
         break;
     }
   }
+
+  if (width === 'wide') {
+    return (
+      <p className={classNames(paragraphClass, className, innerClass)}>
+        <span className="block max-w-6xl">{children}</span>
+      </p>
+    );
+  }
+
   return (
     <p className={classNames(paragraphClass, className, innerClass)}>
       {children}

@@ -18,7 +18,7 @@ import { objectMap } from '@utils/objectMap';
 import { ReactElement } from 'react';
 
 export const CoreCoverCard1 = ({ data, className }: any) => {
-  let h2 = data?.wpBlockCoverInnerContainer?.h2?._jsx || Missing.H2();
+  let h2 = data?.wpBlockCoverInnerContainer?.h2?._text || Missing.H2();
   let buttonText =
     data?.wpBlockCoverInnerContainer?.wpBlockButtons?.wpBlockButton?.a?._text ||
     Missing.Button();

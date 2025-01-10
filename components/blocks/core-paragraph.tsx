@@ -14,12 +14,21 @@ export const CoreParagraph = ({
   // needs to have x-padding.
   const { alignment, textAlign } = getAlign(className, defaultAlign);
 
+  let width: string = '';
+  if (className.includes('alignwide')) {
+    width = 'wide';
+  }
+
   if (className.includes('is-style-lead')) {
     as = 'leader';
   }
 
   return (
-    <Paragraph as={as} className={classNames(alignment, textAlign)}>
+    <Paragraph
+      as={as}
+      width={width}
+      className={classNames(alignment, textAlign)}
+    >
       {children}
     </Paragraph>
   );
