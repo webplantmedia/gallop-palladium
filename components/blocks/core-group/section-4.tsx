@@ -1,11 +1,89 @@
+import Iconify from '@components/iconify';
+import ArrowInsertIcon from '@iconify/icons-material-symbols/arrow-insert';
 import { BlockProps } from '@lib/types';
 import classNames from 'classnames';
 import { AnimatedNumber } from '@components/widgets/animated-number';
 import { extractMilestone } from '@utils/tools';
 import * as Missing from '@components/global/missing';
-import { Alignment } from '@components/common';
+import {
+  Alignment,
+  Container,
+  Heading,
+  Paragraph,
+  Button,
+  BackgroundMedia,
+  Overlay2,
+} from '@components/common';
+import { objectMap } from '@utils/objectMap';
+import { ReactElement } from 'react';
 
 export const CoreGroupSection4 = ({ data, className, props }: BlockProps) => {
+  let h1 = data?.h1?._jsx || Missing.H1();
+  let p = data?.p?._jsx || Missing.Paragraph();
+  let column1: Array<ReactElement> = [];
+  let column2: Array<ReactElement> = [];
+  let column3: Array<ReactElement> = [];
+  data?.wpBlockGroup &&
+    objectMap(data.wpBlockGroup, (key, item, index) => {
+      let h2 = item?.wpBlockCoverInnerContainer?.h2?._jsx || Missing.H2();
+      let buttonText =
+        item?.wpBlockCoverInnerContainer?.wpBlockButtons?.wpBlockButton?.a
+          ?._text || Missing.Button();
+      let buttonHref =
+        item?.wpBlockCoverInnerContainer?.wpBlockButtons?.wpBlockButton?.a
+          ?._href || null;
+
+      var bgColorClass = [
+        'bg-accent/90 group-hover:bg-accent/80',
+        'bg-red-700/90 group-hover:bg-red-700/80',
+        'bg-orange-700/90 group-hover:bg-orange-700/80',
+        'bg-amber-700/90 group-hover:bg-amber-700/80',
+        'bg-yellow-700/90 group-hover:bg-yellow-700/80',
+        'bg-lime-700/90 group-hover:bg-lime-700/80',
+        'bg-green-700/90 group-hover:bg-green-700/80',
+        'bg-emerald-700/90 group-hover:bg-emerald-700/80',
+        'bg-teal-700/90 group-hover:bg-teal-700/80',
+        'bg-cyan-700/90 group-hover:bg-cyan-700/80',
+        'bg-sky-700/90 group-hover:bg-sky-700/80',
+        'bg-blue-700/90 group-hover:bg-blue-700/80',
+        'bg-indigo-700/90 group-hover:bg-indigo-700/80',
+        'bg-violet-700/90 group-hover:bg-violet-700/80',
+        'bg-purple-700/90 group-hover:bg-purple-700/80',
+        'bg-fushsia-700/90 group-hover:bg-fushsia-700/80',
+        'bg-pink-700/90 group-hover:bg-pink-700/80',
+        'bg-rose-700/90 group-hover:bg-rose-700/80',
+      ];
+      const selectedBgClass = bgColorClass[index % bgColorClass.length];
+
+      const card = (
+        <a
+          href={buttonHref}
+          className="relative w-full aspect-[3/4] border border-black flex flex-col justify-between p-7 rounded-xl group overflow-hidden drop-shadow-2xl transition-transform duration-200 ease-out hover:-translate-y-2"
+        >
+          <BackgroundMedia wpBlockCover={item} />
+          <Overlay2 className={classNames('transition-all', selectedBgClass)} />
+          <Heading className="!mt-0 !text-4xl text-white" as="h2">
+            {h2}
+          </Heading>
+          <span className="text-white opacity-0 translate-y-5 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-200 ease-out flex items-center gap-1">
+            {buttonText}
+            <Iconify
+              icon={ArrowInsertIcon}
+              className="flex-shrink-0 h-auto w-6 text-white rotate-90"
+            />
+          </span>
+        </a>
+      );
+
+      if (index < 2) {
+        column1.push(card);
+      } else if (index < 5) {
+        column2.push(card);
+      } else if (index < 7) {
+        column3.push(card);
+      }
+    });
+
   return (
     <Alignment align="full" className="relative isolate">
       <svg
@@ -46,85 +124,34 @@ export const CoreGroupSection4 = ({ data, className, props }: BlockProps) => {
             clipPath:
               'polygon(63.1% 29.5%, 100% 17.1%, 76.6% 3%, 48.4% 0%, 44.6% 4.7%, 54.5% 25.3%, 59.8% 49%, 55.2% 57.8%, 44.4% 57.2%, 27.8% 47.9%, 35.1% 81.5%, 0% 97.7%, 39.2% 100%, 35.2% 81.4%, 97.2% 52.8%, 63.1% 29.5%)',
           }}
-          className="aspect-[801/1036] w-[50.0625rem] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30"
+          className="aspect-[801/1036] w-[50.0625rem] bg-gradient-to-tr from-accent to-accent-gradient opacity-30"
         />
       </div>
-      <div className="overflow-hidden">
-        <div className="mx-auto max-w-7xl px-6 pb-32 pt-36 sm:pt-60 lg:px-8 lg:pt-32">
-          <div className="mx-auto max-w-2xl gap-x-14 lg:mx-0 lg:flex lg:max-w-none lg:items-center">
+      <Container as="div" width="wide" className="">
+        <div className="mx-auto pb-32 pt-36 sm:pt-60 lg:pt-32">
+          <div className="mx-auto max-w-none gap-x-14 lg:mx-0 lg:flex lg:max-w-none lg:items-start justify-between">
             <div className="relative w-full lg:max-w-xl lg:shrink-0 xl:max-w-2xl">
-              <h1 className="text-pretty text-5xl font-semibold tracking-tight text-gray-900 sm:text-7xl">
-                We’re changing the way people connect
-              </h1>
-              <p className="mt-8 text-pretty text-lg font-medium text-gray-500 sm:max-w-md sm:text-xl/8 lg:max-w-none">
-                Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui
-                lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat
-                fugiat aliqua. Anim aute id magna aliqua ad ad non deserunt
-                sunt.
-              </p>
-              <div className="mt-10 flex items-center gap-x-6">
-                <a
-                  href="#"
-                  className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                >
-                  Get started
-                </a>
-                <a href="#" className="text-sm/6 font-semibold text-gray-900">
-                  Live demo <span aria-hidden="true">→</span>
-                </a>
-              </div>
+              <Heading className="" as="h1">
+                {h1}
+              </Heading>
+              <Paragraph as="large" className="mt-8 sm:max-w-md lg:max-w-none">
+                {p}
+              </Paragraph>
             </div>
             <div className="mt-14 flex justify-end gap-8 sm:-mt-44 sm:justify-start sm:pl-20 lg:mt-0 lg:pl-0">
-              <div className="ml-auto w-44 flex-none space-y-8 pt-32 sm:ml-0 sm:pt-80 lg:order-last lg:pt-36 xl:order-none xl:pt-80">
-                <div className="relative">
-                  <img
-                    alt=""
-                    src="https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&h=528&q=80"
-                    className="aspect-[2/3] w-full rounded-xl bg-gray-900/5 object-cover shadow-lg"
-                  />
-                  <div className="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-inset ring-gray-900/10" />
-                </div>
+              <div className="ml-auto w-1/3 flex-none space-y-8 pt-32 sm:ml-0 sm:pt-80 lg:order-last lg:pt-36 xl:order-none xl:pt-80">
+                {column1}
               </div>
-              <div className="mr-auto w-44 flex-none space-y-8 sm:mr-0 sm:pt-52 lg:pt-36">
-                <div className="relative">
-                  <img
-                    alt=""
-                    src="https://images.unsplash.com/photo-1485217988980-11786ced9454?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&h=528&q=80"
-                    className="aspect-[2/3] w-full rounded-xl bg-gray-900/5 object-cover shadow-lg"
-                  />
-                  <div className="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-inset ring-gray-900/10" />
-                </div>
-                <div className="relative">
-                  <img
-                    alt=""
-                    src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&crop=focalpoint&fp-x=.4&w=396&h=528&q=80"
-                    className="aspect-[2/3] w-full rounded-xl bg-gray-900/5 object-cover shadow-lg"
-                  />
-                  <div className="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-inset ring-gray-900/10" />
-                </div>
+              <div className="mr-auto w-1/3 flex-none space-y-8 sm:mr-0 sm:pt-52 lg:pt-36">
+                {column2}
               </div>
-              <div className="w-44 flex-none space-y-8 pt-32 sm:pt-0">
-                <div className="relative">
-                  <img
-                    alt=""
-                    src="https://images.unsplash.com/photo-1670272504528-790c24957dda?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&crop=left&w=400&h=528&q=80"
-                    className="aspect-[2/3] w-full rounded-xl bg-gray-900/5 object-cover shadow-lg"
-                  />
-                  <div className="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-inset ring-gray-900/10" />
-                </div>
-                <div className="relative">
-                  <img
-                    alt=""
-                    src="https://images.unsplash.com/photo-1670272505284-8faba1c31f7d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&h=528&q=80"
-                    className="aspect-[2/3] w-full rounded-xl bg-gray-900/5 object-cover shadow-lg"
-                  />
-                  <div className="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-inset ring-gray-900/10" />
-                </div>
+              <div className="w-1/3 flex-none space-y-8 pt-32 sm:pt-0">
+                {column3}
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </Container>
     </Alignment>
   );
 };

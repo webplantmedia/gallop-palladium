@@ -38,16 +38,16 @@ const GallopMilestone = ({ milestoneStr, index }: any) => {
 };
 
 export const CoreGroupSection3 = ({ data, className, props }: BlockProps) => {
-  let h2 = data?.h2?.jsx || Missing.H2();
-  let p = data?.p?.jsx || Missing.Paragraph();
+  let h2 = data?.h2?._jsx || Missing.H2();
+  let p = data?.p?._jsx || Missing.Paragraph();
   const button1 =
-    data?.wpBlockButtons?.wpBlockButton?.a?.text || Missing.Button();
+    data?.wpBlockButtons?.wpBlockButton?.a?._text || Missing.Button();
   const button2 =
-    data?.wpBlockButtons?.wpBlockButton_2?.a?.text || Missing.Button();
+    data?.wpBlockButtons?.wpBlockButton_2?.a?._text || Missing.Button();
   const button3 =
-    data?.wpBlockButtons?.wpBlockButton_3?.a?.text || Missing.Button();
+    data?.wpBlockButtons?.wpBlockButton_3?.a?._text || Missing.Button();
   const button4 =
-    data?.wpBlockButtons?.wpBlockButton_4?.a?.text || Missing.Button();
+    data?.wpBlockButtons?.wpBlockButton_4?.a?._text || Missing.Button();
   const button1Href = data?.wpBlockButtons?.wpBlockButton?.a?.href || null;
   const button2Href = data?.wpBlockButtons?.wpBlockButton_2?.a?.href || null;
   const button3Href = data?.wpBlockButtons?.wpBlockButton_3?.a?.href || null;
@@ -56,16 +56,16 @@ export const CoreGroupSection3 = ({ data, className, props }: BlockProps) => {
   var milestones, milestone1, milestone2, milestone3, milestone4;
   if (data?.wpBlockGroup?.className?.includes('is-style-milestones')) {
     milestone1 = (
-      <GallopMilestone milestoneStr={data?.wpBlockGroup?.h4?.text} />
+      <GallopMilestone milestoneStr={data?.wpBlockGroup?.h4?._text} />
     );
     milestone2 = (
-      <GallopMilestone milestoneStr={data?.wpBlockGroup?.h4_2?.text} />
+      <GallopMilestone milestoneStr={data?.wpBlockGroup?.h4_2?._text} />
     );
     milestone3 = (
-      <GallopMilestone milestoneStr={data?.wpBlockGroup?.h4_3?.text} />
+      <GallopMilestone milestoneStr={data?.wpBlockGroup?.h4_3?._text} />
     );
     milestone4 = (
-      <GallopMilestone milestoneStr={data?.wpBlockGroup?.h4_4?.text} />
+      <GallopMilestone milestoneStr={data?.wpBlockGroup?.h4_4?._text} />
     );
 
     milestones = [milestone1, milestone2, milestone3, milestone4];
