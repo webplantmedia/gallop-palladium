@@ -154,10 +154,10 @@ export const CoreGroupSection4 = ({ data, className, props }: BlockProps) => {
               <div className="w-1/5 flex-none space-y-8 pt-32 sm:pt-0">
                 {column3}
               </div>
-              <div className="w-1/5 flex-none space-y-8 pt-32 sm:pt-0 relative -top-80">
+              <div className="w-1/5 flex-none space-y-8 pt-32 sm:pt-0 -mt-80">
                 {column4}
               </div>
-              <div className="w-1/5 flex-none space-y-8 pt-32 sm:pt-0 relative -top-96">
+              <div className="w-1/5 flex-none space-y-8 pt-32 sm:pt-0 -mt-96">
                 {column5}
               </div>
             </div>
