@@ -35,7 +35,7 @@ interface MapProps {
   map?: google.maps.Map | null;
   center?: google.maps.LatLngLiteral | null;
   children?: ReactNode;
-  mapZoom: number;
+  mapZoom?: number;
   data?: any | null;
 }
 
