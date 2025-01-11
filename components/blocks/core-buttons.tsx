@@ -25,8 +25,6 @@ export const CoreButtons = ({
     className,
     defaultAlign
   );
-  console.log(className);
-  console.log(justify);
 
   const wrap = className?.includes('is-nowrap')
     ? '2xl:flex-nowrap'

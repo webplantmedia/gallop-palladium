@@ -29,7 +29,13 @@ export const CoreGroupSection4 = ({ data, className, props }: BlockProps) => {
   data?.wpBlockGroup &&
     objectMap(data.wpBlockGroup, (key, item, index) => {
       const itemClassName = item?._className ? item._className : '';
-      const card = <CoreCoverCard1 data={item} className={itemClassName} />;
+      const card = (
+        <CoreCoverCard1
+          key={`card1-${index}`}
+          data={item}
+          className={itemClassName}
+        />
+      );
 
       if (index < 1) {
         column1.push(card);
