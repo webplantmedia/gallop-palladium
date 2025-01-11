@@ -92,7 +92,7 @@ export const ParseBlocks = ({
           return coreGroup(domNode, options, className, props, parentTag);
         } else if (className?.includes('wp-block-buttons')) {
           return (
-            <CoreButtons className={className}>
+            <CoreButtons className={className} parentTag={parentTag}>
               {domToReact(domNode.children as DOMNode[], options)}
             </CoreButtons>
           );
