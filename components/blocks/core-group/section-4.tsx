@@ -28,7 +28,8 @@ export const CoreGroupSection4 = ({ data, className, props }: BlockProps) => {
   let column5: Array<ReactElement> = [];
   data?.wpBlockGroup &&
     objectMap(data.wpBlockGroup, (key, item, index) => {
-      const card = <CoreCoverCard1 data={item} />;
+      const itemClassName = item?._className ? item._className : '';
+      const card = <CoreCoverCard1 data={item} className={itemClassName} />;
 
       if (index < 1) {
         column1.push(card);
