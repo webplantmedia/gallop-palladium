@@ -35,6 +35,7 @@ interface MapProps {
   map?: google.maps.Map | null;
   center?: google.maps.LatLngLiteral | null;
   children?: ReactNode;
+  mapZoom: number;
   data?: any | null;
 }
 
@@ -142,7 +143,7 @@ const SetPin = ({ center, map, data }: MapProps) => {
             }
           });
           await Promise.all(geocodePromises);
-          map.fitBounds(areaBound, 150);
+          // map.fitBounds(areaBound, 150);
         } catch (error) {
           console.error(
             'Error loading libraries or initializing markers for homes:',
@@ -164,7 +165,7 @@ const SetPin = ({ center, map, data }: MapProps) => {
   return null;
 };
 
-const Map = ({ data, address, children }: MapProps) => {
+const Map = ({ data, address, children, mapZoom }: MapProps) => {
   const mapRef = useRef<any>(null);
 
   const [map, setMap] = useState<google.maps.Map | null>(null);
@@ -177,7 +178,7 @@ const Map = ({ data, address, children }: MapProps) => {
 
       const m = new window.google.maps.Map(mapRef.current, {
         center: center,
-        zoom: 14,
+        zoom: Number(mapZoom),
         gestureHandling: 'cooperative',
         zoomControl: true,
         mapTypeControl: true,
@@ -230,13 +231,13 @@ const Map = ({ data, address, children }: MapProps) => {
   );
 };
 
-export const GallopMapClient = ({ data, address }: any) => {
+export const GallopMapClient = ({ data, address, mapZoom }: any) => {
   return (
     <Wrapper
       apiKey={`${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}`}
       render={render}
     >
-      <Map data={data} address={address}>
+      <Map data={data} address={address} mapZoom={mapZoom}>
         <SetPin />
       </Map>
     </Wrapper>

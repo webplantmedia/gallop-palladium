@@ -135,7 +135,7 @@ export const ParseBlocks = ({
         } else if (className?.includes('wp-block-gallop-sidebar')) {
           return gallopSidebar(domNode, options, className, sidebarHeader);
         } else if (className?.includes('wp-block-gallop-map')) {
-          return gallopMap(domNode, options, className);
+          return gallopMap(domNode, options, className, props);
         } else if (className?.includes('wp-block-gallop-excerpt-post')) {
           gallopExcerptPost(domNode, options, props, className);
         } else if (className?.includes('wp-block-code')) {

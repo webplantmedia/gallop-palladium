@@ -11,34 +11,45 @@ import {
 } from 'html-react-parser';
 import { tailwindAlignClasses, getDomNodeText } from '@utils/tools';
 import { HTMLAttributeProps } from '@lib/types';
-import { castToHTMLAttributeProps } from '@utils/tools';
+import { castToHTMLAttributeProps, getAlign } from '@utils/tools';
 import { Alignment } from '@components/common';
 
 export const gallopMap = (
   domNode: Element,
   options: HTMLReactParserOptions,
-  className: string
+  className: string,
+  props: HTMLAttributeProps
 ) => {
   const data = getVarsFromNode2(domNode);
 
-  return <GallopMap data={data} className={className} />;
+  return <GallopMap data={data} className={className} props={props} />;
 };
 
 export const GallopMap = ({
   data,
   className,
+  props,
 }: {
   data: any;
   className: string;
+  props: HTMLAttributeProps;
 }) => {
+  const { align } = getAlign(className);
+  const { dataMapZoom = 12 } = props;
+
   const address = data?.wpBlockGroup?.h3
     ? data.wpBlockGroup.h3._text
     : '1611 Avenue L, Lubbock, TX 79413';
 
   return (
-    <Alignment align="full" className={classNames('mb-0')}>
-      <div className="relative rounded-b-none overflow-clip w-full aspect-square lg:aspect-[16/7] h-full">
-        <GallopMapClient data={data} address={address} />
+    <Alignment align={align} className={classNames('mb-0')}>
+      <div
+        className={classNames(
+          'relative rounded-b-none overflow-clip w-full aspect-square lg:aspect-[16/7] h-full',
+          align === 'wide' && '!rounded-2xl'
+        )}
+      >
+        <GallopMapClient data={data} address={address} mapZoom={dataMapZoom} />
       </div>
     </Alignment>
   );
