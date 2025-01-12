@@ -1,7 +1,7 @@
 import Iconify from '@components/iconify';
 import QuoteIcon from '@iconify/icons-icon-park-outline/quote';
 import classNames from 'classnames';
-import { Paragraph as Pa, QuoteCitation } from '@components/common';
+import { Heading, Paragraph as Pa, QuoteCitation } from '@components/common';
 
 export function Paragraph() {
   return <span className="text-red-500 font-bold">*Missing paragraph</span>;
@@ -26,6 +26,22 @@ export function H6() {
 }
 export function Button() {
   return <span className="text-red-500 font-bold">*Missing button</span>;
+}
+export function Content() {
+  return {
+    h3: {
+      _jsx: (
+        <Heading as="h3" className="!text-red-500 !font-bold">
+          Heading
+        </Heading>
+      ),
+      _text: 'Heading',
+    },
+    p: {
+      _jsx: <Pa className="!text-red-500 !font-bold">Text</Pa>,
+      _text: 'Text',
+    },
+  };
 }
 export function Quote() {
   return {
