@@ -8,27 +8,22 @@ import ArrowInsertIcon from '@iconify/icons-material-symbols/arrow-insert';
 import Iconify from '@components/iconify';
 import { Alignment, BackgroundMedia, Overlay } from '@components/common';
 import { objectMap } from '@utils/objectMap';
+import { Heading, HeadingAccent, Button } from '@components/common';
+import * as Missing from '@components/global/missing';
 
 export const CoreCoverTestimonials1 = ({ data, className }: any) => {
-  const h2 = data?.wpBlockCoverInnerContainer?.h2?._jsx || null;
-  const h3 = data?.wpBlockCoverInnerContainer?.h3?._jsx || null;
-  const quote1 = data?.wpBlockCoverInnerContainer?.wpBlockQuote || null;
-  const quote2 = data?.wpBlockCoverInnerContainer?.wpBlockQuote_2 || null;
-  const p = data?.wpBlockCoverInnerContainer?.p?._jsx || null;
+  const h2 = data?.wpBlockCoverInnerContainer?.h2?._jsx || Missing.H2();
+  const h3 = data?.wpBlockCoverInnerContainer?.h3?._jsx || Missing.H3();
+  const quote1 =
+    data?.wpBlockCoverInnerContainer?.wpBlockQuote || Missing.Quote();
+  const quote2 =
+    data?.wpBlockCoverInnerContainer?.wpBlockQuote_2 || Missing.Quote();
   const button1 =
     data?.wpBlockCoverInnerContainer?.wpBlockButtons?.wpBlockButton?.a?._text ||
-    null;
-  const button2 =
-    data?.wpBlockCoverInnerContainer?.wpBlockButtons?.wpBlockButton_2?.a
-      ?._text || null;
+    Missing.Button();
   const button1Href =
     data?.wpBlockCoverInnerContainer?.wpBlockButtons?.wpBlockButton?.a?._href ||
     null;
-  const button2Href =
-    data?.wpBlockCoverInnerContainer?.wpBlockButtons?.wpBlockButton_2?.a
-      ?._href || null;
-
-  const img = data?.wpBlockCoverInnerContainer?.wpBlockImage?.img || null;
 
   return (
     <Alignment
@@ -39,18 +34,14 @@ export const CoreCoverTestimonials1 = ({ data, className }: any) => {
       <Overlay className="bg-white/90" />
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         {h2 && (
-          <h2 className="leading-tight text-xl uppercase tracking-[0.1em] text-accent2 mb-7 font-accent font-normal flex items-center [&+h3]:!mt-0 justify-center">
+          <HeadingAccent as="h2" className="justify-center !text-accent2">
             {h2}
-            <Iconify
-              icon={ArrowInsertIcon}
-              className="flex-shrink-0 h-auto w-7 rotate-180"
-            />
-          </h2>
+          </HeadingAccent>
         )}
         {h3 && (
-          <h3 className="mb-20 leading-tight text-4xl md:text-5xl lg:text-6xl text-center text-base-contrast mt-14 font-bold">
+          <Heading as="h3" inStyle="h2" className="text-center !mb-20 !mt-14">
             {h3}
-          </h3>
+          </Heading>
         )}
         <div className="mx-auto grid max-w-2xl grid-cols-1 lg:mx-0 lg:max-w-none lg:grid-cols-2">
           <div className="flex flex-col pb-10 sm:pb-16 lg:pb-0 lg:pr-8 xl:pr-20">
@@ -113,12 +104,7 @@ export const CoreCoverTestimonials1 = ({ data, className }: any) => {
 
         {button1 && (
           <div className="text-center mt-20">
-            <a
-              href={button1Href}
-              className="border-2 overflow-hidden inline-flex items-center border-accent bg-accent text-white hover:bg-primary-light rounded-md px-4 py-2 text-base font-normal shadow-sm"
-            >
-              {button1}
-            </a>
+            <Button href={button1Href}>{button1}</Button>
           </div>
         )}
       </div>

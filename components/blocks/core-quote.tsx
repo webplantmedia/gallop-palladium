@@ -16,6 +16,7 @@ import {
   DOMNode,
   Element,
 } from 'html-react-parser';
+import { QuoteCitation } from '@components/common/quote-citation';
 
 export const coreQuote = (
   domNode: Element,
@@ -38,12 +39,9 @@ export const coreQuote = (
 
         if (domNode.name === 'p') {
           return (
-            <CoreParagraph
-              key={'blockquote-p' + index}
-              className="font-accent italic text-xl md:text-[1.6rem] md:leading-[1.4] leading-normal text-base-contrast2 mb-7"
-            >
+            <QuoteCitation key={'blockquote-p' + index}>
               <>{domToReact(domNode.children as DOMNode[], op)}</>
-            </CoreParagraph>
+            </QuoteCitation>
           );
         } else if (domNode.name === 'cite') {
           return (

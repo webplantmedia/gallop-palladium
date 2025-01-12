@@ -2,6 +2,7 @@ import { ReactElement } from 'react';
 import classNames from 'classnames';
 import React from 'react';
 import { styleStringToObject } from '@utils/tools';
+import * as Missing from '@components/global/missing';
 
 interface ScrollingImage {
   _src: string; // The image source URL
@@ -20,11 +21,13 @@ export const BackgroundMedia = ({
   wpBlockCover = {},
   attr = {},
   grayscale = false,
+  forceSelection = true,
 }: {
   className?: string;
   wpBlockCover?: Record<string, any>;
   attr?: Record<string, any>;
   grayscale?: boolean;
+  forceSelection?: boolean;
 }) => {
   let videoSrc: string | null =
     wpBlockCover?.wpBlockCoverVideoBackground?._src || null;
@@ -88,7 +91,7 @@ export const BackgroundMedia = ({
         }}
       ></div>
     );
-  } else if (attr) {
+  } else if (Object.keys(attr).length > 0) {
     background = (
       <img
         className={classNames(
@@ -102,6 +105,24 @@ export const BackgroundMedia = ({
             ? styleStringToObject(attr.style)
             : attr.style
         }
+        width={attr.width ? Number(attr.width) : undefined}
+        height={attr.height ? Number(attr.height) : undefined}
+        srcSet={attr.srcSet}
+        // sizes={attr.sizes}
+        alt={attr.alt}
+        title={attr.title}
+      />
+    );
+  } else if (forceSelection === true) {
+    attr = Missing.BackgroundMedia();
+    return (
+      <img
+        className={classNames(
+          'w-full box-border absolute inset-0 object-cover h-full object-center -z-20',
+          className
+        )}
+        loading="lazy"
+        src={attr.src}
         width={attr.width ? Number(attr.width) : undefined}
         height={attr.height ? Number(attr.height) : undefined}
         srcSet={attr.srcSet}
