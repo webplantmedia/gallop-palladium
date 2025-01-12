@@ -1,29 +1,9 @@
-import Iconify from '@components/iconify';
-import ArrowInsertIcon from '@iconify/icons-material-symbols/arrow-insert';
 import { BlockProps } from '@lib/types';
-import classNames from 'classnames';
-import { AnimatedNumber } from '@components/widgets/animated-number';
-import { extractMilestone } from '@utils/tools';
 import * as Missing from '@components/global/missing';
-import {
-  Alignment,
-  Container,
-  Heading,
-  Paragraph,
-  Button,
-  BackgroundMedia,
-  Overlay2,
-} from '@components/common';
+import { Alignment, Container, Heading, Paragraph } from '@components/common';
 import { objectMap } from '@utils/objectMap';
-import { ReactElement } from 'react';
-import { CoreCoverCard1 } from '@components/blocks';
-import {
-  BuildingOffice2Icon,
-  EnvelopeIcon,
-  PhoneIcon,
-} from '@heroicons/react/24/outline';
 
-export const CoreGroupSection5 = ({ data, className, props }: BlockProps) => {
+export const CoreGroupContact1 = ({ data, className, props }: BlockProps) => {
   let h2 = data?.h2?._jsx || Missing.H2();
   let p = data?.p?._jsx || Missing.Paragraph();
   let quote = data?.wpBlockQuote || Missing.Quote();
@@ -32,7 +12,7 @@ export const CoreGroupSection5 = ({ data, className, props }: BlockProps) => {
     <Alignment
       as="div"
       align="full"
-      className="relative isolate bg-white px-6 py-24 sm:py-32 lg:px-8"
+      className="relative isolate bg-white py-24 sm:py-32"
     >
       <svg
         aria-hidden="true"
