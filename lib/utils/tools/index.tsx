@@ -54,3 +54,4 @@ export { tailwindGetAlignClasses } from './tailwind-get-align-classes';
 export { extractMilestone } from './extract-milestone';
 export { getAspectRatio, getAspectRatioPadding } from './get-aspect-ratio';
 export { getAlign } from './get-align';
+export { getFontSize } from './get-font-size';
