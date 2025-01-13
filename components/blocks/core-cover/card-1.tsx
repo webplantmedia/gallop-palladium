@@ -17,6 +17,30 @@ import {
 import { objectMap } from '@utils/objectMap';
 import { ReactElement } from 'react';
 
+const getFontSize = (str: string) => {
+  const words = str.split(' ');
+  let maxLength = 0;
+  let className = '!text-3xl xl:!text-4xl';
+
+  for (const word of words) {
+    if (word.length > maxLength) {
+      maxLength = word.length;
+    }
+  }
+
+  if (maxLength >= 9) {
+    className = '!text-3xl xl:!text-3xl';
+  }
+  if (maxLength >= 12) {
+    className = '!text-3xl xl:!text-lg 2xl:!text-2xl';
+  }
+  if (maxLength >= 14) {
+    className = '!text-3xl xl:!text-lg 2xl:!text-xl';
+  }
+
+  return className;
+};
+
 export const CoreCoverCard1 = ({ data, className }: any) => {
   let h2 = data?.wpBlockCoverInnerContainer?.h2?._text || Missing.H2();
   let buttonText =
@@ -67,7 +91,12 @@ export const CoreCoverCard1 = ({ data, className }: any) => {
     >
       <BackgroundMedia wpBlockCover={data} grayscale={true} />
       <Overlay className={classNames('transition-all', selectedBgClass)} />
-      <Heading className="!mt-0 !text-4xl text-white break-word" as="h2">
+      <Heading
+        className={`!mt-0 !text-3xl xl:!text-4xl text-white break-word ${getFontSize(
+          h2
+        )}`}
+        as="h2"
+      >
         {h2}
       </Heading>
       <span className="text-white opacity-0 translate-y-5 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-200 ease-out flex items-center gap-1">
