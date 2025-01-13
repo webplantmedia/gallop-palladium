@@ -51,7 +51,7 @@ export default function EditLink({ meta }: any) {
 
   return (
     <>
-      <div className="hidden w-12 h-12 lg:flex items-center justify-center">
+      <div className="w-12 h-12 flex items-center justify-center">
         <button
           onClick={handleRevalidate}
           className="rounded-full bg-primary-main hover:bg-primary-light w-12 h-12 flex items-center justify-center dmh:bg-modern-primary-main dmh:hover:bg-modern-primary-light"
@@ -61,20 +61,7 @@ export default function EditLink({ meta }: any) {
       </div>
       {databaseId !== 0 && (
         <>
-          <div className="hidden w-12 h-12 lg:flex items-center justify-center">
-            <a
-              href={
-                'https://dougnewby1.wpenginepowered.com/' +
-                (meta.postType !== 'page' ? meta.postType + '/' : '') +
-                (meta.slug !== 'home' ? meta.slug + '/' : '')
-              }
-              target="_blank"
-              className="rounded-full bg-primary-main hover:bg-primary-light w-12 h-12 flex items-center justify-center dmh:bg-modern-primary-main dmh:hover:bg-modern-primary-light"
-            >
-              <Iconify className="w-6 h-6 text-white" icon={eyeIcon} />
-            </a>
-          </div>
-          <div className="hidden w-12 h-12 lg:flex items-center justify-center">
+          <div className="w-12 h-12 flex items-center justify-center">
             <a
               href={
                 process.env.NEXT_PUBLIC_WORDPRESS_URL +
