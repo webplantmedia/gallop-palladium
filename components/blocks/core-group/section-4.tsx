@@ -104,20 +104,18 @@ export const CoreGroupSection4 = ({ data, className, props }: BlockProps) => {
                 {p}
               </Paragraph>
             </div>
-            <div className="mt-14 flex justify-end gap-8 sm:-mt-44 sm:justify-start sm:pl-20 lg:mt-0 lg:pl-0">
-              <div className="ml-auto w-1/5 flex-none space-y-8 pt-32 sm:ml-0 sm:pt-40 lg:order-last lg:pt-36 xl:order-none xl:pt-40">
+            <div className="mt-14 grid grid-cols-5 justify-end gap-8 sm:-mt-44 sm:justify-start sm:pl-20 lg:mt-0 lg:pl-0">
+              <div className="ml-auto w-full space-y-8 pt-32 sm:ml-0 sm:pt-40 lg:order-last lg:pt-36 xl:order-none xl:pt-40">
                 {column1}
               </div>
-              <div className="mr-auto w-1/5 flex-none space-y-8 sm:mr-0 sm:pt-24 lg:pt-24">
+              <div className="mr-auto w-full space-y-8 sm:mr-0 sm:pt-24 lg:pt-24">
                 {column2}
               </div>
-              <div className="w-1/5 flex-none space-y-8 pt-32 sm:pt-0">
-                {column3}
-              </div>
-              <div className="w-1/5 flex-none space-y-8 pt-32 sm:pt-0 -mt-80">
+              <div className="w-full space-y-8 pt-32 sm:pt-0">{column3}</div>
+              <div className="w-full space-y-8 pt-32 sm:pt-0 -mt-80">
                 {column4}
               </div>
-              <div className="w-1/5 flex-none space-y-8 pt-32 sm:pt-0 -mt-96">
+              <div className="w-full space-y-8 pt-32 sm:pt-0 -mt-96">
                 {column5}
               </div>
             </div>

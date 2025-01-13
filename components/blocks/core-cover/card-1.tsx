@@ -67,7 +67,7 @@ export const CoreCoverCard1 = ({ data, className }: any) => {
     >
       <BackgroundMedia wpBlockCover={data} grayscale={true} />
       <Overlay className={classNames('transition-all', selectedBgClass)} />
-      <Heading className="!mt-0 !text-4xl text-white" as="h2">
+      <Heading className="!mt-0 !text-4xl text-white break-word" as="h2">
         {h2}
       </Heading>
       <span className="text-white opacity-0 translate-y-5 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-200 ease-out flex items-center gap-1">
