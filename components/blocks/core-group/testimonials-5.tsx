@@ -8,8 +8,6 @@ export const CoreGroupTestimonials5 = ({
   className,
   props,
 }: BlockProps) => {
-  console.log(data);
-
   let column1: any[] = [];
   let column2: any[] = [];
   let column3: any[] = [];
