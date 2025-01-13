@@ -75,7 +75,7 @@ export const CoreCoverCard1 = ({ data, className }: any) => {
       >
         {h2}
       </Heading>
-      <span className="text-white opacity-0 translate-y-5 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-200 ease-out flex items-center gap-1">
+      <span className="text-white lg:opacity-0 lg:translate-y-5 lg:group-hover:opacity-100 lg:group-hover:translate-y-0 transition-all duration-200 ease-out flex items-center gap-1">
         {buttonText}
         <Iconify
           icon={ArrowInsertIcon}
