@@ -111,13 +111,6 @@ export const CoreGroupContact1 = ({ data, className, props }: BlockProps) => {
                 Let’s talk
               </button>
             </div>
-            <p className="mt-4 text-sm/6 text-gray-500">
-              By submitting this form, I agree to the{' '}
-              <a href="#" className="font-bold text-accent">
-                privacy&nbsp;policy
-              </a>
-              .
-            </p>
           </form>
           <div className="lg:mt-6 lg:w-96 lg:flex-none">
             <figure className="mt-10">

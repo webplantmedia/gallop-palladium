@@ -61,7 +61,7 @@ export const CoreCoverCard1 = ({ data, className }: any) => {
     <a
       href={buttonHref}
       className={classNames(
-        'relative w-full aspect-[3/4] flex flex-col justify-between p-7 rounded-xl group overflow-hidden drop-shadow-2xl transition-transform duration-200 ease-out hover:-translate-y-2',
+        'relative w-full aspect-square md:aspect-[3/4] flex flex-col justify-between p-7 rounded-xl group overflow-hidden drop-shadow-2xl transition-transform duration-200 ease-out hover:-translate-y-2',
         selectedBgClass
       )}
     >

@@ -96,7 +96,7 @@ export const CoreGroupSection4 = ({ data, className, props }: BlockProps) => {
         />
       </div>
       <Container as="div" width="wide" className="">
-        <div className="mx-auto pb-32 pt-28 sm:pt-28 lg:pt-32">
+        <div className="mx-auto pb-32 pt-14 md:pt-28 lg:pt-32">
           <div className="mx-auto max-w-none gap-x-14 lg:mx-0 lg:flex lg:max-w-none lg:items-start justify-between flex flex-col">
             <div className="relative w-full lg:max-w-2xl lg:shrink-0">
               <Heading className="" as="h1">
@@ -121,7 +121,7 @@ export const CoreGroupSection4 = ({ data, className, props }: BlockProps) => {
                 {column5}
               </div>
             </div>
-            <div className="mt-8 grid-cols-1 md:grid-cols-2 w-full justify-end gap-8 grid xl:hidden">
+            <div className="mt-8 grid-cols-1 sm:grid-cols-2 w-full justify-end gap-8 grid xl:hidden">
               {columns}
             </div>
           </div>

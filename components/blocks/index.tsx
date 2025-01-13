@@ -54,4 +54,4 @@ export { GallopMapClient } from './gallop-map-client';
 export { CoreGroupHeader1 } from './core-group/header-1';
 export { CoreCoverHeader1 } from './core-cover/header-1';
 export { CoreGroupHeader2 } from './core-group/header-2';
-export { CoreGroupTestimonials5 } from './core-group/testimonials-5';
+export { CoreGroupTestimonials1 } from './core-group/testimonials-1';

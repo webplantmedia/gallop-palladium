@@ -33,6 +33,7 @@ export const CoreButtons = ({
   return (
     <Alignment
       align={align}
+      defaultAlign={defaultAlign}
       className={classNames(
         alignment,
         justify,
