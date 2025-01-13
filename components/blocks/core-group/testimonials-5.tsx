@@ -20,14 +20,14 @@ export const CoreGroupTestimonials5 = ({
   data &&
     objectMap(data, (key, item, index) => {
       if (item._className.includes('wp-block-quote')) {
-        if (index !== 0) {
-          if (index < 4) {
+        if (index !== 1) {
+          if (index < 5) {
             column1.push(item);
-          } else if (index < 6) {
+          } else if (index < 7) {
             column2.push(item);
-          } else if (index < 8) {
+          } else if (index < 9) {
             column3.push(item);
-          } else if (index < 11) {
+          } else if (index < 12) {
             column4.push(item);
           }
         }
