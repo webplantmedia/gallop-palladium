@@ -37,7 +37,7 @@ export const CoreGroupGrid = ({
   );
   className = className?.replace(
     'is-style-columns-5',
-    'grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-5 gap-7 lg:gap-7'
+    'grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-5 gap-7 lg:gap-7'
   );
   className = className?.replace('is-vertically-aligned-top', 'items-start');
   className = className?.replace('is-vertically-aligned-bottom', 'items-end');
