@@ -3,6 +3,7 @@ import Container from '@components/container';
 import { BlockProps } from '@lib/types';
 import { objectMap } from '@utils/objectMap';
 import classNames from 'classnames';
+import * as Missing from '@components/global/missing';
 
 export const CoreGroupTestimonials5 = ({
   data,
@@ -13,6 +14,8 @@ export const CoreGroupTestimonials5 = ({
   let column2: any[] = [];
   let column3: any[] = [];
   let column4: any[] = [];
+
+  let h1 = data?.h1?._jsx || Missing.H1();
 
   data &&
     objectMap(data, (key, item, index) => {
@@ -38,7 +41,7 @@ export const CoreGroupTestimonials5 = ({
 
   let featuredTestimonial = data.wpBlockQuote;
   return (
-    <Alignment align="alignwide" className="relative isolate -mt-16 mb-8">
+    <Alignment align="alignwide" className="wp-block-group py-20">
       <div
         aria-hidden="true"
         className="absolute inset-x-0 top-1/2 -z-10 -translate-y-1/2 transform-gpu overflow-hidden opacity-30 blur-3xl"
@@ -48,7 +51,7 @@ export const CoreGroupTestimonials5 = ({
             clipPath:
               'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)',
           }}
-          className="ml-[max(50%,38rem)] aspect-[1313/771] w-[82.0625rem] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc]"
+          className="ml-[max(50%,38rem)] aspect-[1313/771] w-[82.0625rem] bg-gradient-to-tr from-accent to-accent-gradient opacity-30"
         />
       </div>
       <div
@@ -60,21 +63,23 @@ export const CoreGroupTestimonials5 = ({
             clipPath:
               'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)',
           }}
-          className="ml-[-22rem] aspect-[1313/771] w-[82.0625rem] flex-none origin-top-right rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] xl:ml-0 xl:mr-[calc(50%-12rem)]"
+          className="ml-[-22rem] aspect-[1313/771] w-[82.0625rem] flex-none origin-top-right rotate-[30deg] bg-gradient-to-tr from-accent to-accent-gradient xl:ml-0 xl:mr-[calc(50%-12rem)] opacity-30"
         />
       </div>
-      <Container className="flex-auto">
-        <div className="mx-auto max-w-2xl text-center">
-          {/* <HeadingAccent as="h1">Testimonials</HeadingAccent> */}
-          <Heading
-            as="h2"
-            inStyle="h2"
-            className={classNames('!mt-6 [text-wrap:balance] max-w-[900px]')}
-          >
-            We have worked with thousands of amazing people
-          </Heading>
-        </div>
-        <div className="mx-auto mt-16 grid max-w-2xl grid-cols-1 grid-rows-1 gap-8 text-sm/6 text-gray-900 sm:mt-20 sm:grid-cols-2 xl:mx-0 xl:max-w-none xl:grid-flow-col xl:grid-cols-4">
+      <div className="flex-auto !mt-0">
+        <HeadingAccent as="h1" className="!mt-0">
+          Client Testimonials
+        </HeadingAccent>
+        <Heading
+          as="h2"
+          inStyle="h1"
+          className={classNames(
+            '!mt-6 [text-wrap:balance] max-w-[900px] !w-full'
+          )}
+        >
+          {h1}
+        </Heading>
+        <div className="w-full mt-16 grid grid-cols-1 grid-rows-1 gap-8 text-sm/6 text-gray-900 sm:mt-20 sm:grid-cols-2 xl:mx-0 xl:max-w-none xl:grid-flow-col xl:grid-cols-4">
           <figure className="rounded-2xl bg-white shadow-lg ring-1 ring-gray-900/5 sm:col-span-2 xl:col-start-2 xl:row-end-1">
             <blockquote className="p-6 text-lg font-semibold tracking-tight text-gray-900 sm:p-12 sm:text-xl/8">
               <p>{`“${featuredTestimonial.p._jsx}”`}</p>
@@ -101,13 +106,13 @@ export const CoreGroupTestimonials5 = ({
                         columnIdx === columnGroup.length - 1)
                       ? 'xl:row-span-2'
                       : 'xl:row-start-1',
-                    'space-y-8'
+                    'space-y-8 w-full'
                   )}
                 >
                   {column.map((testimonial: any) => (
                     <figure
                       key={testimonial.p_2._text}
-                      className="rounded-2xl bg-white p-6 shadow-lg ring-1 ring-gray-900/5"
+                      className="rounded-2xl bg-white p-6 shadow-lg ring-1 ring-gray-900/5 w-full"
                     >
                       <blockquote className="text-gray-900">
                         <p>{`“${testimonial.p._text}”`}</p>
@@ -126,7 +131,7 @@ export const CoreGroupTestimonials5 = ({
             </div>
           ))}
         </div>
-      </Container>
+      </div>
     </Alignment>
   );
 };
