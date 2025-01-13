@@ -50,6 +50,8 @@ export const CoreGroupSection4 = ({ data, className, props }: BlockProps) => {
       }
     });
 
+  let columns = [...column1, ...column2, ...column3, ...column4, ...column5];
+
   return (
     <Alignment align="full" className="relative isolate">
       <svg
@@ -104,7 +106,7 @@ export const CoreGroupSection4 = ({ data, className, props }: BlockProps) => {
                 {p}
               </Paragraph>
             </div>
-            <div className="mt-14 grid grid-cols-5 justify-end gap-8 sm:-mt-44 sm:justify-start sm:pl-20 lg:mt-0 lg:pl-0">
+            <div className="mt-14 grid-cols-5 justify-end gap-8 sm:-mt-44 sm:justify-start sm:pl-20 lg:mt-0 lg:pl-0 hidden xl:grid">
               <div className="ml-auto w-full space-y-8 pt-32 sm:ml-0 sm:pt-40 lg:order-last lg:pt-36 xl:order-none xl:pt-40">
                 {column1}
               </div>
@@ -118,6 +120,9 @@ export const CoreGroupSection4 = ({ data, className, props }: BlockProps) => {
               <div className="w-full space-y-8 pt-32 sm:pt-0 -mt-96">
                 {column5}
               </div>
+            </div>
+            <div className="mt-8 grid-cols-1 md:grid-cols-2 w-full justify-end gap-8 grid xl:hidden">
+              {columns}
             </div>
           </div>
         </div>
