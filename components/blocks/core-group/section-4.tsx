@@ -96,13 +96,13 @@ export const CoreGroupSection4 = ({ data, className, props }: BlockProps) => {
         />
       </div>
       <Container as="div" width="wide" className="">
-        <div className="mx-auto pb-32 pt-36 sm:pt-60 lg:pt-32">
+        <div className="mx-auto pb-32 pt-28 sm:pt-28 lg:pt-32">
           <div className="mx-auto max-w-none gap-x-14 lg:mx-0 lg:flex lg:max-w-none lg:items-start justify-between flex flex-col">
-            <div className="relative w-full lg:max-w-xl lg:shrink-0 xl:max-w-2xl">
+            <div className="relative w-full lg:max-w-2xl lg:shrink-0">
               <Heading className="" as="h1">
                 {h1}
               </Heading>
-              <Paragraph as="large" className="mt-8 sm:max-w-md lg:max-w-none">
+              <Paragraph as="large" className="mt-8">
                 {p}
               </Paragraph>
             </div>
