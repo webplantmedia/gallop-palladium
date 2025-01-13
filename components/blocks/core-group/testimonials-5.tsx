@@ -1,4 +1,5 @@
-import { Alignment } from '@components/common';
+import { Alignment, Heading, HeadingAccent } from '@components/common';
+import Container from '@components/container';
 import { BlockProps } from '@lib/types';
 import { objectMap } from '@utils/objectMap';
 import classNames from 'classnames';
@@ -37,7 +38,7 @@ export const CoreGroupTestimonials5 = ({
 
   let featuredTestimonial = data.wpBlockQuote;
   return (
-    <Alignment align="alignwide" className="relative isolate mt-16 mb-8">
+    <Alignment align="alignwide" className="relative isolate -mt-16 mb-8">
       <div
         aria-hidden="true"
         className="absolute inset-x-0 top-1/2 -z-10 -translate-y-1/2 transform-gpu overflow-hidden opacity-30 blur-3xl"
@@ -62,14 +63,16 @@ export const CoreGroupTestimonials5 = ({
           className="ml-[-22rem] aspect-[1313/771] w-[82.0625rem] flex-none origin-top-right rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] xl:ml-0 xl:mr-[calc(50%-12rem)]"
         />
       </div>
-      <div className="">
+      <Container className="flex-auto">
         <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-base/7 font-semibold text-indigo-600">
-            Testimonials
-          </h2>
-          <p className="mt-2 text-balance text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl">
+          {/* <HeadingAccent as="h1">Testimonials</HeadingAccent> */}
+          <Heading
+            as="h2"
+            inStyle="h2"
+            className={classNames('!mt-6 [text-wrap:balance] max-w-[900px]')}
+          >
             We have worked with thousands of amazing people
-          </p>
+          </Heading>
         </div>
         <div className="mx-auto mt-16 grid max-w-2xl grid-cols-1 grid-rows-1 gap-8 text-sm/6 text-gray-900 sm:mt-20 sm:grid-cols-2 xl:mx-0 xl:max-w-none xl:grid-flow-col xl:grid-cols-4">
           <figure className="rounded-2xl bg-white shadow-lg ring-1 ring-gray-900/5 sm:col-span-2 xl:col-start-2 xl:row-end-1">
@@ -123,7 +126,7 @@ export const CoreGroupTestimonials5 = ({
             </div>
           ))}
         </div>
-      </div>
+      </Container>
     </Alignment>
   );
 };
