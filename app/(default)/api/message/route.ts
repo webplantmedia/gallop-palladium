@@ -1,5 +1,4 @@
 import { NextResponse } from 'next/server';
-import { _contactForm } from '@data/_contact-form';
 
 function isValidEmail(email: string): boolean {
   const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -13,16 +12,19 @@ function encodeFormData(data: any) {
 }
 
 export async function POST(req: Request) {
-  const { firstName, lastName, email, phone, message, sourceUrl, domain } =
-    await req.json();
+  const { firstName, lastName, email, message } = await req.json();
 
-  if (!firstName || !lastName || !email || !phone || !message) {
-    return new Response(JSON.stringify({ message: _contactForm.missing }));
+  if (!firstName || !lastName || !email || !message) {
+    return new Response(JSON.stringify({ message: 'Input fields missing.' }));
   }
 
   if (!isValidEmail(email)) {
-    return new Response(JSON.stringify({ message: _contactForm.invalid }), {});
+    return new Response(
+      JSON.stringify({ message: 'Invalid email address.' }),
+      {}
+    );
   }
+
   const emailHtml = `
   <!DOCTYPE html>
   <html>
@@ -78,9 +80,7 @@ export async function POST(req: Request) {
       <div class="container">
           <div class="content">
             <p class="info"><strong>Full Name:</strong> ${firstName} ${lastName}</p>
-            <p class="info"><strong>Phone:</strong> ${phone}</p>
             <p class="info"><strong>Message:</strong> ${message}</p>
-						<p class="info"><strong>Source URL:</strong> <a href='${sourceUrl}' class="link">${sourceUrl}</a></p>
           </div>
       </div>
   </body>
@@ -91,7 +91,7 @@ export async function POST(req: Request) {
     from: `${process.env.MAILGUN_FROM_NAME} <${process.env.MAILGUN_SMTP_MAIL}>`,
     to: `${firstName} ${lastName} <${email}>`,
     bcc: `${process.env.MAILGUN_DEV_NAME} <${process.env.MAILGUN_DEV_MAIL}>`,
-    subject: `${firstName} ${lastName}: ${_contactForm.subject}${domain}`,
+    subject: `Let's talk`,
     html: emailHtml,
   };
 
@@ -109,10 +109,15 @@ export async function POST(req: Request) {
     }
   );
 
+  console.log(resp);
+
   const data = await resp.text();
+
+  console.log(data);
   const response =
     data != 'Forbidden' && JSON.parse(data).id
-      ? _contactForm.sent
-      : _contactForm.error;
+      ? 'Messgae sent. Thank You.'
+      : 'An error occurred.';
+
   return NextResponse.json({ message: response });
 }

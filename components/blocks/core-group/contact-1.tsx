@@ -1,12 +1,49 @@
+'use client';
+
 import { BlockProps } from '@lib/types';
 import * as Missing from '@components/global/missing';
 import { Alignment, Container, Heading, Paragraph } from '@components/common';
 import { objectMap } from '@utils/objectMap';
+import { useState } from 'react';
 
 export const CoreGroupContact1 = ({ data, className, props }: BlockProps) => {
   let h2 = data?.h2?._jsx || Missing.H2();
   let p = data?.p?._jsx || Missing.Paragraph();
   let quote = data?.wpBlockQuote || Missing.Quote();
+
+  const [status, setStatus] = useState('');
+
+  const clearForm = (event: any) => {
+    event.target.firstname.value = '';
+    event.target.lastname.value = '';
+    event.target.emailaddress.value = '';
+    event.target.telnumber.value = '';
+    event.target.message.value = '';
+  };
+
+  const submit = async (e: any) => {
+    e.preventDefault();
+    const formData = {
+      firstName: e.target.firstname.value,
+      lastName: e.target.lastname.value,
+      email: e.target.email.value,
+      message: e.target.message.value,
+    };
+
+    const response = await fetch('/api/message/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData),
+    });
+
+    const data = await response.json();
+
+    if (data.message == 'Message sent. Thank You.') {
+      clearForm(e);
+    }
+
+    setStatus(data.message);
+  };
 
   return (
     <Alignment
@@ -49,7 +86,12 @@ export const CoreGroupContact1 = ({ data, className, props }: BlockProps) => {
         </Heading>
         <Paragraph className="">{p}</Paragraph>
         <div className="mt-16 flex flex-col gap-16 sm:gap-y-20 lg:flex-row">
-          <form action="#" method="POST" className="lg:flex-auto">
+          <form
+            action="#"
+            method="POST"
+            className="lg:flex-auto"
+            onSubmit={submit}
+          >
             <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
               <div>
                 <label
@@ -60,8 +102,8 @@ export const CoreGroupContact1 = ({ data, className, props }: BlockProps) => {
                 </label>
                 <div className="mt-2.5">
                   <input
-                    id="first-name"
-                    name="first-name"
+                    id="firstname"
+                    name="firstname"
                     type="text"
                     autoComplete="given-name"
                     className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline outline-2 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-accent"
@@ -77,10 +119,27 @@ export const CoreGroupContact1 = ({ data, className, props }: BlockProps) => {
                 </label>
                 <div className="mt-2.5">
                   <input
-                    id="last-name"
-                    name="last-name"
+                    id="lastname"
+                    name="lastname"
                     type="text"
                     autoComplete="family-name"
+                    className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline outline-2 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-accent"
+                  />
+                </div>
+              </div>
+              <div className="sm:col-span-2">
+                <label
+                  htmlFor="email"
+                  className="block text-sm/6 font-semibold text-gray-900"
+                >
+                  Email
+                </label>
+                <div className="mt-2.5">
+                  <input
+                    id="email"
+                    name="email"
+                    type="text"
+                    autoComplete="email-address"
                     className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline outline-2 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-accent"
                   />
                 </div>
@@ -103,6 +162,17 @@ export const CoreGroupContact1 = ({ data, className, props }: BlockProps) => {
                 </div>
               </div>
             </div>
+            {status.length > 0 && (
+              <p
+                className={
+                  (status == 'Message sent. Thank You.'
+                    ? 'text-primary-main '
+                    : 'text-[red] ') + 'text-base pt-2'
+                }
+              >
+                {status}
+              </p>
+            )}
             <div className="mt-10">
               <button
                 type="submit"
