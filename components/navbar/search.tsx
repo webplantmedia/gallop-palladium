@@ -134,27 +134,14 @@ export default function Search({ isScrolling, post }: any) {
                 >
                   <div className="relative flex items-center justify-start flex-col h-full">
                     <div className="w-full z-10 sticky top-0 relative">
-                      <div className="w-full flex justify-between items-center gap-2 rounded-md border-0 focus:ring-primary-main text-base-contrast shadow-sm bg-white pr-0 overflow-clip h-14">
-                        <div className="relative flex justify-between items-center gap-2 w-full border-0 focus:ring-primary-main text-base-contrast shadow-sm bg-white pr-0 overflow-clip h-14">
-                          <input
-                            className="shadow-inner hide-clear bg-white text-base-contrast font-body block w-full border-white pr-16 pl-6 h-14 border-0 box-border border-white focus:border-white focus:ring-0 placeholder:text-base-contrast/50 truncate text-base"
-                            autoFocus={true}
-                            placeholder={heading}
-                            value={search}
-                            onChange={(e) => setSearch(e.target.value)}
-                          />
-                          {search != '' && (
-                            <a
-                              onClick={() => setSearch('')}
-                              className="cursor-pointer text-primary-main hover:text-primary-lighter flex items-center justify-center border-2 h-10 px-2 border-primary-main hover:border-primary-lighter rounded-md hover:bg-primary-lighter/10"
-                            >
-                              Clear
-                            </a>
-                          )}
-                        </div>
-                        <button className="text-center rounded-br-md rounded-tr-md shadow-sm flex items-center justify-center text-base h-14 px-4 bg-secondary-main text-secondary-contrast hover:bg-secondary-light">
-                          Search
-                        </button>
+                      <div className="relative flex items-center">
+                        <input
+                          className="shadow-inner hide-clear bg-white text-base-contrast font-body block w-full border-white pr-16 pl-6 h-14 border-0 box-border border-white focus:border-white focus:ring-0 placeholder:text-base-contrast/50 truncate text-base"
+                          autoFocus={true}
+                          placeholder={heading}
+                          value={search}
+                          onChange={(e) => setSearch(e.target.value)}
+                        />
                       </div>
                     </div>
                   </div>
