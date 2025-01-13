@@ -15,6 +15,7 @@ import {
   CoreGroupOurOffices1,
   CoreGroupHeader1,
   CoreGroupHeader2,
+  CoreGroupTestimonials5,
 } from '@components/blocks';
 import { CoreGroup } from './default';
 import { hasExactClass, getVarsFromNode, getVarsFromNode2 } from '@utils/tools';
@@ -82,6 +83,11 @@ export const coreGroup = (
     return <CoreGroupHeader2 data={data} className={className} props={props} />;
   } else if (className?.includes('is-style-content-1')) {
     return coreGroupContent1(domNode, options, className, props);
+  } else if (className?.includes('is-style-testimonials-5')) {
+    const data = getVarsFromNode2(domNode);
+    return (
+      <CoreGroupTestimonials5 data={data} className={className} props={props} />
+    );
   }
 
   return (
