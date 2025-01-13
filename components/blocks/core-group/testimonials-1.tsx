@@ -1,11 +1,16 @@
-import { Alignment, Heading, HeadingAccent } from '@components/common';
+import {
+  Alignment,
+  Heading,
+  HeadingAccent,
+  Paragraph,
+} from '@components/common';
 import Container from '@components/container';
 import { BlockProps } from '@lib/types';
 import { objectMap } from '@utils/objectMap';
 import classNames from 'classnames';
 import * as Missing from '@components/global/missing';
 
-export const CoreGroupTestimonials5 = ({
+export const CoreGroupTestimonials1 = ({
   data,
   className,
   props,
@@ -41,7 +46,7 @@ export const CoreGroupTestimonials5 = ({
 
   let featuredTestimonial = data.wpBlockQuote;
   return (
-    <Alignment align="alignwide" className="wp-block-group py-20">
+    <Alignment align="wide" className="wp-block-group py-20">
       <div
         aria-hidden="true"
         className="absolute inset-x-0 top-1/2 -z-10 -translate-y-1/2 transform-gpu overflow-hidden opacity-30 blur-3xl"
@@ -81,8 +86,8 @@ export const CoreGroupTestimonials5 = ({
         </Heading>
         <div className="w-full mt-16 grid grid-cols-1 grid-rows-1 gap-8 text-sm/6 text-gray-900 sm:mt-20 sm:grid-cols-2 xl:mx-0 xl:max-w-none xl:grid-flow-col xl:grid-cols-4">
           <figure className="rounded-2xl bg-white shadow-lg ring-1 ring-gray-900/5 sm:col-span-2 xl:col-start-2 xl:row-end-1">
-            <blockquote className="p-6 text-lg font-semibold tracking-tight text-gray-900 sm:p-12 sm:text-xl/8">
-              <p>{`“${featuredTestimonial.p._jsx}”`}</p>
+            <blockquote className="p-6">
+              <Paragraph as="large">{`“${featuredTestimonial.p._jsx}”`}</Paragraph>
             </blockquote>
             <figcaption className="flex flex-wrap items-center gap-x-4 gap-y-4 border-t border-gray-900/10 px-6 py-4 sm:flex-nowrap">
               <div className="flex-auto">
@@ -114,8 +119,8 @@ export const CoreGroupTestimonials5 = ({
                       key={testimonial.p_2._text}
                       className="rounded-2xl bg-white p-6 shadow-lg ring-1 ring-gray-900/5 w-full"
                     >
-                      <blockquote className="text-gray-900">
-                        <p>{`“${testimonial.p._text}”`}</p>
+                      <blockquote className="">
+                        <Paragraph>{`“${testimonial.p._text}”`}</Paragraph>
                       </blockquote>
                       <figcaption className="mt-6 flex items-center gap-x-4">
                         <div>
