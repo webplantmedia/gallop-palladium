@@ -3,7 +3,7 @@ import ArrowInsertIcon from '@iconify/icons-material-symbols/arrow-insert';
 import { BlockProps } from '@lib/types';
 import classNames from 'classnames';
 import { AnimatedNumber } from '@components/widgets/animated-number';
-import { extractMilestone } from '@utils/tools';
+import { extractMilestone, getFontSize } from '@utils/tools';
 import * as Missing from '@components/global/missing';
 import {
   Alignment,
@@ -67,7 +67,12 @@ export const CoreCoverCard1 = ({ data, className }: any) => {
     >
       <BackgroundMedia wpBlockCover={data} grayscale={true} />
       <Overlay className={classNames('transition-all', selectedBgClass)} />
-      <Heading className="!mt-0 !text-4xl text-white break-word" as="h2">
+      <Heading
+        className={`!mt-0 !text-3xl xl:!text-4xl text-white break-word ${getFontSize(
+          h2
+        )}`}
+        as="h2"
+      >
         {h2}
       </Heading>
       <span className="text-white opacity-0 translate-y-5 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-200 ease-out flex items-center gap-1">
