@@ -7,6 +7,7 @@ export const CoreGroupContact2 = ({ data, className, props }: BlockProps) => {
   let h2 = data?.h2?._jsx || Missing.H2();
   let p = data?.p?._jsx || Missing.Paragraph();
   let quote = data?.wpBlockQuote || Missing.Quote();
+  console.log(data);
 
   return (
     <Alignment as="div" align="wide" className="mt-24 sm:mt-32">
@@ -15,102 +16,42 @@ export const CoreGroupContact2 = ({ data, className, props }: BlockProps) => {
           <div className="grid grid-cols-1 gap-10 lg:grid-cols-3">
             <div>
               <Heading as="h2" className="!mt-0">
-                Get in touch
+                {h2}
               </Heading>
-              <Paragraph className="">
-                Quam nunc nunc eu sed. Sed rhoncus quis ultricies ac
-                pellentesque.
-              </Paragraph>
+              <Paragraph className="">{p}</Paragraph>
             </div>
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:col-span-2 lg:gap-8">
-              <div className="rounded-2xl bg-gray-50 p-10">
-                <h3 className="text-base/7 font-semibold text-gray-900">
-                  Collaborate
-                </h3>
-                <dl className="mt-3 space-y-1 text-sm/6 text-gray-600">
-                  <div>
-                    <dt className="sr-only">Email</dt>
-                    <dd>
-                      <a
-                        href="mailto:collaborate@example.com"
-                        className="font-semibold text-indigo-600"
+              {data &&
+                objectMap(data, (key, item, index) => {
+                  if (!key.includes('wpBlockGroup')) {
+                    return;
+                  }
+                  const h3 = item?.h3?._jsx || Missing.H3();
+                  const linkText = item?.p?.a?._text || Missing.Link();
+                  const href = item?.p?.a?._href || null;
+                  return (
+                    <a
+                      href={href}
+                      key={`contact-${index}`}
+                      className="rounded-2xl bg-gray-50 p-10 group hover:bg-gray-100"
+                    >
+                      <Heading
+                        as="h3"
+                        className="text-base/7 font-semibold text-gray-900"
                       >
-                        collaborate@example.com
-                      </a>
-                    </dd>
-                  </div>
-                  <div className="mt-1">
-                    <dt className="sr-only">Phone number</dt>
-                    <dd>+1 (555) 905-2345</dd>
-                  </div>
-                </dl>
-              </div>
-              <div className="rounded-2xl bg-gray-50 p-10">
-                <h3 className="text-base/7 font-semibold text-gray-900">
-                  Press
-                </h3>
-                <dl className="mt-3 space-y-1 text-sm/6 text-gray-600">
-                  <div>
-                    <dt className="sr-only">Email</dt>
-                    <dd>
-                      <a
-                        href="mailto:press@example.com"
-                        className="font-semibold text-indigo-600"
-                      >
-                        press@example.com
-                      </a>
-                    </dd>
-                  </div>
-                  <div className="mt-1">
-                    <dt className="sr-only">Phone number</dt>
-                    <dd>+1 (555) 905-3456</dd>
-                  </div>
-                </dl>
-              </div>
-              <div className="rounded-2xl bg-gray-50 p-10">
-                <h3 className="text-base/7 font-semibold text-gray-900">
-                  Join our team
-                </h3>
-                <dl className="mt-3 space-y-1 text-sm/6 text-gray-600">
-                  <div>
-                    <dt className="sr-only">Email</dt>
-                    <dd>
-                      <a
-                        href="mailto:careers@example.com"
-                        className="font-semibold text-indigo-600"
-                      >
-                        careers@example.com
-                      </a>
-                    </dd>
-                  </div>
-                  <div className="mt-1">
-                    <dt className="sr-only">Phone number</dt>
-                    <dd>+1 (555) 905-4567</dd>
-                  </div>
-                </dl>
-              </div>
-              <div className="rounded-2xl bg-gray-50 p-10">
-                <h3 className="text-base/7 font-semibold text-gray-900">
-                  Say hello
-                </h3>
-                <dl className="mt-3 space-y-1 text-sm/6 text-gray-600">
-                  <div>
-                    <dt className="sr-only">Email</dt>
-                    <dd>
-                      <a
-                        href="mailto:hello@example.com"
-                        className="font-semibold text-indigo-600"
-                      >
-                        hello@example.com
-                      </a>
-                    </dd>
-                  </div>
-                  <div className="mt-1">
-                    <dt className="sr-only">Phone number</dt>
-                    <dd>+1 (555) 905-5678</dd>
-                  </div>
-                </dl>
-              </div>
+                        {h3}
+                      </Heading>
+                      <dl className="mt-3 space-y-1 text-sm/6 text-gray-600">
+                        <div>
+                          <dt className="sr-only">{h3}</dt>
+                          <dd className="font-semibold text-accent">
+                            {linkText}
+                          </dd>
+                        </div>
+                      </dl>
+                    </a>
+                  );
+                })}
             </div>
           </div>
         </div>

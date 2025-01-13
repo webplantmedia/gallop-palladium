@@ -3,6 +3,9 @@ import QuoteIcon from '@iconify/icons-icon-park-outline/quote';
 import classNames from 'classnames';
 import { Heading, Paragraph as Pa, QuoteCitation } from '@components/common';
 
+export function Link() {
+  return <span className="text-red-500 font-bold">*Missing link</span>;
+}
 export function Paragraph() {
   return <span className="text-red-500 font-bold">*Missing paragraph</span>;
 }
