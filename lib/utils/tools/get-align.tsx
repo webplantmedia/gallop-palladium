@@ -21,6 +21,17 @@ export function getAlign(
     align = 'full';
   }
 
+  if (className?.includes('is-content-justification-center')) {
+    justify = 'justify-center';
+    textAlign = 'text-center';
+  } else if (className?.includes('is-content-justification-left')) {
+    justify = 'justify-start';
+    textAlign = 'text-left';
+  } else if (className?.includes('is-content-justification-right')) {
+    justify = 'justify-end';
+    textAlign = 'text-right';
+  }
+
   if (className?.includes('has-text-align-center')) {
     justify = 'justify-center';
     textAlign = 'text-center';

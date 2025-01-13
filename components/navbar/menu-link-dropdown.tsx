@@ -50,8 +50,8 @@ export default function MenuLinkDropdown({
                 <div
                   className={classNames(
                     isScrolling
-                      ? 'max-h-[calc(var(--app-height)-theme(space.28))] grid-cols-3'
-                      : 'max-h-[calc(var(--app-height)-theme(space.48))] grid-cols-3',
+                      ? 'max-h-[calc(100vh-theme(space.36))] grid-cols-3'
+                      : 'max-h-[calc(100vh-theme(space.64))] grid-cols-3',
                     'px-4 pb-4 pt-4 overflow-hidden overflow-y-auto scrollbar-hide grid gap-2 shadow-inner'
                   )}
                 >

@@ -12,6 +12,7 @@ import {
   CoreCoverBackground1,
   CoreCover,
   CoreCoverHeader1,
+  CoreCoverCard1,
   CoreHeading,
   CoreParagraph,
 } from '@components/blocks';
@@ -119,6 +120,9 @@ export const coreCover = (
   } else if (className?.includes('is-style-testimonials-1')) {
     const data = getVarsFromNode2(domNode);
     return <CoreCoverTestimonials1 data={data} className={className} />;
+  } else if (className?.includes('is-style-card-1')) {
+    const data = getVarsFromNode2(domNode);
+    return <CoreCoverCard1 data={data} className={className} />;
   } else if (className?.includes('is-style-header-1')) {
     const data = getVarsFromNode2(domNode);
     return <CoreCoverHeader1 data={data} className={className} />;

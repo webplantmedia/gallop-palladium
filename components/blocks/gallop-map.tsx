@@ -1,6 +1,6 @@
 import { BlockProps } from '@lib/types';
 import { GallopMapClient } from './gallop-map-client';
-import { tailwindGetAlignClasses } from '@utils/tools';
+import { tailwindGetAlignClasses, getVarsFromNode2 } from '@utils/tools';
 import classNames from 'classnames';
 import { ReactElement, isValidElement } from 'react';
 import {
@@ -11,104 +11,46 @@ import {
 } from 'html-react-parser';
 import { tailwindAlignClasses, getDomNodeText } from '@utils/tools';
 import { HTMLAttributeProps } from '@lib/types';
-import { castToHTMLAttributeProps } from '@utils/tools';
+import { castToHTMLAttributeProps, getAlign } from '@utils/tools';
+import { Alignment } from '@components/common';
 
 export const gallopMap = (
   domNode: Element,
   options: HTMLReactParserOptions,
-  className: string
+  className: string,
+  props: HTMLAttributeProps
 ) => {
-  let address: string = '';
-  let heading: ReactElement | null = null;
-  let description: ReactElement | null = null;
-  let image: ReactElement | null = null;
+  const data = getVarsFromNode2(domNode);
 
-  const op: HTMLReactParserOptions = {
-    replace(domNode) {
-      if (domNode instanceof Element && domNode.attribs) {
-        const props: HTMLAttributeProps = castToHTMLAttributeProps(
-          domNode.attribs
-        );
-        let { className } = props;
-
-        if (domNode.name === 'p') {
-          const content = domToReact(domNode?.children as DOMNode[], options);
-          description = <p className="text-xs">{content}</p>;
-          return <></>;
-        } else if (domNode.name === 'img') {
-          const content = (
-            <img
-              className={classNames(
-                props.className,
-                '!mb-0 !max-w-full aspect-4/3 object-cover object-center'
-              )}
-              loading="lazy"
-              src={props.src}
-              style={props.style}
-              width={parseInt(props.width)}
-              height={parseInt(props.height)}
-              srcSet={props.srcSet}
-              // sizes={props.sizes}
-              alt={props.alt}
-              title={props.title}
-            />
-          );
-          if (isValidElement(content)) {
-            image = content;
-          }
-        } else if (domNode.name === 'h2') {
-          const content = domToReact(domNode?.children as DOMNode[], options);
-          heading = (
-            <h3 className="text-base-contrast text-sm font-bold leading-snug mb-1">
-              {content}
-            </h3>
-          );
-          return <></>;
-        } else if (domNode.name === 'h3') {
-          address = getDomNodeText(domNode);
-          return <></>;
-        }
-      }
-    },
-  };
-
-  domToReact(domNode?.children as DOMNode[], op);
-
-  return (
-    <GallopMap
-      address={address}
-      heading={heading}
-      description={description}
-      image={image}
-      className={className}
-    />
-  );
+  return <GallopMap data={data} className={className} props={props} />;
 };
+
 export const GallopMap = ({
-  address,
-  heading,
-  description,
-  image,
+  data,
   className,
+  props,
 }: {
-  address: any;
-  heading: any;
-  description: any;
-  image: any;
-  className: any;
+  data: any;
+  className: string;
+  props: HTMLAttributeProps;
 }) => {
-  className = tailwindGetAlignClasses(className);
+  const { align } = getAlign(className);
+  const { dataMapZoom = 12 } = props;
+
+  const address = data?.wpBlockGroup?.h3
+    ? data.wpBlockGroup.h3._text
+    : '1611 Avenue L, Lubbock, TX 79413';
 
   return (
-    <div className={classNames('mb-0', className)}>
-      <div className="relative rounded-b-none overflow-clip w-full aspect-square lg:aspect-[16/7] h-full">
-        <GallopMapClient
-          address={address}
-          heading={heading}
-          image={image}
-          description={description}
-        />
+    <Alignment align={align} className={classNames('mb-0')}>
+      <div
+        className={classNames(
+          'relative rounded-b-none overflow-clip w-full aspect-square lg:aspect-[16/7] h-full',
+          align === 'wide' && '!rounded-2xl'
+        )}
+      >
+        <GallopMapClient data={data} address={address} mapZoom={dataMapZoom} />
       </div>
-    </div>
+    </Alignment>
   );
 };

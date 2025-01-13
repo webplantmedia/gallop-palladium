@@ -4,6 +4,7 @@ import { parseContent } from './parse-content';
 import { GalleryPopup } from '@components/lightbox/gallery-popup';
 import { captureMediaElements } from '@components/content/capture-media-elements';
 import H1 from '@components/h-1';
+import SmoothScroll from '@components/scripts/smooth-scroll';
 
 interface Props {
   post?: any;
@@ -19,19 +20,21 @@ export default function Content({ post, meta = {}, sidebarHeader }: Props) {
   ({ content, toc, hasH1 } = parseContent(post?.postContent));
 
   let article = (
-    <article className="main-content">
-      {!hasH1 && <H1 title={post?.postTitle} />}
-      {content && typeof content === 'string' && (
-        <ParseBlocks
-          content={content}
-          meta={meta}
-          sidebarHeader={sidebarHeader}
-        />
-      )}
+    <>
+      <article className="main-content">
+        {!hasH1 && <H1 title={post?.postTitle} />}
+        {content && typeof content === 'string' && (
+          <ParseBlocks
+            content={content}
+            meta={meta}
+            sidebarHeader={sidebarHeader}
+          />
+        )}
+      </article>
       <div className="fixed bottom-5 right-5 z-40 flex gap-2 !px-0">
         <EditLink meta={meta} />
       </div>
-    </article>
+    </>
   );
 
   let { slides } = captureMediaElements(content);
@@ -40,6 +43,7 @@ export default function Content({ post, meta = {}, sidebarHeader }: Props) {
     <>
       {article}
       <GalleryPopup />
+      <SmoothScroll />
     </>
   );
 }

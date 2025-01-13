@@ -92,7 +92,7 @@ export const ParseBlocks = ({
           return coreGroup(domNode, options, className, props, parentTag);
         } else if (className?.includes('wp-block-buttons')) {
           return (
-            <CoreButtons className={className}>
+            <CoreButtons className={className} parentTag={parentTag}>
               {domToReact(domNode.children as DOMNode[], options)}
             </CoreButtons>
           );
@@ -128,14 +128,14 @@ export const ParseBlocks = ({
           return coreEmbed(domNode, options, className);
         } else if (className?.includes('wp-block-gallop-swiper')) {
           return (
-            <GallopSwiper className={className}>
+            <GallopSwiper className={className} props={props}>
               {domToReact(domNode.children as DOMNode[], options)}
             </GallopSwiper>
           );
         } else if (className?.includes('wp-block-gallop-sidebar')) {
           return gallopSidebar(domNode, options, className, sidebarHeader);
         } else if (className?.includes('wp-block-gallop-map')) {
-          return gallopMap(domNode, options, className);
+          return gallopMap(domNode, options, className, props);
         } else if (className?.includes('wp-block-gallop-excerpt-post')) {
           gallopExcerptPost(domNode, options, props, className);
         } else if (className?.includes('wp-block-code')) {

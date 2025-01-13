@@ -8,7 +8,8 @@ import React from 'react';
 import { BlockProps } from '@lib/types';
 import { Container } from '@components/common';
 
-export const GallopSwiper = ({ children, className }: BlockProps) => {
+export const GallopSwiper = ({ children, className, props }: BlockProps) => {
+  const navText = props?.dataNavText ? props.dataNavText : 'Scroll for Content';
   let swiperId = 'swiper-' + useId(); // Generate a unique ID
   swiperId = swiperId.replace(/:/g, '-'); // Sanitize the ID
 
@@ -27,7 +28,7 @@ export const GallopSwiper = ({ children, className }: BlockProps) => {
               />
             </div>
             <div className="swiper-button-next text-secondary-main hover:text-secondary-light text-lg justify-end flex flex-row items-center gap-2 cursor-pointer hover:text-base-contrast/80">
-              <span>Scroll for Content</span>
+              <span>{navText}</span>
               <Iconify
                 icon={ArrowLongRightIcon}
                 className="flex-shrink-0 h-auto w-8"

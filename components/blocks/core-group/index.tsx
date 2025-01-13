@@ -2,6 +2,9 @@ import {
   CoreGroupSection1,
   CoreGroupSection2,
   CoreGroupSection3,
+  CoreGroupSection4,
+  CoreGroupContact1,
+  CoreGroupContact2,
   CoreGroupCard1,
   CoreGroupCard2,
   CoreGroupTeam1,
@@ -44,6 +47,15 @@ export const coreGroup = (
   } else if (className?.includes('is-style-section-3')) {
     const data = getVarsFromNode2(domNode);
     return <CoreGroupSection3 data={data} className={className} />;
+  } else if (className?.includes('is-style-section-4')) {
+    const data = getVarsFromNode2(domNode);
+    return <CoreGroupSection4 data={data} className={className} />;
+  } else if (className?.includes('is-style-contact-1')) {
+    const data = getVarsFromNode2(domNode);
+    return <CoreGroupContact1 data={data} className={className} />;
+  } else if (className?.includes('is-style-contact-2')) {
+    const data = getVarsFromNode2(domNode);
+    return <CoreGroupContact2 data={data} className={className} />;
   } else if (className?.includes('is-style-our-offices-1')) {
     const data = getVarsFromNode2(domNode);
     return <CoreGroupOurOffices1 data={data} className={className} />;

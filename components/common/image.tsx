@@ -20,7 +20,7 @@ export const Image = ({
   attr: Record<string, any>;
 }) => {
   attr = removeUnderscoreFromKeys(attr);
-  if (!attr) {
+  if (Object.keys(attr).length === 0) {
     attr = Missing.Image();
   }
   return (

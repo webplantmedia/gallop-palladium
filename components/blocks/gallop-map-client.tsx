@@ -15,6 +15,8 @@ import {
 } from 'react';
 import { setKey, setLocationType, fromAddress } from 'react-geocode';
 import ReactDOM from 'react-dom/client';
+import { objectMap } from '@utils/objectMap';
+import { Image } from '@components/common';
 
 setKey(process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY!);
 setLocationType('ROOFTOP');
@@ -33,9 +35,11 @@ interface MapProps {
   map?: google.maps.Map | null;
   center?: google.maps.LatLngLiteral | null;
   children?: ReactNode;
+  mapZoom?: number;
+  data?: any | null;
 }
 
-const SetPin = ({ center, map, heading, image, description }: MapProps) => {
+const SetPin = ({ center, map, data }: MapProps) => {
   const activeMarkersRef = useRef<google.maps.marker.AdvancedMarkerElement[]>(
     []
   );
@@ -47,57 +51,99 @@ const SetPin = ({ center, map, heading, image, description }: MapProps) => {
             'marker'
           )) as google.maps.MarkerLibrary;
           var areaBound = new google.maps.LatLngBounds();
+          const geocodePromises = objectMap(data, async (key, item, index) => {
+            const pinPosition = item?._className?.includes(
+              'is-style-map-pin-left'
+            )
+              ? 'left'
+              : 'right';
+            const heading = item?.h2?._jsx || null;
+            const address = item?.h3?._text || null;
+            const description = item?.p?._jsx || null;
+            const imgProps = item?.wpBlockImage?.img || null;
 
-          if (center) {
-            const info = document.createElement('div');
-            info.className = classNames(
-              'relative px-0 py-0 font-body rounded-md bg-white text-base-contrast shadow-lg',
-              'lg:translate-x-1/2 lg:translate-y-1/2 lg:[clip-path:polygon(20px_0%,100%_0%,100%_100%,20px_100%,0%_50%)] -translate-y-1/2',
-              'lg:ml-10'
-            );
-            const infoContent = document.createElement('div');
-            const infoRoot = ReactDOM.createRoot(infoContent);
-            infoRoot.render(
-              <div className="flex flex-row gap-0 items-center">
-                <div className="block grow-0 shrink-0 max-w-[180px]">
-                  {image && <>{image}</>}
-                </div>
-                <div className="block px-4 max-w-[300px]">
-                  {heading && <>{heading}</>}
-                  {description && <>{description}</>}
-                </div>
-              </div>
-            );
-            info.appendChild(infoContent);
+            if (address) {
+              try {
+                // Geocode the address to get the lat/lng
+                const { results } = await fromAddress(address);
+                const { lat, lng } = results[0].geometry.location;
 
-            const dot = document.createElement('div');
-            dot.className = classNames('translate-y-1/2');
-            const pingContent = document.createElement('div');
-            const pingRoot = ReactDOM.createRoot(pingContent);
-            pingRoot.render(
-              <span className="relative flex h-5 w-5">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-main opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-5 w-5 bg-primary-main"></span>
-              </span>
-            );
-            dot.appendChild(pingContent);
+                const position = new google.maps.LatLng(lat, lng);
+                const info = document.createElement('div');
+                info.className = classNames(
+                  'relative px-0 py-0 font-body rounded-md bg-white text-base-contrast shadow-lg overflow-hidden',
+                  pinPosition === 'right'
+                    ? 'translate-x-1/2 translate-y-1/2'
+                    : '-translate-x-1/2 translate-y-1/2',
+                  imgProps &&
+                    pinPosition === 'right' &&
+                    '[clip-path:polygon(20px_0%,100%_0%,100%_100%,20px_100%,0%_50%)] -translate-y-1/2',
+                  imgProps &&
+                    pinPosition === 'left' &&
+                    '[clip-path:polygon(calc(100%-20px)_0%,0%_0%,0%_100%,calc(100%-20px)_100%,100%_50%)] -translate-y-1/2',
+                  pinPosition === 'right' ? 'ml-10' : 'mr-10 pr-4'
+                );
+                const infoContent = document.createElement('div');
+                const infoRoot = ReactDOM.createRoot(infoContent);
+                infoRoot.render(
+                  <div className="flex flex-row gap-0 items-center">
+                    {imgProps && (
+                      <div className="block grow-0 shrink-0 max-w-[180px]">
+                        <Image
+                          attr={imgProps}
+                          className="!mb-0 !max-w-full aspect-4/3 object-cover object-center"
+                        />
+                      </div>
+                    )}
+                    <div className="block px-4 max-w-[300px]">
+                      {heading && (
+                        <h3
+                          className={classNames(
+                            'text-base-contrast text-sm font-bold leading-snug mb-1',
+                            !imgProps && 'mt-1'
+                          )}
+                        >
+                          {heading}
+                        </h3>
+                      )}
+                      {description && <p className="text-xs">{description}</p>}
+                    </div>
+                  </div>
+                );
+                info.appendChild(infoContent);
 
-            // Position the marker slightly to the right
-            let position = new google.maps.LatLng(center.lat, center.lng);
-            let mark = new AdvancedMarkerElement({
-              position: position,
-              map: map,
-              content: info,
-            });
-            let markDot = new AdvancedMarkerElement({
-              position: position,
-              map: map,
-              content: dot,
-            });
-            areaBound.extend(position);
-            activeMarkersRef.current.push(mark);
-            activeMarkersRef.current.push(markDot);
-          }
+                const dot = document.createElement('div');
+                dot.className = classNames('translate-y-1/2');
+                const pingContent = document.createElement('div');
+                const pingRoot = ReactDOM.createRoot(pingContent);
+                pingRoot.render(
+                  <span className="relative flex h-5 w-5">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-main opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-5 w-5 bg-primary-main"></span>
+                  </span>
+                );
+                dot.appendChild(pingContent);
+
+                let mark = new AdvancedMarkerElement({
+                  position: position,
+                  map: map,
+                  content: info,
+                });
+                let markDot = new AdvancedMarkerElement({
+                  position: position,
+                  map: map,
+                  content: dot,
+                });
+                areaBound.extend(position);
+                activeMarkersRef.current.push(mark);
+                activeMarkersRef.current.push(markDot);
+              } catch (error) {
+                console.error(`Error geocoding address "${address}":`, error);
+              }
+            }
+          });
+          await Promise.all(geocodePromises);
+          // map.fitBounds(areaBound, 150);
         } catch (error) {
           console.error(
             'Error loading libraries or initializing markers for homes:',
@@ -119,7 +165,7 @@ const SetPin = ({ center, map, heading, image, description }: MapProps) => {
   return null;
 };
 
-const Map = ({ children, address, heading, image, description }: MapProps) => {
+const Map = ({ data, address, children, mapZoom }: MapProps) => {
   const mapRef = useRef<any>(null);
 
   const [map, setMap] = useState<google.maps.Map | null>(null);
@@ -132,7 +178,7 @@ const Map = ({ children, address, heading, image, description }: MapProps) => {
 
       const m = new window.google.maps.Map(mapRef.current, {
         center: center,
-        zoom: 14,
+        zoom: Number(mapZoom),
         gestureHandling: 'cooperative',
         zoomControl: true,
         mapTypeControl: true,
@@ -176,9 +222,7 @@ const Map = ({ children, address, heading, image, description }: MapProps) => {
           return cloneElement(child as ReactElement<MapProps>, {
             map,
             center,
-            heading,
-            image,
-            description,
+            data,
           });
         }
         return child; // Return as is if not a valid element
@@ -187,23 +231,13 @@ const Map = ({ children, address, heading, image, description }: MapProps) => {
   );
 };
 
-export const GallopMapClient = ({
-  address,
-  heading,
-  image,
-  description,
-}: MapProps) => {
+export const GallopMapClient = ({ data, address, mapZoom }: any) => {
   return (
     <Wrapper
       apiKey={`${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}`}
       render={render}
     >
-      <Map
-        heading={heading}
-        image={image}
-        description={description}
-        address={address}
-      >
+      <Map data={data} address={address} mapZoom={mapZoom}>
         <SetPin />
       </Map>
     </Wrapper>

@@ -58,7 +58,7 @@ export default function DynamicSidebar({
           className="fixed inset-0 bg-base-darker/25 duration-500 ease-out data-[closed]:opacity-0"
         />
 
-        <div className="fixed inset-0 font-body h-[var(--app-height)] text-base max-w-[86%] md:max-w-[77%] lg:max-w-[67%] xl:max-w-[700px] w-full right-0 left-auto scroll-smooth">
+        <div className="fixed inset-0 font-body h-screen min-h-screen text-base max-w-[86%] md:max-w-[77%] lg:max-w-[67%] xl:max-w-[700px] w-full right-0 left-auto scroll-smooth">
           <div className="flex justify-end h-full">
             <DialogPanel
               transition

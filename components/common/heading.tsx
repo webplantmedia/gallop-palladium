@@ -53,7 +53,7 @@ export const Heading = ({
   }
 
   return (
-    <Component className={classNames(headingClass, className)}>
+    <Component id={id} className={classNames(headingClass, className)}>
       {children}
     </Component>
   );
