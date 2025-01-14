@@ -109,11 +109,8 @@ export async function POST(req: Request) {
     }
   );
 
-  console.log(resp);
-
   const data = await resp.text();
 
-  console.log(data);
   const response =
     data != 'Forbidden' && JSON.parse(data).id
       ? 'Messgae sent. Thank You.'

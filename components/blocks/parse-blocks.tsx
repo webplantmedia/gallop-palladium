@@ -38,15 +38,18 @@ import {
 } from '@components/blocks';
 import { HTMLAttributeProps } from '@lib/types';
 import { castToHTMLAttributeProps } from '@utils/tools';
+import Breadcrumbs from '@components/breadcrumbs';
 
 export const ParseBlocks = ({
   content,
   meta,
   sidebarHeader,
+  breadcrumbs = [],
 }: {
   content: string;
   meta: any;
   sidebarHeader: any;
+  breadcrumbs?: any;
 }) => {
   if (content === null) {
     return <></>;
@@ -144,6 +147,11 @@ export const ParseBlocks = ({
               {domToReact(domNode?.children as DOMNode[], options)}
             </CoreCode>
           );
+        } else if (
+          className?.includes('wp-block-gallop-breadcrumbs') &&
+          breadcrumbs
+        ) {
+          return <Breadcrumbs breadcrumbs={breadcrumbs} />;
         }
       }
     },

@@ -10,9 +10,15 @@ interface Props {
   post?: any;
   meta?: any;
   sidebarHeader?: any;
+  breadcrumbs?: any;
 }
 
-export default function Content({ post, meta = {}, sidebarHeader }: Props) {
+export default function Content({
+  post,
+  meta = {},
+  sidebarHeader,
+  breadcrumbs = [],
+}: Props) {
   let toc: any = [];
   let hasH1: boolean;
   let content: string;
@@ -28,6 +34,7 @@ export default function Content({ post, meta = {}, sidebarHeader }: Props) {
             content={content}
             meta={meta}
             sidebarHeader={sidebarHeader}
+            breadcrumbs={breadcrumbs}
           />
         )}
       </article>

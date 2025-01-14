@@ -7,7 +7,6 @@ export const CoreGroupContact2 = ({ data, className, props }: BlockProps) => {
   let h2 = data?.h2?._jsx || Missing.H2();
   let p = data?.p?._jsx || Missing.Paragraph();
   let quote = data?.wpBlockQuote || Missing.Quote();
-  console.log(data);
 
   return (
     <Alignment as="div" align="wide" className="mt-24 sm:mt-32">

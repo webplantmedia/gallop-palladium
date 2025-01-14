@@ -1,11 +1,35 @@
 import type { Metadata } from 'next';
 import Content from '@components/content';
 import Grid from '@components/grid';
-import { fetchPost, fetchSiteElements } from '@api';
-import { replaceWordPressUrl } from '@utils/tools';
+import {
+  fetchPost,
+  fetchSiteElements,
+  getBreadcrumbs,
+  getPagesAll,
+} from '@api';
+import { replaceWordPressUrl, replaceWordPressUrlRelative } from '@utils/tools';
 import { PageSeo } from '@components/seo/page';
 
 export const revalidate = 3600;
+
+export async function generateStaticParams() {
+  if (process.env.RUN_STATIC_PARAMS !== 'true') {
+    // If not in production, return an empty array or some default data
+    return [];
+  }
+
+  let { data } = await getPagesAll();
+  return (
+    data
+      ?.map((item: any) => {
+        const slug = replaceWordPressUrlRelative(item);
+        if (slug && slug !== '/') {
+          return { slug: slug.split('/').filter(Boolean) };
+        }
+      })
+      .filter(Boolean) || null
+  );
+}
 
 type Params = Promise<{ slug: Array<string> }>;
 
@@ -30,6 +54,14 @@ export default async function Page(props: { params: Params }) {
   const uri = `/${params.slug.join('/')}/`;
   const { post, meta } = await fetchPost(uri);
   const { sidebarHeader } = await fetchSiteElements();
+  const { data } = await getBreadcrumbs(post?.ID);
 
-  return <Content post={post} meta={meta} sidebarHeader={sidebarHeader} />;
+  return (
+    <Content
+      post={post}
+      meta={meta}
+      sidebarHeader={sidebarHeader}
+      breadcrumbs={data ? data.reverse() : []}
+    />
+  );
 }
