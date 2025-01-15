@@ -49,7 +49,7 @@ export default function Breadcrumbs({ breadcrumbs }: any) {
                         )}
                       >
                         {item?.icon && item?.icon}
-                        <span className="">{item?.post_title}</span>
+                        <span className="">{parse(item?.post_title)}</span>
                       </Link>
                     </>
                   )}
