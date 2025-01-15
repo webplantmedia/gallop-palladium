@@ -9,7 +9,7 @@ import parse from 'html-react-parser';
 import { usePopper } from 'react-popper';
 import { useState } from 'react';
 
-export default function BreadcrumbsMenu({ dropdown }: any) {
+export function BreadcrumbsMenu({ dropdown }: any) {
   let [referenceElement, setReferenceElement] =
     useState<HTMLButtonElement | null>(null);
   let [popperElement, setPopperElement] = useState<HTMLElement | null>(null);
