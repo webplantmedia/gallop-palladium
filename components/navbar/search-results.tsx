@@ -3,7 +3,10 @@ import {
   ChevronRightIcon,
   EnvelopeIcon,
 } from '@heroicons/react/20/solid';
-import { replaceProductionUrl } from '@utils/tools';
+import {
+  replaceProductionUrl,
+  replaceWordPressUrlRelative,
+} from '@utils/tools';
 import classNames from 'classnames';
 // import Image from 'next/image';
 
@@ -35,7 +38,7 @@ export default function SearchResults({ result }: Props) {
 
   return (
     <a
-      href={replaceProductionUrl(result.url)}
+      href={replaceWordPressUrlRelative(result.href)}
       className="block bg-primary-light hover:bg-primary-lighter hover:cursor-pointer"
       target={target}
     >
