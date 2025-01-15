@@ -35,10 +35,10 @@ import {
   gallopSidebar,
   GallopSwiper,
   coreEmbed,
+  GallopBreadcrumbs,
 } from '@components/blocks';
 import { HTMLAttributeProps } from '@lib/types';
 import { castToHTMLAttributeProps } from '@utils/tools';
-import Breadcrumbs from '@components/breadcrumbs';
 
 export const ParseBlocks = ({
   content,
@@ -151,7 +151,7 @@ export const ParseBlocks = ({
           className?.includes('wp-block-gallop-breadcrumbs') &&
           breadcrumbs
         ) {
-          return <Breadcrumbs breadcrumbs={breadcrumbs} />;
+          return <GallopBreadcrumbs breadcrumbs={breadcrumbs} />;
         }
       }
     },

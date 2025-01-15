@@ -3,15 +3,13 @@
 import classNames from 'classnames';
 import { Popover, PopoverPanel, PopoverButton } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
-
 import Link from 'next/link';
 import { replaceWordPressUrlRelative } from '@utils/tools';
 import parse from 'html-react-parser';
 import { usePopper } from 'react-popper';
-
 import { useState } from 'react';
 
-export default function BreadcrumbMenu({ dropdown }: any) {
+export default function BreadcrumbsMenu({ dropdown }: any) {
   let [referenceElement, setReferenceElement] =
     useState<HTMLButtonElement | null>(null);
   let [popperElement, setPopperElement] = useState<HTMLElement | null>(null);

@@ -55,3 +55,4 @@ export { CoreGroupHeader1 } from './core-group/header-1';
 export { CoreCoverHeader1 } from './core-cover/header-1';
 export { CoreGroupHeader2 } from './core-group/header-2';
 export { CoreGroupTestimonials1 } from './core-group/testimonials-1';
+export { GallopBreadcrumbs } from './gallop-breadcrumbs';
