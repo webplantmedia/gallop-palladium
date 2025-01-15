@@ -26,8 +26,7 @@ export default function BreadcrumbMenu({ dropdown }: any) {
           <PopoverButton
             ref={setReferenceElement}
             as="div"
-            href="#"
-            className="inline-flex items-center justify-center text-center rounded-r-md bg-base-darker/20 dmh:bg-modern-primary-main hover:bg-accent hover:dmh:bg-modern-primary-darker dmh:text-modern-primary-contrast hover:text-secondary-contrast ui-open:bg-accent ui-open:text-secondary-contrast pl-3 pr-3 text-base gap-2 h-full outline-none border-transparent hover:cursor-pointer"
+            className="inline-flex items-center justify-center text-center rounded-r-md bg-base-darker/20 hover:bg-accent hover:text-secondary-contrast ui-open:bg-accent ui-open:text-secondary-contrast pl-3 pr-3 text-base gap-2 h-full outline-none border-transparent hover:cursor-pointer"
           >
             <ChevronDownIcon
               className={classNames(
@@ -44,7 +43,7 @@ export default function BreadcrumbMenu({ dropdown }: any) {
             modal={false}
             style={styles.popper}
             {...attributes.popper}
-            className="z-10 bg-accent dmh:bg-modern-primary-main mt-2 absolute rounded-md py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none top-full transition data-[closed]:opacity-0 data-[enter]:duration-200 data-[leave]:duration-150 data-[enter]:ease-out data-[leave]:ease-in w-auto max-w-none left-0"
+            className="z-10 bg-accent mt-2 absolute rounded-md py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none top-full transition data-[closed]:opacity-0 data-[enter]:duration-200 data-[leave]:duration-150 data-[enter]:ease-out data-[leave]:ease-in w-auto max-w-none left-0"
           >
             {({ close }: { close: () => void }) => (
               <>
@@ -62,7 +61,7 @@ export default function BreadcrumbMenu({ dropdown }: any) {
                             ? replaceWordPressUrlRelative(item.href)
                             : '#'
                         }
-                        className="ui-active:bg-white/10 whitespace-normal md:whitespace-nowrap px-4 py-2 text-secondary-contrast dmh:text-modern-primary-contrast flex items-center justify-start hover:bg-accent-light hover:dmh:bg-modern-primary-light"
+                        className="ui-active:bg-white/10 whitespace-normal md:whitespace-nowrap px-4 py-2 text-secondary-contrast flex items-center justify-start hover:bg-accent-light "
                       >
                         {item?.icon ? (
                           <span className="w-5 flex justify-center mr-2">
