@@ -3,6 +3,13 @@ import { AnimatedNumber } from '@components/widgets/animated-number';
 import { extractMilestone } from '@utils/tools';
 import classNames from 'classnames';
 
+const renderUnit = (unit: string | null) => {
+  if (unit === '★') {
+    return <span className="text-3xl ml-2">{unit}</span>;
+  }
+  return unit;
+};
+
 export function Milestone({
   label,
   className,
@@ -32,11 +39,12 @@ export function Milestone({
           end={milestone.number}
           decimals={milestone.decimals}
         />
-        {milestone.unit}
+        {renderUnit(milestone.unit)}
       </dd>
     </div>
   );
 }
+
 export function Milestone2({
   label,
   className,
@@ -57,7 +65,7 @@ export function Milestone2({
       )}
     >
       <dt className="text-sm/6 text-base-contrast">{milestone.suffix}</dt>
-      <dd className="order-first text-6xl font-medium tracking-tight">
+      <dd className="order-first text-6xl font-medium tracking-tight flex items-center">
         <>
           {milestone.prefix}
           <AnimatedNumber
@@ -65,7 +73,7 @@ export function Milestone2({
             end={milestone.number}
             decimals={milestone.decimals}
           />
-          {milestone.unit}
+          {renderUnit(milestone.unit)}
         </>
       </dd>
     </div>
