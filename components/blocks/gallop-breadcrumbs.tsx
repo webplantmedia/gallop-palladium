@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import Link from 'next/link';
-import BreadcrumbsMenu from './gallop-breadcrumbs-client';
+import { BreadcrumbsMenu } from './gallop-breadcrumbs-client';
 import { Alignment } from '@components/common';
 import { replaceWordPressUrlRelative } from '@utils/tools';
 import parse from 'html-react-parser';
