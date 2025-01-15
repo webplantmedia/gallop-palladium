@@ -1,11 +1,11 @@
 import classNames from 'classnames';
 import Link from 'next/link';
-import BreadcrumbMenu from './breadcrumbs-menu';
-import { Alignment } from './common';
+import BreadcrumbsMenu from './gallop-breadcrumbs-client';
+import { Alignment } from '@components/common';
 import { replaceWordPressUrlRelative } from '@utils/tools';
 import parse from 'html-react-parser';
 
-export default function Breadcrumbs({ breadcrumbs }: any) {
+export function GallopBreadcrumbs({ breadcrumbs }: any) {
   const breadcrumbsLength = breadcrumbs.length;
   return (
     <Alignment align="wide" className="relative w-full wp-block-group pt-16">
@@ -66,7 +66,7 @@ export default function Breadcrumbs({ breadcrumbs }: any) {
                         {item?.icon && item?.icon}
                         <span>{parse(item?.post_title)}</span>
                       </Link>
-                      <BreadcrumbMenu dropdown={item?.children} />
+                      <BreadcrumbsMenu dropdown={item?.children} />
                     </>
                   )}
                 </div>

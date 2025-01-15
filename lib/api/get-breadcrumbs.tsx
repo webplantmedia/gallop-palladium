@@ -3,7 +3,7 @@ export async function getBreadcrumbs(id = '') {
     'Content-Type': 'application/json',
   };
 
-  const url = `${process.env.NEXT_PUBLIC_WORDPRESS_URL}/wp-json/gallop/v1/pages/`;
+  const url = `${process.env.NEXT_PUBLIC_WORDPRESS_URL}/wp-json/gallop/v1/breadcrumbs/`;
 
   const response = await fetch(url, {
     headers,

@@ -3,15 +3,13 @@
 import classNames from 'classnames';
 import { Popover, PopoverPanel, PopoverButton } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
-
 import Link from 'next/link';
 import { replaceWordPressUrlRelative } from '@utils/tools';
 import parse from 'html-react-parser';
 import { usePopper } from 'react-popper';
-
 import { useState } from 'react';
 
-export default function BreadcrumbMenu({ dropdown }: any) {
+export default function BreadcrumbsMenu({ dropdown }: any) {
   let [referenceElement, setReferenceElement] =
     useState<HTMLButtonElement | null>(null);
   let [popperElement, setPopperElement] = useState<HTMLElement | null>(null);
@@ -38,12 +36,11 @@ export default function BreadcrumbMenu({ dropdown }: any) {
           </PopoverButton>
           <PopoverPanel
             ref={setPopperElement}
-            transition
             as="div"
             modal={false}
             style={styles.popper}
             {...attributes.popper}
-            className="z-10 bg-accent mt-2 absolute rounded-md py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none top-full transition data-[closed]:opacity-0 data-[enter]:duration-200 data-[leave]:duration-150 data-[enter]:ease-out data-[leave]:ease-in w-auto max-w-none left-0"
+            className="z-10 bg-accent mt-2 absolute rounded-md py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none top-full data-[closed]:opacity-0 data-[enter]:duration-200 data-[leave]:duration-150 data-[enter]:ease-out data-[leave]:ease-in w-auto max-w-none left-0"
           >
             {({ close }: { close: () => void }) => (
               <>

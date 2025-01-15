@@ -3,7 +3,7 @@ export async function getPagesAll() {
     'Content-Type': 'application/json',
   };
 
-  const url = `${process.env.NEXT_PUBLIC_WORDPRESS_URL}/wp-json/gallop/v1/hrefs/`;
+  const url = `${process.env.NEXT_PUBLIC_WORDPRESS_URL}/wp-json/gallop/v1/pages-all/`;
 
   const response = await fetch(url, {
     headers,
