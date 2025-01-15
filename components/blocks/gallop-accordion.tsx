@@ -195,7 +195,7 @@ export const GallopAccordion = ({ node, props }: any) => {
 
   if (heading && content) {
     return (
-      <Disclosure as="div" className="w-full">
+      <Disclosure as="div" className="w-full pb-8">
         {({ open }: { open: boolean }) => (
           <>
             <DisclosureButton
