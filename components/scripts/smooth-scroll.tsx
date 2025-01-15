@@ -24,7 +24,7 @@ const SmoothScroll = () => {
 
     // Select all anchor links inside .main-content
     const links = document.querySelectorAll<HTMLAnchorElement>(
-      '.main-content a[href^="#"]'
+      '.main-content a[href^="#"]:not(.breadcrumbs-popover)'
     );
 
     // Add event listeners to these links
