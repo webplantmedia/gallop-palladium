@@ -72,7 +72,7 @@ export default function Navbar({
           <div
             className={classNames(
               isScrolling && 'hidden',
-              'relative shrink-0 pt-7 pb-1 xl:py-0 h-40'
+              'relative shrink-0 pt-8 pb-[1.5px] xl:py-0 h-40'
             )}
           >
             <div
