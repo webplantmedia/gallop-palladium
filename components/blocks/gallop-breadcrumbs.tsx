@@ -8,7 +8,7 @@ import parse from 'html-react-parser';
 export function GallopBreadcrumbs({ breadcrumbs }: any) {
   const breadcrumbsLength = breadcrumbs.length;
   return (
-    <Alignment align="wide" className="relative w-full wp-block-group pt-16">
+    <Alignment align="wide" className="relative w-full wp-block-group mt-14">
       <nav className="flex relative" aria-label="Breadcrumb">
         <ol
           role="list"
