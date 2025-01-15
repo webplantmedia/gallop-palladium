@@ -70,8 +70,8 @@ export const ParseBlocks = ({
               {domToReact(domNode.children as DOMNode[], options)}
             </CoreParagraph>
           );
-        } else if (domNode.name === 'ul') {
-          return coreList(domNode, options, className);
+        } else if (domNode.name === 'ul' || domNode.name === 'ol') {
+          return coreList(domNode, options, className, domNode.name);
         } else if (domNode.name === 'hr') {
           return <CoreSeparator props={props} />;
         } else if (className?.includes('wp-block-spacer')) {
