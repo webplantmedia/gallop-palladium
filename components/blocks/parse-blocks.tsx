@@ -151,7 +151,12 @@ export const ParseBlocks = ({
           className?.includes('wp-block-gallop-breadcrumbs') &&
           breadcrumbs
         ) {
-          return <GallopBreadcrumbs breadcrumbs={breadcrumbs} />;
+          return (
+            <GallopBreadcrumbs
+              breadcrumbs={breadcrumbs}
+              className={className}
+            />
+          );
         }
       }
     },

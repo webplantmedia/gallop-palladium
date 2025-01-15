@@ -5,10 +5,14 @@ import { Alignment } from '@components/common';
 import { replaceWordPressUrlRelative } from '@utils/tools';
 import parse from 'html-react-parser';
 
-export function GallopBreadcrumbs({ breadcrumbs }: any) {
+export function GallopBreadcrumbs({ breadcrumbs, className }: any) {
   const breadcrumbsLength = breadcrumbs.length;
+  let classNameList = 'relative w-full wp-block-group pt-16';
+  if (className.includes('is-style-bottom-spacing')) {
+    classNameList += ' mb-14';
+  }
   return (
-    <Alignment align="wide" className="relative w-full wp-block-group pt-16">
+    <Alignment align="wide" className={classNameList}>
       <nav className="flex relative" aria-label="Breadcrumb">
         <ol
           role="list"
