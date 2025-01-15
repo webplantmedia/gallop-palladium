@@ -8,10 +8,7 @@ import parse from 'html-react-parser';
 export default function Breadcrumbs({ breadcrumbs }: any) {
   const breadcrumbsLength = breadcrumbs.length;
   return (
-    <Alignment
-      align="alignwide"
-      className="relative isolate w-full wp-block-group pt-16"
-    >
+    <Alignment align="wide" className="relative w-full wp-block-group pt-16">
       <nav className="flex relative" aria-label="Breadcrumb">
         <ol
           role="list"
