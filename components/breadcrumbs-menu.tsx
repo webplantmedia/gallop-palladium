@@ -27,7 +27,7 @@ export default function BreadcrumbMenu({ dropdown }: any) {
             ref={setReferenceElement}
             as="div"
             href="#"
-            className="inline-flex items-center justify-center text-center rounded-r-md bg-base-darker/20 dmh:bg-modern-primary-main hover:bg-accent hover:dmh:bg-modern-primary-darker dmh:text-modern-primary-contrast hover:text-secondary-contrast ui-open:bg-accent ui-open:text-secondary-contrast pl-3 pr-3 text-base gap-2 h-full outline-none border-transparent  hover:cursor-pointer"
+            className="inline-flex items-center justify-center text-center rounded-r-md bg-base-darker/20 dmh:bg-modern-primary-main hover:bg-accent hover:dmh:bg-modern-primary-darker dmh:text-modern-primary-contrast hover:text-secondary-contrast ui-open:bg-accent ui-open:text-secondary-contrast pl-3 pr-3 text-base gap-2 h-full outline-none border-transparent hover:cursor-pointer"
           >
             <ChevronDownIcon
               className={classNames(

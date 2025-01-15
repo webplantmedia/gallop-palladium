@@ -53,7 +53,7 @@ export const CoreGroupSection4 = ({ data, className, props }: BlockProps) => {
   let columns = [...column1, ...column2, ...column3, ...column4, ...column5];
 
   return (
-    <Alignment align="full" className="relative isolate !-z-10">
+    <Alignment align="full" className="">
       <svg
         aria-hidden="true"
         className="absolute inset-x-0 top-0 -z-10 h-[64rem] w-full stroke-gray-200 [mask-image:radial-gradient(32rem_32rem_at_center,white,transparent)]"
@@ -98,7 +98,7 @@ export const CoreGroupSection4 = ({ data, className, props }: BlockProps) => {
       <Container as="div" width="wide" className="">
         <div className="mx-auto pb-32 pt-14 md:pt-28 lg:pt-32">
           <div className="mx-auto max-w-none gap-x-14 lg:mx-0 lg:flex lg:max-w-none lg:items-start justify-between flex flex-col">
-            <div className="relative w-full lg:max-w-2xl lg:shrink-0">
+            <div className="w-full lg:max-w-2xl lg:shrink-0">
               <Heading className="" as="h1">
                 {h1}
               </Heading>
