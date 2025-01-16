@@ -16,8 +16,7 @@ export const CoreGroupContact1 = ({ data, className, props }: BlockProps) => {
   const clearForm = (event: any) => {
     event.target.firstname.value = '';
     event.target.lastname.value = '';
-    event.target.emailaddress.value = '';
-    event.target.telnumber.value = '';
+    event.target.email.value = '';
     event.target.message.value = '';
   };
 

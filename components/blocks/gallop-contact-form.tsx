@@ -15,17 +15,6 @@ export const GallopContactForm = () => {
 };
 const GallopContactFormInner = () => {
   const [status, setStatus] = useState('');
-  const path = usePathname();
-  var search = useSearchParams().toString();
-
-  const [url, setUrl] = useState('');
-
-  useEffect(() => {
-    const fullUrl = `${window.location.origin}${path}${
-      search ? '?' + search : ''
-    }`;
-    setUrl(fullUrl);
-  }, [path, search]);
 
   const clearForm = (event: any) => {
     event.target.firstname.value = '';
@@ -44,8 +33,6 @@ const GallopContactFormInner = () => {
       email: event.target.emailaddress.value,
       phone: event.target.telnumber.value,
       message: event.target.message.value,
-      sourceUrl: url,
-      domain: getDomainFromUrl(url),
     };
 
     const response = await fetch('/api/message/', {
@@ -106,9 +93,9 @@ const GallopContactFormInner = () => {
       {status.length > 0 && (
         <p
           className={
-            status == 'Message sent. Thank You.'
-              ? 'text-[#006400] '
-              : 'text-primary-main ' + 'text-base'
+            (status == 'Message sent. Thank You.'
+              ? 'text-primary-main '
+              : 'text-[red] ') + 'text-base -mt-2 pb-2'
           }
         >
           {status}

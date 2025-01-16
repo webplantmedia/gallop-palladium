@@ -46,15 +46,16 @@ export async function POST(req: Request) {
               padding: 75px 15px;
           }
           .content {
-              max-width: 400px;
+              width: 550px;
               display: inline-block;
               text-align: left;
           }
           .logo {
               display: block;
               margin: 0 auto 20px;
-              max-width: 400px;
-              width: 90%;
+              max-width: 200px;
+              width: 100%;
+              padding-bottom: 20px;
           }
           .info {
               margin-bottom: 20px;
@@ -79,6 +80,7 @@ export async function POST(req: Request) {
   <body>
       <div class="container">
           <div class="content">
+            <img src="https://wp.tpaynelaw.com/wp-content/uploads/2025/01/Main-Logo.png" alt="Logo" class="logo" />
             <p class="info"><strong>Full Name:</strong> ${firstName} ${lastName}</p>
             <p class="info"><strong>Message:</strong> ${message}</p>
           </div>
@@ -113,7 +115,7 @@ export async function POST(req: Request) {
 
   const response =
     data != 'Forbidden' && JSON.parse(data).id
-      ? 'Messgae sent. Thank You.'
+      ? 'Message sent. Thank You.'
       : 'An error occurred.';
 
   return NextResponse.json({ message: response });
