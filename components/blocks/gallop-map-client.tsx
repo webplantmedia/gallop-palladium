@@ -86,20 +86,20 @@ const SetPin = ({ center, map, data }: MapProps) => {
                 const infoContent = document.createElement('div');
                 const infoRoot = ReactDOM.createRoot(infoContent);
                 infoRoot.render(
-                  <div className="flex flex-row gap-0 items-center">
+                  <div className="flex flex-row gap-0 items-stretch">
                     {imgProps && (
-                      <div className="block grow-0 shrink-0 max-w-[180px]">
+                      <div className="flex grow-0 shrink-0 !max-w-[180px]">
                         <Image
                           attr={imgProps}
-                          className="!mb-0 !max-w-full aspect-4/3 object-cover object-center"
+                          className="!max-w-[180px] object-cover !h-full sm:aspect-4/3"
                         />
                       </div>
                     )}
-                    <div className="block px-4 max-w-[300px]">
+                    <div className="flex flex-col max-w-[300px] px-4 my-2 sm:my-auto">
                       {heading && (
                         <h3
                           className={classNames(
-                            'text-base-contrast text-sm font-bold leading-snug mb-1',
+                            'text-base-contrast text-xs sm:text-sm font-bold leading-snug mb-1',
                             !imgProps && 'mt-1'
                           )}
                         >
