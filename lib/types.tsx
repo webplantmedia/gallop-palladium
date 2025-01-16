@@ -11,7 +11,6 @@ export interface SEOGraphImage {
   mediaItemUrl: string;
   mediaDetails: SEOGraphImageDetails;
   mediaType: string;
-  mimeType: string;
 }
 export interface SEO {
   canonical: string;
