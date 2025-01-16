@@ -145,14 +145,14 @@ export default function Search({ isScrolling, post }: any) {
                       </div>
                     </div>
                   </div>
-                  {loading && results.length > 0 && search.length > 0 && (
-                    <div
-                      className={classNames(
-                        'absolute h-full w-full bg-white z-20 opacity-25'
-                      )}
-                    ></div>
-                  )}
                   <div className="w-full block relative">
+                    {loading && results.length > 0 && search.length > 0 && (
+                      <div
+                        className={classNames(
+                          'absolute h-full w-full bg-white z-20 opacity-25'
+                        )}
+                      ></div>
+                    )}
                     {search.length > 0 &&
                       results?.map((item, index) => (
                         <SearchResults result={item} key={index} />
