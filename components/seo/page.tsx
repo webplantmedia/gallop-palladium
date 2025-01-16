@@ -3,11 +3,12 @@ import Script from 'next/script';
 // import GetBreadcrumbList from './breadcrumbs';
 import type { Metadata } from 'next';
 import { SEO } from '@lib/types';
+import parse from 'html-react-parser';
 
 export function PageSeo(seo: SEO, link: string = '', site: any) {
   var data: Metadata = {};
 
-  if (seo?.title) data.title = seo.title;
+  if (seo?.title) data.title = parse(seo.title).toString();
 
   if (seo?.metaDesc) data.description = seo.metaDesc;
 
@@ -21,7 +22,8 @@ export function PageSeo(seo: SEO, link: string = '', site: any) {
       // type: seo.opengraphType, // generates TS error event though value is article
     };
 
-    if (seo?.opengraphTitle) data.openGraph.title = seo.opengraphTitle;
+    if (seo?.opengraphTitle)
+      data.openGraph.title = parse(seo.opengraphTitle).toString();
 
     if (seo?.opengraphDescription)
       data.openGraph.description = seo.opengraphDescription;
@@ -37,10 +39,10 @@ export function PageSeo(seo: SEO, link: string = '', site: any) {
     if (seo?.opengraphModifiedTime)
       data.openGraph.modifiedTime = seo.opengraphModifiedTime;
 
-    if (seo?.opengraphSiteName) data.openGraph.siteName = seo.opengraphSiteName;
     data.openGraph.authors = [site.siteAuthor];
 
-    if (seo?.opengraphSiteName) data.openGraph.siteName = seo.opengraphSiteName;
+    if (seo?.opengraphSiteName)
+      data.openGraph.siteName = parse(seo.opengraphSiteName).toString();
 
     if (seo?.opengraphImage?.mediaItemUrl) {
       data.openGraph.images = {
