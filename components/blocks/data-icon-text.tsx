@@ -2,7 +2,7 @@ import { replaceWordPressUrlRelative } from '@utils/tools';
 import DevicePhoneMobileIcon from '@iconify/icons-heroicons/device-phone-mobile';
 import EnvelopeIcon from '@iconify/icons-heroicons/envelope';
 import ChatBubbleBottomCenterTextIcon from '@iconify/icons-heroicons/chat-bubble-bottom-center-text';
-import ChatBubbleLeft from '@iconify/icons-heroicons/chat-bubble-left';
+import PhoneChat16Regular from '@iconify/icons-fluent/phone-chat-16-regular';
 import Iconify from '@components/iconify';
 import Link from 'next/link';
 import classNames from 'classnames';
@@ -45,7 +45,7 @@ export const DataIconText = ({
       case 'icon-text':
         menuIcon = (
           <Iconify
-            icon={ChatBubbleLeft}
+            icon={PhoneChat16Regular}
             className="flex-shrink-0 h-6 w-6 mr-2"
           />
         );
