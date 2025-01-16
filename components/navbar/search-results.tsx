@@ -39,7 +39,7 @@ export default function SearchResults({ result }: Props) {
   return (
     <a
       href={replaceWordPressUrlRelative(result.href)}
-      className="block bg-primary-light hover:bg-primary-lighter hover:cursor-pointer"
+      className="block bg-grey1 hover:bg-grey2 hover:cursor-pointer text-black"
       target={target}
     >
       <div className="flex items-center px-4 py-4 sm:px-6">
@@ -58,7 +58,7 @@ export default function SearchResults({ result }: Props) {
           )}
           <div className="min-w-0 pt-2 pr-4 pb-2 flex-1">
             <h3
-              className="text-primary-main dmh:text-modern-base-contrast text-white"
+              className="text-primary-main"
               dangerouslySetInnerHTML={{ __html: result.title }}
             ></h3>
             <span
@@ -72,7 +72,10 @@ export default function SearchResults({ result }: Props) {
           </div>
         </div>
         <div>
-          <ChevronRightIcon className="h-5 w-5 text-white" aria-hidden="true" />
+          <ChevronRightIcon
+            className="h-5 w-5 text-primary-main"
+            aria-hidden="true"
+          />
         </div>
       </div>
     </a>

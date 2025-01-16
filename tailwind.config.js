@@ -112,6 +112,8 @@ module.exports = {
         'accent5-light': '#999999',
         'accent5-dark': '#999999',
         disabled: '#936f4d',
+        grey1: '#ececec',
+        grey2: '#d4d4d4',
       },
       spacing: {
         28: '7rem',
