@@ -28,9 +28,16 @@ export default function CurrentTime({
 
   // Convert date to CST/CDT
   const convertToCST = (date: Date): Date => {
-    return new Date(
-      date.toLocaleString('en-US', { timeZone: 'America/Chicago' })
-    );
+    const utcTime = date.getTime();
+    const offset = new Date()
+      .toLocaleString('en-US', { timeZone: 'America/Chicago' })
+      .includes('Daylight')
+      ? -5
+      : -6;
+
+    const cstTime = utcTime + offset * 60 * 60 * 1000;
+
+    return new Date(cstTime);
   };
 
   // Parse time strings to Date objects in CST/CDT
