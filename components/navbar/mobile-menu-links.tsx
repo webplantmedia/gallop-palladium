@@ -56,6 +56,7 @@ export default function MobileMenuLinks({
             <GallopIconText
               className="border-2 border-primary-main rounded-md px-4 py-3 text-base font-normal bg-primary-main text-primary-contrast shadow-sm hover:bg-primary-light focus:outline-none whitespace-nowrap"
               data={data}
+              closeModal={closeModal}
             />
           );
         } else if (hasExactClass(className, 'wp-block-group')) {

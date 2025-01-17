@@ -10,9 +10,11 @@ import classNames from 'classnames';
 export const GallopIconText = ({
   className,
   data,
+  closeModal,
 }: {
   className: any;
   data: any;
+  closeModal: any;
 }) => {
   const icon = data?.pre?.code?.text ? data.pre.code.text : null;
   const label = data?.p?.a?.text ? data.p.a.text : 'Label';
@@ -56,6 +58,7 @@ export const GallopIconText = ({
     <Link
       prefetch={false}
       href={replaceWordPressUrlRelative(href)}
+      onClick={closeModal}
       className={classNames(
         'flex items-center justify-start w-full',
         className

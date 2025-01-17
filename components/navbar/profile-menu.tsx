@@ -88,7 +88,7 @@ export default function ProfileMenu({
                     </div>
                   </div>
                 </div>
-                <div className="mt-6 w-full px-4 sm:px-8">
+                <div className="mt-6 w-full px-4 sm:px-8 pb-20">
                   <ProfileMenuSidebar
                     sidebar={sidebar}
                     closeModal={closeModal}
