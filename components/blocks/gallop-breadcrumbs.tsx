@@ -19,18 +19,8 @@ export function GallopBreadcrumbs({ breadcrumbs, className }: any) {
           className="flex gap-3 w-full flex-nowrap md:flex-wrap md:flex-row flex-col  md:w-auto"
         >
           {breadcrumbs.map((item: any, key: any) => {
-            const showBreadCrumb =
-              key === breadcrumbsLength - 1 ||
-              (key === 1 && key !== breadcrumbsLength);
-
             return (
-              <li
-                key={key}
-                className={classNames(
-                  'md:flex',
-                  showBreadCrumb ? 'flex' : 'hidden'
-                )}
-              >
+              <li key={key} className={classNames('flex')}>
                 <div
                   className={classNames(
                     'flex relative justify-items-stretch items-stretch shadow w-full rounded-md md:w-auto'
