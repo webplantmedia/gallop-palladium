@@ -1,4 +1,5 @@
 import { getPageSlugsAll, getPostSlugsAll } from '@api';
+import { replaceWordPressUrl2 } from '@utils/tools';
 import { MetadataRoute } from 'next';
 
 export const dynamic = 'force-static';
@@ -21,7 +22,7 @@ export default async function sitemap({
     if (Array.isArray(postSlugs)) {
       postMaps = postSlugs.map(
         async (item: { slug: string; modified: any; uri: string }) => ({
-          url: `${item.uri}`,
+          url: `${replaceWordPressUrl2(item.uri)}`,
           lastModified: new Date(item.modified),
           changeFrequency: 'daily',
         })
@@ -35,7 +36,7 @@ export default async function sitemap({
     if (Array.isArray(pageSlugs)) {
       pageMaps = pageSlugs.map(
         async (item: { slug: string; modified: any; uri: string }) => ({
-          url: `${item.uri}`,
+          url: `${replaceWordPressUrl2(item.uri)}`,
           lastModified: new Date(item.modified),
           changeFrequency: 'daily',
         })

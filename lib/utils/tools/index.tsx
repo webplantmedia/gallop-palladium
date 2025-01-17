@@ -55,3 +55,4 @@ export { extractMilestone } from './extract-milestone';
 export { getAspectRatio, getAspectRatioPadding } from './get-aspect-ratio';
 export { getAlign } from './get-align';
 export { getFontSize } from './get-font-size';
+export { replaceWordPressUrl2 } from './replace-wordpress-url-2';
