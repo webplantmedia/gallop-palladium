@@ -43,7 +43,6 @@ export default function ProfileMenu({
           onClick={openModal}
           className="flex rounded-md bg-white focus:outline-none dmh:bg-transparent"
         >
-          <span className="sr-only">About Douglas Newby</span>
           <span className="relative inline-block">
             <StickyLogo
               post={stickyLogo}
