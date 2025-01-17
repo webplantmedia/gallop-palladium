@@ -19,6 +19,7 @@ import LogoTwitter from '@iconify/icons-carbon/logo-twitter';
 import LogoInstagram from '@iconify/icons-carbon/logo-instagram';
 import LogoYouTube from '@iconify/icons-carbon/logo-youtube';
 import InstagramLogo from '@svg/instagram-logo.svg';
+import PhoneChat16Regular from '@iconify/icons-fluent/phone-chat-16-regular';
 
 import {
   HTMLReactParserOptions,
@@ -97,6 +98,14 @@ export const getGallopAccordionHeader = (node: Element) => {
                   <Iconify
                     icon={DotMarkIcon}
                     className="flex-shrink-0 h-3 w-3 text-primary-main"
+                  />
+                );
+                break;
+              case 'icon-text':
+                icon = (
+                  <Iconify
+                    icon={PhoneChat16Regular}
+                    className="flex-shrink-0 h-5 w-5 text-primary-main"
                   />
                 );
                 break;
