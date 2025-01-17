@@ -88,14 +88,14 @@ const SetPin = ({ center, map, data }: MapProps) => {
                 infoRoot.render(
                   <div className="flex flex-row gap-0 items-stretch">
                     {imgProps && (
-                      <div className="flex grow-0 shrink-0 !max-w-[180px]">
+                      <div className="flex grow-0 shrink-0 !max-w-[90px] sm:!max-w-[180px]">
                         <Image
                           attr={imgProps}
-                          className="!max-w-[180px] object-cover !h-full sm:aspect-4/3"
+                          className="!max-w-[90px] object-cover !h-full aspect-4/3 sm:!max-w-[180px]"
                         />
                       </div>
                     )}
-                    <div className="flex flex-col max-w-[300px] px-4 my-2 sm:my-auto">
+                    <div className="flex flex-col max-w-[150px] px-4 my-auto justify-center h-full py-2 sm:py-auto sm:!max-w-[300px] sm:justify-between sm:h-auto">
                       {heading && (
                         <h3
                           className={classNames(
@@ -106,7 +106,9 @@ const SetPin = ({ center, map, data }: MapProps) => {
                           {heading}
                         </h3>
                       )}
-                      {description && <p className="text-xs">{description}</p>}
+                      {description && (
+                        <p className="text-xs hidden sm:flex">{description}</p>
+                      )}
                     </div>
                   </div>
                 );
