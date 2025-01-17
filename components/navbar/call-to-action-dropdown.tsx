@@ -3,7 +3,13 @@
 import { Fragment } from 'react';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
 import classNames from 'classnames';
-import { Menu, MenuButton, MenuItems, Transition } from '@headlessui/react';
+import {
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuItems,
+  Transition,
+} from '@headlessui/react';
 import { DataIconText } from '@components/blocks';
 
 export default function CallToActionDropdown({ data }: any) {
@@ -46,11 +52,15 @@ export default function CallToActionDropdown({ data }: any) {
         >
           {obj.map((data: any, index: number) => {
             return (
-              <DataIconText
-                key={`data-icon-text-${index}`}
-                className="ui-active:bg-white/10 whitespace-nowrap px-4 py-2 text-base text-primary-contrast flex items-center hover:bg-white/10"
-                data={data}
-              />
+              <MenuItem key={`data-icon-text-${index}`}>
+                {({ close }: { close: () => void }) => (
+                  <DataIconText
+                    className="ui-active:bg-white/10 whitespace-nowrap px-4 py-2 text-base text-primary-contrast flex items-center hover:bg-white/10"
+                    data={data}
+                    onClick={close}
+                  />
+                )}
+              </MenuItem>
             );
           })}
         </MenuItems>

@@ -10,9 +10,11 @@ import classNames from 'classnames';
 export const DataIconText = ({
   className,
   data,
+  onClick,
 }: {
   className: any;
   data: any;
+  onClick: any;
 }) => {
   const icon = data?.pre?.code?.text ? data.pre.code.text : null;
   const label = data?.p?.a?.jsx ? data.p.a.jsx : 'Label';
@@ -60,6 +62,7 @@ export const DataIconText = ({
         'flex items-center justify-start w-full',
         className
       )}
+      onClick={onClick}
     >
       {menuIcon && menuIcon}
       <span>{label}</span>
