@@ -22,17 +22,7 @@ export default function SidebarAbout({ className = '' }) {
             'leading-normal'
           )}
         >
-          Douglas Newby knows the potential inventory of architecturally
-          significant homes and the nuances of neighborhoods in Highland Park
-          better than any real estate agent in Dallas. Understanding inventory
-          is more than relying on MLS or “hip pockets.” It is approaching the
-          market as if every home in Dallas is for sale. When a buyer looks for
-          a home from that perspective, they are not constrained by a random
-          slice of what is presently on the market or hoping something better
-          will magically come on the market. A traditional approach leaves
-          economics and aesthetics to chance. For decades Douglas Newby has
-          identified architecturally significant homes and helped clients select
-          neighborhoods in good locations that make them happy.{' '}
+          Placeholder text{' '}
         </span>
         <button
           onClick={handleOpen}
@@ -52,7 +42,7 @@ export default function SidebarAbout({ className = '' }) {
         href="/about/"
         className="w-full justify-center overflow-hidden inline-flex items-center border-2 border-primary-main rounded-md px-12 py-2 text-base font-normal bg-primary-main text-primary-contrast shadow-sm hover:bg-primary-light focus:outline-none whitespace-nowrap"
       >
-        <span>About Douglas Newby</span>
+        <span>Placeholder text</span>
         <ArrowRightIcon
           className="h-4 w-4 flex-none text-modern-base-body-contrast ml-2"
           aria-hidden="true"

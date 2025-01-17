@@ -82,9 +82,9 @@ export default function TableOfContents({ toc, meta }: any) {
                               <div className="w-full flex items-start justify-between">
                                 <h3 className="text-primary-main">
                                   <img
-                                    src="/dougnewby-carriage@390.png"
+                                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Placeholder_view_vector.svg/1280px-Placeholder_view_vector.svg.png"
                                     className="block w-[110px] -ml-2"
-                                    alt="Douglas Newby Origins"
+                                    alt="Placeholder text"
                                     // quality={100}
                                     width={390}
                                     height={162}

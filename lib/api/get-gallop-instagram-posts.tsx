@@ -7,7 +7,7 @@ export async function getGallopInstagramPosts() {
       query GetGallopInstagramPosts {
         posts(
           where: {
-            categoryName: "douglas-newby-insights"
+            categoryName: "<categoryName>"
             orderby: { field: DATE, order: DESC }
           }
           first: 6

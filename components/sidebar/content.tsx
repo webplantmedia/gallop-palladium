@@ -10,11 +10,11 @@ export default function Sidebar() {
     <>
       <h3 className="px-4 sm:px-8 text-primary-main small-caps mb-4">
         <Link prefetch={false} href="/about/">
-          Award-Winning Realtor
+          Placeholder text
         </Link>
         <Link prefetch={false} href="/about">
           <span className="text-base-contrast block pt-5 text-xl variant-normal ">
-            Douglas Newby
+            Placeholder text
           </span>
         </Link>
       </h3>
@@ -22,8 +22,8 @@ export default function Sidebar() {
         <Link prefetch={false} href="/about">
           <img
             className="rounded-sm mb-4"
-            alt="Award-Winning Realtor Douglas Newby"
-            src="https://architecturallysignificant.dougnewby.com/wp-content/uploads/9342/doug_Ted-750x500.jpg"
+            alt="Placeholder text"
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Placeholder_view_vector.svg/1280px-Placeholder_view_vector.svg.png"
             width={750}
             height={500}
             // quality={100}
@@ -40,7 +40,7 @@ export default function Sidebar() {
       </div>
       <div className="pb-10 px-4 sm:px-8 flex flex-col gap-y-3">
         <h3 className="text-primary-main small-caps text-lg">
-          Call Douglas Newby to See if He Should Represent You
+          Placeholder text
         </h3>
       </div>
     </>
