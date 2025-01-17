@@ -17,6 +17,7 @@ import { setKey, setLocationType, fromAddress } from 'react-geocode';
 import ReactDOM from 'react-dom/client';
 import { objectMap } from '@utils/objectMap';
 import { Image } from '@components/common';
+import { ArrowRightIcon } from '@heroicons/react/24/outline';
 
 setKey(process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY!);
 setLocationType('ROOFTOP');
@@ -52,15 +53,13 @@ const SetPin = ({ center, map, data }: MapProps) => {
           )) as google.maps.MarkerLibrary;
           var areaBound = new google.maps.LatLngBounds();
           const geocodePromises = objectMap(data, async (key, item, index) => {
-            const pinPosition = item?._className?.includes(
-              'is-style-map-pin-left'
-            )
-              ? 'left'
-              : 'right';
+            const pinPosition = item['_data-position'];
             const heading = item?.h2?._jsx || null;
             const address = item?.h3?._text || null;
             const description = item?.p?._jsx || null;
             const imgProps = item?.wpBlockImage?.img || null;
+            const anchorLink = item?.wpBlockButton?.a?._href || null;
+            const anchorText = item?.wpBlockButton?.a?._text || null;
 
             if (address) {
               try {
@@ -86,16 +85,16 @@ const SetPin = ({ center, map, data }: MapProps) => {
                 const infoContent = document.createElement('div');
                 const infoRoot = ReactDOM.createRoot(infoContent);
                 infoRoot.render(
-                  <div className="flex flex-row gap-0 items-stretch">
+                  <div className="flex flex-row gap-0 items-stretch hover:cursor-pointer">
                     {imgProps && (
-                      <div className="flex grow-0 shrink-0 !max-w-[90px] sm:!max-w-[180px]">
+                      <div className="flex grow-0 shrink-0 !max-w-[180px] sm:!max-w-[180px] !min-w-[100px]">
                         <Image
                           attr={imgProps}
-                          className="!max-w-[90px] object-cover !h-full aspect-4/3 sm:!max-w-[180px]"
+                          className="!max-w-[180px] object-cover !h-full aspect-4/3 sm:!max-w-[180px] !min-w-[100px]"
                         />
                       </div>
                     )}
-                    <div className="flex flex-col max-w-[150px] px-4 my-auto justify-center h-full py-2 sm:py-auto sm:!max-w-[300px] sm:justify-between sm:h-auto">
+                    <div className="flex flex-col px-4 my-auto justify-center h-full py-4 sm:py-auto sm:justify-between sm:h-auto !w-[300px]">
                       {heading && (
                         <h3
                           className={classNames(
@@ -107,7 +106,16 @@ const SetPin = ({ center, map, data }: MapProps) => {
                         </h3>
                       )}
                       {description && (
-                        <p className="text-xs hidden sm:flex">{description}</p>
+                        <p className="text-xs block">{description}</p>
+                      )}
+                      {anchorLink && anchorText && (
+                        <p className="text-xs flex items-center font-bold text-accent mt-2">
+                          {anchorText}
+                          <ArrowRightIcon
+                            className="h-4 w-4 flex-none text-modern-base-body-contrast ml-1"
+                            aria-hidden="true"
+                          />
+                        </p>
                       )}
                     </div>
                   </div>
@@ -131,6 +139,11 @@ const SetPin = ({ center, map, data }: MapProps) => {
                   map: map,
                   content: info,
                 });
+
+                mark.addListener('click', () => {
+                  window.location.href = anchorLink;
+                });
+
                 let markDot = new AdvancedMarkerElement({
                   position: position,
                   map: map,
