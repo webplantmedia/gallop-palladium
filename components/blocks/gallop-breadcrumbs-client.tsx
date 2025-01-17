@@ -15,6 +15,21 @@ export function BreadcrumbsMenu({ dropdown }: any) {
   let [popperElement, setPopperElement] = useState<HTMLElement | null>(null);
   let { styles, attributes } = usePopper(referenceElement, popperElement, {
     placement: 'bottom',
+    modifiers: [
+      {
+        name: 'preventOverflow',
+        options: {
+          boundary: 'clippingParents',
+          rootBoundary: 'viewport',
+        },
+      },
+      {
+        name: 'flip',
+        options: {
+          fallbackPlacements: ['bottom-start', 'bottom-end'],
+        },
+      },
+    ],
   });
 
   return (
