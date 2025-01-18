@@ -14,7 +14,7 @@ export const GallopIconText = ({
 }: {
   className: any;
   data: any;
-  closeModal: any;
+  closeModal?: any;
 }) => {
   const icon = data?.pre?.code?.text ? data.pre.code.text : null;
   const label = data?.p?.a?.text ? data.p.a.text : 'Label';
@@ -58,7 +58,7 @@ export const GallopIconText = ({
     <Link
       prefetch={false}
       href={replaceWordPressUrlRelative(href)}
-      onClick={closeModal}
+      onClick={closeModal ? closeModal : undefined}
       className={classNames(
         'flex items-center justify-start w-full',
         className
