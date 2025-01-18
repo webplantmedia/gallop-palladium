@@ -74,18 +74,23 @@ const SetPin = ({ center, map, data }: MapProps) => {
                   pinPosition === 'right'
                     ? 'translate-x-1/2 translate-y-1/2'
                     : '-translate-x-1/2 translate-y-1/2',
-                  imgProps &&
-                    pinPosition === 'right' &&
-                    '[clip-path:polygon(20px_0%,100%_0%,100%_100%,20px_100%,0%_50%)] -translate-y-1/2',
-                  imgProps &&
-                    pinPosition === 'left' &&
-                    '[clip-path:polygon(calc(100%-20px)_0%,0%_0%,0%_100%,calc(100%-20px)_100%,100%_50%)] -translate-y-1/2',
-                  pinPosition === 'right' ? 'ml-10' : 'mr-10 pr-4'
+                  // imgProps &&
+                  // pinPosition === 'right' &&
+                  // '[clip-path:polygon(20px_0%,100%_0%,100%_100%,20px_100%,0%_50%)] -translate-y-1/2',
+                  // imgProps &&
+                  // pinPosition === 'left' &&
+                  // '[clip-path:polygon(calc(100%-20px)_0%,0%_0%,0%_100%,calc(100%-20px)_100%,100%_50%)] -translate-y-1/2',
+                  pinPosition === 'right' ? 'ml-10' : 'mr-10'
                 );
                 const infoContent = document.createElement('div');
                 const infoRoot = ReactDOM.createRoot(infoContent);
                 infoRoot.render(
-                  <div className="flex flex-row gap-0 items-stretch hover:cursor-pointer">
+                  <div
+                    className={classNames(
+                      anchorLink && 'cursor-default group hover:bg-gray-100',
+                      'flex flex-row gap-0 items-stretch hover:cursor-pointer bg-white'
+                    )}
+                  >
                     {imgProps && (
                       <div className="flex grow-0 shrink-0 !max-w-[180px] sm:!max-w-[180px] !min-w-[100px]">
                         <Image
@@ -109,10 +114,10 @@ const SetPin = ({ center, map, data }: MapProps) => {
                         <p className="text-xs block">{description}</p>
                       )}
                       {anchorLink && anchorText && (
-                        <p className="text-xs flex items-center font-bold text-accent mt-2">
+                        <p className="text-xs flex items-center font-bold text-accent mt-2 group-hover:text-accent-light">
                           {anchorText}
                           <ArrowRightIcon
-                            className="h-4 w-4 flex-none text-modern-base-body-contrast ml-1"
+                            className="h-4 w-4 flex-none text-accent group-hover:text-accent-light ml-1"
                             aria-hidden="true"
                           />
                         </p>
@@ -140,9 +145,11 @@ const SetPin = ({ center, map, data }: MapProps) => {
                   content: info,
                 });
 
-                mark.addListener('click', () => {
-                  window.location.href = anchorLink;
-                });
+                if (anchorLink) {
+                  mark.addListener('click', () => {
+                    window.location.href = anchorLink;
+                  });
+                }
 
                 let markDot = new AdvancedMarkerElement({
                   position: position,
