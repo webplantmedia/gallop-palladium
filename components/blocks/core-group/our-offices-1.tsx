@@ -29,7 +29,7 @@ export const CoreGroupOurOffices1 = ({ data, className }: any) => {
               const itemP = item?.p?._jsx || Missing.Paragraph();
               const itemP2 = item?.p_2?._jsx || Missing.Paragraph();
               return (
-                <div>
+                <div key={`office-${index}`}>
                   <Heading
                     as="h3"
                     className="border-l-2 border-accent pl-6 !mb-0"
