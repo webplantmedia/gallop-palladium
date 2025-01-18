@@ -92,14 +92,14 @@ const SetPin = ({ center, map, data }: MapProps) => {
                     )}
                   >
                     {imgProps && (
-                      <div className="flex grow-0 shrink-0 !max-w-[180px] sm:!max-w-[180px] !min-w-[100px]">
+                      <div className="hidden md:flex grow-0 shrink-0 !w-[180px]">
                         <Image
                           attr={imgProps}
                           className="!max-w-[180px] object-cover !h-full aspect-4/3 sm:!max-w-[180px] !min-w-[100px]"
                         />
                       </div>
                     )}
-                    <div className="flex flex-col px-4 my-auto justify-center h-full py-4 sm:py-auto sm:justify-between sm:h-auto !w-[300px]">
+                    <div className="flex flex-col px-4 my-auto justify-center h-full py-4 sm:py-auto sm:justify-between sm:h-auto !w-[200px] md:!w-[300px]">
                       {heading && (
                         <h3
                           className={classNames(
@@ -111,10 +111,10 @@ const SetPin = ({ center, map, data }: MapProps) => {
                         </h3>
                       )}
                       {description && (
-                        <p className="text-xs block">{description}</p>
+                        <p className="text-xs hidden md:block">{description}</p>
                       )}
                       {anchorLink && anchorText && (
-                        <p className="text-xs flex items-center font-bold text-accent mt-2 group-hover:text-accent-light">
+                        <p className="text-xs flex items-center font-bold text-accent mt-0 md:mt-2 group-hover:text-accent-light">
                           {anchorText}
                           <ArrowRightIcon
                             className="h-4 w-4 flex-none text-accent group-hover:text-accent-light ml-1"
