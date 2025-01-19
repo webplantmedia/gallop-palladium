@@ -2,7 +2,6 @@ import classNames from 'classnames';
 import { hasExactClass, castToHTMLAttributeProps } from '@utils/tools';
 import { HTMLAttributeProps } from '@lib/types';
 import parse, { HTMLReactParserOptions, Element } from 'html-react-parser';
-import { getVarsFromNode } from '@utils/tools';
 
 export default function Logo({ post, className }: any) {
   let img: React.ReactElement | null = null;

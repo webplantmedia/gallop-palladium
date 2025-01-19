@@ -76,9 +76,7 @@ export default function Navbar({
             )}
           >
             <div
-              className={classNames(
-                'flex justify-center items-center sm:items-end xl:items-center h-full'
-              )}
+              className={classNames('flex justify-center items-center h-full')}
             >
               <div className="w-full sm:w-auto flex justify-center">
                 <Link prefetch={false} href="/">
