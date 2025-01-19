@@ -3,7 +3,7 @@ import { ParseBlocks } from '@components/blocks';
 import { parseContent } from './parse-content';
 import { GalleryPopup } from '@components/lightbox/gallery-popup';
 import { captureMediaElements } from '@components/content/capture-media-elements';
-import H1 from '@components/h-1';
+import { Heading } from '@components/common';
 import SmoothScroll from '@components/scripts/smooth-scroll';
 
 interface Props {
@@ -28,7 +28,7 @@ export default function Content({
   let article = (
     <>
       <article className="main-content">
-        {!hasH1 && <H1 title={post?.postTitle} />}
+        {!hasH1 && <Heading as="h1">{post?.postTitle}</Heading>}
         {content && typeof content === 'string' && (
           <ParseBlocks
             content={content}

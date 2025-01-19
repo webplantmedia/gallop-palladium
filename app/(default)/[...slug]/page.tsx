@@ -9,6 +9,7 @@ import {
 } from '@api';
 import { replaceWordPressUrl, replaceWordPressUrlRelative } from '@utils/tools';
 import { PageSeo } from '@components/seo/page';
+import { notFound, permanentRedirect } from 'next/navigation';
 
 export const revalidate = 3600;
 
@@ -19,6 +20,7 @@ export async function generateStaticParams() {
   }
 
   let { data } = await getPagesAll();
+
   return (
     data
       ?.map((item: any) => {
@@ -53,6 +55,13 @@ export default async function Page(props: { params: Params }) {
   const params = await props.params;
   const uri = `/${params.slug.join('/')}/`;
   const { post, meta } = await fetchPost(uri);
+
+  if (!post || !meta) {
+    console.log(post);
+    console.log(meta);
+    notFound();
+  }
+
   const { sidebarHeader } = await fetchSiteElements();
   const { data } = await getBreadcrumbs(post?.ID);
 

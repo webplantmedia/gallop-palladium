@@ -68,26 +68,24 @@ export default async function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en">
       <body className="font-body bg-base-body text-base" style={bodyStyle}>
-        <div className="min-h-screen">
-          <main>
-            <Container>
-              <Navbar
-                menu={menu}
-                mobileMenu={mobileMenu}
-                topMenu={topMenu}
-                callToAction={callToAction}
-                logo={logo}
-                stickyLogo={stickyLogo}
-                sidebar={sidebar}
-                sidebarHeader={sidebarHeader}
-                site={site}
-                aiChat={aiChat}
-                websiteSearch={websiteSearch}
-              />
-              <GridFull>{children}</GridFull>
-            </Container>
-          </main>
-        </div>
+        <main>
+          <Container>
+            <Navbar
+              menu={menu}
+              mobileMenu={mobileMenu}
+              topMenu={topMenu}
+              callToAction={callToAction}
+              logo={logo}
+              stickyLogo={stickyLogo}
+              sidebar={sidebar}
+              sidebarHeader={sidebarHeader}
+              site={site}
+              aiChat={aiChat}
+              websiteSearch={websiteSearch}
+            />
+            <GridFull>{children}</GridFull>
+          </Container>
+        </main>
         <Footer post={footer} />
       </body>
       {track && (
