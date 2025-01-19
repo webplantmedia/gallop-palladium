@@ -57,8 +57,6 @@ export default async function Page(props: { params: Params }) {
   const { post, meta } = await fetchPost(uri);
 
   if (!post || !meta) {
-    console.log(post);
-    console.log(meta);
     notFound();
   }
 

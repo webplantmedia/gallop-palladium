@@ -27,7 +27,7 @@ export default function Content({
 
   let article = (
     <>
-      <article className="main-content">
+      <article className="main-content [&>*:last-child:not(.alignfull)]:!mb-32">
         {!hasH1 && <Heading as="h1">{post?.postTitle}</Heading>}
         {content && typeof content === 'string' && (
           <ParseBlocks

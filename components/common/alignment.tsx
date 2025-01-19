@@ -50,7 +50,10 @@ export const Alignment = ({
   const { alignment } = getAlign(`align${align}`, defaultAlign);
 
   return (
-    <Component id={id} className={classNames(alignment, className)}>
+    <Component
+      id={id}
+      className={classNames(`align${align}`, alignment, className)}
+    >
       {children}
     </Component>
   );
