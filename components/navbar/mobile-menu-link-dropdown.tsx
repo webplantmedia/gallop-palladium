@@ -29,6 +29,7 @@ const SubMenu = ({ items, onClick }: any) => {
         className="relative flex justify-start text-left rounded-md overflow-hidden bg-base-body cursor-pointer hover:bg-white/30 dmh:bg-modern-base-card dmh:hover:bg-white/30 min-h-20"
         href={href}
         onClick={onClick}
+        scroll={true}
       >
         <div className="relative">
           {img && (

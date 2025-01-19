@@ -56,7 +56,8 @@ export const GallopIconText = ({
   }
   return (
     <Link
-      prefetch={false}
+      prefetch={true}
+      scroll={true}
       href={replaceWordPressUrlRelative(href)}
       onClick={closeModal ? closeModal : undefined}
       className={classNames(

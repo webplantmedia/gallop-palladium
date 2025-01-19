@@ -30,6 +30,7 @@ export default function MenuLinks({
           return (
             <Link
               href={href}
+              scroll={true}
               prefetch={true}
               className={classNames(
                 'inline-flex items-center border-b-2 border-transparent text-base font-normal text-base-contrast hover:border-base-contrast hover:text-base-contrast transition-all'

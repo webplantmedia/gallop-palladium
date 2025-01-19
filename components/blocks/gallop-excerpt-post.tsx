@@ -115,7 +115,7 @@ export const GallopExcerptPost = ({
   className = tailwindAlignClasses(className);
 
   let content = (
-    <Link prefetch={true} id={id} href={href} className="block">
+    <Link scroll={true} prefetch={true} id={id} href={href} className="block">
       {heading && heading}
       {figure && figure}
       {!hasTextLink && paragraph && paragraph}

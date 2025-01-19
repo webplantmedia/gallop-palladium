@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import { Alignment, Heading, Button } from '@components/common';
 
 export default function NotFound() {

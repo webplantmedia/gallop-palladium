@@ -45,7 +45,8 @@ export default function SidebarAccordion({ item }: any) {
           <Disclosure.Panel className="text-base-contrast mb-4">
             {item.children.map((child: any, key: number) => (
               <Link
-                prefetch={false}
+                scroll={true}
+                prefetch={true}
                 key={key}
                 href={child.href}
                 className={classNames(

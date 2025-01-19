@@ -54,12 +54,13 @@ export const GallopCard = ({ node, className, props, options }: any) => {
 
   return (
     <Link
-      prefetch={false}
+      prefetch={true}
       className={classNames(
         'flex flex-row gap-4 items-center w-full justify-between bg-base-card rounded-md pr-4 py-4 group mb-7 shadow-lg',
         src ? 'pl-4' : 'pl-6'
       )}
       href={href}
+      scroll={true}
     >
       {src && (
         <figure className="h-[100px] w-[100px] shrink-0">

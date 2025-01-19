@@ -129,7 +129,12 @@ export default function FooterColumns({ post }: { post: any }) {
             href = replaceWordPressUrlRelative(props.href);
           }
           return (
-            <Link prefetch={false} href={href} className="hover:underline">
+            <Link
+              scroll={true}
+              prefetch={true}
+              href={href}
+              className="hover:underline"
+            >
               {domToReact(domNode.children as DOMNode[], options)}
             </Link>
           );

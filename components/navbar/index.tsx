@@ -79,7 +79,7 @@ export default function Navbar({
               className={classNames('flex justify-center items-center h-full')}
             >
               <div className="w-full sm:w-auto flex justify-center">
-                <Link prefetch={false} href="/">
+                <Link scroll={true} prefetch={true} href="/">
                   <Logo post={logo} className="block" />
                 </Link>
               </div>

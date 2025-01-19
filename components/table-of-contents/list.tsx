@@ -52,7 +52,8 @@ export default function TableOfContentsList({
         />
       </span>
       <Link
-        prefetch={false}
+        prefetch={true}
+        scroll={true}
         id={permalink(meta.title)}
         className="hover:text-secondary-main"
         href={'#' + permalink(meta.title)}
@@ -78,7 +79,8 @@ export default function TableOfContentsList({
           />
         </span>
         <Link
-          prefetch={false}
+          scroll={true}
+          prefetch={true}
           id={id}
           onClick={handleClick}
           className="text-base-contrast hover:text-secondary-main active:text-base-contrast hover:dmh:text-modern-secondary-light"

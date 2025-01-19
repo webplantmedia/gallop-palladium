@@ -39,6 +39,8 @@ export default function SidebarAbout({ className = '' }) {
         </blockquote>
       )}
       <Link
+        prefetch={true}
+        scroll={true}
         href="/about/"
         className="w-full justify-center overflow-hidden inline-flex items-center border-2 border-primary-main rounded-md px-12 py-2 text-base font-normal bg-primary-main text-primary-contrast shadow-sm hover:bg-primary-light focus:outline-none whitespace-nowrap"
       >
