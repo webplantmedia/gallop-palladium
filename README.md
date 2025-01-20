@@ -2,7 +2,7 @@
 
 This is a production ready bootstrap website template with clear instructions, thoughtfully selected npm packages and libraries, and an easy content management. View example of a production site deployed using [GallopWP](https://nextjs.org/docs/basic-features/data-fetching/incremental-static-regeneration).
 
-## Deploy your own
+## Deploy your own.
 
 Once you have access to [the environment variables you'll need](#step-3-set-up-environment-variables), deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example)
 
