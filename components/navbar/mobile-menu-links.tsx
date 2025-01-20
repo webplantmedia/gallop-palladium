@@ -34,24 +34,22 @@ export default function MobileMenuLinks({
             ? replaceWordPressUrlRelative(data.a.href)
             : '#';
           return (
-            <>
-              <Link
-                prefetch={true}
-                href={href}
-                onClick={closeModal}
-                scroll={false}
-                className={classNames(
-                  'text-base-contrast border border-base-contrast/20 align-center inline-flex w-full justify-start rounded-md py-3 px-4 bg-base-body cursor-pointer hover:bg-white/30 items-center gap-x-2 dmh:bg-modern-base-card dmh:hover:bg-white/30'
-                )}
-              >
-                {/* Correct way to include the Iconify component */}
-                {/*<Iconify
+            <Link
+              prefetch={true}
+              href={href}
+              onClick={closeModal}
+              scroll={false}
+              className={classNames(
+                'text-base-contrast border border-base-contrast/20 align-center inline-flex w-full justify-start rounded-md py-3 px-4 bg-base-body cursor-pointer hover:bg-white/30 items-center gap-x-2 dmh:bg-modern-base-card dmh:hover:bg-white/30'
+              )}
+            >
+              {/* Correct way to include the Iconify component */}
+              {/*<Iconify
 								className="w-5 h-5 shrink-0 mr-2"
 								icon={item.icon} // Ensure `item.icon` has the correct Iconify icon identifier
 							/>*/}
-                <span>{data?.a?.text}</span>
-              </Link>
-            </>
+              <span>{data?.a?.text}</span>
+            </Link>
           );
         } else if (hasExactClass(className, 'is-style-icon-text')) {
           const data = getVarsFromNode(domNode);

@@ -24,8 +24,6 @@ export default function CallToActionDropdown({ data }: any) {
     }
   }
 
-  console.log(obj);
-
   return (
     <Menu as="div" className="relative">
       <MenuButton

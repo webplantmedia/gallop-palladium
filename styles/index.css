@@ -104,9 +104,9 @@ p {
   display: none;
 }
 
-/* .smooth-scrolling {
+.smooth-scrolling {
   -webkit-overflow-scrolling: touch;
-} */
+}
 
 /* For IE, Edge and Firefox */
 .scrollbar-hide {
