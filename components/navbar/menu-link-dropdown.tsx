@@ -67,7 +67,7 @@ export default function MenuLinkDropdown({
                     return (
                       <Link
                         prefetch={true}
-                        scroll={false}
+                        scroll={true}
                         onClick={() => {
                           close();
                         }}

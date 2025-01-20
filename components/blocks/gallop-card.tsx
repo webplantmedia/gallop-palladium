@@ -60,7 +60,7 @@ export const GallopCard = ({ node, className, props, options }: any) => {
         src ? 'pl-4' : 'pl-6'
       )}
       href={href}
-      scroll={false}
+      scroll={true}
     >
       {src && (
         <figure className="h-[100px] w-[100px] shrink-0">

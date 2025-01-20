@@ -62,7 +62,7 @@ export const coreImage = (
           return (
             <Link
               href={href2}
-              scroll={false}
+              scroll={true}
               prefetch={false}
               {...(target ? { target } : {})}
               className={classNames(
