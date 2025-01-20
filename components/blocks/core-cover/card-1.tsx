@@ -5,6 +5,7 @@ import classNames from 'classnames';
 import { AnimatedNumber } from '@components/widgets/animated-number';
 import { extractMilestone, getFontSize } from '@utils/tools';
 import * as Missing from '@components/global/missing';
+import Link from 'next/link';
 import {
   Alignment,
   Container,
@@ -58,7 +59,9 @@ export const CoreCoverCard1 = ({ data, className }: any) => {
     bgColorClass['is-style-bg-accent']; // Fallback if no match
 
   const card = (
-    <a
+    <Link
+      scroll={false}
+      prefetch={true}
       href={buttonHref}
       className={classNames(
         'relative w-full aspect-square md:aspect-[3/4] flex flex-col justify-between p-7 rounded-xl group overflow-hidden drop-shadow-2xl transition-transform duration-200 ease-out hover:-translate-y-2',
@@ -82,7 +85,7 @@ export const CoreCoverCard1 = ({ data, className }: any) => {
           className="flex-shrink-0 h-auto w-6 text-white rotate-90"
         />
       </span>
-    </a>
+    </Link>
   );
 
   return card;
