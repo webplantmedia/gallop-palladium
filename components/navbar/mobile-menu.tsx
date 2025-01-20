@@ -16,6 +16,7 @@ import { useRouter } from 'next/navigation';
 
 export default function MobileMenu({ menu }: { menu: any }) {
   let [isOpen, setIsOpen] = useState(false);
+  const htmlElement = document.documentElement;
 
   const router = useRouter();
 
@@ -35,10 +36,12 @@ export default function MobileMenu({ menu }: { menu: any }) {
   const closeModal = () => {
     setIsOpen(false);
     document.body.style.overflow = '';
+    htmlElement.classList.remove('dialog-open');
   };
 
   const openModal = () => {
     document.body.style.overflow = 'hidden';
+    htmlElement.classList.add('dialog-open');
     setIsOpen(true);
   };
 
