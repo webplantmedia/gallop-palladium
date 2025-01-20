@@ -72,24 +72,26 @@ export default async function RootLayout({ children }: RootLayoutProps) {
         className="font-body bg-base-body text-base overscroll-none scroll-auto"
         style={bodyStyle}
       >
-        <main>
-          <Container>
-            <Navbar
-              menu={menu}
-              mobileMenu={mobileMenu}
-              topMenu={topMenu}
-              callToAction={callToAction}
-              logo={logo}
-              stickyLogo={stickyLogo}
-              sidebar={sidebar}
-              sidebarHeader={sidebarHeader}
-              site={site}
-              aiChat={aiChat}
-              websiteSearch={websiteSearch}
-            />
-            <GridFull>{children}</GridFull>
-          </Container>
-        </main>
+        <div className="min-h-screen">
+          <main>
+            <Container>
+              <Navbar
+                menu={menu}
+                mobileMenu={mobileMenu}
+                topMenu={topMenu}
+                callToAction={callToAction}
+                logo={logo}
+                stickyLogo={stickyLogo}
+                sidebar={sidebar}
+                sidebarHeader={sidebarHeader}
+                site={site}
+                aiChat={aiChat}
+                websiteSearch={websiteSearch}
+              />
+              <GridFull>{children}</GridFull>
+            </Container>
+          </main>
+        </div>
         <Footer post={footer} />
       </body>
       <ScrollManager />
