@@ -30,7 +30,7 @@ export default function MobileMenu({ menu }: { menu: any }) {
       window.removeEventListener('popstate', handlePopState);
       document.body.style.overflow = ''; // Ensure cleanup
     };
-  }, []);
+  }, [router]);
 
   const closeModal = () => {
     setIsOpen(false);
