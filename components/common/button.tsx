@@ -33,7 +33,12 @@ export const Button = ({
     }
   }
   return href ? (
-    <Link href={href} className={classNames(buttonClass, className)}>
+    <Link
+      prefetch={true}
+      scroll={false}
+      href={href}
+      className={classNames(buttonClass, className)}
+    >
       {children}
     </Link>
   ) : (

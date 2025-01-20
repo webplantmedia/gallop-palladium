@@ -46,7 +46,7 @@ export const CoreGroupTestimonials1 = ({
 
   let featuredTestimonial = data.wpBlockQuote;
   return (
-    <Alignment align="wide" className="wp-block-group py-20">
+    <Alignment align="wide" className="wp-block-group pt-20 mb-20">
       <div
         aria-hidden="true"
         className="absolute inset-x-0 top-1/2 -z-10 -translate-y-1/2 transform-gpu overflow-hidden opacity-30 blur-3xl"
