@@ -19,26 +19,26 @@ export default function MobileMenu({ menu }: { menu: any }) {
 
   const router = useRouter();
 
-  useEffect(() => {
-    const handlePopState = () => {
-      document.body.style.overflow = ''; // Remove scroll lock on route change
-    };
+  // useEffect(() => {
+  //   const handlePopState = () => {
+  //     document.body.style.overflow = ''; // Remove scroll lock on route change
+  //   };
 
-    window.addEventListener('popstate', handlePopState);
+  //   window.addEventListener('popstate', handlePopState);
 
-    return () => {
-      window.removeEventListener('popstate', handlePopState);
-      document.body.style.overflow = ''; // Ensure cleanup
-    };
-  }, [router]);
+  //   return () => {
+  //     window.removeEventListener('popstate', handlePopState);
+  //     document.body.style.overflow = ''; // Ensure cleanup
+  //   };
+  // }, [router]);
 
   const closeModal = () => {
-    document.body.style.overflow = '';
+    // document.body.style.overflow = '';
     setIsOpen(false);
   };
 
   const openModal = () => {
-    document.body.style.overflow = 'hidden';
+    // document.body.style.overflow = 'hidden';
     setIsOpen(true);
   };
 
@@ -59,30 +59,22 @@ export default function MobileMenu({ menu }: { menu: any }) {
           )}
         </button>
       </div>
-      <Dialog
-        unmount={false}
-        as="div"
-        className="relative z-40"
-        onClose={closeModal}
-        open={isOpen}
-      >
-        <DialogBackdrop
+      <div className={'relative z-40' + (!isOpen ? ' hidden' : '')}>
+        {/* <DialogBackdrop
           transition
           className="fixed inset-0 bg-base-darker/25 duration-500 ease-out data-[closed]:opacity-0"
-        />
+        /> */}
 
         <div className="fixed inset-0 font-body h-screen min-h-screen text-base max-w-[86%] sm:max-w-[24rem] w-full ">
           <div className="flex justify-start h-full">
-            <DialogPanel
-              transition
+            <div
+              // transition
               className="pointer-events-auto h-full bg-base-body shadow-xl text-left align-middle overflow-hidden overflow-y-auto scrollbar-hide w-full  duration-500 ease-in-out transition data-[closed]:-translate-x-full"
             >
               <div className="px-4 sm:px-8 relative flex items-center justify-start flex-col h-full py-6">
                 <div className="w-full px-0">
                   <div className="w-full flex items-start justify-between">
-                    <DialogTitle className="text-primary-main">
-                      Menu
-                    </DialogTitle>
+                    <h2 className="text-primary-main">Menu</h2>
                     <div className="ml-3 flex h-7 items-center">
                       <button
                         type="button"
@@ -99,10 +91,10 @@ export default function MobileMenu({ menu }: { menu: any }) {
                   <MobileMenuLinks menu={menu} closeModal={closeModal} />
                 </div>
               </div>
-            </DialogPanel>
+            </div>
           </div>
         </div>
-      </Dialog>
+      </div>
     </>
   );
 }
