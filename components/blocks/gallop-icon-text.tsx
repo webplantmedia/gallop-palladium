@@ -55,9 +55,9 @@ export const GallopIconText = ({
     }
   }
   return (
-    <Link
-      prefetch={true}
-      scroll={false}
+    <a
+      // prefetch={true}
+      // scroll={false}
       href={replaceWordPressUrlRelative(href)}
       onClick={closeModal ? closeModal : undefined}
       className={classNames(
@@ -67,6 +67,6 @@ export const GallopIconText = ({
     >
       {menuIcon && menuIcon}
       <span>{label}</span>
-    </Link>
+    </a>
   );
 };
