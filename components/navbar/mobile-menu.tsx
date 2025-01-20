@@ -33,8 +33,8 @@ export default function MobileMenu({ menu }: { menu: any }) {
   }, [router]);
 
   const closeModal = () => {
-    setIsOpen(false);
     document.body.style.overflow = '';
+    setIsOpen(false);
   };
 
   const openModal = () => {
