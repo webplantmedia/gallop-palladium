@@ -6,18 +6,35 @@ import {
   DialogBackdrop,
   DialogTitle,
 } from '@headlessui/react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { state } from '@state';
 import MobileMenuLinks from './mobile-menu-links';
 import Link from 'next/link';
 import classNames from 'classnames';
+import { useRouter } from 'next/navigation';
 
 export default function MobileMenu({ menu }: { menu: any }) {
   let [isOpen, setIsOpen] = useState(false);
 
+  // useEffect(() => {
+  //   const handleRouteChange = () => {
+  //     // Remove the scroll lock when navigating to a new route
+  //     document.body.style.overflow = '';
+  //   };
+
+  //   // Listen for router navigation events
+  //   router.events?.on('routeChangeStart', handleRouteChange);
+
+  //   return () => {
+  //     // Cleanup the event listener
+  //     router.events?.off('routeChangeStart', handleRouteChange);
+  //   };
+  // }, [router]);
+
   const closeModal = () => {
     setIsOpen(false);
+    document.body.style.overflow = '';
   };
 
   const openModal = () => {
@@ -83,6 +100,7 @@ export default function MobileMenu({ menu }: { menu: any }) {
                     prefetch={true}
                     href={'/our-team/'}
                     scroll={true}
+                    onClick={closeModal}
                     className={classNames(
                       'text-base-contrast border border-base-contrast/20 align-center inline-flex w-full justify-start rounded-md py-3 px-4 bg-base-body cursor-pointer hover:bg-white/30 items-center gap-x-2 dmh:bg-modern-base-card dmh:hover:bg-white/30'
                     )}
