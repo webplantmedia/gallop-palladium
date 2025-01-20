@@ -28,16 +28,16 @@ export default function MenuLinks({
             ? replaceWordPressUrlRelative(data.a.href)
             : '#';
           return (
-            <Link
+            <a
               href={href}
-              scroll={false}
-              prefetch={true}
+              // scroll={false}
+              // prefetch={true}
               className={classNames(
                 'inline-flex items-center border-b-2 border-transparent text-base font-normal text-base-contrast hover:border-base-contrast hover:text-base-contrast transition-all'
               )}
             >
               {data?.a?.text}
-            </Link>
+            </a>
           );
         } else if (hasExactClass(className, 'wp-block-group')) {
           const data = getVarsFromNode(domNode);
