@@ -10,6 +10,8 @@ import { useState } from 'react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { state } from '@state';
 import MobileMenuLinks from './mobile-menu-links';
+import Link from 'next/link';
+import classNames from 'classnames';
 
 export default function MobileMenu({ menu }: { menu: any }) {
   let [isOpen, setIsOpen] = useState(false);
@@ -79,6 +81,21 @@ export default function MobileMenu({ menu }: { menu: any }) {
                 </div>
                 <div className="gap-x-2 mt-6 w-full flex flex-col gap-3 pb-20">
                   <MobileMenuLinks menu={menu} closeModal={closeModal} />
+                  <Link
+                    prefetch={true}
+                    href={'/our-team/'}
+                    scroll={true}
+                    className={classNames(
+                      'text-base-contrast border border-base-contrast/20 align-center inline-flex w-full justify-start rounded-md py-3 px-4 bg-base-body cursor-pointer hover:bg-white/30 items-center gap-x-2 dmh:bg-modern-base-card dmh:hover:bg-white/30'
+                    )}
+                  >
+                    {/* Correct way to include the Iconify component */}
+                    {/*<Iconify
+								className="w-5 h-5 shrink-0 mr-2"
+								icon={item.icon} // Ensure `item.icon` has the correct Iconify icon identifier
+							/>*/}
+                    <span>Label</span>
+                  </Link>
                 </div>
               </div>
             </DialogPanel>
