@@ -25,7 +25,7 @@ export const TagAnchor = ({ children, className, props }: BlockProps) => {
 
   return (
     <Link
-      scroll={true}
+      scroll={false}
       prefetch={true}
       className={classNames(className, '')}
       href={href}

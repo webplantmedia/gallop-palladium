@@ -130,7 +130,7 @@ export default function FooterColumns({ post }: { post: any }) {
           }
           return (
             <Link
-              scroll={true}
+              scroll={false}
               prefetch={true}
               href={href}
               className="hover:underline"

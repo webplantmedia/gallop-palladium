@@ -60,7 +60,7 @@ export const CoreCoverCard1 = ({ data, className }: any) => {
 
   const card = (
     <Link
-      scroll={true}
+      scroll={false}
       prefetch={true}
       href={buttonHref}
       className={classNames(

@@ -65,7 +65,7 @@ export function BreadcrumbsMenu({ dropdown }: any) {
                     replaceWordPressUrlRelative(item.href) !== '/' && (
                       <Link
                         prefetch={true}
-                        scroll={true}
+                        scroll={false}
                         onClick={() => {
                           close();
                         }}

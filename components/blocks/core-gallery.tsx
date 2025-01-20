@@ -193,7 +193,7 @@ export const coreGallery = (
             <Link
               href={href2}
               prefetch={false}
-              scroll={true}
+              scroll={false}
               {...(target ? { target } : {})}
               className={classNames(
                 'block',
