@@ -22,8 +22,6 @@ export const CoreGroupContact1 = ({ data, className, props }: BlockProps) => {
 
   const submit = async (e: any) => {
     e.preventDefault();
-    setStatus('Sending...');
-
     const formData = {
       firstName: e.target.firstname.value,
       lastName: e.target.lastname.value,
@@ -166,8 +164,7 @@ export const CoreGroupContact1 = ({ data, className, props }: BlockProps) => {
             {status.length > 0 && (
               <p
                 className={
-                  (status == 'Message sent. Thank You.' ||
-                  status == 'Sending...'
+                  (status == 'Message sent. Thank You.'
                     ? 'text-primary-main '
                     : 'text-[red] ') + 'text-base pt-2'
                 }
