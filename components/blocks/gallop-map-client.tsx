@@ -93,10 +93,10 @@ const SetPin = ({ center, map, data }: MapProps) => {
                   >
                     {imgProps && (
                       <div className="hidden md:flex grow-0 shrink-0 !w-[180px]">
-                        {/* <Image
+                        <Image
                           attr={imgProps}
                           className="!max-w-[180px] object-cover !h-full aspect-4/3 sm:!max-w-[180px] !min-w-[100px]"
-                        /> */}
+                        />
                       </div>
                     )}
                     <div className="flex flex-col px-4 my-auto justify-center h-full py-4 sm:py-auto sm:justify-between sm:h-auto !w-[200px] md:!w-[300px]">
