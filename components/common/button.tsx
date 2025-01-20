@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import { ReactNode, ElementType } from 'react';
+import Link from 'next/link';
 
 export const Button = ({
   as,
@@ -31,9 +32,11 @@ export const Button = ({
         break;
     }
   }
-  return (
-    <a href={href} className={classNames(buttonClass, className)}>
+  return href ? (
+    <Link href={href} className={classNames(buttonClass, className)}>
       {children}
-    </a>
+    </Link>
+  ) : (
+    <span className={classNames(buttonClass, className)}>{children}</span>
   );
 };
