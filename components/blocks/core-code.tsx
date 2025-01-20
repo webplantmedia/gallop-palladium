@@ -6,12 +6,12 @@ import classNames from 'classnames';
 // AGPanel,
 // StandingSeamSSQ100,
 // StandingSeamSSQ450,
-import { RPanel } from '@components/three/r-panel';
+// import { RPanel } from '@components/three/r-panel';
 
 export const CoreCode = ({ children, className }: BlockProps) => {
   const alignClass = tailwindGetAlignClasses(className);
 
-  return <RPanel />;
+  // return <RPanel />;
   /*if (className?.includes('r-panel-profile')) {
     return <RPanel />;
   } else if (className?.includes('u-panel-profile')) {
