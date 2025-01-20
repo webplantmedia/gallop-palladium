@@ -12,33 +12,33 @@ import { state } from '@state';
 import MobileMenuLinks from './mobile-menu-links';
 import Link from 'next/link';
 import classNames from 'classnames';
-import { useRouter } from 'next/navigation';
+// import { useRouter } from 'next/navigation';
 
 export default function MobileMenu({ menu }: { menu: any }) {
   let [isOpen, setIsOpen] = useState(false);
 
-  const router = useRouter();
+  // const router = useRouter();
 
-  useEffect(() => {
-    const handlePopState = () => {
-      document.body.style.overflow = ''; // Remove scroll lock on route change
-    };
+  // useEffect(() => {
+  //   const handlePopState = () => {
+  //     document.body.style.overflow = ''; // Remove scroll lock on route change
+  //   };
 
-    window.addEventListener('popstate', handlePopState);
+  //   window.addEventListener('popstate', handlePopState);
 
-    return () => {
-      window.removeEventListener('popstate', handlePopState);
-      document.body.style.overflow = ''; // Ensure cleanup
-    };
-  }, [router]);
+  //   return () => {
+  //     window.removeEventListener('popstate', handlePopState);
+  //     document.body.style.overflow = ''; // Ensure cleanup
+  //   };
+  // }, [router]);
 
   const closeModal = () => {
     setIsOpen(false);
-    document.body.style.overflow = '';
+    // document.body.style.overflow = '';
   };
 
   const openModal = () => {
-    document.body.style.overflow = 'hidden';
+    // document.body.style.overflow = 'hidden';
     setIsOpen(true);
   };
 
