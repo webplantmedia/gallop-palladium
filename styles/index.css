@@ -40,6 +40,10 @@ p {
   @apply break-words;
 }
 
+html.dialog-open body {
+  overflow: hidden;
+}
+
 /*
 .wp-block-image img {
   @apply max-w-full;
