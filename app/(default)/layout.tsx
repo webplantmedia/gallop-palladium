@@ -10,6 +10,7 @@ import { GoogleAnalytics } from '@next/third-parties/google';
 import type { Metadata } from 'next';
 import GridFull from '@components/grid-full';
 import { fetchSiteElements } from '@api/fetch-site-elements';
+import { ScrollManager } from '@components/scripts/scroll-manager';
 
 export const metadata: Metadata = {
   metadataBase: new URL(String(process.env.PRODUCTION_URL)),
@@ -67,7 +68,10 @@ export default async function RootLayout({ children }: RootLayoutProps) {
 
   return (
     <html lang="en">
-      <body className="font-body bg-base-body text-base" style={bodyStyle}>
+      <body
+        className="font-body bg-base-body text-base overscroll-none scroll-auto"
+        style={bodyStyle}
+      >
         <main>
           <Container>
             <Navbar
@@ -88,6 +92,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
         </main>
         <Footer post={footer} />
       </body>
+      <ScrollManager />
       {track && (
         <>
           <GoogleAnalytics gaId="" />

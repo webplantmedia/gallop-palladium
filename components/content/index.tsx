@@ -50,6 +50,7 @@ export default function Content({
     <>
       {article}
       <GalleryPopup />
+      <SmoothScroll />
     </>
   );
 }
