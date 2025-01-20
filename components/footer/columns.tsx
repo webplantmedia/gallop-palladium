@@ -84,7 +84,7 @@ export default function FooterColumns({ post }: { post: any }) {
           return (
             <div
               className={classNames(
-                'flex flex-col lg:flex-row items-center lg:items-center justify-center lg:justify-between [&>*]:mb-0'
+                'flex flex-col lg:flex-row items-start sm:items-center lg:items-center justify-center lg:justify-between [&>*]:mb-0'
               )}
             >
               {domToReact(domNode.children as DOMNode[], options)}
