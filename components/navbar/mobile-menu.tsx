@@ -17,12 +17,10 @@ export default function MobileMenu({ menu }: { menu: any }) {
   let [isOpen, setIsOpen] = useState(false);
 
   const closeModal = () => {
-    state.dialogOpen = false;
     setIsOpen(false);
   };
 
   const openModal = () => {
-    state.dialogOpen = true;
     setIsOpen(true);
   };
 
