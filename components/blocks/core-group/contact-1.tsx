@@ -17,6 +17,7 @@ export const CoreGroupContact1 = ({ data, className, props }: BlockProps) => {
     event.target.firstname.value = '';
     event.target.lastname.value = '';
     event.target.email.value = '';
+    event.target.phone.value = '';
     event.target.message.value = '';
   };
 
@@ -26,6 +27,7 @@ export const CoreGroupContact1 = ({ data, className, props }: BlockProps) => {
       firstName: e.target.firstname.value,
       lastName: e.target.lastname.value,
       email: e.target.email.value,
+      phone: e.target.phone.value,
       message: e.target.message.value,
     };
 
@@ -126,7 +128,7 @@ export const CoreGroupContact1 = ({ data, className, props }: BlockProps) => {
                   />
                 </div>
               </div>
-              <div className="sm:col-span-2">
+              <div>
                 <label
                   htmlFor="email"
                   className="block text-sm/6 font-semibold text-gray-900"
@@ -137,8 +139,25 @@ export const CoreGroupContact1 = ({ data, className, props }: BlockProps) => {
                   <input
                     id="email"
                     name="email"
-                    type="text"
-                    autoComplete="email-address"
+                    type="email"
+                    autoComplete="email"
+                    className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline outline-2 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-accent"
+                  />
+                </div>
+              </div>
+              <div>
+                <label
+                  htmlFor="phone"
+                  className="block text-sm/6 font-semibold text-gray-900"
+                >
+                  Phone
+                </label>
+                <div className="mt-2.5">
+                  <input
+                    id="phone"
+                    name="phone"
+                    type="tel"
+                    autoComplete="tel"
                     className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline outline-2 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-accent"
                   />
                 </div>

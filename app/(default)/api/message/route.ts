@@ -12,7 +12,7 @@ function encodeFormData(data: any) {
 }
 
 export async function POST(req: Request) {
-  const { firstName, lastName, email, message } = await req.json();
+  const { firstName, lastName, email, message, phone } = await req.json();
 
   if (!firstName || !lastName || !email || !message) {
     return new Response(JSON.stringify({ message: 'Input fields missing.' }));
@@ -82,7 +82,8 @@ export async function POST(req: Request) {
           <div class="content">
             <img src="https://wp.tpaynelaw.com/wp-content/uploads/2025/01/Main-Logo.png" alt="Logo" class="logo" />
             <p class="info"><strong>Full Name:</strong> ${firstName} ${lastName}</p>
-            <p class="info"><strong>Email:</strong> ${email}</p>
+						<p class="info"><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p>
+						<p class="info"><strong>Phone:</strong> <a href="tel:${phone}">${phone}</a></p>
             <p class="info"><strong>Message:</strong> ${message}</p>
           </div>
       </div>

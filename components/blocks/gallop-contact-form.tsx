@@ -19,20 +19,20 @@ const GallopContactFormInner = () => {
   const clearForm = (event: any) => {
     event.target.firstname.value = '';
     event.target.lastname.value = '';
-    event.target.emailaddress.value = '';
-    event.target.telnumber.value = '';
+    event.target.email.value = '';
+    event.target.phone.value = '';
     event.target.message.value = '';
   };
 
-  const handleSubmit = async (event: any) => {
-    event.preventDefault();
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
 
     const formData = {
-      firstName: event.target.firstname.value,
-      lastName: event.target.lastname.value,
-      email: event.target.emailaddress.value,
-      phone: event.target.telnumber.value,
-      message: event.target.message.value,
+      firstName: e.target.firstname.value,
+      lastName: e.target.lastname.value,
+      email: e.target.email.value,
+      phone: e.target.phone.value,
+      message: e.target.message.value,
     };
 
     const response = await fetch('/api/message/', {
@@ -44,7 +44,7 @@ const GallopContactFormInner = () => {
     const data = await response.json();
 
     if (data.message == 'Message sent. Thank You.') {
-      clearForm(event);
+      clearForm(e);
     }
 
     setStatus(data.message);
@@ -60,35 +60,39 @@ const GallopContactFormInner = () => {
         name="firstname"
         id="firstname"
         placeholder="First Name"
-        className="block text-base w-full rounded-md border-2 border-contrast3 py-3 px-5 focus:ring-primary-main text-base-contrast shadow-sm placeholder:text-base-contrast/50 dmh:border-modern-primary-main dmh:focus:outline-none dmh:focus:ring-0 dmh:focus:border-modern-secondary-main dmh:text-modern-base-contrast dmh:placeholder:text-modern-base-contrast/50 dmh:border-2"
+        autoComplete="given-name"
+        className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline outline-2 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-accent"
       />
       <input
         type="text"
         name="lastname"
         id="lastname"
         placeholder="Last Name"
-        className="block text-base w-full rounded-md border-2 border-contrast3 py-3 px-5 focus:ring-primary-main text-base-contrast shadow-sm placeholder:text-base-contrast/50 dmh:border-modern-primary-main dmh:focus:outline-none dmh:focus:ring-0 dmh:focus:border-modern-secondary-main dmh:text-modern-base-contrast dmh:placeholder:text-modern-base-contrast/50 dmh:border-2"
+        autoComplete="family-name"
+        className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline outline-2 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-accent"
       />
       <input
         type="email"
-        name="emailaddress"
+        name="email"
         placeholder="Enter your email address"
-        id="emailaddress"
-        className="block text-base w-full rounded-md border-2 border-contrast3 py-3 px-5 focus:ring-primary-main text-base-contrast shadow-sm placeholder:text-base-contrast/50 dmh:border-modern-primary-main dmh:focus:outline-none dmh:focus:ring-0 dmh:focus:border-modern-secondary-main dmh:text-modern-base-contrast dmh:placeholder:text-modern-base-contrast/50 dmh:border-2"
+        id="email"
+        autoComplete="email"
+        className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline outline-2 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-accent"
       />
       <input
         type="tel"
-        name="telnumber"
+        name="phone"
         placeholder="Enter your phone number"
-        id="telnumber"
-        className="block text-base w-full rounded-md border-2 border-contrast3 py-3 px-5 focus:ring-primary-main text-base-contrast shadow-sm placeholder:text-base-contrast/50 dmh:border-modern-primary-main dmh:focus:outline-none dmh:focus:ring-0 dmh:focus:border-modern-secondary-main dmh:text-modern-base-contrast dmh:placeholder:text-modern-base-contrast/50 dmh:border-2"
+        id="phone"
+        autoComplete="tel"
+        className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline outline-2 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-accent"
       />
       <textarea
         name="message"
         placeholder="Enter your message"
         id="message"
-        rows={7}
-        className="block text-base w-full rounded-md border-2 border-contrast3 py-3 px-5 focus:ring-primary-main text-base-contrast shadow-sm placeholder:text-base-contrast/50 dmh:border-modern-primary-main dmh:focus:outline-none dmh:focus:ring-0 dmh:focus:border-modern-secondary-main dmh:text-modern-base-contrast dmh:placeholder:text-modern-base-contrast/50 dmh:border-2"
+        rows={4}
+        className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline outline-2 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-accent"
       />
       {status.length > 0 && (
         <p
@@ -103,7 +107,7 @@ const GallopContactFormInner = () => {
       )}
       <button
         type="submit"
-        className="shrink-0 w-full text-center rounded-md shadow-sm flex items-center justify-center text-base py-3 px-5 bg-secondary-main text-secondary-contrast hover:bg-secondary-light dmh:bg-modern-primary-main dmh:text-modern-primary-contrast dmh:hover:bg-modern-primary-light"
+        className="block w-full rounded-md bg-accent px-3.5 py-2.5 text-center text-base font-normal text-white shadow-sm hover:bg-accent-light focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
       >
         Message
       </button>
