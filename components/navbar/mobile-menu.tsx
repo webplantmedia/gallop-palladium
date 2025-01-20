@@ -33,11 +33,13 @@ export default function MobileMenu({ menu }: { menu: any }) {
   // }, [router]);
 
   const closeModal = () => {
-    setIsOpen(false);
+    state.dialogOpen = false;
     // document.body.style.overflow = '';
+    setIsOpen(false);
   };
 
   const openModal = () => {
+    state.dialogOpen = true;
     // document.body.style.overflow = 'hidden';
     setIsOpen(true);
   };
