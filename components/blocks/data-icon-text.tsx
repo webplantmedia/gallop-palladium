@@ -18,7 +18,7 @@ export const DataIconText = ({
 }) => {
   const icon = data?.pre?.code?.text ? data.pre.code.text : null;
   const label = data?.p?.a?.jsx ? data.p.a.jsx : 'Label';
-  const href = data?.p?.a?.href ? data.p.a.href : '#';
+  const href = data?.p?.a?.href ? data.p.a.href : '/our-team/';
 
   let menuIcon = <></>;
   if (icon) {

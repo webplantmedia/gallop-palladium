@@ -24,6 +24,8 @@ export default function CallToActionDropdown({ data }: any) {
     }
   }
 
+  console.log(obj);
+
   return (
     <Menu as="div" className="relative">
       <MenuButton
@@ -63,6 +65,15 @@ export default function CallToActionDropdown({ data }: any) {
               </MenuItem>
             );
           })}
+          <MenuItem key={`data-icon-text--1`}>
+            {({ close }: { close: () => void }) => (
+              <DataIconText
+                className="ui-active:bg-white/10 whitespace-nowrap px-4 py-2 text-base text-primary-contrast flex items-center hover:bg-white/10"
+                data={data}
+                onClick={close}
+              />
+            )}
+          </MenuItem>
         </MenuItems>
       </Transition>
     </Menu>
