@@ -2,6 +2,12 @@ import classNames from 'classnames';
 import { BlockProps } from '@lib/types';
 import { getAlign } from '@utils/tools';
 import { Heading, HeadingAccent } from '@components/common';
+import { HeadingElements } from '@lib/types';
+
+type CoreHeadingProps = BlockProps & {
+  tag?: HeadingElements;
+  parentTag?: string;
+};
 
 export const CoreHeading = ({
   children,
@@ -9,19 +15,17 @@ export const CoreHeading = ({
   className = '',
   props,
   parentTag = undefined,
-}: BlockProps) => {
+}: CoreHeadingProps) => {
   let inStyle = tag;
 
   const { id } = props ?? {};
-  let Tag: keyof JSX.IntrinsicElements = tag as keyof JSX.IntrinsicElements;
-
   const defaultAlign = parentTag ? 'none' : 'content';
   const { alignment, justify, textAlign } = getAlign(className, defaultAlign);
 
   if (className?.includes('is-style-accent-title')) {
     return (
       <HeadingAccent
-        as={Tag}
+        as={tag}
         key={id}
         id={id}
         className={classNames(className, alignment, justify)}
@@ -43,7 +47,7 @@ export const CoreHeading = ({
 
   return (
     <Heading
-      as={Tag}
+      as={tag}
       key={id}
       id={id}
       inStyle={inStyle}

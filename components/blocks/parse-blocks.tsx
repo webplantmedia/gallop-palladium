@@ -37,7 +37,11 @@ import {
   coreEmbed,
   GallopBreadcrumbs,
 } from '@components/blocks';
-import { HTMLAttributeProps } from '@lib/types';
+import {
+  HTMLAttributeProps,
+  HeadingElements,
+  ValidHeadingElements,
+} from '@lib/types';
 import { castToHTMLAttributeProps } from '@utils/tools';
 
 export const ParseBlocks = ({
@@ -81,16 +85,18 @@ export const ParseBlocks = ({
         } else if (className?.includes('is-style-milestone')) {
           return gallopMilestone(domNode, className);
         } else if (className?.includes('wp-block-heading')) {
-          return (
-            <CoreHeading
-              tag={domNode.name}
-              className={className}
-              props={props}
-              parentTag={parentTag}
-            >
-              {domToReact(domNode.children as DOMNode[], options)}
-            </CoreHeading>
-          );
+          if (ValidHeadingElements.includes(domNode.name as HeadingElements)) {
+            return (
+              <CoreHeading
+                tag={domNode.name as HeadingElements}
+                className={className}
+                props={props}
+                parentTag={parentTag}
+              >
+                {domToReact(domNode.children as DOMNode[], options)}
+              </CoreHeading>
+            );
+          }
         } else if (hasExactClass(className, 'wp-block-group')) {
           return coreGroup(domNode, options, className, props, parentTag);
         } else if (className?.includes('wp-block-buttons')) {

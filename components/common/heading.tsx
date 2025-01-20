@@ -2,6 +2,16 @@ import classNames from 'classnames';
 import { ReactNode } from 'react';
 import Iconify from '@components/iconify';
 import ArrowInsertIcon from '@iconify/icons-material-symbols/arrow-insert';
+import { HeadingElements, HeadingAccentElements } from '@lib/types';
+
+type HeadingProps = {
+  as?: HeadingElements;
+  inStyle?: HeadingElements;
+  outline?: boolean;
+  children: ReactNode;
+  id?: string;
+  className?: string;
+};
 
 export const Heading = ({
   as: Component = 'h2',
@@ -10,18 +20,11 @@ export const Heading = ({
   children,
   id,
   className,
-}: {
-  as?: keyof JSX.IntrinsicElements;
-  inStyle?: string;
-  outline?: boolean;
-  children: ReactNode;
-  id?: string;
-  className?: string;
-}) => {
-  let headingClass: string = '';
+}: HeadingProps) => {
+  let headingClass = '';
 
   if (!inStyle) {
-    inStyle = String(Component);
+    inStyle = Component;
   }
 
   switch (inStyle) {
@@ -59,33 +62,39 @@ export const Heading = ({
   );
 };
 
-export const HeadingAccent = ({
-  as: Component = 'h2',
-  children,
-  size,
-  id,
-  className,
-  icon = true,
-}: {
-  as?: keyof JSX.IntrinsicElements;
+type HeadingAccentProps = {
+  as?: HeadingAccentElements;
   children: ReactNode;
-  size?: string;
+  size?: 'large' | 'small' | 'default';
   id?: string;
   className?: string;
   icon?: boolean;
-}) => {
+};
+
+export const HeadingAccent = ({
+  as: Component = 'h2',
+  children,
+  size = 'default',
+  id,
+  className,
+  icon = true,
+}: HeadingAccentProps) => {
   let sizeClass = '';
+
   if (size === 'large') {
-    sizeClass = 'text-2xl tracking-[0.3em] ';
+    sizeClass = 'text-2xl tracking-[0.3em]';
+  } else if (size === 'small') {
+    sizeClass = 'text-sm tracking-[0.1em]';
   }
+
   return (
     <Component
+      id={id}
       className={classNames(
         '!leading-tight text-xl uppercase tracking-[0.1em] text-primary-main mb-7 font-accent font-normal flex items-center [&+h2]:!mt-0 [&+h3]:!mt-0',
         className,
         sizeClass
       )}
-      id={id}
     >
       {children}
       {icon && (

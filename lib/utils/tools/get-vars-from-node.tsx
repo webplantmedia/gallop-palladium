@@ -1,4 +1,4 @@
-import React, { ReactNode, ReactElement } from 'react';
+import React, { ReactNode, ReactElement, Children } from 'react';
 
 import {
   domToReact,
@@ -78,25 +78,18 @@ export function getVarsFromNode(node: any): Record<string, any> {
   };
 
   function getTextFromJSX(jsx: ReactNode): string {
-    // If it's a string, return it
     if (typeof jsx === 'string') {
       return jsx;
     }
-
-    // If it's a React element, process its children recursively
     if (React.isValidElement(jsx)) {
-      const element = jsx as ReactElement;
-      return React.Children.toArray(element.props.children)
-        .map(getTextFromJSX) // Recursively get text from children
-        .join(''); // Join the text content
+      const element = jsx as ReactElement<{ children?: ReactNode }>; // Explicitly define props type
+      return Children.toArray(element.props?.children)
+        .map(getTextFromJSX)
+        .join('');
     }
-
-    // If it's an object (like nested JSX), process it recursively
     if (Array.isArray(jsx)) {
-      return jsx.map(getTextFromJSX).join(''); // Handle arrays of children
+      return jsx.map(getTextFromJSX).join('');
     }
-
-    // Return an empty string for other non-text elements
     return '';
   }
 

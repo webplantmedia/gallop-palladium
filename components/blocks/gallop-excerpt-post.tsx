@@ -11,7 +11,7 @@ import {
   replaceWordPressUrlRelative,
   tailwindAlignClasses,
 } from '@utils/tools';
-import { BlockProps } from '@lib/types';
+import { BlockProps, HeadingElements, ValidHeadingElements } from '@lib/types';
 import { HTMLAttributeProps } from '@lib/types';
 import { castToHTMLAttributeProps } from '@utils/tools';
 import {
@@ -53,15 +53,17 @@ export const gallopExcerptPost = (
         } else if (className?.includes('wp-block-image')) {
           figure = coreImage(domNode, className);
         } else if (className?.includes('wp-block-heading')) {
-          heading = (
-            <CoreHeading
-              tag={domNode.name}
-              className={classNames(className, 'p-4 !mb-0 !mt-0')}
-              props={props}
-            >
-              {domToReact(domNode.children as DOMNode[], options)}
-            </CoreHeading>
-          );
+          if (ValidHeadingElements.includes(domNode.name as HeadingElements)) {
+            heading = (
+              <CoreHeading
+                tag={domNode.name as HeadingElements}
+                className={classNames(className, 'p-4 !mb-0 !mt-0')}
+                props={props}
+              >
+                {domToReact(domNode.children as DOMNode[], options)}
+              </CoreHeading>
+            );
+          }
           return <></>;
         } else if (domNode.name == 'p') {
           if (domNode?.children?.length > 0) {

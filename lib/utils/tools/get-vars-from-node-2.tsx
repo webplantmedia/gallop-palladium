@@ -1,4 +1,4 @@
-import React, { ReactNode, ReactElement } from 'react';
+import React, { ReactNode, ReactElement, Children } from 'react';
 
 import {
   domToReact,
@@ -71,8 +71,8 @@ export function getVarsFromNode2(node: any): Record<string, any> {
       return jsx;
     }
     if (React.isValidElement(jsx)) {
-      const element = jsx as ReactElement;
-      return React.Children.toArray(element.props.children)
+      const element = jsx as ReactElement<{ children?: ReactNode }>; // Explicitly define props type
+      return Children.toArray(element.props?.children)
         .map(getTextFromJSX)
         .join('');
     }

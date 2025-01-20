@@ -10,7 +10,7 @@ import { shapeGeometry, smoothPoints, borderGeometry } from '@components/three';
 export const StandingSeamSSQ100 = () => {
   const [shape, setShape] = useState<'unattached' | 'attached'>('unattached');
   const [draw, setDraw] = useState<'wire' | 'detail'>('detail');
-  const cameraRef = useRef<THREE.PerspectiveCamera>();
+  const cameraRef = useRef<THREE.PerspectiveCamera>(null);
 
   useEffect(() => {
     if (cameraRef.current) {

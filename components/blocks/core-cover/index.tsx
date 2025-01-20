@@ -16,6 +16,7 @@ import {
   CoreHeading,
   CoreParagraph,
 } from '@components/blocks';
+import { HeadingElements, ValidHeadingElements } from '@lib/types';
 
 import { HTMLAttributeProps } from '@lib/types';
 import {
@@ -43,16 +44,18 @@ const getData = (domNode: Element, options: HTMLReactParserOptions) => {
         index++;
 
         if (className?.includes('wp-block-heading')) {
-          content.push(
-            <CoreHeading
-              key={`heading-${index}`}
-              tag={domNode.name}
-              className={classNames('text-white', className)}
-              props={props}
-            >
-              {domToReact(domNode.children as DOMNode[], options)}
-            </CoreHeading>
-          );
+          if (ValidHeadingElements.includes(domNode.name as HeadingElements)) {
+            content.push(
+              <CoreHeading
+                key={`heading-${index}`}
+                tag={domNode.name as HeadingElements}
+                className={classNames('text-white', className)}
+                props={props}
+              >
+                {domToReact(domNode.children as DOMNode[], options)}
+              </CoreHeading>
+            );
+          }
           return <></>;
         } else if (domNode.name === 'p') {
           content.push(

@@ -1,13 +1,7 @@
 import Iconify from '@components/iconify';
 import dotMarkIcon from '@iconify/icons-carbon/dot-mark';
-import {
-  hasExactClass,
-  castToHTMLAttributeProps,
-  tailwindAlignClasses,
-} from '@utils/tools';
+import { castToHTMLAttributeProps, tailwindAlignClasses } from '@utils/tools';
 import classNames from 'classnames';
-import { BlockProps } from '@lib/types';
-import { HTMLAttributeProps } from '@lib/types';
 import {
   HTMLReactParserOptions,
   domToReact,
@@ -20,20 +14,17 @@ export const coreList = (
   domNode: Element,
   options: HTMLReactParserOptions,
   className: string,
-  type: keyof JSX.IntrinsicElements
+  type: 'ul' | 'ol' // Restrict type to "ul" or "ol"
 ) => {
   const op: HTMLReactParserOptions = {
     replace(domNode, index) {
       if (domNode instanceof Element && domNode.attribs) {
-        const props: HTMLAttributeProps = castToHTMLAttributeProps(
-          domNode.attribs
-        );
-        let { className } = props;
+        const props = castToHTMLAttributeProps(domNode.attribs);
 
         if (domNode.name === 'li') {
           return (
             <li className="flex gap-x-3 items-start">
-              {type == 'ul' ? (
+              {type === 'ul' ? (
                 <span className="w-3 shrink-0 mt-[0.45rem]">
                   <Iconify
                     className="text-primary-main dmh:text-modern-primary-main w-3 h-3"
@@ -45,14 +36,12 @@ export const coreList = (
                   {index + 1}.
                 </span>
               )}
-              <span className="">
-                {domToReact(domNode.children as DOMNode[], options)}
-              </span>
+              <span>{domToReact(domNode.children as DOMNode[], options)}</span>
             </li>
           );
         }
 
-        return <></>;
+        return null;
       }
     },
   };
@@ -69,7 +58,7 @@ export const CoreList = ({
 }: {
   content: any;
   className: string;
-  type: keyof JSX.IntrinsicElements;
+  type: 'ul' | 'ol'; // Restrict type to "ul" or "ol"
 }) => {
   className = tailwindAlignClasses(className);
 

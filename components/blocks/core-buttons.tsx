@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { domToReact, DOMNode } from 'html-react-parser';
 import { BlockProps } from '@lib/types';
-import { tailwindAlignClasses, getAlign } from '@utils/tools';
+import { getAlign } from '@utils/tools';
 import { Alignment } from '@components/common';
 
 export const CoreButtons = ({

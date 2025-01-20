@@ -1,6 +1,14 @@
 import classNames from 'classnames';
 import { ReactNode } from 'react';
 import { getAlign } from '@utils/tools';
+import {
+  AlignOptions,
+  ComponentElements,
+  ContainerWidths,
+  DefaultAlign,
+  JustifyOptions,
+  TextAlignOptions,
+} from '@lib/types';
 
 export const Container = ({
   as: Component = 'div',
@@ -9,8 +17,8 @@ export const Container = ({
   className,
   id, // Add the id prop
 }: {
-  as?: keyof JSX.IntrinsicElements;
-  width?: string;
+  as?: ComponentElements;
+  width?: ContainerWidths;
   children: ReactNode;
   className?: string;
   id?: string; // Make id optional
@@ -40,9 +48,9 @@ export const Alignment = ({
   className,
   id, // Add the id prop
 }: {
-  as?: keyof JSX.IntrinsicElements;
-  align?: string;
-  defaultAlign?: string;
+  as?: ComponentElements;
+  align?: AlignOptions;
+  defaultAlign?: DefaultAlign;
   children: ReactNode;
   className?: string;
   id?: string; // Make id optional

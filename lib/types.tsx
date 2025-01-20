@@ -56,3 +56,67 @@ export interface BlockProps {
   options?: HTMLReactParserOptions;
   props?: HTMLAttrProps;
 }
+
+export type ContainerWidths = 'wide' | 'content' | '' | undefined;
+
+export type ComponentElements =
+  | 'div'
+  | 'section'
+  | 'article'
+  | 'ul'
+  | 'ol'
+  | undefined;
+
+export type HeadingElements =
+  | 'h1'
+  | 'h2'
+  | 'h3'
+  | 'h4'
+  | 'h5'
+  | 'h6'
+  | undefined;
+
+export const ValidHeadingElements: HeadingElements[] = [
+  'h1',
+  'h2',
+  'h3',
+  'h4',
+  'h5',
+  'h6',
+];
+export type HeadingAccentElements =
+  | 'h1'
+  | 'h2'
+  | 'h3'
+  | 'h4'
+  | 'h5'
+  | 'h6'
+  | 'strong'
+  | undefined;
+
+export type AlignOptions =
+  | 'right'
+  | 'center'
+  | 'left'
+  | 'wide'
+  | 'full'
+  | 'content'
+  | 'none'
+  | ''
+  | undefined;
+
+export type JustifyOptions =
+  | 'justify-center'
+  | 'justify-start'
+  | 'justify-end'
+  | ''
+  | undefined;
+
+export type TextAlignOptions =
+  | 'text-left'
+  | 'text-center'
+  | 'text-right'
+  | ''
+  | undefined;
+
+export type DefaultAlign = 'content' | 'none' | '' | undefined;

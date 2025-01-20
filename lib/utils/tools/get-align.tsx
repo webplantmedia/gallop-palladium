@@ -1,13 +1,20 @@
+import { AlignOptions, JustifyOptions, TextAlignOptions } from '@lib/types';
+
 export function getAlign(
   className: string | null | undefined,
-  defaultAlign: string = 'content'
-) {
+  defaultAlign: AlignOptions = 'content' // Use strict type for defaultAlign
+): {
+  align: AlignOptions;
+  justify: JustifyOptions;
+  alignment: string;
+  textAlign: TextAlignOptions;
+} {
   className = String(className);
 
-  let align = defaultAlign;
-  let justify = '';
-  let textAlign = 'text-left';
-  let alignment = '';
+  let align: AlignOptions = defaultAlign;
+  let justify: JustifyOptions = '';
+  let textAlign: TextAlignOptions = 'text-left';
+  let alignment: string = '';
 
   if (className?.includes('alignright')) {
     align = 'right';
