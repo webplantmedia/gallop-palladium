@@ -6,39 +6,21 @@ import {
   DialogBackdrop,
   DialogTitle,
 } from '@headlessui/react';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { state } from '@state';
 import MobileMenuLinks from './mobile-menu-links';
-// import { useRouter } from 'next/navigation';
 
 export default function MobileMenu({ menu }: { menu: any }) {
   let [isOpen, setIsOpen] = useState(false);
 
-  // const router = useRouter();
-
-  // useEffect(() => {
-  //   const handlePopState = () => {
-  //     document.body.style.overflow = ''; // Remove scroll lock on route change
-  //   };
-
-  //   window.addEventListener('popstate', handlePopState);
-
-  //   return () => {
-  //     window.removeEventListener('popstate', handlePopState);
-  //     document.body.style.overflow = ''; // Ensure cleanup
-  //   };
-  // }, [router]);
-
   const closeModal = () => {
     state.dialogOpen = false;
-    // document.body.style.overflow = '';
     setIsOpen(false);
   };
 
   const openModal = () => {
     state.dialogOpen = true;
-    // document.body.style.overflow = 'hidden';
     setIsOpen(true);
   };
 
@@ -73,7 +55,10 @@ export default function MobileMenu({ menu }: { menu: any }) {
 
         <div className="fixed inset-0 font-body h-screen min-h-screen text-base max-w-[86%] sm:max-w-[24rem] w-full ">
           <div className="flex justify-start h-full">
-            <DialogPanel className="pointer-events-auto h-full bg-base-body shadow-xl text-left align-middle overflow-hidden overflow-y-auto scrollbar-hide w-full  duration-500 ease-in-out transition data-[closed]:-translate-x-full">
+            <DialogPanel
+              transition
+              className="pointer-events-auto h-full bg-base-body shadow-xl text-left align-middle overflow-hidden overflow-y-auto scrollbar-hide w-full  duration-500 ease-in-out transition data-[closed]:-translate-x-full"
+            >
               <div className="px-4 sm:px-8 relative flex items-center justify-start flex-col h-full py-6">
                 <div className="w-full px-0">
                   <div className="w-full flex items-start justify-between">
