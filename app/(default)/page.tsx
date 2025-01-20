@@ -30,7 +30,7 @@ export default async function Page(props: { params: Params }) {
 
   const { post, meta } = await fetchPost(uri);
 
-  if (!post || !meta) {
+  if (!post && !meta) {
     notFound();
   }
 
