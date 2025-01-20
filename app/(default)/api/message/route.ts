@@ -101,7 +101,7 @@ export async function POST(req: Request) {
     to: isDevelopment
       ? `${process.env.MAILGUN_DEV_NAME} <${process.env.MAILGUN_DEV_MAIL}>`
       : `${process.env.MAILGUN_FROM_NAME} <${process.env.MAILGUN_SMTP_MAIL}>`,
-    ...(isDevelopment && {
+    ...(!isDevelopment && {
       bcc: [
         `${process.env.MAILGUN_DEV_NAME} <${process.env.MAILGUN_DEV_MAIL}>`,
         `${firstName} ${lastName} <${email}>`,
