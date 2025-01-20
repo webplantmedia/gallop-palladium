@@ -85,6 +85,7 @@ export default function MobileMenu({ menu }: { menu: any }) {
                     prefetch={true}
                     href={'/our-team/'}
                     scroll={true}
+                    onClick={closeModal}
                     className={classNames(
                       'text-base-contrast border border-base-contrast/20 align-center inline-flex w-full justify-start rounded-md py-3 px-4 bg-base-body cursor-pointer hover:bg-white/30 items-center gap-x-2 dmh:bg-modern-base-card dmh:hover:bg-white/30'
                     )}
