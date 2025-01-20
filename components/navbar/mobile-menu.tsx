@@ -70,7 +70,10 @@ export default function MobileMenu({ menu }: { menu: any }) {
 
         <div className="fixed inset-0 font-body h-screen min-h-screen text-base max-w-[86%] sm:max-w-[24rem] w-full ">
           <div className="flex justify-start h-full">
-            <DialogPanel className="pointer-events-auto h-full bg-base-body shadow-xl text-left align-middle overflow-hidden overflow-y-auto scrollbar-hide w-full  duration-500 ease-in-out transition data-[closed]:-translate-x-full">
+            <DialogPanel
+              transition
+              className="pointer-events-auto h-full bg-base-body shadow-xl text-left align-middle scrollbar-hide w-full  duration-500 ease-in-out transition data-[closed]:-translate-x-full"
+            >
               <div className="px-4 sm:px-8 relative flex items-center justify-start flex-col h-full py-6">
                 <div className="w-full px-0">
                   <div className="w-full flex items-start justify-between">
