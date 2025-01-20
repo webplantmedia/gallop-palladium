@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import Content from '@components/content';
-import Grid from '@components/grid';
 import {
   fetchPost,
   fetchSiteElements,
@@ -21,7 +20,7 @@ export async function generateStaticParams() {
 
   let { data } = await getPagesAll();
 
-  return (
+  const slugs =
     data
       ?.map((item: any) => {
         const slug = replaceWordPressUrlRelative(item);
@@ -29,8 +28,9 @@ export async function generateStaticParams() {
           return { slug: slug.split('/').filter(Boolean) };
         }
       })
-      .filter(Boolean) || null
-  );
+      .filter(Boolean) || null;
+
+  return slugs;
 }
 
 type Params = Promise<{ slug: Array<string> }>;
