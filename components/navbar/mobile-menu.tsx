@@ -10,8 +10,6 @@ import { useEffect, useState } from 'react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { state } from '@state';
 import MobileMenuLinks from './mobile-menu-links';
-import Link from 'next/link';
-import classNames from 'classnames';
 // import { useRouter } from 'next/navigation';
 
 export default function MobileMenu({ menu }: { menu: any }) {
