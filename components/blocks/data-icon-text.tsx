@@ -17,8 +17,8 @@ export const DataIconText = ({
   onClick: any;
 }) => {
   const icon = data?.pre?.code?.text ? data.pre.code.text : null;
-  const label = data?.p?.a?.jsx ? data.p.a.jsx : '';
-  const href = data?.p?.a?.href ? data.p.a.href : '';
+  const label = data?.p?.a?.jsx ? data.p.a.jsx : 'Label';
+  const href = data?.p?.a?.href ? data.p.a.href : '#';
 
   let menuIcon = <></>;
   if (icon) {
