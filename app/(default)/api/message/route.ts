@@ -92,8 +92,9 @@ export async function POST(req: Request) {
   const body = {
     from: `${process.env.MAILGUN_FROM_NAME} <${process.env.MAILGUN_SMTP_MAIL}>`,
     to: `${firstName} ${lastName} <${email}>`,
-    bcc: `${process.env.MAILGUN_DEV_NAME} <${process.env.MAILGUN_DEV_MAIL}>`,
-    subject: `Let's talk`,
+    bcc: `${process.env.MAILGUN_DEV_NAME} <${process.env.MAILGUN_DEV_MAIL}>, ${process.env.MAILGUN_FROM_NAME} <${process.env.MAILGUN_SMTP_MAIL}>`,
+    replyTo: `${firstName} ${lastName} <${email}>`,
+    subject: `${firstName} ${lastName}: Contact Form ${process.env.MAILGUN_DOMAIN_NAME}`,
     html: emailHtml,
   };
 
