@@ -82,6 +82,7 @@ export async function POST(req: Request) {
           <div class="content">
             <img src="https://wp.tpaynelaw.com/wp-content/uploads/2025/01/Main-Logo.png" alt="Logo" class="logo" />
             <p class="info"><strong>Full Name:</strong> ${firstName} ${lastName}</p>
+            <p class="info"><strong>Email:</strong> ${email}</p>
             <p class="info"><strong>Message:</strong> ${message}</p>
           </div>
       </div>
@@ -89,11 +90,25 @@ export async function POST(req: Request) {
   </html>
   `;
 
+  const isDevelopment = process.env.NODE_ENV === 'development';
+  const productionUrlClean = process.env.PRODUCTION_URL?.replace(
+    /^https?:\/\//,
+    ''
+  );
+
   const body = {
     from: `${process.env.MAILGUN_FROM_NAME} <${process.env.MAILGUN_SMTP_MAIL}>`,
-    to: `${firstName} ${lastName} <${email}>`,
-    bcc: `${process.env.MAILGUN_DEV_NAME} <${process.env.MAILGUN_DEV_MAIL}>`,
-    subject: `Let's talk`,
+    to: isDevelopment
+      ? `${process.env.MAILGUN_DEV_NAME} <${process.env.MAILGUN_DEV_MAIL}>`
+      : `${process.env.MAILGUN_FROM_NAME} <${process.env.MAILGUN_SMTP_MAIL}>`,
+    ...(!isDevelopment && {
+      bcc: [
+        `${process.env.MAILGUN_DEV_NAME} <${process.env.MAILGUN_DEV_MAIL}>`,
+        `${firstName} ${lastName} <${email}>`,
+      ],
+    }),
+    'h:Reply-To': `${firstName} ${lastName} <${email}>`,
+    subject: `${firstName} ${lastName}: Contact Form ${productionUrlClean}`,
     html: emailHtml,
   };
 
