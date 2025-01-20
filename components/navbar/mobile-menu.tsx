@@ -17,20 +17,20 @@ import { useRouter } from 'next/navigation';
 export default function MobileMenu({ menu }: { menu: any }) {
   let [isOpen, setIsOpen] = useState(false);
 
-  // useEffect(() => {
-  //   const handleRouteChange = () => {
-  //     // Remove the scroll lock when navigating to a new route
-  //     document.body.style.overflow = '';
-  //   };
+  const router = useRouter();
 
-  //   // Listen for router navigation events
-  //   router.events?.on('routeChangeStart', handleRouteChange);
+  useEffect(() => {
+    const handlePopState = () => {
+      document.body.style.overflow = ''; // Remove scroll lock on route change
+    };
 
-  //   return () => {
-  //     // Cleanup the event listener
-  //     router.events?.off('routeChangeStart', handleRouteChange);
-  //   };
-  // }, [router]);
+    window.addEventListener('popstate', handlePopState);
+
+    return () => {
+      window.removeEventListener('popstate', handlePopState);
+      document.body.style.overflow = ''; // Ensure cleanup
+    };
+  }, []);
 
   const closeModal = () => {
     setIsOpen(false);
@@ -38,6 +38,7 @@ export default function MobileMenu({ menu }: { menu: any }) {
   };
 
   const openModal = () => {
+    document.body.style.overflow = 'hidden';
     setIsOpen(true);
   };
 
