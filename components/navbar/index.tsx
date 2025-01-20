@@ -99,21 +99,6 @@ export default function Navbar({
                 <div className={classNames('flex items-center h-full')}>
                   <div className="-ml-2 flex gap-0 2xl:gap-1 flex-row pr-0 xl:pr-2 2xl:pr-3 h-full">
                     <MobileMenu menu={mobileMenu} />
-                    <Link
-                      prefetch={true}
-                      href={'/our-team/'}
-                      scroll={true}
-                      className={classNames(
-                        'text-base-contrast border border-base-contrast/20 align-center inline-flex w-full justify-start rounded-md py-3 px-4 bg-base-body cursor-pointer hover:bg-white/30 items-center gap-x-2 dmh:bg-modern-base-card dmh:hover:bg-white/30'
-                      )}
-                    >
-                      {/* Correct way to include the Iconify component */}
-                      {/*<Iconify
-								className="w-5 h-5 shrink-0 mr-2"
-								icon={item.icon} // Ensure `item.icon` has the correct Iconify icon identifier
-							/>*/}
-                      <span>Label</span>
-                    </Link>
                   </div>
                   {/* Current: "border-primary-darker text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" */}
                   <div
