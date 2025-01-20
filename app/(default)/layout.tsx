@@ -10,7 +10,6 @@ import { GoogleAnalytics } from '@next/third-parties/google';
 import type { Metadata } from 'next';
 import GridFull from '@components/grid-full';
 import { fetchSiteElements } from '@api/fetch-site-elements';
-import { ScrollManager } from '@components/scripts/scroll-manager';
 
 export const metadata: Metadata = {
   metadataBase: new URL(String(process.env.PRODUCTION_URL)),
@@ -92,7 +91,6 @@ export default async function RootLayout({ children }: RootLayoutProps) {
         </main>
         <Footer post={footer} />
       </body>
-      <ScrollManager />
       {track && (
         <>
           <GoogleAnalytics gaId="G-B3VZNG84YB" />

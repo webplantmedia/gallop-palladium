@@ -65,9 +65,9 @@ export default function MenuLinkDropdown({
                     const description = '';
 
                     return (
-                      <Link
-                        prefetch={true}
-                        scroll={false}
+                      <a
+                        // prefetch={true}
+                        // scroll={false}
                         onClick={() => {
                           close();
                         }}
@@ -107,7 +107,7 @@ export default function MenuLinkDropdown({
                             </p>
                           )}
                         </div>
-                      </Link>
+                      </a>
                     );
                   })}
                 </div>
