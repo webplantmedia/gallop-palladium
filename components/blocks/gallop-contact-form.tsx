@@ -26,6 +26,7 @@ const GallopContactFormInner = () => {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
+    setStatus('Sending...');
 
     const formData = {
       firstName: e.target.firstname.value,
@@ -97,7 +98,7 @@ const GallopContactFormInner = () => {
       {status.length > 0 && (
         <p
           className={
-            (status == 'Message sent. Thank You.'
+            (status == 'Message sent. Thank You.' || status == 'Sending...'
               ? 'text-primary-main '
               : 'text-[red] ') + 'text-base -mt-2 pb-2'
           }
