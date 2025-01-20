@@ -30,7 +30,7 @@ export function GallopBreadcrumbs({ breadcrumbs, className }: any) {
                     <>
                       <Link
                         prefetch={true}
-                        scroll={true}
+                        scroll={false}
                         href={
                           item?.href
                             ? replaceWordPressUrlRelative(item.href)
@@ -49,7 +49,7 @@ export function GallopBreadcrumbs({ breadcrumbs, className }: any) {
                     <>
                       <Link
                         prefetch={true}
-                        scroll={true}
+                        scroll={false}
                         href={
                           item?.href
                             ? replaceWordPressUrlRelative(item.href)

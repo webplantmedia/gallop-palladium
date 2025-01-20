@@ -9,17 +9,17 @@ export default function Sidebar() {
   return (
     <>
       <h3 className="px-4 sm:px-8 text-primary-main small-caps mb-4">
-        <Link scroll={true} prefetch={true} href="/about/">
+        <Link scroll={false} prefetch={true} href="/about/">
           Placeholder text
         </Link>
-        <Link scroll={true} prefetch={true} href="/about">
+        <Link scroll={false} prefetch={true} href="/about">
           <span className="text-base-contrast block pt-5 text-xl variant-normal ">
             Placeholder text
           </span>
         </Link>
       </h3>
       <div className="mb-10 px-4 sm:px-8">
-        <Link scroll={true} prefetch={true} href="/about">
+        <Link scroll={false} prefetch={true} href="/about">
           <img
             className="rounded-sm mb-4"
             alt="Placeholder text"

@@ -53,7 +53,7 @@ export default function TableOfContentsList({
       </span>
       <Link
         prefetch={true}
-        scroll={true}
+        scroll={false}
         id={permalink(meta.title)}
         className="hover:text-secondary-main"
         href={'#' + permalink(meta.title)}
@@ -79,7 +79,7 @@ export default function TableOfContentsList({
           />
         </span>
         <Link
-          scroll={true}
+          scroll={false}
           prefetch={true}
           id={id}
           onClick={handleClick}
