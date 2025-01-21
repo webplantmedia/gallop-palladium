@@ -6,7 +6,6 @@ import { replaceWordPressUrlRelative } from '@utils/tools';
 import parse from 'html-react-parser';
 
 export function GallopBreadcrumbs({ breadcrumbs, className }: any) {
-  const breadcrumbsLength = breadcrumbs.length;
   let classNameList = 'relative w-full wp-block-group mt-14';
   if (className.includes('is-style-bottom-spacing')) {
     classNameList += ' mb-14';
