@@ -25,7 +25,7 @@ export const BackgroundMedia = ({
   forceSelection = true,
 }: {
   className?: string;
-  loading?: 'lazy' | 'eager' | 'auto' | undefined;
+  loading?: 'lazy' | 'eager' | undefined;
   wpBlockCover?: Record<string, any>;
   attr?: Record<string, any>;
   grayscale?: boolean;
