@@ -71,7 +71,6 @@ export default function MobileMenuLinkDropdown({ data, closeModal }: any) {
         <>
           <DisclosureButton
             as="a"
-            href={href}
             className="text-base-contrast border border-base-contrast/20 align-center flex w-full justify-start rounded-md py-3 px-4 bg-base-body cursor-pointer hover:bg-white/30 items-center dmh:bg-modern-base-card dmh:hover:bg-white/30"
           >
             <span className="flex justify-start items-center w-full gap-x-2">
