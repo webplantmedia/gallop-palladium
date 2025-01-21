@@ -30,7 +30,7 @@ export const CoreGroupSection1 = ({ data, className, props }: BlockProps) => {
       align="wide"
       className={classNames('overflow-hidden pt-16 pb-16')}
     >
-      <Heading as="h2" className="!mb-2 !mt-0">
+      <Heading as="h2" className="!mb-4 !mt-0 !max-w-6xl">
         {h2}
       </Heading>
       <Paragraph as="leader" className="!max-w-3xl">
