@@ -14,9 +14,11 @@ function removeUnderscoreFromKeys<T extends Record<string, any>>(
 
 export const Image = ({
   className,
+  loading = 'eager',
   attr = {},
 }: {
   className?: string;
+  loading?: 'lazy' | 'eager' | undefined;
   attr: Record<string, any>;
 }) => {
   attr = removeUnderscoreFromKeys(attr);
@@ -26,7 +28,7 @@ export const Image = ({
   return (
     <img
       className={classNames(className)}
-      loading="lazy"
+      loading={loading}
       src={attr.src}
       style={
         typeof attr.style === 'string'
