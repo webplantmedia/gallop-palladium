@@ -91,9 +91,11 @@ export const CoreGroupHero1 = ({ data, className }: BlockProps) => {
                           )}
                           {slide?.h1?.strong?._jsx && (
                             <Heading as="h1" className="!mb-0 text-white">
-                              {slide.h1.strong._jsx}
+                              <span className="md:block">
+                                {slide.h1.strong._jsx}{' '}
+                              </span>
                               {slide.h1?.em?._jsx && (
-                                <span className="text-stroke text-stroke-white block">
+                                <span className="text-stroke text-stroke-white md:block">
                                   {slide.h1.em._jsx}
                                 </span>
                               )}
@@ -105,9 +107,11 @@ export const CoreGroupHero1 = ({ data, className }: BlockProps) => {
                               inStyle="h1"
                               className="!mb-0 text-white"
                             >
-                              {slide.h2.strong._jsx}
+                              <span className="md:block">
+                                {slide.h2.strong._jsx}{' '}
+                              </span>
                               {slide.h2?.em?._jsx && (
-                                <span className="text-stroke text-stroke-white block">
+                                <span className="text-stroke text-stroke-white md:block">
                                   {slide.h2.em._jsx}
                                 </span>
                               )}
