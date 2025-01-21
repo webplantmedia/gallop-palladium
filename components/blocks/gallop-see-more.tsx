@@ -57,7 +57,7 @@ export const GallopSeeMore = ({ node, props }: any) => {
           'leading-normal'
         )}
       >
-        {content}
+        {content}{' '}
       </span>
       <button
         onClick={handleOpen}
