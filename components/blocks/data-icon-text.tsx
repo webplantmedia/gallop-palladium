@@ -57,7 +57,7 @@ export const DataIconText = ({
   return (
     <Link
       prefetch={true}
-      scroll={false}
+      scroll={true}
       href={replaceWordPressUrlRelative(href)}
       className={classNames(
         'flex items-center justify-start w-full',

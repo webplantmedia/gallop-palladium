@@ -23,7 +23,7 @@ export const CoreButtonLink = ({ children, className, props }: BlockProps) => {
 
   return (
     <Link
-      scroll={false}
+      scroll={true}
       prefetch={true}
       className={classNames(className, 'w-full')}
       href={href ? replaceWordPressUrlRelative(href) : '#'}

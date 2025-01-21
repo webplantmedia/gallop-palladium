@@ -35,7 +35,7 @@ export const Button = ({
   return href ? (
     <Link
       prefetch={true}
-      scroll={false}
+      scroll={true}
       href={href}
       className={classNames(buttonClass, className)}
     >
