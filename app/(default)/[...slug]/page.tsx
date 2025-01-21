@@ -7,7 +7,7 @@ import {
   getPagesAll,
 } from '@api';
 import { replaceWordPressUrl, replaceWordPressUrlRelative } from '@utils/tools';
-import { PageSeo } from '@components/seo/page';
+import { PageSeo, PageStructuredData } from '@components/seo/page';
 import { notFound, permanentRedirect } from 'next/navigation';
 
 export const revalidate = 3600;
@@ -61,14 +61,23 @@ export default async function Page(props: { params: Params }) {
   }
 
   const { sidebarHeader } = await fetchSiteElements();
-  const { data } = await getBreadcrumbs(post?.ID);
+  let { data } = await getBreadcrumbs(post?.ID);
+  let leafNode = data[0];
+  data = data.reverse();
 
   return (
-    <Content
-      post={post}
-      meta={meta}
-      sidebarHeader={sidebarHeader}
-      breadcrumbs={data ? data.reverse() : []}
-    />
+    <>
+      <PageStructuredData
+        seo={meta}
+        breadcrumbs={data || []}
+        children={leafNode && leafNode.children}
+      />
+      <Content
+        post={post}
+        meta={meta}
+        sidebarHeader={sidebarHeader}
+        breadcrumbs={data || []}
+      />
+    </>
   );
 }

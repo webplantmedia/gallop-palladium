@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 import Content from '@components/content';
-import { PageSeo } from '@components/seo/page';
+import { PageSeo, PageStructuredData } from '@components/seo/page';
 import { replaceWordPressUrl } from '@utils/tools';
-import { fetchPost, fetchSiteElements } from '@api';
+import { fetchPost, fetchSiteElements, getBreadcrumbs } from '@api';
 import { notFound, permanentRedirect } from 'next/navigation';
 
 export const revalidate = 3600;
@@ -36,5 +36,10 @@ export default async function Page(props: { params: Params }) {
 
   const { sidebarHeader } = await fetchSiteElements();
 
-  return <Content post={post} meta={meta} sidebarHeader={sidebarHeader} />;
+  return (
+    <>
+      <PageStructuredData seo={meta} />
+      <Content post={post} meta={meta} sidebarHeader={sidebarHeader} />;
+    </>
+  );
 }

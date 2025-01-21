@@ -4,6 +4,7 @@ import Script from 'next/script';
 import type { Metadata } from 'next';
 import { SEO } from '@lib/types';
 import parse from 'html-react-parser';
+import GetBreadcrumbsList from './breadcrumbs';
 
 export function PageSeo(seo: SEO, link: string = '', site: any) {
   var data: Metadata = {};
@@ -65,8 +66,13 @@ export function PageSeo(seo: SEO, link: string = '', site: any) {
   return data;
 }
 
-export function PageStructuredData({ seo, site }: any) {
-  // let breadcrumbList = GetBreadcrumbList(seo, meta);
+export function PageStructuredData({
+  seo,
+  breadcrumbs = [],
+  children = [],
+}: any) {
+  let breadcrumbsList = GetBreadcrumbsList(seo, breadcrumbs, 'breadcrumbs');
+  let childrenList = GetBreadcrumbsList(seo, children, 'children');
 
   let schema = {
     '@context': 'https://schema.org',
@@ -102,8 +108,8 @@ export function PageStructuredData({ seo, site }: any) {
         '@type': 'WebSite',
         '@id': '/#website',
         url: process.env.NEXT_PUBLIC_LIVE_URL,
-        name: site.siteTitle,
-        description: site.siteDescription,
+        name: seo.title,
+        description: seo.metaDesc,
         inLanguage: 'en-US',
       },
     ],
@@ -121,9 +127,13 @@ export function PageStructuredData({ seo, site }: any) {
     });
   }
 
-  // if (Object.keys(breadcrumbList).length !== 0) {
-  // schema['@graph'].push(breadcrumbList);
-  // }
+  if (Object.keys(breadcrumbsList).length !== 0) {
+    schema['@graph'].push(breadcrumbsList);
+  }
+
+  if (Object.keys(childrenList).length !== 0) {
+    schema['@graph'].push(childrenList);
+  }
 
   return (
     <Script id="schema" type="application/ld+json">
