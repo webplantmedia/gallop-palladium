@@ -37,8 +37,8 @@ export const GallopMap = ({
   const { align } = getAlign(className);
   const { dataMapZoom = 12 } = props;
 
-  const address = data?.wpBlockGroup?.h3
-    ? data.wpBlockGroup.h3._text
+  const address = data?.wpBlockGallopMapPin?.h3
+    ? data.wpBlockGallopMapPin.h3._text
     : '1611 Avenue L, Lubbock, TX 79413';
 
   return (
