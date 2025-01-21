@@ -39,7 +39,7 @@ export default async function Page(props: { params: Params }) {
   return (
     <>
       <PageStructuredData seo={meta} />
-      <Content post={post} meta={meta} sidebarHeader={sidebarHeader} />;
+      <Content post={post} meta={meta} sidebarHeader={sidebarHeader} />
     </>
   );
 }
