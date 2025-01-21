@@ -1,3 +1,5 @@
+import { getPostSlugsAll } from '@api';
+
 export const dynamic = 'force-static';
 export const revalidate = 86400;
 
@@ -10,7 +12,13 @@ const sitemapToXml = (sitemap: any) =>
     .join('\n')}</sitemapindex>`;
 
 export async function GET() {
-  const sitemaps = [{ id: 'post' }, { id: 'page' }];
+  const { postSlugs } = await getPostSlugsAll();
+  const sitemaps = [{ id: 'page' }];
+
+  if (postSlugs.length > 0) {
+    sitemaps.push({ id: 'post' });
+  }
+
   const sitemapXml = sitemapToXml(sitemaps);
 
   return new Response(sitemapXml, {
