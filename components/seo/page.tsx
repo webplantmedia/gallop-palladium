@@ -66,13 +66,9 @@ export function PageSeo(seo: SEO, link: string = '', site: any) {
   return data;
 }
 
-export function PageStructuredData({
-  seo,
-  breadcrumbs = [],
-  children = [],
-}: any) {
+export function PageStructuredData({ seo, breadcrumbs = [], nodes = [] }: any) {
   let breadcrumbsList = GetBreadcrumbsList(seo, breadcrumbs, 'breadcrumbs');
-  let childrenList = GetBreadcrumbsList(seo, children, 'children');
+  let childrenList = GetBreadcrumbsList(seo, nodes, 'children');
 
   let schema = {
     '@context': 'https://schema.org',

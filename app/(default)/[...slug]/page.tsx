@@ -62,7 +62,7 @@ export default async function Page(props: { params: Params }) {
 
   const { sidebarHeader } = await fetchSiteElements();
   let { data } = await getBreadcrumbs(post?.ID);
-  let leafNode = data[0];
+  let node = data[0];
   data = data.reverse();
 
   return (
@@ -70,7 +70,7 @@ export default async function Page(props: { params: Params }) {
       <PageStructuredData
         seo={meta}
         breadcrumbs={data || []}
-        children={leafNode && leafNode.children}
+        nodes={node && node.children}
       />
       <Content
         post={post}
