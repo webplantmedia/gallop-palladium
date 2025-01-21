@@ -62,7 +62,7 @@ export const CoreGroupHero1 = ({ data, className }: BlockProps) => {
     <>
       <Alignment align="full">
         <div className="relative">
-          <BackgroundMedia wpBlockCover={wpBlockCover} />
+          <BackgroundMedia wpBlockCover={wpBlockCover} loading="eager" />
           <Overlay className="bg-black/60" />
           <Container className="relative flex flex-col xl:flex-row py-32">
             <div className="w-full xl:w-7/12 flex justify-center">

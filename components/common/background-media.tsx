@@ -18,12 +18,14 @@ interface ScrollingImage {
 
 export const BackgroundMedia = ({
   className,
+  loading = 'eager',
   wpBlockCover = {},
   attr = {},
   grayscale = false,
   forceSelection = true,
 }: {
   className?: string;
+  loading?: 'lazy' | 'eager' | 'auto' | undefined;
   wpBlockCover?: Record<string, any>;
   attr?: Record<string, any>;
   grayscale?: boolean;
@@ -64,7 +66,7 @@ export const BackgroundMedia = ({
           grayscale && 'grayscale',
           className
         )}
-        loading="lazy"
+        loading={loading}
         src={scrollingImage._src}
         style={styleStringToObject(scrollingImage._style)}
         width={
@@ -98,7 +100,7 @@ export const BackgroundMedia = ({
           'w-full box-border absolute inset-0 object-cover h-full object-center -z-20',
           className
         )}
-        loading="lazy"
+        loading={loading}
         src={attr.src}
         style={
           typeof attr.style === 'string'
@@ -121,7 +123,7 @@ export const BackgroundMedia = ({
           'w-full box-border absolute inset-0 object-cover h-full object-center -z-20',
           className
         )}
-        loading="lazy"
+        loading={loading}
         src={attr.src}
         width={attr.width ? Number(attr.width) : undefined}
         height={attr.height ? Number(attr.height) : undefined}
