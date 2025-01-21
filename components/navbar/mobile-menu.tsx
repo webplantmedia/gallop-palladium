@@ -77,7 +77,7 @@ export default function MobileMenu({ menu }: { menu: any }) {
                     </div>
                   </div>
                 </div>
-                <div className="gap-x-2 mt-6 w-full flex flex-col gap-3 pb-20">
+                <div className="gap-x-2 mt-6 w-full flex flex-col gap-3 pb-32">
                   <MobileMenuLinks menu={menu} closeModal={closeModal} />
                 </div>
               </div>
