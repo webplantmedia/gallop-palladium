@@ -23,13 +23,13 @@ const SubMenu = ({ items, onClick }: any) => {
     const description = '';
 
     return (
-      <Link
-        prefetch={true}
+      <a
+        // prefetch={true}
         key={`sub-menu-${index}`}
         className="relative flex justify-start text-left rounded-md overflow-hidden bg-base-body cursor-pointer hover:bg-white/30 dmh:bg-modern-base-card dmh:hover:bg-white/30 min-h-20"
         href={href}
         onClick={onClick}
-        scroll={true}
+        // scroll={false}
       >
         <div className="relative">
           {img && (
@@ -54,7 +54,7 @@ const SubMenu = ({ items, onClick }: any) => {
             </p>
           )}
         </div>
-      </Link>
+      </a>
     );
   });
 };
