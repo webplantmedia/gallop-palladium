@@ -1,11 +1,9 @@
-import { replaceWordPressUrl } from '@utils/tools';
+import { getVarsFromNode2, replaceWordPressUrl } from '@utils/tools';
 import Script from 'next/script';
-// import GetBreadcrumbList from './breadcrumbs';
 import type { Metadata } from 'next';
 import { SEO } from '@lib/types';
-import parse from 'html-react-parser';
+import parse, { HTMLReactParserOptions, Element } from 'html-react-parser';
 import GetBreadcrumbsList from './breadcrumbs';
-import { objectMap } from '@utils/objectMap';
 import GetAddressList from './address-list';
 
 export function PageSeo(seo: SEO, link: string = '', site: any) {
@@ -148,4 +146,30 @@ export function PageStructuredData({
       {JSON.stringify(schema)}
     </Script>
   );
+}
+
+export function StructuredData({
+  meta,
+  schema,
+  breadcrumbs = [],
+  nodes = [],
+}: any) {
+  const options: HTMLReactParserOptions = {
+    replace(domNode) {
+      if (domNode instanceof Element && domNode.attribs) {
+        return (
+          <PageStructuredData
+            seo={meta}
+            vars={getVarsFromNode2(domNode)}
+            breadcrumbs={breadcrumbs}
+            nodes={nodes}
+          />
+        );
+      }
+    },
+  };
+
+  const structuredData = parse(schema.postContent, options);
+
+  return structuredData;
 }

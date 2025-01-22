@@ -6,14 +6,9 @@ import {
   getBreadcrumbs,
   getPagesAll,
 } from '@api';
-import {
-  getVarsFromNode2,
-  replaceWordPressUrl,
-  replaceWordPressUrlRelative,
-} from '@utils/tools';
-import { PageSeo, PageStructuredData } from '@components/seo/page';
-import { notFound, permanentRedirect } from 'next/navigation';
-import parse, { HTMLReactParserOptions, Element } from 'html-react-parser';
+import { replaceWordPressUrl, replaceWordPressUrlRelative } from '@utils/tools';
+import { PageSeo, StructuredData } from '@components/seo/page';
+import { notFound } from 'next/navigation';
 
 export const revalidate = 3600;
 
@@ -65,32 +60,20 @@ export default async function Page(props: { params: Params }) {
     notFound();
   }
 
-  const { sidebarHeader } = await fetchSiteElements();
   let { data } = await getBreadcrumbs(post?.ID);
-  const site = await fetchSiteElements();
-
   let node = data[0];
   data = data.reverse();
 
-  const options: HTMLReactParserOptions = {
-    replace(domNode) {
-      if (domNode instanceof Element && domNode.attribs) {
-        return (
-          <PageStructuredData
-            seo={meta}
-            breadcrumbs={data || []}
-            nodes={node && node.children}
-            vars={getVarsFromNode2(domNode)}
-          />
-        );
-      }
-    },
-  };
-  const structuredData = parse(site.schema.postContent, options);
+  const { sidebarHeader, schema } = await fetchSiteElements();
 
   return (
     <>
-      {structuredData}
+      <StructuredData
+        meta={meta}
+        breadcrumbs={data || []}
+        nodes={node && node.children}
+        schema={schema}
+      />
       <Content
         post={post}
         meta={meta}
