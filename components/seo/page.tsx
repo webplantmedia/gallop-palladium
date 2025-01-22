@@ -1,10 +1,16 @@
-import { getVarsFromNode2, replaceWordPressUrl } from '@utils/tools';
+import {
+  getVarsFromNode2,
+  replaceWordPressUrl,
+  castToHTMLAttributeProps,
+  hasExactClass,
+} from '@utils/tools';
 import Script from 'next/script';
 import type { Metadata } from 'next';
 import { SEO } from '@lib/types';
 import parse, { HTMLReactParserOptions, Element } from 'html-react-parser';
 import GetBreadcrumbsList from './breadcrumbs';
-import GetAddressList from './address-list';
+import { HTMLAttributeProps } from '@lib/types';
+import GetList from './get-list';
 
 export function PageSeo(seo: SEO, link: string = '', site: any) {
   var data: Metadata = {};
@@ -70,11 +76,11 @@ export function PageStructuredData({
   seo,
   breadcrumbs = [],
   nodes = [],
-  vars,
+  schemaList,
 }: any) {
   let breadcrumbsList = GetBreadcrumbsList(seo, breadcrumbs, 'breadcrumbs');
   let childrenList = GetBreadcrumbsList(seo, nodes, 'children');
-  let addressList = GetAddressList(vars);
+  let lists = schemaList.map((schema: any) => GetList(schema));
 
   let schema = {
     '@context': 'https://schema.org',
@@ -137,8 +143,8 @@ export function PageStructuredData({
     schema['@graph'].push(childrenList);
   }
 
-  if (Object.keys(vars).length !== 0) {
-    schema['@graph'].push(addressList);
+  if (Object.keys(lists).length !== 0) {
+    schema['@graph'] = [...schema['@graph'], ...lists];
   }
 
   return (
@@ -154,22 +160,33 @@ export function StructuredData({
   breadcrumbs = [],
   nodes = [],
 }: any) {
+  let schemaList: any[] = [];
+
   const options: HTMLReactParserOptions = {
     replace(domNode) {
       if (domNode instanceof Element && domNode.attribs) {
-        return (
-          <PageStructuredData
-            seo={meta}
-            vars={getVarsFromNode2(domNode)}
-            breadcrumbs={breadcrumbs}
-            nodes={nodes}
-          />
+        const props: HTMLAttributeProps = castToHTMLAttributeProps(
+          domNode.attribs
         );
+
+        let { className } = props;
+
+        if (hasExactClass(className, 'wp-block-gallop-schema')) {
+          const vars = getVarsFromNode2(domNode);
+          if (Object.keys(vars).includes('wpBlockList')) schemaList.push(vars);
+        }
       }
     },
   };
 
-  const structuredData = parse(schema.postContent, options);
+  parse(schema.postContent, options);
 
-  return structuredData;
+  return (
+    <PageStructuredData
+      seo={meta}
+      schemaList={schemaList}
+      breadcrumbs={breadcrumbs}
+      nodes={nodes}
+    />
+  );
 }
