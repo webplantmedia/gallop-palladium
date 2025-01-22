@@ -10,7 +10,7 @@ interface ScrollingImage {
   _height?: string | number; // Height as a string or number
   _className?: string; // Additional classes for styling
   _style?: string; // Inline styles as a string or object
-  _srcSet?: string; // For responsive images
+  _srcset?: string; // For responsive images
   _sizes?: string; // Sizes attribute for responsive images
   _alt?: string; // Alt text for the image
   _title?: string; // Title attribute for the image
@@ -75,8 +75,8 @@ export const BackgroundMedia = ({
         height={
           scrollingImage._height ? Number(scrollingImage._height) : undefined
         }
-        srcSet={scrollingImage._srcSet}
-        // sizes={scrollingImage._sizes}
+        srcSet={scrollingImage._srcset}
+        sizes={scrollingImage._sizes}
         alt={scrollingImage._alt}
         title={scrollingImage._title}
       />
