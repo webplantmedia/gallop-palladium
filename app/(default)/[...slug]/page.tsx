@@ -6,9 +6,14 @@ import {
   getBreadcrumbs,
   getPagesAll,
 } from '@api';
-import { replaceWordPressUrl, replaceWordPressUrlRelative } from '@utils/tools';
+import {
+  getVarsFromNode2,
+  replaceWordPressUrl,
+  replaceWordPressUrlRelative,
+} from '@utils/tools';
 import { PageSeo, PageStructuredData } from '@components/seo/page';
 import { notFound, permanentRedirect } from 'next/navigation';
+import parse, { HTMLReactParserOptions, Element } from 'html-react-parser';
 
 export const revalidate = 3600;
 
@@ -62,16 +67,30 @@ export default async function Page(props: { params: Params }) {
 
   const { sidebarHeader } = await fetchSiteElements();
   let { data } = await getBreadcrumbs(post?.ID);
+  const site = await fetchSiteElements();
+
   let node = data[0];
   data = data.reverse();
 
+  const options: HTMLReactParserOptions = {
+    replace(domNode) {
+      if (domNode instanceof Element && domNode.attribs) {
+        return (
+          <PageStructuredData
+            seo={meta}
+            breadcrumbs={data || []}
+            nodes={node && node.children}
+            vars={getVarsFromNode2(domNode)}
+          />
+        );
+      }
+    },
+  };
+  const structuredData = parse(site.schema.postContent, options);
+
   return (
     <>
-      <PageStructuredData
-        seo={meta}
-        breadcrumbs={data || []}
-        nodes={node && node.children}
-      />
+      {structuredData}
       <Content
         post={post}
         meta={meta}

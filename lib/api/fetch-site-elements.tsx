@@ -12,7 +12,8 @@ export async function fetchSiteElements() {
     sidebarHeader: any = null,
     site: any = null,
     aiChat: any = null,
-    websiteSearch: any = null;
+    websiteSearch: any = null,
+    schema: any = null;
 
   const headers = {
     'Content-Type': 'application/json',
@@ -41,6 +42,7 @@ export async function fetchSiteElements() {
       'sidebar-header': sidebarHeader,
       'a-i-chat': aiChat,
       'website-search': websiteSearch,
+      schema,
     } = jsonResponse);
 
     if (menu && 'postContent' in menu) {
@@ -76,6 +78,9 @@ export async function fetchSiteElements() {
 
     if (websiteSearch?.postContent)
       websiteSearch.postContent = compressContent(websiteSearch.postContent);
+
+    if (schema?.postContent)
+      schema.postContent = compressContent(schema.postContent);
   }
 
   return {
@@ -91,5 +96,6 @@ export async function fetchSiteElements() {
     site,
     aiChat,
     websiteSearch,
+    schema,
   };
 }

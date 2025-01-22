@@ -5,6 +5,8 @@ import type { Metadata } from 'next';
 import { SEO } from '@lib/types';
 import parse from 'html-react-parser';
 import GetBreadcrumbsList from './breadcrumbs';
+import { objectMap } from '@utils/objectMap';
+import GetAddressList from './address-list';
 
 export function PageSeo(seo: SEO, link: string = '', site: any) {
   var data: Metadata = {};
@@ -66,9 +68,15 @@ export function PageSeo(seo: SEO, link: string = '', site: any) {
   return data;
 }
 
-export function PageStructuredData({ seo, breadcrumbs = [], nodes = [] }: any) {
+export function PageStructuredData({
+  seo,
+  breadcrumbs = [],
+  nodes = [],
+  vars,
+}: any) {
   let breadcrumbsList = GetBreadcrumbsList(seo, breadcrumbs, 'breadcrumbs');
   let childrenList = GetBreadcrumbsList(seo, nodes, 'children');
+  let addressList = GetAddressList(vars);
 
   let schema = {
     '@context': 'https://schema.org',
@@ -129,6 +137,10 @@ export function PageStructuredData({ seo, breadcrumbs = [], nodes = [] }: any) {
 
   if (Object.keys(childrenList).length !== 0) {
     schema['@graph'].push(childrenList);
+  }
+
+  if (Object.keys(vars).length !== 0) {
+    schema['@graph'].push(addressList);
   }
 
   return (
