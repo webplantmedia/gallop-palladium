@@ -23,6 +23,7 @@ export const BackgroundMedia = ({
   attr = {},
   grayscale = false,
   forceSelection = true,
+  size = 'full',
 }: {
   className?: string;
   loading?: 'lazy' | 'eager' | undefined;
@@ -30,6 +31,7 @@ export const BackgroundMedia = ({
   attr?: Record<string, any>;
   grayscale?: boolean;
   forceSelection?: boolean;
+  size?: 'thumbnail' | 'small' | 'medium' | 'large' | 'full';
 }) => {
   let videoSrc: string | null =
     wpBlockCover?.wpBlockCoverVideoBackground?._src || null;
@@ -41,6 +43,18 @@ export const BackgroundMedia = ({
     : null;
   let scrollingImage: ScrollingImage | null =
     wpBlockCover?.wpBlockCoverImageBackground || {};
+
+  const sizes = {
+    thumbnail: '(max-width: 150px) 150px, 150px',
+    small: '(max-width: 150px) 150px, (max-width: 384px) 384px, 768px',
+    medium:
+      '(max-width: 150px) 150px, (max-width: 384px) 384px, (max-width: 512px) 512px, 768px',
+
+    large:
+      '(max-width: 150px) 150px, (max-width: 384px) 384px, (max-width: 512px) 512px, (max-width: 640px) 768px, 512px',
+
+    full: '(max-width: 150px) 150px, (max-width: 384px) 384px, (max-width: 512px) 512px, (max-width: 640px) 768px, (max-width: 1024px) 1024px, 1280px',
+  };
 
   let background: ReactElement | null = null;
   if (videoSrc) {
@@ -76,7 +90,7 @@ export const BackgroundMedia = ({
           scrollingImage._height ? Number(scrollingImage._height) : undefined
         }
         srcSet={scrollingImage._srcset}
-        sizes={scrollingImage._sizes}
+        sizes={sizes[size]}
         alt={scrollingImage._alt}
         title={scrollingImage._title}
       />
