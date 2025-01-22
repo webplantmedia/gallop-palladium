@@ -49,10 +49,8 @@ export const BackgroundMedia = ({
     small: '(max-width: 150px) 150px, (max-width: 384px) 384px, 768px',
     medium:
       '(max-width: 150px) 150px, (max-width: 384px) 384px, (max-width: 512px) 512px, 768px',
-
     large:
       '(max-width: 150px) 150px, (max-width: 384px) 384px, (max-width: 512px) 512px, (max-width: 640px) 768px, 512px',
-
     full: '(max-width: 150px) 150px, (max-width: 384px) 384px, (max-width: 512px) 512px, (max-width: 640px) 768px, (max-width: 1024px) 1024px, 1280px',
   };
 
