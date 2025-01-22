@@ -58,8 +58,14 @@ const SetPin = ({ center, map, data }: MapProps) => {
             const address = item?.h3?._text || null;
             const description = item?.p?._jsx || null;
             const imgProps = item?.wpBlockImage?.img || null;
-            const anchorLink = item?.wpBlockButton?.a?._href || null;
-            const anchorText = item?.wpBlockButton?.a?._text || null;
+            const anchorLink =
+              item?.wpBlockButtons?.wpBlockButton?.a?._href ||
+              item?.wpBlockButton?.a?._href ||
+              null;
+            const anchorText =
+              item?.wpBlockButtons?.wpBlockButton?.a?._text ||
+              item?.wpBlockButton?.a?._text ||
+              null;
 
             if (address) {
               try {
