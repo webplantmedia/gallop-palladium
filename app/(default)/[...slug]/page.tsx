@@ -56,7 +56,7 @@ export default async function Page(props: { params: Params }) {
   const uri = `/${params.slug.join('/')}/`;
   const { post, meta } = await fetchPost(uri);
 
-  if (!post || !meta) {
+  if (!post && !meta) {
     notFound();
   }
 
